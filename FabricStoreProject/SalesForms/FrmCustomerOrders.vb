@@ -1,16 +1,17 @@
 ﻿Imports System.Data.SqlClient
+Imports System.Web.Services.Description
 
 Public Class FrmCustomerOrders
 
 
-    Private PageSize, PagesCount, RowsCount, OrderID As Integer
+    Private PageSize, PagesCount, RowsCount, OrderID, CustomerID As Integer
     Private PageNum As Integer = 1
     Private SearchActive As Boolean
     Private Operation As String
 
     Private FromChkNum As Boolean
-    Private DSMain, DSSearch, DSEdit As New DataSet
-    Private DTTailor, DTService As New DataTable
+    Private DSMain, DSSearch, DSEdit, DS, DSService As New DataSet
+    Private DTTailor, DTService, DTCustomerSize As New DataTable
 
 
 
@@ -28,6 +29,7 @@ Public Class FrmCustomerOrders
             DTPTo.Value = Now.Date
             GetData(Data.Main)
             TxtPagesCount.Text = 1
+            PnlOrderDetails.BringToFront()
 
         Else
             If Not IsNothing(DSMain) Then
@@ -69,8 +71,8 @@ Public Class FrmCustomerOrders
             Case Data.Main
 
                 SQLQuery = " Select ID,Name From UserView where  ID <> 1  Order By Name "
-                SQLQuery &= " Select ID,Name From CustomersTable  Order By Name  "
-                SQLQuery &= " Select ID,Name From TailorsTable  Order By Name  "
+                SQLQuery &= " Select ID,Name From CustomersTable  where EndService IS Null  Order By Name  "
+                SQLQuery &= " Select ID,Name From TailorsTable where EndService IS NUll  Order By Name  "
                 SQLQuery &= " Select * From ServicesTable  Order By Name  "
 
                 DSMain = SQLCon.SelectData(SQLQuery)
@@ -80,8 +82,9 @@ Public Class FrmCustomerOrders
 
                 Dim Param() As SqlParameter =
                     {New SqlParameter("@InvoiceNum", Val(TxtNum.Text)),
-                    New SqlParameter("@OrderNum", Val(TxtOrderNum.Text))}
-                SQLQuery = "SELECT  ROW_NUMBER() OVER (ORDER BY (InvoiceDate)Desc) As ت, * From CustomerOrdersView 
+                    New SqlParameter("@OrderNum", Val(TxtOrderNum.Text)),
+                    New SqlParameter("@ItemStoreNum", TxtItemStoreNum.Text)}
+                SQLQuery = " SELECT  ROW_NUMBER() OVER (ORDER BY (InvoiceDate)Desc) As ت, * From CustomerOrdersView 
                             WHERE InvoiceEndService IS NULL And OrderEndService IS NULL"
 
                 AppendConditions()
@@ -100,11 +103,6 @@ Public Class FrmCustomerOrders
 
         Select Case Type
             Case Data.Main
-                CmbUserName.DataSource = DS.Tables(0)
-                CmbUserName.DisplayMember = "Name"
-                CmbUserName.ValueMember = "ID"
-                CmbUserName.SelectedIndex = -1
-
                 CmbCustomer.DataSource = DS.Tables(1)
                 CmbCustomer.DisplayMember = "Name"
                 CmbCustomer.ValueMember = "ID"
@@ -126,11 +124,11 @@ Public Class FrmCustomerOrders
                 CmbService.ValueMember = "ID"
                 CmbService.SelectedIndex = -1
 
-                DTService = DS.Tables(3).Copy
-                CmbServiceOrder.DataSource = DTService
-                CmbServiceOrder.DisplayMember = "Name"
-                CmbServiceOrder.ValueMember = "ID"
-                CmbServiceOrder.SelectedIndex = -1
+                'DTService = DS.Tables(3).Copy
+                'CmbServiceOrder.DataSource = DTService
+                'CmbServiceOrder.DisplayMember = "Name"
+                'CmbServiceOrder.ValueMember = "ID"
+                'CmbServiceOrder.SelectedIndex = -1
 
             Case Data.Search
                 If DS.Tables(1).Rows.Count > 0 Then
@@ -139,7 +137,10 @@ Public Class FrmCustomerOrders
                 GetPagesCount()
 
                 DGV.Rows.Clear()
-                If DS.Tables(0).Rows.Count = 0 Then MsgTool("لا توجد نتائج للبحث", 0)
+                If DS.Tables(0).Rows.Count = 0 Then
+                    MsgTool("لا توجد نتائج للبحث", 0)
+                    Exit Sub
+                End If
 
                 For i = 0 To DS.Tables(0).Rows.Count - 1
                     With DS.Tables(0).Rows(i)
@@ -148,40 +149,48 @@ Public Class FrmCustomerOrders
                         DGV.Item(0, i).Value = .Item("ID")
                         DGV.Item(1, i).Value = .Item("ت") 'i + 1
                         DGV.Item(2, i).Value = .Item("OrderNum")
-                        DGV.Item(3, i).Value = .Item("ItemName")
-                        DGV.Item(4, i).Value = .Item("ServiceName")
-                        DGV.Item(5, i).Value = .Item("Size")
-                        DGV.Item(6, i).Value = .Item("TailorIName")
-                        DGV.Item(7, i).Value = Format(.Item("SellPrice"), "0.000")
-                        DGV.Item(8, i).Value = .Item("Quantity")
-                        DGV.Item(9, i).Value = Format(.Item("Quantity") * .Item("SellPrice"), "0.000")
-                        DGV.Item(10, i).Value = Format(.Item("InvoiceNum"), "000000")
-                        DGV.Item(11, i).Value = Format(.Item("InvoiceDate"), GetDateAndTimeFormat(DTFormat.DTF))
+                        DGV.Item(3, i).Value = .Item("INum")
+                        DGV.Item(4, i).Value = .Item("ItemName")
+                        DGV.Item(5, i).Value = .Item("ServiceName")
+                        DGV.Item(6, i).Value = .Item("Size")
+                        DGV.Item(7, i).Value = .Item("TailorIName")
+                        DGV.Item(8, i).Value = Format(.Item("TailorPrice"), "0.00")
+                        DGV.Item(9, i).Value = .Item("Quantity")
+                        DGV.Item(10, i).Value = Format(.Item("Quantity") * .Item("TailorPrice"), "0.00")
+                        DGV.Item(11, i).Value = Format(.Item("InvoiceNum"), "000000")
+                        DGV.Item(12, i).Value = Format(.Item("InvoiceDate"), GetDateAndTimeFormat(DTFormat.DTF))
                         If .Item("Place") = "1" Then
-                            DGV.Item(12, i).Value = "في المخزن"
+                            DGV.Item(13, i).Value = "في المخزن"
 
                         ElseIf .Item("Place") = "2" Then
-                            DGV.Item(12, i).Value = "تحت التجهيز"
+                            DGV.Item(13, i).Value = "تحت التجهيز"
 
                         ElseIf .Item("Place") = "3" Then
-                            DGV.Item(12, i).Value = "جاهز"
+                            DGV.Item(13, i).Value = "جاهز"
 
                         ElseIf .Item("Place") = "4" Then
-                            DGV.Item(12, i).Value = "تم البيع"
+                            DGV.Item(13, i).Value = "تم البيع"
 
                         End If
 
-                        DGV.Item(13, i).Value = .Item("CustomerName")
+                        DGV.Item(14, i).Value = .Item("CustomerName")
                         If IsDBNull(.Item("DeliveryDate")) Then
-                            DGV.Item(14, i).Value = "-"
+                            DGV.Item(15, i).Value = "-"
                         Else
 
-                            DGV.Item(14, i).Value = Format(.Item("DeliveryDate"), GetDateAndTimeFormat(DTFormat.DTF))
+                            DGV.Item(15, i).Value = Format(.Item("DeliveryDate"), GetDateAndTimeFormat(DTFormat.DTF))
                         End If
-                        DGV.Item(15, i).Value = .Item("CustomerID")
-                        DGV.Item(16, i).Value = .Item("ServiceID")
-                        DGV.Item(17, i).Value = .Item("TailorID")
-                        DGV.Item(18, i).Value = .Item("Place")
+                        DGV.Item(16, i).Value = .Item("CustomerID")
+                        DGV.Item(17, i).Value = .Item("ServiceID")
+                        DGV.Item(18, i).Value = .Item("TailorID")
+                        DGV.Item(19, i).Value = .Item("Place")
+                        DGV.Item(21, i).Value = .Item("Armpit")
+                        DGV.Item(22, i).Value = .Item("Chest")
+                        DGV.Item(23, i).Value = .Item("Height")
+                        DGV.Item(24, i).Value = .Item("Hip")
+                        DGV.Item(25, i).Value = .Item("Shoulder")
+                        DGV.Item(26, i).Value = .Item("Sleeve")
+                        DGV.Item(27, i).Value = .Item("Waist")
 
                     End With
                 Next
@@ -197,11 +206,11 @@ Public Class FrmCustomerOrders
         Dim DateTimeTo As Date = DTPTo.Value.Date & " " & "23:59".ToString
         If ChkNum.Checked And TxtNum.Text.Trim <> "" Then AppendToQuery(" AND ", " CustomerOrdersView.InvoiceNum=@InvoiceNum ")
         If ChkOrderNum.Checked And TxtOrderNum.Text.Trim <> "" Then AppendToQuery(" AND ", " CustomerOrdersView.OrderNum=@OrderNum ")
-        If ChkUser.Checked And CmbUserName.SelectedValue <> Nothing Then AppendToQuery(" AND ", "  dbo.CustomerOrdersView.UserID = " & CmbUserName.SelectedValue)
-        If ChkCustomer.Checked And CmbCustomer.SelectedValue <> Nothing Then AppendToQuery(" AND ", " dbo.CustomerOrdersView.CustomerID = " & CmbCustomer.SelectedValue)
-        If ChkTailor.Checked And CmbTailor.SelectedValue <> Nothing Then AppendToQuery(" AND ", " dbo.CustomerOrdersView.TailorID = " & CmbTailor.SelectedValue)
-        If ChkService.Checked And CmbService.SelectedValue <> Nothing Then AppendToQuery(" AND ", " dbo.CustomerOrdersView.ServiceID = " & CmbService.SelectedValue)
-        If ChkDate.Checked Then AppendToQuery(" AND ", " InvoiceDate BETWEEN '" & DateTimeFrom & "' AND '" & DateTimeTo & "' ")
+        If ChkItemStoreNum.Checked And TxtItemStoreNum.Text.Trim <> "" Then AppendToQuery(" AND ", " CustomerOrdersView.INum=" & TxtItemStoreNum.Text.Trim) '@ItemStoreNum ")
+        If ChkCustomer.Checked And CmbCustomer.SelectedValue <> Nothing Then AppendToQuery(" And ", " dbo.CustomerOrdersView.CustomerID = " & CmbCustomer.SelectedValue)
+        If ChkTailor.Checked And CmbTailor.SelectedValue <> Nothing Then AppendToQuery(" And ", " dbo.CustomerOrdersView.TailorID = " & CmbTailor.SelectedValue)
+        If ChkService.Checked And CmbService.SelectedValue <> Nothing Then AppendToQuery(" And ", " dbo.CustomerOrdersView.ServiceID = " & CmbService.SelectedValue)
+        If ChkDate.Checked Then AppendToQuery(" And ", " InvoiceDate BETWEEN '" & DateTimeFrom & "' AND '" & DateTimeTo & "' ")
         If ChkOrder.Checked Then
             If RadReady.Checked Then
                 AppendToQuery(" AND ", " dbo.CustomerOrdersView.DeliveryDate IS NOT NULL")
@@ -214,7 +223,7 @@ Public Class FrmCustomerOrders
     End Sub
 
     Private Sub ChkChecks()
-        If ChkDate.Checked = False And ChkNum.Checked = False And ChkOrderNum.Checked = False And ChkUser.Checked = False And ChkCustomer.Checked = False And ChkTailor.Checked = False And ChkService.Checked = False And ChkOrder.Checked = False Then Exit Sub
+        If ChkDate.Checked = False And ChkNum.Checked = False And ChkOrderNum.Checked = False And ChkItemStoreNum.Checked = False And ChkCustomer.Checked = False And ChkTailor.Checked = False And ChkService.Checked = False And ChkOrder.Checked = False Then Exit Sub
     End Sub
 
     Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
@@ -228,7 +237,7 @@ Public Class FrmCustomerOrders
 
         DGV.Rows.Clear()
         ChkChecks()
-        If ChkDate.Checked = False And ChkNum.Checked = False And ChkOrderNum.Checked = False And ChkUser.Checked = False And ChkCustomer.Checked = False And ChkTailor.Checked = False And ChkService.Checked = False And ChkOrder.Checked = False Then
+        If ChkDate.Checked = False And ChkNum.Checked = False And ChkOrderNum.Checked = False And ChkItemStoreNum.Checked = False And ChkCustomer.Checked = False And ChkTailor.Checked = False And ChkService.Checked = False And ChkOrder.Checked = False Then
             MsgTool("يرجى اختيار طريقة بحث", 0)
             Exit Sub
         End If
@@ -257,16 +266,16 @@ Public Class FrmCustomerOrders
             TxtNum.Enabled = True
             TxtNum.Focus()
             FromChkNum = True
-            ChkUser.Checked = False
+            ChkItemStoreNum.Checked = False
             ChkDate.Checked = False
             ChkCustomer.Checked = False
             ChkTailor.Checked = False
             ChkService.Checked = False
             ChkOrder.Checked = False
             ChkOrderNum.Checked = False
+            ChkItemStoreNum.Checked = False
 
         Else
-            'ChkDate.Checked = True
             TxtNum.Enabled = False
             TxtNum.Text = ""
             TxtPageNum.Text = 1
@@ -282,8 +291,7 @@ Public Class FrmCustomerOrders
 
             TxtOrderNum.Enabled = True
             TxtOrderNum.Focus()
-            'FromChkNum = True
-            ChkUser.Checked = False
+            ChkItemStoreNum.Checked = False
             ChkDate.Checked = False
             ChkCustomer.Checked = False
             ChkTailor.Checked = False
@@ -292,7 +300,6 @@ Public Class FrmCustomerOrders
             ChkNum.Checked = False
 
         Else
-            'ChkDate.Checked = True
             TxtOrderNum.Enabled = False
             TxtOrderNum.Text = ""
             TxtPageNum.Text = 1
@@ -302,24 +309,25 @@ Public Class FrmCustomerOrders
 
     End Sub
 
-    Private Sub ChkUser_CheckedChanged(sender As Object, e As EventArgs) Handles ChkUser.CheckedChanged
+    Private Sub ChkItemStoreNum_CheckedChanged(sender As Object, e As EventArgs) Handles ChkItemStoreNum.CheckedChanged
         DGV.Rows.Clear()
-        CmbUserName.BackColor = SystemColors.Window
+        'TxtItemStoreNum.BackColor = SystemColors.Window
 
-        If ChkUser.Checked = True Then
-            CmbUserName.Enabled = True
-            CmbUserName.Focus()
-            If ChkNum.Checked = True Then ChkNum.Checked = False
-            If ChkOrderNum.Checked = True Then ChkOrderNum.Checked = False
+        If ChkItemStoreNum.Checked = True Then
+            TxtItemStoreNum.Enabled = True
+            TxtItemStoreNum.Focus()
+            ChkNum.Checked = False
+            ChkOrderNum.Checked = False
+            'ChkOrderNum.Enabled = False
 
         Else
-            '   ChangeControlColor(Me)
-            CmbUserName.Text = ""
-            CmbUserName.Enabled = False
+            TxtItemStoreNum.Enabled = False
+            TxtItemStoreNum.Text = ""
             TxtPageNum.Text = 1
             TxtPagesCount.Text = 1
             SearchActive = False
         End If
+
     End Sub
 
     Private Sub ChkCustomer_CheckedChanged(sender As Object, e As EventArgs) Handles ChkCustomer.CheckedChanged
@@ -329,8 +337,9 @@ Public Class FrmCustomerOrders
         If ChkCustomer.Checked = True Then
             CmbCustomer.Enabled = True
             CmbCustomer.Focus()
-            If ChkNum.Checked = True Then ChkNum.Checked = False
-            If ChkOrderNum.Checked = True Then ChkOrderNum.Checked = False
+            ChkNum.Checked = False
+            ChkOrderNum.Checked = False
+            ChkItemStoreNum.Checked = False
 
         Else
             CmbCustomer.Text = ""
@@ -348,8 +357,9 @@ Public Class FrmCustomerOrders
         If ChkTailor.Checked = True Then
             CmbTailor.Enabled = True
             CmbTailor.Focus()
-            If ChkNum.Checked = True Then ChkNum.Checked = False
-            If ChkOrderNum.Checked = True Then ChkOrderNum.Checked = False
+            ChkNum.Checked = False
+            ChkOrderNum.Checked = False
+            ChkItemStoreNum.Checked = False
 
         Else
             CmbTailor.Text = ""
@@ -367,8 +377,9 @@ Public Class FrmCustomerOrders
         If ChkService.Checked = True Then
             CmbService.Enabled = True
             CmbService.Focus()
-            If ChkNum.Checked = True Then ChkNum.Checked = False
-            If ChkOrderNum.Checked = True Then ChkOrderNum.Checked = False
+            ChkNum.Checked = False
+            ChkOrderNum.Checked = False
+            ChkItemStoreNum.Checked = False
 
         Else
             CmbService.Text = ""
@@ -384,8 +395,9 @@ Public Class FrmCustomerOrders
         If ChkDate.Checked = True Then
             DTPFrom.Enabled = True
             DTPTo.Enabled = True
-            If ChkNum.Checked = True Then ChkNum.Checked = False
-            If ChkOrderNum.Checked = True Then ChkOrderNum.Checked = False
+            ChkNum.Checked = False
+            ChkOrderNum.Checked = False
+            ChkItemStoreNum.Checked = False
 
         Else
             DTPFrom.Enabled = True
@@ -412,8 +424,9 @@ Public Class FrmCustomerOrders
         If ChkOrder.Checked = True Then
             RadOrder.Enabled = True
             RadReady.Enabled = True
-            If ChkNum.Checked = True Then ChkNum.Checked = False
-            If ChkOrderNum.Checked = True Then ChkOrderNum.Checked = False
+            ChkNum.Checked = False
+            ChkOrderNum.Checked = False
+            ChkItemStoreNum.Checked = False
 
         Else
             RadOrder.Enabled = False
@@ -434,7 +447,7 @@ Public Class FrmCustomerOrders
         ChkService.Checked = False
         ChkNum.Checked = False
         ChkOrder.Checked = False
-        ChkUser.Checked = False
+        ChkItemStoreNum.Checked = False
         SearchActive = False
     End Sub
 
@@ -458,139 +471,18 @@ Public Class FrmCustomerOrders
         EditOrder()
     End Sub
 
-    Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
-        TLPOrderDetails.Visible = False
-    End Sub
-
-    Private Sub DGV_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV.CellContentClick
-        If DGV.RowCount = 0 OrElse e.RowIndex < 0 Then Exit Sub
-
-        If DGV.Item(18, e.RowIndex).Value = 4 Then Exit Sub
-
-        OrderID = Convert.ToInt32(DGV.Item(0, e.RowIndex).Value)
-
-        TxtSize.Text = DGV.Item(5, e.RowIndex).Value
-        TxtTailorPrice.Text = DGV.Item(7, e.RowIndex).Value
-
-        If Not IsNothing(DGV.Item(16, e.RowIndex)) Then
-            CmbServiceOrder.SelectedValue = DGV.Item(16, e.RowIndex).Value
-        End If
-
-        If Not IsNothing(DGV.Item(17, e.RowIndex)) Then
-            CmbTailorOrder.SelectedValue = DGV.Item(17, e.RowIndex).Value
-        End If
-
-
-        Dim ColName As String = DGV.Columns(e.ColumnIndex).Name
-
-        If ColName = "ColEdit" Then
-            If DGV.Item(18, e.RowIndex).Value = 1 Then
-                BtnSend.Enabled = True
-                BtnReceive.Enabled = False
-                BtnSell.Enabled = False
-
-            ElseIf DGV.Item(18, e.RowIndex).Value = 2 Then
-                BtnSend.Enabled = False
-                BtnReceive.Enabled = True
-                BtnSell.Enabled = False
-
-            ElseIf DGV.Item(18, e.RowIndex).Value = 3 Then
-                BtnSend.Enabled = False
-                BtnReceive.Enabled = False
-                BtnSell.Enabled = True
-            End If
-
-            If DGV.Item(18, e.RowIndex).Value = 1 Then
-                LblOrderData.Enabled = True
-                LblOrderData_Click(sender, e)
-
-            ElseIf DGV.Item(18, e.RowIndex).Value = 4 Then
-                MsgTool("تم تسليم الطلب للزبون", 0)
-                Exit Sub
-
-            Else
-                LblOrderData.Enabled = False
-                LblOrderState_Click(sender, e)
-            End If
-
-            TLPOrderDetails.Visible = True
-            'TLPOrderDetails.BringToFront()
-
-            'EditOrder()
-        End If
-    End Sub
-
-    Private Sub DGV_DoubleClick(sender As Object, e As EventArgs) Handles DGV.DoubleClick
-        If DGV.RowCount = 0 OrElse DGV.CurrentRow Is Nothing Then Exit Sub
-
-        OrderID = Convert.ToInt32(DGV.CurrentRow.Cells(0).Value)
-        If DGV.CurrentRow.Cells(18).Value = 1 Then
-            BtnSend.Enabled = True
-            BtnReceive.Enabled = False
-            BtnSell.Enabled = False
-
-        ElseIf DGV.CurrentRow.Cells(18).Value = 2 Then
-            BtnSend.Enabled = False
-            BtnReceive.Enabled = True
-            BtnSell.Enabled = False
-
-        ElseIf DGV.CurrentRow.Cells(18).Value = 3 Then
-            BtnSend.Enabled = False
-            BtnReceive.Enabled = False
-            BtnSell.Enabled = True
-        End If
-
-        LblOrderData_Click(sender, e)
-        If DGV.CurrentRow.Cells(18).Value = 1 Then
-            LblOrderData.Enabled = True
-            LblOrderData_Click(sender, e)
-
-        ElseIf DGV.CurrentRow.Cells(18).Value = 4 Then
-            MsgTool("تم تسليم الطلب للزبون", 0)
-            Exit Sub
-
-        Else
-            LblOrderData.Enabled = False
-            LblOrderState_Click(sender, e)
-        End If
-        TLPOrderDetails.Visible = True
-
-        'EditOrder()
-    End Sub
-
-    Private Sub LblOrderData_Click(sender As Object, e As EventArgs) Handles LblOrderData.Click
-        PnlData.BringToFront()
-        PnlOrderState.Visible = False
-        PnlOrderData.Visible = True
-    End Sub
-
-    Private Sub LblOrderState_Click(sender As Object, e As EventArgs) Handles LblOrderState.Click
-        PnlState.BringToFront()
-        PnlOrderData.Visible = False
-        PnlOrderState.Visible = True
-    End Sub
-
-    Private Sub CmbServiceOrder_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbServiceOrder.SelectedIndexChanged
-
-    End Sub
-
-    Private Sub CmbServiceOrder_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles CmbServiceOrder.SelectionChangeCommitted
-        Dim DT As DataTable = DTService
-        If IsNothing(CmbServiceOrder.SelectedValue) Then Exit Sub
-
-        Dim rows() As DataRow = DT.Select("ID = " & CmbServiceOrder.SelectedValue)
-        If rows.Length > 0 Then
-            TxtTailorPrice.Text = rows(0)("Price").ToString()
-        Else
-            TxtTailorPrice.Text = 0
-        End If
-    End Sub
-
     Private Sub EditOrder()
         Dim TailorID As Integer = 0
         Dim ServiceID As Integer = 0
         Dim TailorPrice As Double = 0
         Dim Size As String = ""
+        Dim Armpit As Double = 0
+        Dim Chest As Double = 0
+        Dim CusHeight As Double = 0
+        Dim Hip As Double = 0
+        Dim Shoulder As Double = 0
+        Dim Sleeve As Double = 0
+        Dim Waist As Double = 0
 
         If Not IsNothing(CmbTailorOrder.SelectedValue) Then
             TailorID = CmbTailorOrder.SelectedValue
@@ -604,6 +496,28 @@ Public Class FrmCustomerOrders
             Size = TxtSize.Text.Trim
         End If
         TailorPrice = Val(TxtTailorPrice.Text)
+
+        If TxtArmpit.Text <> "" Then
+            Armpit = Val(TxtArmpit.Text.Trim)
+        End If
+        If TxtChest.Text <> "" Then
+            Chest = Val(TxtChest.Text.Trim)
+        End If
+        If TxtHeight.Text <> "" Then
+            CusHeight = Val(TxtHeight.Text.Trim)
+        End If
+        If TxtHip.Text <> "" Then
+            Hip = Val(TxtHip.Text.Trim)
+        End If
+        If TxtShoulder.Text <> "" Then
+            Shoulder = Val(TxtShoulder.Text.Trim)
+        End If
+        If TxtSleeve.Text <> "" Then
+            Sleeve = Val(TxtSleeve.Text.Trim)
+        End If
+        If TxtWaist.Text <> "" Then
+            Waist = Val(TxtWaist.Text.Trim)
+        End If
 
         If (TailorID = 0 Or ServiceID = 0 Or TailorPrice = 0 Or Size = "") And Operation = "Edit" Then
             MsgTool("يرجى تكملة بيانات الطلب أولاً", 0)
@@ -623,7 +537,15 @@ Public Class FrmCustomerOrders
         New SqlParameter("@TailorID", TailorID),
         New SqlParameter("@ServiceID", ServiceID),
         New SqlParameter("@Price", TailorPrice),
-        New SqlParameter("@Size", Size)}
+        New SqlParameter("@Size", Size),
+        New SqlParameter("@Height", CusHeight),
+        New SqlParameter("@Shoulder", Shoulder),
+        New SqlParameter("@Sleeve", Sleeve),
+        New SqlParameter("@Armpit", Armpit),
+        New SqlParameter("@Chest", Chest),
+        New SqlParameter("@Waist", Waist),
+        New SqlParameter("@Hip", Hip),
+        New SqlParameter("@ChkCustomer", ChkCustomer.Checked)}
 
         Dim DS As DataSet = SQLCon.CMDExecuteData("EditOrder", Param)
         Select Case Operation
@@ -642,16 +564,335 @@ Public Class FrmCustomerOrders
 
         End Select
         BtnSearch.PerformClick()
-        TLPOrderDetails.Visible = False
+        PnlOrderDetails.Visible = False
         Clear(TLPOrder)
     End Sub
 
-    Private Sub TxtNum_TextChanged(sender As Object, e As EventArgs) Handles TxtNum.TextChanged, CmbUserName.TextChanged
+    Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
+        PnlOrderDetails.Visible = False
+    End Sub
+
+    Private Sub DGV_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV.CellContentClick
+        If DGV.RowCount = 0 OrElse e.RowIndex < 0 Then Exit Sub
+
+        If DGV.Item(19, e.RowIndex).Value = 4 Then Exit Sub
+
+        OrderID = Convert.ToInt32(DGV.Item(0, e.RowIndex).Value)
+        LblCustomerName.Text = DGV.Item(14, e.RowIndex).Value
+        CustomerID = Convert.ToInt32(DGV.Item(16, e.RowIndex).Value)
+
+        CleanSizes()
+
+        TxtSize.Text = DGV.Item(6, e.RowIndex).Value
+        TxtTailorPrice.Text = DGV.Item(8, e.RowIndex).Value
+
+
+
+        Dim SqlCon As New SQLConClass()
+        SQLQuery = "  Select * From CustomerSizesTable Where CustomerID = " & CustomerID
+        SQLQuery += "  Select * From CustomerOrdersView Where ID = " & OrderID
+        DS = SqlCon.SelectData(SQLQuery, 0, Nothing)
+        If DSHasTables(DS) Then
+            If DS.Tables(0).Rows.Count > 0 Then
+                DTCustomerSize = DS.Tables(0).Copy
+                FillCustomerSizes(DTCustomerSize)
+                CmbSizeName.SelectedValue = DS.Tables(1).Rows(0).Item("CustomerSizeID")
+            Else
+                CmbSizeName.DataSource = Nothing
+                CmbSizeName.Text = ""
+            End If
+        End If
+        Dim cellValueObject As Object = DGV.Item(18, e.RowIndex).Value
+        If Not String.IsNullOrWhiteSpace(Convert.ToString(cellValueObject)) Then
+
+            'End If
+            'If Not IsNothing(DGV.Item(18, e.RowIndex)) Or Not IsDBNull(DGV.Item(18, e.RowIndex)) Then
+            CmbTailorOrder.SelectedValue = DGV.Item(18, e.RowIndex).Value
+
+            'Dim SQLCon = New SQLConClass()
+            SQLQuery = " Select * From TailorServicesView Where TailorID = " & CmbTailorOrder.SelectedValue
+
+            DSService = SqlCon.SelectData(SQLQuery, 0, Nothing)
+            If DSHasTables(DSService) Then
+                If DSService.Tables(0).Rows.Count > 0 Then
+                    CmbServiceOrder.DataSource = DSService.Tables(0)
+                    CmbServiceOrder.DisplayMember = "ServiceName"
+                    CmbServiceOrder.ValueMember = "ID"
+                    'CmbServiceOrder.SelectedIndex = -1
+                    If Not IsNothing(DGV.Item(17, e.RowIndex)) Then
+                        CmbServiceOrder.SelectedValue = DGV.Item(17, e.RowIndex).Value
+                    End If
+
+                Else
+                    CmbServiceOrder.DataSource = Nothing
+                    CmbServiceOrder.SelectedIndex = -1
+                    CmbServiceOrder.Text = ""
+                End If
+            End If
+
+        End If
+
+        If Not IsDBNull(DGV.Item(21, e.RowIndex)) Then
+            TxtArmpit.Text = DGV.Item(21, e.RowIndex).Value.ToString
+        End If
+        If Not IsNothing(DGV.Item(22, e.RowIndex)) Then
+            TxtChest.Text = DGV.Item(22, e.RowIndex).Value.ToString
+        End If
+        If Not IsNothing(DGV.Item(23, e.RowIndex)) Then
+            TxtHeight.Text = DGV.Item(23, e.RowIndex).Value.ToString
+        End If
+        If Not IsNothing(DGV.Item(24, e.RowIndex)) Then
+            TxtHip.Text = DGV.Item(24, e.RowIndex).Value.ToString
+        End If
+        If Not IsNothing(DGV.Item(25, e.RowIndex)) Then
+            TxtShoulder.Text = DGV.Item(25, e.RowIndex).Value.ToString
+        End If
+        If Not IsNothing(DGV.Item(26, e.RowIndex)) Then
+            TxtSleeve.Text = DGV.Item(26, e.RowIndex).Value.ToString
+        End If
+        If Not IsNothing(DGV.Item(27, e.RowIndex)) Then
+            TxtWaist.Text = DGV.Item(27, e.RowIndex).Value.ToString
+        End If
+
+        Dim ColName As String = DGV.Columns(e.ColumnIndex).Name
+
+        If ColName = "ColEdit" Then
+            If DGV.Item(19, e.RowIndex).Value = 1 Then
+                BtnSave.Enabled = True
+                BtnSend.Enabled = True
+                BtnReceive.Enabled = False
+                BtnSell.Enabled = False
+
+            ElseIf DGV.Item(19, e.RowIndex).Value = 2 Then
+                BtnSave.Enabled = False
+                BtnSend.Enabled = False
+                BtnReceive.Enabled = True
+                BtnSell.Enabled = False
+
+            ElseIf DGV.Item(19, e.RowIndex).Value = 3 Then
+                BtnSave.Enabled = False
+                BtnSend.Enabled = False
+                BtnReceive.Enabled = False
+                BtnSell.Enabled = True
+            End If
+
+            If DGV.Item(19, e.RowIndex).Value = 1 Then
+                BtnSave.Enabled = True
+                LblOrderData.Enabled = True
+
+            ElseIf DGV.Item(19, e.RowIndex).Value = 4 Then
+                BtnSave.Enabled = False
+                MsgTool("تم تسليم الطلب للزبون", 0)
+                Exit Sub
+
+            Else
+                BtnSave.Enabled = False
+                LblOrderData.Enabled = False
+            End If
+
+
+            PnlOrderDetails.Top = (Me.Height - PnlOrderDetails.Height) / 2
+            PnlOrderDetails.Left = (Me.Width - PnlOrderDetails.Width) / 2.0
+            PnlOrderDetails.Visible = True
+        End If
+    End Sub
+
+    Private Sub CleanSizes()
+        TxtSizeName.Text = ""
+        TxtHeight.Text = ""
+        TxtShoulder.Text = ""
+        TxtSleeve.Text = ""
+        TxtArmpit.Text = ""
+        TxtChest.Text = ""
+        TxtWaist.Text = ""
+        TxtHip.Text = ""
+    End Sub
+
+    Private Sub FillCustomerSizes(DT As DataTable)
+        If DT.Rows.Count > 0 Then
+            CmbSizeName.DataSource = DT
+            CmbSizeName.DisplayMember = "Name"
+            CmbSizeName.ValueMember = "ID"
+            CmbSizeName.SelectedIndex = -1
+
+        Else
+            CmbSizeName.DataSource = Nothing
+            CmbSizeName.Text = ""
+        End If
+    End Sub
+
+    Private Sub CmbSizeName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbSizeName.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub CmbSizeName_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles CmbSizeName.SelectionChangeCommitted
+        CleanSizes()
+        If CmbSizeName.SelectedValue Is Nothing Or CmbSizeName.SelectedValue = -1 Then Exit Sub
+
+        Dim ItemRow() As DataRow = DTCustomerSize.Select("ID=" & CmbSizeName.SelectedValue)
+
+        If ItemRow.Length = 0 Then Exit Sub
+
+        If Not IsDBNull(ItemRow(0)("Name")) Then TxtSizeName.Text = ItemRow(0)("Name")
+        If Not IsDBNull(ItemRow(0)("Height")) Then TxtHeight.Text = ItemRow(0)("Height")
+        If Not IsDBNull(ItemRow(0)("Shoulder")) Then TxtShoulder.Text = ItemRow(0)("Shoulder")
+        If Not IsDBNull(ItemRow(0)("Sleeve")) Then TxtSleeve.Text = ItemRow(0)("Sleeve")
+        If Not IsDBNull(ItemRow(0)("Armpit")) Then TxtArmpit.Text = ItemRow(0)("Armpit")
+        If Not IsDBNull(ItemRow(0)("Chest")) Then TxtChest.Text = ItemRow(0)("Chest")
+        If Not IsDBNull(ItemRow(0)("Waist")) Then TxtWaist.Text = ItemRow(0)("Waist")
+        If Not IsDBNull(ItemRow(0)("Hip")) Then TxtHip.Text = ItemRow(0)("Hip")
+    End Sub
+
+    Private Sub DGV_DoubleClick(sender As Object, e As EventArgs) Handles DGV.DoubleClick
+        If DGV.RowCount = 0 OrElse DGV.CurrentRow Is Nothing Then Exit Sub
+
+        OrderID = Convert.ToInt32(DGV.CurrentRow.Cells(0).Value)
+        LblCustomerName.Text = DGV.CurrentRow.Cells(14).Value
+        CustomerID = Convert.ToInt32(DGV.CurrentRow.Cells(16).Value)
+        CleanSizes()
+
+        TxtSize.Text = DGV.CurrentRow.Cells(6).Value
+        TxtTailorPrice.Text = DGV.CurrentRow.Cells(8).Value
+
+
+        If DGV.CurrentRow.Cells(19).Value = 1 Then
+            BtnSave.Enabled = True
+            BtnSend.Enabled = True
+            BtnReceive.Enabled = False
+            BtnSell.Enabled = False
+
+        ElseIf DGV.CurrentRow.Cells(19).Value = 2 Then
+            BtnSave.Enabled = False
+            BtnSend.Enabled = False
+            BtnReceive.Enabled = True
+            BtnSell.Enabled = False
+
+        ElseIf DGV.CurrentRow.Cells(19).Value = 3 Then
+            BtnSave.Enabled = False
+            BtnSend.Enabled = False
+            BtnReceive.Enabled = False
+            BtnSell.Enabled = True
+        End If
+
+        If DGV.CurrentRow.Cells(19).Value = 1 Then
+            BtnSave.Enabled = True
+            LblOrderData.Enabled = True
+
+        ElseIf DGV.CurrentRow.Cells(19).Value = 4 Then
+            BtnSave.Enabled = False
+            MsgTool("تم تسليم الطلب للزبون", 0)
+            Exit Sub
+
+        Else
+            BtnSave.Enabled = False
+            LblOrderData.Enabled = False
+        End If
+
+        Dim SqlCon As New SQLConClass()
+        SQLQuery = "  Select * From CustomerSizesTable Where CustomerID = " & CustomerID
+        SQLQuery += "  Select * From CustomerOrdersView Where ID = " & OrderID
+        DS = SqlCon.SelectData(SQLQuery, 0, Nothing)
+        DS = SqlCon.SelectData(SQLQuery, 0, Nothing)
+        If DSHasTables(DS) Then
+            If DS.Tables(0).Rows.Count > 0 Then
+                DTCustomerSize = DS.Tables(0).Copy
+                FillCustomerSizes(DTCustomerSize)
+                CmbSizeName.SelectedValue = DS.Tables(1).Rows(0).Item("CustomerSizeID")
+                TxtSizeName.Text = CmbSizeName.Text
+            Else
+                CmbSizeName.DataSource = Nothing
+                CmbSizeName.Text = ""
+            End If
+        End If
+
+        'If Not IsNothing(DGV.CurrentRow.Cells(17).Value) Then
+        '    CmbServiceOrder.SelectedValue = DGV.CurrentRow.Cells(17).Value
+        'End If
+        Dim cellValueObject As Object = DGV.CurrentRow.Cells(18).Value
+        If Not String.IsNullOrWhiteSpace(Convert.ToString(cellValueObject)) Then
+
+            'End If
+            'If Not IsNothing(DGV.CurrentRow.Cells(18)) Or Not IsDBNull(DGV.CurrentRow.Cells(18).Value) Then
+            CmbTailorOrder.SelectedValue = DGV.CurrentRow.Cells(18).Value
+
+            'Dim SQLCon = New SQLConClass()
+            SQLQuery = " Select * From TailorServicesView Where TailorID = " & CmbTailorOrder.SelectedValue
+
+            DSService = SqlCon.SelectData(SQLQuery, 0, Nothing)
+            If DSHasTables(DSService) Then
+                If DSService.Tables(0).Rows.Count > 0 Then
+                    CmbServiceOrder.DataSource = DSService.Tables(0)
+                    CmbServiceOrder.DisplayMember = "ServiceName"
+                    CmbServiceOrder.ValueMember = "ID"
+                    'CmbServiceOrder.SelectedIndex = -1
+                    If Not IsNothing(DGV.CurrentRow.Cells(17).Value) Or Not IsDBNull(DGV.CurrentRow.Cells(17).Value) Then
+                        CmbServiceOrder.SelectedValue = DGV.CurrentRow.Cells(17).Value
+                    End If
+
+                Else
+                    CmbServiceOrder.DataSource = Nothing
+                    CmbServiceOrder.SelectedIndex = -1
+                    CmbServiceOrder.Text = ""
+                End If
+            End If
+
+        End If
+
+        If Not IsDBNull(DGV.CurrentRow.Cells(21)) Then
+            TxtArmpit.Text = DGV.CurrentRow.Cells(21).Value.ToString
+        End If
+        If Not IsNothing(DGV.CurrentRow.Cells(22)) Then
+            TxtChest.Text = DGV.CurrentRow.Cells(22).Value.ToString
+        End If
+        If Not IsNothing(DGV.CurrentRow.Cells(23)) Then
+            TxtHeight.Text = DGV.CurrentRow.Cells(23).Value.ToString
+        End If
+        If Not IsNothing(DGV.CurrentRow.Cells(24)) Then
+            TxtHip.Text = DGV.CurrentRow.Cells(24).Value.ToString
+        End If
+        If Not IsNothing(DGV.CurrentRow.Cells(25)) Then
+            TxtShoulder.Text = DGV.CurrentRow.Cells(25).Value.ToString
+        End If
+        If Not IsNothing(DGV.CurrentRow.Cells(26)) Then
+            TxtSleeve.Text = DGV.CurrentRow.Cells(26).Value.ToString
+        End If
+        If Not IsNothing(DGV.CurrentRow.Cells(27)) Then
+            TxtWaist.Text = DGV.CurrentRow.Cells(27).Value.ToString
+        End If
+
+        PnlOrderDetails.Top = (Me.Height - PnlOrderDetails.Height) / 2
+        PnlOrderDetails.Left = (Me.Width - PnlOrderDetails.Width) / 2.0
+        PnlOrderDetails.Visible = True
+
+    End Sub
+
+    Private Sub CmbServiceOrder_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbServiceOrder.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub CmbServiceOrder_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles CmbServiceOrder.SelectionChangeCommitted
+        Dim DT As DataTable = DSService.Tables(0)
+        If IsNothing(CmbServiceOrder.SelectedValue) Then Exit Sub
+
+        Dim rows() As DataRow = DT.Select("ID = " & CmbServiceOrder.SelectedValue)
+        If rows.Length > 0 Then
+            TxtTailorPrice.Text = rows(0)("Price").ToString()
+        Else
+            TxtTailorPrice.Text = 0
+        End If
+    End Sub
+
+    Private Sub TxtNum_TextChanged(sender As Object, e As EventArgs) Handles TxtNum.TextChanged
         DGV.Rows.Clear()
         sender.BackColor = SystemColors.Window
     End Sub
 
     Private Sub TxtOrderNum_TextChanged(sender As Object, e As EventArgs) Handles TxtOrderNum.TextChanged
+        DGV.Rows.Clear()
+        sender.BackColor = SystemColors.Window
+    End Sub
+
+    Private Sub TxtItemStoreNum_TextChanged(sender As Object, e As EventArgs) Handles TxtItemStoreNum.TextChanged
         DGV.Rows.Clear()
         sender.BackColor = SystemColors.Window
     End Sub
@@ -666,11 +907,6 @@ Public Class FrmCustomerOrders
 
     Private Sub DTPTo_ValueChanged(sender As Object, e As EventArgs) Handles DTPTo.ValueChanged
         DGV.Rows.Clear()
-    End Sub
-
-    Private Sub CmbUserName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbUserName.SelectedIndexChanged
-        DGV.Rows.Clear()
-        sender.BackColor = SystemColors.Window
     End Sub
 
     Private Sub CmbCustomer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbCustomer.SelectedIndexChanged
@@ -701,41 +937,40 @@ Public Class FrmCustomerOrders
         '    Exit Sub
         'End If
 
-        'If DGVRecipt.Rows.Count = 0 Then Exit Sub
+        If DGV.Rows.Count = 0 Then Exit Sub
 
-        'Dim DSPrint = New DataSet
-        'Dim SQLCon = New SQLConClass
+        Dim DSPrint = New DataSet
+        Dim SQLCon = New SQLConClass
+        Dim Param() As SqlParameter =
+                    {New SqlParameter("@InvoiceNum", Val(TxtNum.Text)),
+                    New SqlParameter("@OrderNum", Val(TxtOrderNum.Text)),
+                    New SqlParameter("@ItemStoreNum", TxtItemStoreNum.Text)}
+        SQLQuery = " SELECT OrderNum, INUM, ItemName, ServiceName, Size, TailorIName, TailorPrice, Quantity, 
+                    TailorTotal, Format(InvoiceNum,'000000') AS InvoiceNum, InvoiceDate, CASE 
+                    WHEN Place = 1 THEN 'في المخزن'
+                    WHEN Place = 2 THEN 'تحت التجهيز'
+					WHEN Place = 3 THEN 'جاهز'
+					WHEN Place = 4 THEN 'تم البيع'
+                    END AS Place, CustomerName, DeliveryDate,ID ,Shoulder, Chest, Waist, Sleeve, Height, Armpit, Hip 
+                    From CustomerOrdersView WHERE InvoiceEndService IS NULL And OrderEndService IS NULL"
+        AppendReportConditions()
+        SQLQuery &= " ORDER BY CustomerOrdersView.InvoiceDate Desc OFFSET " & PageSize * (PageNum - 1) & " ROWS FETCH NEXT " & PageSize & " ROWS ONLY"
+        SQLQuery &= " SELECT * FROM CenterInfoTable"
 
-        'SQLQuery = "SELECT FORMAT(Num,'000000') AS Num,FORMAT([Date],'" & GetDateAndTimeFormat(DTFormat.DF) & "') AS [Date],Value,ReceiptName,NoteFor FROM ReceiptView WHERE EndService IS NULL"
-        'AppendReportConditions()
-        'SQLQuery &= " ORDER BY ID DESC OFFSET " & PageSize * (PageNum - 1) & " ROWS FETCH NEXT " & PageSize & " ROWS ONLY"
-        'SQLQuery &= " SELECT * FROM CenterMainInfoTable"
+        DSPrint = SQLCon.SelectData(SQLQuery, 0, Param)
 
-        'Dim Param() As SqlParameter =
-        '    {
-        '    New SqlParameter("@Num", TxtNum.Text.Trim),
-        '    New SqlParameter("@ReceiptName", "%" & TxtReciptName.Text.Trim & "%"),
-        '    New SqlParameter("@PaymentTypeID", (IIf(IsNothing(CmbPaymentType.SelectedValue), 0, CmbPaymentType.SelectedValue))),
-        '    New SqlParameter("@UserID", (IIf(IsNothing(CmbUserName.SelectedValue), 0, CmbUserName.SelectedValue))),
-        '    New SqlParameter("@BankID", (IIf(IsNothing(CmbBank.SelectedValue), 0, CmbBank.SelectedValue))),
-        '    New SqlParameter("@ReceiptFinanceTypeID", (IIf(IsNothing(CmbFinancRecipt.SelectedValue), 0, CmbFinancRecipt.SelectedValue))),
-        '    New SqlParameter("@Check", "%" & Val(TxtCkeck.Text.Trim) & "%")
-        '    }
+        Dim F As New FrmPrint
+        Dim C As New CRCustomerOrders
 
-        'DSPrint = SQLCon.SelectData(SQLQuery, 0, Param)
-
-        'Dim F As New FrmPrint
-        'Dim C As New CRRecieptList
-
-        'C.SetDataSource(DSPrint.Tables(0))
-        'C.Subreports(0).SetDataSource(DSPrint.Tables(1))
-        'C.Subreports(1).SetDataSource(DSPrint.Tables(1))
-        'F.CrystalReportViewer1.ReportSource = C
-        'F.CrystalReportViewer1.Refresh()
-        'F.Text = "طباعة"
-        'F.CrystalReportViewer1.Zoom(100%)
-        'F.WindowState = FormWindowState.Maximized
-        'F.Show()
+        C.SetDataSource(DSPrint.Tables(0))
+        C.Subreports(0).SetDataSource(DSPrint.Tables(1))
+        C.Subreports(1).SetDataSource(DSPrint.Tables(1))
+        F.CrystalReportViewer1.ReportSource = C
+        F.CrystalReportViewer1.Refresh()
+        F.Text = "طباعة"
+        F.CrystalReportViewer1.Zoom(100%)
+        F.WindowState = FormWindowState.Maximized
+        F.Show()
     End Sub
 
     Private Sub BtnPrintAll_Click(sender As Object, e As EventArgs) Handles BtnPrintAll.Click
@@ -746,55 +981,87 @@ Public Class FrmCustomerOrders
         '    Exit Sub
         'End If
 
-        'If DGVRecipt.Rows.Count = 0 Then Exit Sub
+        If DGV.Rows.Count = 0 Then Exit Sub
 
-        'Dim DSPrint = New DataSet
-        'Dim SQLCon = New SQLConClass
+        Dim DSPrint = New DataSet
+        Dim SQLCon = New SQLConClass
+        Dim Param() As SqlParameter =
+                    {New SqlParameter("@InvoiceNum", Val(TxtNum.Text)),
+                    New SqlParameter("@OrderNum", Val(TxtOrderNum.Text)),
+                    New SqlParameter("@ItemStoreNum", TxtItemStoreNum.Text)}
+        SQLQuery = " SELECT OrderNum, INUM, ItemName, ServiceName, Size, TailorIName, TailorPrice, Quantity, 
+                    TailorTotal, Format(InvoiceNum,'000000') AS InvoiceNum, InvoiceDate, CASE 
+                    WHEN Place = 1 THEN 'في المخزن'
+                    WHEN Place = 2 THEN 'تحت التجهيز'
+					WHEN Place = 3 THEN 'جاهز'
+					WHEN Place = 4 THEN 'تم البيع'
+                    END AS Place, CustomerName, DeliveryDate ,ID, Shoulder, Chest, Waist, Sleeve, Height, Armpit, Hip
+                    From CustomerOrdersView WHERE InvoiceEndService IS NULL And OrderEndService IS NULL"
+        AppendReportConditions()
+        SQLQuery &= " ORDER BY CustomerOrdersView.InvoiceDate Desc "
+        SQLQuery &= " SELECT * FROM CenterInfoTable"
+        DSPrint = SQLCon.SelectData(SQLQuery, 0, Param)
 
-        'SQLQuery = "SELECT FORMAT(Num,'000000') AS Num,FORMAT([Date],'" & GetDateAndTimeFormat(DTFormat.DF) & "') AS [Date],Value,ReceiptName,NoteFor FROM ReceiptView WHERE EndService IS NULL"
-        'AppendReportConditions()
-        'SQLQuery &= " ORDER BY ID DESC"
-        'SQLQuery &= " SELECT * FROM CenterMainInfoTable"
+        Dim F As New FrmPrint
+        Dim C As New CRCustomerOrders
 
-        'Dim Param() As SqlParameter =
-        '    {
-        '    New SqlParameter("@Num", TxtNum.Text.Trim),
-        '    New SqlParameter("@ReceiptName", "%" & TxtReciptName.Text.Trim & "%"),
-        '    New SqlParameter("@PaymentTypeID", (IIf(IsNothing(CmbPaymentType.SelectedValue), 0, CmbPaymentType.SelectedValue))),
-        '    New SqlParameter("@UserID", (IIf(IsNothing(CmbUserName.SelectedValue), 0, CmbUserName.SelectedValue))),
-        '    New SqlParameter("@BankID", (IIf(IsNothing(CmbBank.SelectedValue), 0, CmbBank.SelectedValue))),
-        '    New SqlParameter("@ReceiptFinanceTypeID", (IIf(IsNothing(CmbFinancRecipt.SelectedValue), 0, CmbFinancRecipt.SelectedValue))),
-        '    New SqlParameter("@Check", "%" & Val(TxtCkeck.Text.Trim) & "%")
-        '    }
-
-        'DSPrint = SQLCon.SelectData(SQLQuery, 0, Param)
-
-        'Dim F As New FrmPrint
-        'Dim C As New CRRecieptList
-
-        'C.SetDataSource(DSPrint.Tables(0))
-        'C.Subreports(0).SetDataSource(DSPrint.Tables(1))
-        'C.Subreports(1).SetDataSource(DSPrint.Tables(1))
-        'F.CrystalReportViewer1.ReportSource = C
-        'F.CrystalReportViewer1.Refresh()
-        'F.Text = "طباعة"
-        'F.CrystalReportViewer1.Zoom(100%)
-        'F.WindowState = FormWindowState.Maximized
-        'F.Show()
+        C.SetDataSource(DSPrint.Tables(0))
+        C.Subreports(0).SetDataSource(DSPrint.Tables(1))
+        C.Subreports(1).SetDataSource(DSPrint.Tables(1))
+        F.CrystalReportViewer1.ReportSource = C
+        F.CrystalReportViewer1.Refresh()
+        F.Text = "طباعة"
+        F.CrystalReportViewer1.Zoom(100%)
+        F.WindowState = FormWindowState.Maximized
+        F.Show()
     End Sub
 
     Private Sub AppendReportConditions()
 
-        If ChkNum.Checked And TxtNum.Text.Trim <> "" Then AppendToQuery(" AND ", " InvoiceNum=@Num")
-        If ChkOrderNum.Checked And TxtNum.Text.Trim <> "" Then AppendToQuery(" AND ", " OrderNum=@Num")
-        If ChkUser.Checked And CmbUserName.Text.Trim <> "" And CmbUserName.SelectedValue <> 0 Then AppendToQuery(" AND ", " UserID=@UserID")
-        If ChkCustomer.Checked And CmbCustomer.Text.Trim <> "" And CmbCustomer.SelectedValue <> 0 Then AppendToQuery(" AND ", " CustomerID=@CustomerID")
-        If ChkDate.Checked Then AppendToQuery(" AND ", " Date BETWEEN '" & DTPFrom.Value.Date & " " & "00:00".ToString & "' AND '" & DTPTo.Value.Date & " " & "23:59".ToString & "'")
+        Dim DateTimeFrom As Date = DTPFrom.Value.Date & " " & "00:00".ToString
+        Dim DateTimeTo As Date = DTPTo.Value.Date & " " & "23:59".ToString
+        If ChkNum.Checked And TxtNum.Text.Trim <> "" Then AppendToQuery(" AND ", " CustomerOrdersView.InvoiceNum=@InvoiceNum ")
+        If ChkOrderNum.Checked And TxtOrderNum.Text.Trim <> "" Then AppendToQuery(" AND ", " CustomerOrdersView.OrderNum=@OrderNum ")
+        If ChkItemStoreNum.Checked And TxtItemStoreNum.Text.Trim <> "" Then AppendToQuery(" AND ", " CustomerOrdersView.INum=" & TxtItemStoreNum.Text.Trim) '@ItemStoreNum ")
+        If ChkCustomer.Checked And CmbCustomer.SelectedValue <> Nothing Then AppendToQuery(" And ", " dbo.CustomerOrdersView.CustomerID = " & CmbCustomer.SelectedValue)
+        If ChkTailor.Checked And CmbTailor.SelectedValue <> Nothing Then AppendToQuery(" And ", " dbo.CustomerOrdersView.TailorID = " & CmbTailor.SelectedValue)
+        If ChkService.Checked And CmbService.SelectedValue <> Nothing Then AppendToQuery(" And ", " dbo.CustomerOrdersView.ServiceID = " & CmbService.SelectedValue)
+        If ChkDate.Checked Then AppendToQuery(" And ", " InvoiceDate BETWEEN '" & DateTimeFrom & "' AND '" & DateTimeTo & "' ")
+        If ChkOrder.Checked Then
+            If RadReady.Checked Then
+                AppendToQuery(" AND ", " dbo.CustomerOrdersView.DeliveryDate IS NOT NULL")
+            End If
 
+            If RadOrder.Checked Then
+                AppendToQuery(" AND ", " dbo.CustomerOrdersView.DeliveryDate IS NULL")
+            End If
+        End If
     End Sub
 
     Private Sub TxtNum_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtNum.KeyPress
         e.Handled = Not IsNumber(sender.Text, e.KeyChar, False, True)
+    End Sub
+
+    Private Sub TxtNum_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtNum.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            BtnSearch_Click(sender, e)
+        End If
+    End Sub
+
+    Private Sub TxtOrderNum_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtOrderNum.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            BtnSearch_Click(sender, e)
+        End If
+    End Sub
+
+    Private Sub TxtItemStoreNum_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtItemStoreNum.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            BtnSearch_Click(sender, e)
+        End If
+    End Sub
+
+    Private Sub TxtItemStoreNum_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtItemStoreNum.KeyPress
+        'e.Handled = Not IsNumber(sender.Text, e.KeyChar, False, True)
     End Sub
 
     '****************************************************************************
@@ -900,6 +1167,10 @@ Public Class FrmCustomerOrders
 
     End Sub
 
+    Private Sub TxtTailorPrice_TextChanged(sender As Object, e As EventArgs) Handles TxtTailorPrice.TextChanged
+
+    End Sub
+
     Private Sub NUDPageSize_TextChanged(sender As Object, e As EventArgs) Handles NUDPageSize.TextChanged
 
         If NUDPageSize.Value = 0 Then
@@ -923,21 +1194,168 @@ Public Class FrmCustomerOrders
     End Sub
 
     Private Sub BtnRefreshPage_Click(sender As Object, e As EventArgs) Handles BtnRefreshPage.Click
-        If Not ChkNum.Checked And Not ChkOrderNum.Checked And Not ChkUser.Checked And Not ChkDate.Checked And Not ChkCustomer.Checked And Not ChkTailor.Checked And Not ChkService.Checked And Not ChkOrder.Checked Then Exit Sub
+        If Not ChkNum.Checked And Not ChkOrderNum.Checked And Not ChkItemStoreNum.Checked And Not ChkDate.Checked And Not ChkCustomer.Checked And Not ChkTailor.Checked And Not ChkService.Checked And Not ChkOrder.Checked Then Exit Sub
         TxtPageNum.Text = 1
         BtnFirstPage_Click(sender, e)
     End Sub
 
-    Private Sub PnlEditOrder_MouseDown(sender As Object, e As MouseEventArgs) Handles PnlEditOrder.MouseDown
-        MoveObject(e, MouseEvent.Down, TLPOrderDetails)
+    Private Sub PnlEditOrder_MouseDown(sender As Object, e As MouseEventArgs) Handles PnlEditOrder.MouseDown, LblOrderData.MouseDown
+        MoveObject(e, MouseEvent.Down, PnlOrderDetails)
     End Sub
 
-    Private Sub PnlEditOrder_MouseMove(sender As Object, e As MouseEventArgs) Handles PnlEditOrder.MouseMove
-        MoveObject(e, MouseEvent.Move, TLPOrderDetails)
+    Private Sub PnlEditOrder_MouseMove(sender As Object, e As MouseEventArgs) Handles PnlEditOrder.MouseMove, LblOrderData.MouseMove
+        MoveObject(e, MouseEvent.Move, PnlOrderDetails)
     End Sub
 
-    Private Sub PnlEditOrder_MouseUp(sender As Object, e As MouseEventArgs) Handles PnlEditOrder.MouseUp
-        MoveObject(e, MouseEvent.Up, TLPOrderDetails)
+    Private Sub PnlEditOrder_MouseUp(sender As Object, e As MouseEventArgs) Handles PnlEditOrder.MouseUp, LblOrderData.MouseUp
+        MoveObject(e, MouseEvent.Up, PnlOrderDetails)
     End Sub
+
+    Private Sub TxtTailorPrice_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtTailorPrice.KeyPress
+        e.Handled = Not Price(sender.Text, e.KeyChar, False, True)
+    End Sub
+
+    Private Sub TxtArmpit_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtArmpit.KeyPress
+        e.Handled = Not Price(sender.Text, e.KeyChar, False, True)
+    End Sub
+
+    Private Sub TxtChest_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtChest.KeyPress
+        e.Handled = Not Price(sender.Text, e.KeyChar, False, True)
+    End Sub
+
+    Private Sub TxtHeight_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtHeight.KeyPress
+        e.Handled = Not Price(sender.Text, e.KeyChar, False, True)
+    End Sub
+
+    Private Sub TxtHip_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtHip.KeyPress
+        e.Handled = Not Price(sender.Text, e.KeyChar, False, True)
+    End Sub
+
+    Private Sub TxtShoulder_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtShoulder.KeyPress
+        e.Handled = Not Price(sender.Text, e.KeyChar, False, True)
+    End Sub
+
+    Private Sub TxtSleeve_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtSleeve.KeyPress
+        e.Handled = Not Price(sender.Text, e.KeyChar, False, True)
+    End Sub
+
+    Private Sub TxtWaist_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtWaist.KeyPress
+        e.Handled = Not Price(sender.Text, e.KeyChar, False, True)
+    End Sub
+
+    Private Sub CmbTailorOrder_KeyDown(sender As Object, e As KeyEventArgs) Handles CmbTailorOrder.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            CmbServiceOrder.Focus()
+        End If
+    End Sub
+
+    Private Sub CmbServiceOrder_KeyDown(sender As Object, e As KeyEventArgs) Handles CmbServiceOrder.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            TxtSize.Focus()
+        End If
+    End Sub
+
+    Private Sub TxtSize_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtSize.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            TxtTailorPrice.Focus()
+        End If
+    End Sub
+
+    Private Sub TxtTailorPrice_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtTailorPrice.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            CmbSizeName.Focus()
+        End If
+    End Sub
+
+    Private Sub CmbTailorOrder_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbTailorOrder.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub TxtSizeName_TextChanged(sender As Object, e As EventArgs) Handles TxtSizeName.TextChanged
+
+    End Sub
+
+    Private Sub TxtSleeve_TextChanged(sender As Object, e As EventArgs) Handles TxtSleeve.TextChanged
+
+    End Sub
+
+    Private Sub CmbTailorOrder_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles CmbTailorOrder.SelectionChangeCommitted
+        If IsNothing(CmbTailorOrder.SelectedValue) Then Exit Sub
+        CmbServiceOrder.DataSource = Nothing
+        CmbServiceOrder.Text = ""
+        TxtTailorPrice.Text = ""
+
+        Dim SQLCon = New SQLConClass()
+        SQLQuery = " Select * From TailorServicesView Where TailorID = " & CmbTailorOrder.SelectedValue
+
+        DSService = SQLCon.SelectData(SQLQuery, 0, Nothing)
+
+        If DSService.Tables(0).Rows.Count > 0 Then
+            CmbServiceOrder.DataSource = DSService.Tables(0)
+            CmbServiceOrder.DisplayMember = "ServiceName"
+            CmbServiceOrder.ValueMember = "ID"
+            CmbServiceOrder.SelectedIndex = -1
+
+        Else
+            CmbServiceOrder.DataSource = Nothing
+            CmbServiceOrder.SelectedIndex = -1
+            CmbServiceOrder.Text = ""
+        End If
+    End Sub
+
+    Private Sub CmbSizeName_KeyDown(sender As Object, e As KeyEventArgs) Handles CmbSizeName.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            TxtSizeName.Focus()
+        End If
+    End Sub
+
+    Private Sub TxtSizeName_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtSizeName.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            TxtHeight.Focus()
+        End If
+    End Sub
+
+    Private Sub TxtHeight_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtHeight.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            TxtShoulder.Focus()
+        End If
+    End Sub
+
+    Private Sub TxtShoulder_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtShoulder.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            TxtSleeve.Focus()
+        End If
+    End Sub
+
+    Private Sub TxtSleeve_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtSleeve.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            TxtArmpit.Focus()
+        End If
+    End Sub
+
+    Private Sub TxtArmpit_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtArmpit.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            TxtChest.Focus()
+        End If
+    End Sub
+
+    Private Sub TxtChest_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtChest.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            TxtWaist.Focus()
+        End If
+    End Sub
+
+    Private Sub TxtWaist_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtWaist.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            TxtHip.Focus()
+        End If
+    End Sub
+
+    Private Sub TxtHip_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtHip.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            BtnSave_Click(sender, e)
+        End If
+    End Sub
+
 
 End Class

@@ -90,7 +90,7 @@ Public Class FrmReceiptReport
                 dbo.ReceiptTable ON dbo.UserView.ID = dbo.ReceiptTable.UserID INNER JOIN
                 dbo.PaymentTypeTable ON dbo.ReceiptTable.PaymentTypeID = dbo.PaymentTypeTable.ID 
                 INNER JOIN dbo.ReceiptFinanceTypeTable ON dbo.ReceiptTable.ReceiptFinanceTypeID 
-                = dbo.ReceiptFinanceTypeTable.ID INNER JOIN
+                = dbo.ReceiptFinanceTypeTable.ID LEFT JOIN
                 dbo.EmployeeTable ON dbo.ReceiptTable.EmployeeID = dbo.EmployeeTable.ID
                 WHERE (dbo.ReceiptTable.EndService IS NULL) "
 
@@ -421,7 +421,7 @@ Public Class FrmReceiptReport
                         DGVRecipt.Item(2, i).Value = Format(.Item("Num"), "000000")
                         DGVRecipt.Item(3, i).Value = .Item("Nots")
                         DGVRecipt.Item(4, i).Value = .Item("ReceiptName")
-                        DGVRecipt.Item(5, i).Value = Format(.Item("Value"), "0.000")
+                        DGVRecipt.Item(5, i).Value = Format(.Item("Value"), "0.00")
                         DGVRecipt.Item(6, i).Value = Format(.Item("Date"), GetDateAndTimeFormat(DTFormat.DTF))
                         DGVRecipt.Item(7, i).Value = .Item("Name")
                         DGVRecipt.Item(8, i).Value = .Item("PayName")
@@ -498,41 +498,42 @@ Public Class FrmReceiptReport
         '    Exit Sub
         'End If
 
-        'If DGVRecipt.Rows.Count = 0 Then Exit Sub
+        If DGVRecipt.Rows.Count = 0 Then Exit Sub
 
-        'Dim DSPrint = New DataSet
-        'Dim SQLCon = New SQLConClass
+        Dim DSPrint = New DataSet
+        Dim SQLCon = New SQLConClass
 
-        'SQLQuery = "SELECT FORMAT(Num,'000000') AS Num,FORMAT([Date],'" & GetDateAndTimeFormat(DTFormat.DF) & "') AS [Date],Value,ReceiptName,NoteFor FROM ReceiptView WHERE EndService IS NULL"
-        'AppendReportConditions()
-        'SQLQuery &= " ORDER BY ID DESC OFFSET " & PageSize * (PageNum - 1) & " ROWS FETCH NEXT " & PageSize & " ROWS ONLY"
-        'SQLQuery &= " SELECT * FROM CenterMainInfoTable"
+        SQLQuery = "SELECT FORMAT(Num,'000000') AS Num,FORMAT([Date],'" & GetDateAndTimeFormat(DTFormat.DF) &
+            "') AS [Date],Value,ReceiptName,NoteFor FROM ReceiptView WHERE EndService IS NULL"
+        AppendReportConditions()
+        SQLQuery &= " ORDER BY ID DESC OFFSET " & PageSize * (PageNum - 1) & " ROWS FETCH NEXT " & PageSize & " ROWS ONLY"
+        SQLQuery &= " SELECT * FROM CenterInfoTable"
 
-        'Dim Param() As SqlParameter =
-        '    {
-        '    New SqlParameter("@Num", TxtNum.Text.Trim),
-        '    New SqlParameter("@ReceiptName", "%" & TxtReciptName.Text.Trim & "%"),
-        '    New SqlParameter("@PaymentTypeID", (IIf(IsNothing(CmbPaymentType.SelectedValue), 0, CmbPaymentType.SelectedValue))),
-        '    New SqlParameter("@UserID", (IIf(IsNothing(CmbUserName.SelectedValue), 0, CmbUserName.SelectedValue))),
-        '    New SqlParameter("@BankID", (IIf(IsNothing(CmbBank.SelectedValue), 0, CmbBank.SelectedValue))),
-        '    New SqlParameter("@ReceiptFinanceTypeID", (IIf(IsNothing(CmbFinancRecipt.SelectedValue), 0, CmbFinancRecipt.SelectedValue))),
-        '    New SqlParameter("@Check", "%" & Val(TxtCkeck.Text.Trim) & "%")
-        '    }
+        Dim Param() As SqlParameter =
+            {
+            New SqlParameter("@Num", TxtNum.Text.Trim),
+            New SqlParameter("@ReceiptName", "%" & TxtReciptName.Text.Trim & "%"),
+            New SqlParameter("@PaymentTypeID", (IIf(IsNothing(CmbPaymentType.SelectedValue), 0, CmbPaymentType.SelectedValue))),
+            New SqlParameter("@UserID", (IIf(IsNothing(CmbUserName.SelectedValue), 0, CmbUserName.SelectedValue))),
+            New SqlParameter("@BankID", (IIf(IsNothing(CmbBank.SelectedValue), 0, CmbBank.SelectedValue))),
+            New SqlParameter("@ReceiptFinanceTypeID", (IIf(IsNothing(CmbFinancRecipt.SelectedValue), 0, CmbFinancRecipt.SelectedValue))),
+            New SqlParameter("@Check", "%" & Val(TxtCkeck.Text.Trim) & "%")
+            }
 
-        'DSPrint = SQLCon.SelectData(SQLQuery, 0, Param)
+        DSPrint = SQLCon.SelectData(SQLQuery, 0, Param)
 
-        'Dim F As New FrmPrint
-        'Dim C As New CRRecieptList
+        Dim F As New FrmPrint
+        Dim C As New CRRecieptList
 
-        'C.SetDataSource(DSPrint.Tables(0))
-        'C.Subreports(0).SetDataSource(DSPrint.Tables(1))
-        'C.Subreports(1).SetDataSource(DSPrint.Tables(1))
-        'F.CrystalReportViewer1.ReportSource = C
-        'F.CrystalReportViewer1.Refresh()
-        'F.Text = "طباعة"
-        'F.CrystalReportViewer1.Zoom(100%)
-        'F.WindowState = FormWindowState.Maximized
-        'F.Show()
+        C.SetDataSource(DSPrint.Tables(0))
+        C.Subreports(0).SetDataSource(DSPrint.Tables(1))
+        C.Subreports(1).SetDataSource(DSPrint.Tables(1))
+        F.CrystalReportViewer1.ReportSource = C
+        F.CrystalReportViewer1.Refresh()
+        F.Text = "طباعة"
+        F.CrystalReportViewer1.Zoom(100%)
+        F.WindowState = FormWindowState.Maximized
+        F.Show()
     End Sub
 
     Private Sub BtnPrintAll_Click(sender As Object, e As EventArgs) Handles BtnPrintAll.Click
@@ -543,41 +544,42 @@ Public Class FrmReceiptReport
         '    Exit Sub
         'End If
 
-        'If DGVRecipt.Rows.Count = 0 Then Exit Sub
+        If DGVRecipt.Rows.Count = 0 Then Exit Sub
 
-        'Dim DSPrint = New DataSet
-        'Dim SQLCon = New SQLConClass
+        Dim DSPrint = New DataSet
+        Dim SQLCon = New SQLConClass
 
-        'SQLQuery = "SELECT FORMAT(Num,'000000') AS Num,FORMAT([Date],'" & GetDateAndTimeFormat(DTFormat.DF) & "') AS [Date],Value,ReceiptName,NoteFor FROM ReceiptView WHERE EndService IS NULL"
-        'AppendReportConditions()
-        'SQLQuery &= " ORDER BY ID DESC"
-        'SQLQuery &= " SELECT * FROM CenterMainInfoTable"
+        SQLQuery = "SELECT FORMAT(Num,'000000') AS Num,FORMAT([Date],'" & GetDateAndTimeFormat(DTFormat.DF) &
+            "') AS [Date],Value,ReceiptName,NoteFor FROM ReceiptView WHERE EndService IS NULL"
+        AppendReportConditions()
+        SQLQuery &= " ORDER BY ID DESC"
+        SQLQuery &= " SELECT * FROM CenterInfoTable"
 
-        'Dim Param() As SqlParameter =
-        '    {
-        '    New SqlParameter("@Num", TxtNum.Text.Trim),
-        '    New SqlParameter("@ReceiptName", "%" & TxtReciptName.Text.Trim & "%"),
-        '    New SqlParameter("@PaymentTypeID", (IIf(IsNothing(CmbPaymentType.SelectedValue), 0, CmbPaymentType.SelectedValue))),
-        '    New SqlParameter("@UserID", (IIf(IsNothing(CmbUserName.SelectedValue), 0, CmbUserName.SelectedValue))),
-        '    New SqlParameter("@BankID", (IIf(IsNothing(CmbBank.SelectedValue), 0, CmbBank.SelectedValue))),
-        '    New SqlParameter("@ReceiptFinanceTypeID", (IIf(IsNothing(CmbFinancRecipt.SelectedValue), 0, CmbFinancRecipt.SelectedValue))),
-        '    New SqlParameter("@Check", "%" & Val(TxtCkeck.Text.Trim) & "%")
-        '    }
+        Dim Param() As SqlParameter =
+            {
+            New SqlParameter("@Num", TxtNum.Text.Trim),
+            New SqlParameter("@ReceiptName", "%" & TxtReciptName.Text.Trim & "%"),
+            New SqlParameter("@PaymentTypeID", (IIf(IsNothing(CmbPaymentType.SelectedValue), 0, CmbPaymentType.SelectedValue))),
+            New SqlParameter("@UserID", (IIf(IsNothing(CmbUserName.SelectedValue), 0, CmbUserName.SelectedValue))),
+            New SqlParameter("@BankID", (IIf(IsNothing(CmbBank.SelectedValue), 0, CmbBank.SelectedValue))),
+            New SqlParameter("@ReceiptFinanceTypeID", (IIf(IsNothing(CmbFinancRecipt.SelectedValue), 0, CmbFinancRecipt.SelectedValue))),
+            New SqlParameter("@Check", "%" & Val(TxtCkeck.Text.Trim) & "%")
+            }
 
-        'DSPrint = SQLCon.SelectData(SQLQuery, 0, Param)
+        DSPrint = SQLCon.SelectData(SQLQuery, 0, Param)
 
-        'Dim F As New FrmPrint
-        'Dim C As New CRRecieptList
+        Dim F As New FrmPrint
+        Dim C As New CRRecieptList
 
-        'C.SetDataSource(DSPrint.Tables(0))
-        'C.Subreports(0).SetDataSource(DSPrint.Tables(1))
-        'C.Subreports(1).SetDataSource(DSPrint.Tables(1))
-        'F.CrystalReportViewer1.ReportSource = C
-        'F.CrystalReportViewer1.Refresh()
-        'F.Text = "طباعة"
-        'F.CrystalReportViewer1.Zoom(100%)
-        'F.WindowState = FormWindowState.Maximized
-        'F.Show()
+        C.SetDataSource(DSPrint.Tables(0))
+        C.Subreports(0).SetDataSource(DSPrint.Tables(1))
+        C.Subreports(1).SetDataSource(DSPrint.Tables(1))
+        F.CrystalReportViewer1.ReportSource = C
+        F.CrystalReportViewer1.Refresh()
+        F.Text = "طباعة"
+        F.CrystalReportViewer1.Zoom(100%)
+        F.WindowState = FormWindowState.Maximized
+        F.Show()
     End Sub
 
     Private Sub AppendReportConditions()

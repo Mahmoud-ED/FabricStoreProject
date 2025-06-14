@@ -162,7 +162,7 @@ Public Class FrmEmployeeCashingReport
                 DGVCashing.Item(0, i).Value = .Item("ID") 'ID
                 DGVCashing.Item(1, i).Value = .Item("ت")
                 DGVCashing.Item(2, i).Value = Format(.Item("NUM"), "000000")
-                DGVCashing.Item(3, i).Value = Format(.Item("Value"), "0.000")
+                DGVCashing.Item(3, i).Value = Format(.Item("Value"), "0.00")
                 DGVCashing.Item(4, i).Value = Format(.Item("Date"), GetDateAndTimeFormat(DTFormat.DF))
                 DGVCashing.Item(5, i).Value = .Item("EmployeeName")
                 DGVCashing.Item(6, i).Value = .Item("PaymentTypeName")

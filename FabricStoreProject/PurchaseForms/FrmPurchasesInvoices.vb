@@ -34,10 +34,10 @@ Public Class FrmPurchasesInvoices
 
     Private Sub GetData()
         Dim sqlcon As New SQLConClass()
-        SQLQuery = "  Select  ID,Name from UserView where EndService IS Null "
+        SQLQuery = "  Select  ID,Name From UserView where EndService IS Null "
         SQLQuery &= "  Select ID,Name From SuppliersTable  "
-        SQLQuery &= " Select *  from ItemsView where EndService IS NUll"
-        SQLQuery &= " Select ISNull(Max(Num ),0)+1 Num from PurchasesTable  "
+        SQLQuery &= " Select *  From ItemsView where EndService IS NUll And Type =1"
+        SQLQuery &= " Select ISNull(Max(Num ),0)+1 Num From PurchasesTable  "
 
         DS = sqlcon.SelectData(SQLQuery, 0, Nothing)
         If DSHasTables(DS) Then
@@ -83,13 +83,23 @@ Public Class FrmPurchasesInvoices
     Private Sub TxtMaterialNum_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtMaterialNum.KeyDown
         If Val(TxtInvoNum.Text) = 0 Then Exit Sub
         If e.KeyCode = Keys.Enter Then
-            Dim ItemRow() As DataRow = DS.Tables(2).Select("Num=" & Val(TxtMaterialNum.Text))
-            If ItemRow.Length = 0 Then Exit Sub
-            CmbMaterial.Text = ""
-            CmbMaterial.SelectedValue = ItemRow(0)("ID")
-            CmbMaterial_SelectionChangeCommitted(CmbMaterial, New EventArgs)
+            BtnSearch_Click(sender, e)
         End If
     End Sub
+
+    Private Sub CmbMaterial_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles CmbMaterial.SelectionChangeCommitted
+        If IsNothing(CmbMaterial.SelectedValue) Then Exit Sub
+        Dim ItemRow() As DataRow = DS.Tables(2).Select("ItemStoreID=" & CmbMaterial.SelectedValue)
+
+        If ItemRow.Length = 0 Then Exit Sub
+
+        TxtMaterialNum.Text = Format(ItemRow(0)("Num"), "000000")
+        TxtCountry.Text = ItemRow(0)("Country")
+        TxtPurchasPrice.Text = Format(ItemRow(0)("PurchasePrice"), "0.00")
+
+    End Sub
+
+
     Private Sub TxtPurchasPrice_TextChanged(sender As Object, e As EventArgs) Handles TxtPurchasPrice.TextChanged
         TxtPurchasPrice.BackColor = SystemColors.Window
         If Val(TxtPurchasPrice.Text) <= 0 Then TxtPurchasPrice.Text = ""
@@ -129,8 +139,8 @@ Public Class FrmPurchasesInvoices
             If Val(TxtMaterialNum.Text.Trim) = Val(Row.Cells(1).Value) Then
                 ISInDGV = True
                 Row.Cells(4).Value = Val(TxtQuantity.Text)
-                Row.Cells(3).Value = Format(Val(TxtPurchasPrice.Text), "0.000") 'سعر الشراء يتعدل 
-                Row.Cells(5).Value = Format(Row.Cells(4).Value * Row.Cells(3).Value, "0.000") 'الاجمالي يتعدل
+                Row.Cells(3).Value = Format(Val(TxtPurchasPrice.Text), "0.00") 'سعر الشراء يتعدل 
+                Row.Cells(5).Value = Format(Row.Cells(4).Value * Row.Cells(3).Value, "0.00") 'الاجمالي يتعدل
                 Row.Cells(6).Value = CmbMaterial.SelectedValue
                 Row.Cells(8).Value = TxtCountry.Text
                 Row.Selected = True
@@ -149,7 +159,7 @@ Public Class FrmPurchasesInvoices
             DGVInvoContent.Rows.Add(DGVInvoContent.Rows.Count + 1,
                                     Val(TxtMaterialNum.Text),
                                     CmbMaterial.Text,
-                                    Format(Val(TxtPurchasPrice.Text), "0.000"),
+                                    Format(Val(TxtPurchasPrice.Text), "0.00"),
                                     Val(TxtQuantity.Text),
                                     Val(TxtTotalMaterial.Text),
                                     CmbMaterial.SelectedValue,
@@ -165,11 +175,11 @@ Public Class FrmPurchasesInvoices
 
     Private Sub GetTotal()
         Dim Total As Double = 0
-        TxtTotal.Text = "0.000"
+        TxtTotal.Text = "0.00"
         For Each Row As DataGridViewRow In DGVInvoContent.Rows
             Total += Val(Row.Cells(5).Value)
         Next
-        TxtTotal.Text = Format(Total, "0.000")
+        TxtTotal.Text = Format(Total, "0.00")
     End Sub
 
     Private Sub BtnClean_Click(sender As Object, e As EventArgs) Handles BtnClean.Click
@@ -261,10 +271,10 @@ Public Class FrmPurchasesInvoices
     End Sub
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles BtnSave.Click
-        'If IDPrint <> 0 Then
-        '    MsgTool("تم حفظ الفاتورة", 1)
-        '    Exit Sub
-        'End If
+        If IDPrint <> 0 Then
+            MsgTool("تم حفظ الفاتورة", 1)
+            Exit Sub
+        End If
 
         'Dim Perm() As DataRow = DTUserPermission.Select("OperationID=99")
 
@@ -302,8 +312,8 @@ Public Class FrmPurchasesInvoices
             MsgTool("تم حفظ الفاتورة بنجاح", 1)
             IDPrint = DSInvo.Tables(1).Rows(0).Item(0)
 
-            Dim CashingForm As New FrmSupplierInvoiceCashing
-
+            Dim CashingForm As New FrmSupplierInvoiceCashingShow
+            FrmSupplierInvoiceCashing.SupplierID = CmbSupplier.SelectedValue
             CashingForm.ShowDialog()
         End If
     End Sub
@@ -351,23 +361,10 @@ Public Class FrmPurchasesInvoices
 
         TxtMaterialNum.Text = Format(ItemRow(0)("Num"), "000000")
         TxtCountry.Text = ItemRow(0)("Country")
-        TxtPurchasPrice.Text = Format(ItemRow(0)("PurchasePrice"), "0.000")
+        TxtPurchasPrice.Text = Format(ItemRow(0)("PurchasePrice"), "0.00")
     End Sub
 
     '------CMbMaterial
-
-    Private Sub CmbMaterial_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles CmbMaterial.SelectionChangeCommitted
-        If IsNothing(CmbMaterial.SelectedValue) Then Exit Sub
-        Dim ItemRow() As DataRow = DS.Tables(2).Select("ItemStoreID=" & CmbMaterial.SelectedValue)
-
-        If ItemRow.Length = 0 Then Exit Sub
-
-        TxtMaterialNum.Text = Format(ItemRow(0)("Num"), "000000")
-        TxtCountry.Text = ItemRow(0)("Country")
-        TxtPurchasPrice.Text = Format(ItemRow(0)("PurchasePrice"), "0.000")
-
-    End Sub
-
 
     Private Sub TxtInvoNum_TextChanged(sender As Object, e As EventArgs) Handles TxtInvoNum.TextChanged
         'If Not TxtInvoNum.BackColor = SystemColors.Window Then TxtInvoNum.BackColor = SystemColors.Window
@@ -411,62 +408,30 @@ Public Class FrmPurchasesInvoices
         '    Exit Sub
         'End If
 
-        'If IDPrint = 0 Then Exit Sub
+        If IDPrint = 0 Then Exit Sub
 
-        'Dim DSPrint = New DataSet
-        'Dim SQLCon = New SQLConClass
+        Dim DSPrint = New DataSet
+        Dim SQLCon = New SQLConClass
 
-        'If Settings.GetSettings(SettingsProject.ClassSettings.Setting.ServiceLang) = "AR" Then
+        SQLQuery = " SELECT ID, FORMAT(Num,'000000') AS Num, Date, Name, [User],Total FROM PurchasesView  WHERE ID=" & IDPrint
+        SQLQuery &= " Select * From PurchaseContentsView Where PurchasesID=" & IDPrint
+        SQLQuery &= " SELECT * FROM CenterInfoTable"
 
-        '    SQLQuery = "SELECT FORMAT(Num,'000000') AS Num,Name,UserName,Total FROM MaterialInvoiceView WHERE ID=" & IDPrint
-        '    SQLQuery &= " SELECT * FROM MaterialInvoiceContentView WHERE ID=" & IDPrint
-        '    SQLQuery &= " SELECT * FROM CenterMainInfoTable"
+        DSPrint = SQLCon.SelectData(SQLQuery, 0, Nothing)
 
-        '    DSPrint = SQLCon.SelectData(SQLQuery, 0, Nothing)
+        Dim F As New FrmPrint
+        Dim C As New CRPurchasesInvoice
 
-        '    Dim F As New FrmPrint
-        '    Dim C As New CRMaterialArInvoice
-
-        '    C.SetDataSource(DSPrint.Tables(1))
-        '    C.Subreports(0).SetDataSource(DSPrint.Tables(2))
-        '    C.Subreports(1).SetDataSource(DSPrint.Tables(2))
-        '    C.SetParameterValue("InvoNum", DSPrint.Tables(0).Rows(0).Item(0))
-        '    C.SetParameterValue("Name", DSPrint.Tables(0).Rows(0).Item(1))
-        '    C.SetParameterValue("UserName", DSPrint.Tables(0).Rows(0).Item(2))
-        '    C.SetParameterValue("Total", DSPrint.Tables(0).Rows(0).Item(3))
-        '    F.CrystalReportViewer1.ReportSource = C
-        '    F.CrystalReportViewer1.Refresh()
-        '    F.Text = "طباعة"
-        '    F.CrystalReportViewer1.Zoom(100%)
-        '    F.WindowState = FormWindowState.Maximized
-        '    F.Show()
-
-        'ElseIf Settings.GetSettings(SettingsProject.ClassSettings.Setting.ServiceLang) = "EN" Then
-
-        '    SQLQuery = "SELECT FORMAT(Num,'000000') AS Num,Name,UserName,Total FROM MaterialInvoiceView WHERE ID=" & IDPrint
-        '    SQLQuery &= " SELECT * FROM MaterialInvoiceContentView WHERE ID=" & IDPrint
-        '    SQLQuery &= " SELECT * FROM CenterMainInfoTable"
-
-        '    DSPrint = SQLCon.SelectData(SQLQuery, 0, Nothing)
-
-        '    Dim F As New FrmPrint
-        '    Dim C As New CRMaterialEnInvoice
-
-        '    C.SetDataSource(DSPrint.Tables(1))
-        '    C.Subreports(0).SetDataSource(DSPrint.Tables(2))
-        '    C.Subreports(1).SetDataSource(DSPrint.Tables(2))
-        '    C.SetParameterValue("InvoNum", DSPrint.Tables(0).Rows(0).Item(0))
-        '    C.SetParameterValue("Name", DSPrint.Tables(0).Rows(0).Item(1))
-        '    C.SetParameterValue("UserName", DSPrint.Tables(0).Rows(0).Item(2))
-        '    C.SetParameterValue("Total", DSPrint.Tables(0).Rows(0).Item(3))
-        '    F.CrystalReportViewer1.ReportSource = C
-        '    F.CrystalReportViewer1.Refresh()
-        '    F.Text = "طباعة"
-        '    F.CrystalReportViewer1.Zoom(100%)
-        '    F.WindowState = FormWindowState.Maximized
-        '    F.Show()
-
-        'End If
+        C.SetDataSource(DSPrint.Tables(0))
+        C.Subreports(0).SetDataSource(DSPrint.Tables(1))
+        C.Subreports(1).SetDataSource(DSPrint.Tables(2))
+        C.Subreports(2).SetDataSource(DSPrint.Tables(2))
+        F.CrystalReportViewer1.ReportSource = C
+        F.CrystalReportViewer1.Refresh()
+        F.Text = "طباعة"
+        F.CrystalReportViewer1.Zoom(100%)
+        F.WindowState = FormWindowState.Maximized
+        F.Show()
 
     End Sub
 
@@ -475,10 +440,14 @@ Public Class FrmPurchasesInvoices
     End Sub
 
     Private Sub CmbSupplier_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbSupplier.SelectedIndexChanged
-        CmbSupplier.BackColor = SystemColors.Window
+        sender.BackColor = SystemColors.Window
     End Sub
 
     Private Sub TxtQuantity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtQuantity.KeyPress
         e.Handled = Not IsNumberOnly(sender.Text, e.KeyChar, False, True)
+    End Sub
+
+    Private Sub TxtCountry_TextChanged(sender As Object, e As EventArgs) Handles TxtCountry.TextChanged
+        sender.BackColor = SystemColors.Window
     End Sub
 End Class

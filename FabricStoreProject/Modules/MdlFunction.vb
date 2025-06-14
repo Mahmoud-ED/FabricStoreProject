@@ -179,7 +179,6 @@ Module MdlFunction
         F.Dock = DockStyle.Fill
         Frmmain.Text = F.Text
 
-
         If IsNothing(B) Then Exit Sub
         If B.Tag = "Dark" Then
             B.BackColor = Primary
@@ -193,8 +192,6 @@ Module MdlFunction
         End If
 
         B.Font = New Font("Droid Arabic Kufi", 11, FontStyle.Regular)
-
-
 
     End Sub
 
@@ -352,24 +349,6 @@ Module MdlFunction
         If Char.IsNumber(KeyChar) Or Asc(KeyChar) = Keys.Back Then Return True
         If Txt.Length > 0 And Not Txt.Contains(".") And Dot And Asc(KeyChar) = 46 Then Return True
         Return False
-    End Function
-
-    Public Function TeethCounter(TLP As TableLayoutPanel) As Integer
-
-        Dim Chk As CheckBox = Nothing
-        Dim Count As Integer = 0
-
-        For Each C As Control In TLP.Controls
-
-            If TypeOf C Is CheckBox Then
-                Chk = DirectCast(C, CheckBox)
-                If Chk.Checked = True Then
-                    Count += 1
-                End If
-            End If
-            ' End If
-        Next
-        Return Count 
     End Function
 
     Public Function IsInputEmpty(Container As Object) As Boolean

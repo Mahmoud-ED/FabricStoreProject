@@ -49,8 +49,10 @@ Partial Class FrmSalesReport
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColShow = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.ColDel = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.TLPBottom = New System.Windows.Forms.TableLayoutPanel()
@@ -364,7 +366,7 @@ Partial Class FrmSalesReport
         Me.DGV.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DGV.ColumnHeadersHeight = 32
         Me.DGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        Me.DGV.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.Column12, Me.Column11, Me.Column2, Me.ColShow, Me.ColDel})
+        Me.DGV.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.Column12, Me.Column2, Me.Column11, Me.Column1, Me.Column3, Me.ColShow, Me.ColDel})
         DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -386,7 +388,7 @@ Partial Class FrmSalesReport
         Me.DGV.RowHeadersWidth = 51
         Me.DGV.RowTemplate.Height = 30
         Me.DGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DGV.Size = New System.Drawing.Size(1002, 250)
+        Me.DGV.Size = New System.Drawing.Size(1002, 242)
         Me.DGV.TabIndex = 1242
         Me.DGV.Tag = "Dark-SelectionVisible"
         '
@@ -428,6 +430,14 @@ Partial Class FrmSalesReport
         Me.Column12.ReadOnly = True
         Me.Column12.Width = 220
         '
+        'Column2
+        '
+        Me.Column2.HeaderText = "الزبون"
+        Me.Column2.MinimumWidth = 6
+        Me.Column2.Name = "Column2"
+        Me.Column2.ReadOnly = True
+        Me.Column2.Width = 360
+        '
         'Column11
         '
         Me.Column11.HeaderText = "القيمة"
@@ -436,13 +446,17 @@ Partial Class FrmSalesReport
         Me.Column11.ReadOnly = True
         Me.Column11.Width = 200
         '
-        'Column2
+        'Column1
         '
-        Me.Column2.HeaderText = "الزبون"
-        Me.Column2.MinimumWidth = 6
-        Me.Column2.Name = "Column2"
-        Me.Column2.ReadOnly = True
-        Me.Column2.Width = 360
+        Me.Column1.HeaderText = "المدفوع"
+        Me.Column1.Name = "Column1"
+        Me.Column1.ReadOnly = True
+        '
+        'Column3
+        '
+        Me.Column3.HeaderText = "الباقي"
+        Me.Column3.Name = "Column3"
+        Me.Column3.ReadOnly = True
         '
         'ColShow
         '
@@ -692,7 +706,7 @@ Partial Class FrmSalesReport
         Me.TxtNum.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
         Me.TxtNum.Location = New System.Drawing.Point(519, 10)
         Me.TxtNum.Margin = New System.Windows.Forms.Padding(2)
-        Me.TxtNum.MaxLength = 6
+        Me.TxtNum.MaxLength = 20
         Me.TxtNum.Name = "TxtNum"
         Me.TxtNum.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.TxtNum.Size = New System.Drawing.Size(315, 35)
@@ -802,7 +816,7 @@ Partial Class FrmSalesReport
         Me.CmbCustomer.Enabled = False
         Me.CmbCustomer.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
         Me.CmbCustomer.FormattingEnabled = True
-        Me.CmbCustomer.Location = New System.Drawing.Point(519, 65)
+        Me.CmbCustomer.Location = New System.Drawing.Point(519, 64)
         Me.CmbCustomer.Margin = New System.Windows.Forms.Padding(2)
         Me.CmbCustomer.Name = "CmbCustomer"
         Me.CmbCustomer.Size = New System.Drawing.Size(315, 35)
@@ -816,7 +830,7 @@ Partial Class FrmSalesReport
         Me.CmbUserName.Enabled = False
         Me.CmbUserName.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
         Me.CmbUserName.FormattingEnabled = True
-        Me.CmbUserName.Location = New System.Drawing.Point(2, 65)
+        Me.CmbUserName.Location = New System.Drawing.Point(2, 64)
         Me.CmbUserName.Margin = New System.Windows.Forms.Padding(2)
         Me.CmbUserName.Name = "CmbUserName"
         Me.CmbUserName.Size = New System.Drawing.Size(316, 35)
@@ -901,8 +915,10 @@ Partial Class FrmSalesReport
     Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
     Friend WithEvents Column12 As DataGridViewTextBoxColumn
-    Friend WithEvents Column11 As DataGridViewTextBoxColumn
     Friend WithEvents Column2 As DataGridViewTextBoxColumn
+    Friend WithEvents Column11 As DataGridViewTextBoxColumn
+    Friend WithEvents Column1 As DataGridViewTextBoxColumn
+    Friend WithEvents Column3 As DataGridViewTextBoxColumn
     Friend WithEvents ColShow As DataGridViewButtonColumn
     Friend WithEvents ColDel As DataGridViewButtonColumn
 End Class

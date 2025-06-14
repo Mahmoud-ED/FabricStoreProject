@@ -429,34 +429,36 @@ Public Class FrmEmployeesReport
         '    Exit Sub
         'End If
 
-        'If DGVEmpReport.Rows.Count = 0 Then Exit Sub
+        If DGVEmpReport.Rows.Count = 0 Then Exit Sub
 
-        'Dim DSPrint = New DataSet
-        'Dim SQLCon = New SQLConClass
+        Dim DSPrint = New DataSet
+        Dim SQLCon = New SQLConClass
 
-        'SQLQuery = "SELECT Name,Phone1,Phone2,Address FROM EmployeeTable WHERE EndService IS NULL"
-        'AppendReportConditions()
-        'SQLQuery &= " SELECT * FROM CenterMainInfoTable"
+        SQLQuery = "SELECT Name,Phone1,Phone2,Address FROM EmployeeTable WHERE EndService IS NULL"
+        AppendReportConditions()
+        SQLQuery &= " ORDER BY ID ASC OFFSET " & PageSize * (PageNum - 1) & " ROWS FETCH NEXT " & PageSize & " ROWS ONLY"
+        SQLQuery &= " SELECT * FROM CenterInfoTable"
 
-        'Dim Param() As SqlParameter =
-        '    {
-        '    New SqlParameter("@Name", "%" & TxtNameReport.Text.Trim & "%"),
-        '    New SqlParameter("@Address", TxtAddress.Text),
-        '    New SqlParameter("@Phone", "%" & TxtPhoneReport.Text & "%")}
+        Dim Param() As SqlParameter =
+            {
+            New SqlParameter("@Name", "%" & TxtNameReport.Text.Trim & "%"),
+            New SqlParameter("@Address", TxtAddress.Text),
+            New SqlParameter("@Phone", "%" & TxtPhoneReport.Text & "%")}
 
-        'DSPrint = SQLCon.SelectData(SQLQuery, 0, Param)
+        DSPrint = SQLCon.SelectData(SQLQuery, 0, Param)
 
-        'Dim F As New FrmPrint
+        Dim F As New FrmPrint
+        Dim C As New CREmployeeList
 
-        'C.SetDataSource(DSPrint.Tables(0))
-        'C.Subreports(0).SetDataSource(DSPrint.Tables(1))
-        'C.Subreports(1).SetDataSource(DSPrint.Tables(1))
-        'F.CrystalReportViewer1.ReportSource = C
-        'F.CrystalReportViewer1.Refresh()
-        'F.Text = "طباعة"
-        'F.CrystalReportViewer1.Zoom(100%)
-        'F.WindowState = FormWindowState.Maximized
-        'F.Show()
+        C.SetDataSource(DSPrint.Tables(0))
+        C.Subreports(0).SetDataSource(DSPrint.Tables(1))
+        C.Subreports(1).SetDataSource(DSPrint.Tables(1))
+        F.CrystalReportViewer1.ReportSource = C
+        F.CrystalReportViewer1.Refresh()
+        F.Text = "طباعة"
+        F.CrystalReportViewer1.Zoom(100%)
+        F.WindowState = FormWindowState.Maximized
+        F.Show()
 
     End Sub
 

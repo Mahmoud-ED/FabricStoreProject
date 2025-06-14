@@ -103,7 +103,7 @@ Public Class FrmCountry
     End Sub
 
     Private Sub TxtCountry_TextChanged(sender As Object, e As EventArgs) Handles TxtCountry.TextChanged
-        If sender.BackColor <> SystemColors.Window Then sender.BackColor = SystemColors.Window
+        sender.BackColor = SystemColors.Window
 
         If CountryID = 0 Then
             DTDefaultView(TxtCountry.Text, DSCountry.Tables(0), "Name")

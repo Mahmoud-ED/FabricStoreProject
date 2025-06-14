@@ -78,10 +78,8 @@ Partial Class FrmMangmentExpensesReport
         Me.ChkDate = New System.Windows.Forms.CheckBox()
         Me.ChkUserReport = New System.Windows.Forms.CheckBox()
         Me.ChkReciptName = New System.Windows.Forms.CheckBox()
-        Me.ChkExpenses = New System.Windows.Forms.CheckBox()
         Me.CmbUserReport = New System.Windows.Forms.ComboBox()
         Me.TxtReciptNameReport = New System.Windows.Forms.TextBox()
-        Me.CmbTypeExpenses = New System.Windows.Forms.ComboBox()
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.TxtSumReportAmont = New System.Windows.Forms.Label()
         Me.Panel2.SuspendLayout()
@@ -114,9 +112,9 @@ Partial Class FrmMangmentExpensesReport
         Me.Panel2.Controls.Add(Me.TxtSumReportAmont)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(0, 0)
-        Me.Panel2.Margin = New System.Windows.Forms.Padding(2)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(1004, 556)
+        Me.Panel2.Size = New System.Drawing.Size(1339, 684)
         Me.Panel2.TabIndex = 1139
         '
         'Label1
@@ -125,11 +123,10 @@ Partial Class FrmMangmentExpensesReport
         Me.Label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.Label1.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.Gray
-        Me.Label1.Location = New System.Drawing.Point(19, 498)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label1.Location = New System.Drawing.Point(25, 613)
         Me.Label1.Name = "Label1"
         Me.Label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Label1.Size = New System.Drawing.Size(37, 28)
+        Me.Label1.Size = New System.Drawing.Size(49, 34)
         Me.Label1.TabIndex = 31
         Me.Label1.Tag = "AutoC"
         Me.Label1.Text = "د.ل"
@@ -140,10 +137,9 @@ Partial Class FrmMangmentExpensesReport
         Me.Label20.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label20.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label20.ForeColor = System.Drawing.Color.Black
-        Me.Label20.Location = New System.Drawing.Point(354, 497)
-        Me.Label20.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label20.Location = New System.Drawing.Point(472, 612)
         Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(228, 33)
+        Me.Label20.Size = New System.Drawing.Size(304, 41)
         Me.Label20.TabIndex = 1215
         Me.Label20.Text = "إجمالي المبلغ في جميع الصفحات"
         Me.Label20.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -180,8 +176,8 @@ Partial Class FrmMangmentExpensesReport
         Me.DGVExpensesReport.DefaultCellStyle = DataGridViewCellStyle6
         Me.DGVExpensesReport.EnableHeadersVisualStyles = False
         Me.DGVExpensesReport.GridColor = System.Drawing.Color.Gray
-        Me.DGVExpensesReport.Location = New System.Drawing.Point(16, 240)
-        Me.DGVExpensesReport.Margin = New System.Windows.Forms.Padding(2)
+        Me.DGVExpensesReport.Location = New System.Drawing.Point(21, 274)
+        Me.DGVExpensesReport.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.DGVExpensesReport.MultiSelect = False
         Me.DGVExpensesReport.Name = "DGVExpensesReport"
         Me.DGVExpensesReport.ReadOnly = True
@@ -191,7 +187,7 @@ Partial Class FrmMangmentExpensesReport
         Me.DGVExpensesReport.RowHeadersWidth = 51
         Me.DGVExpensesReport.RowTemplate.Height = 30
         Me.DGVExpensesReport.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DGVExpensesReport.Size = New System.Drawing.Size(974, 197)
+        Me.DGVExpensesReport.Size = New System.Drawing.Size(1299, 258)
         Me.DGVExpensesReport.TabIndex = 1225
         Me.DGVExpensesReport.Tag = "Dark-SelectionVisible"
         '
@@ -295,7 +291,7 @@ Partial Class FrmMangmentExpensesReport
         Me.TLPPages.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.62162!))
         Me.TLPPages.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TLPPages.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.62162!))
-        Me.TLPPages.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 72.0!))
+        Me.TLPPages.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 138.0!))
         Me.TLPPages.Controls.Add(Me.BtnRefreshPage, 9, 0)
         Me.TLPPages.Controls.Add(Me.TxtPagesCount, 6, 0)
         Me.TLPPages.Controls.Add(Me.TxtCurrentPage, 2, 0)
@@ -307,13 +303,13 @@ Partial Class FrmMangmentExpensesReport
         Me.TLPPages.Controls.Add(Me.Panel13, 1, 0)
         Me.TLPPages.Controls.Add(Me.Panel16, 0, 0)
         Me.TLPPages.Font = New System.Drawing.Font("Droid Arabic Kufi", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TLPPages.Location = New System.Drawing.Point(16, 439)
-        Me.TLPPages.Margin = New System.Windows.Forms.Padding(2)
+        Me.TLPPages.Location = New System.Drawing.Point(21, 540)
+        Me.TLPPages.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TLPPages.Name = "TLPPages"
         Me.TLPPages.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.TLPPages.RowCount = 1
         Me.TLPPages.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TLPPages.Size = New System.Drawing.Size(974, 40)
+        Me.TLPPages.Size = New System.Drawing.Size(1299, 49)
         Me.TLPPages.TabIndex = 1214
         Me.TLPPages.Tag = "Dark"
         '
@@ -327,10 +323,11 @@ Partial Class FrmMangmentExpensesReport
         Me.BtnRefreshPage.Font = New System.Drawing.Font("Droid Arabic Kufi", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnRefreshPage.ForeColor = System.Drawing.Color.White
         Me.BtnRefreshPage.Image = CType(resources.GetObject("BtnRefreshPage.Image"), System.Drawing.Image)
-        Me.BtnRefreshPage.Location = New System.Drawing.Point(3, 3)
+        Me.BtnRefreshPage.Location = New System.Drawing.Point(4, 4)
+        Me.BtnRefreshPage.Margin = New System.Windows.Forms.Padding(4)
         Me.BtnRefreshPage.Name = "BtnRefreshPage"
         Me.BtnRefreshPage.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.BtnRefreshPage.Size = New System.Drawing.Size(66, 34)
+        Me.BtnRefreshPage.Size = New System.Drawing.Size(133, 41)
         Me.BtnRefreshPage.TabIndex = 1209
         Me.BtnRefreshPage.Tag = "Dark"
         Me.BtnRefreshPage.UseVisualStyleBackColor = False
@@ -340,11 +337,12 @@ Partial Class FrmMangmentExpensesReport
         Me.TxtPagesCount.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtPagesCount.BackColor = System.Drawing.SystemColors.Window
         Me.TxtPagesCount.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
-        Me.TxtPagesCount.Location = New System.Drawing.Point(337, 3)
+        Me.TxtPagesCount.Location = New System.Drawing.Point(485, 4)
+        Me.TxtPagesCount.Margin = New System.Windows.Forms.Padding(4)
         Me.TxtPagesCount.Name = "TxtPagesCount"
         Me.TxtPagesCount.ReadOnly = True
         Me.TxtPagesCount.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TxtPagesCount.Size = New System.Drawing.Size(138, 35)
+        Me.TxtPagesCount.Size = New System.Drawing.Size(174, 42)
         Me.TxtPagesCount.TabIndex = 1205
         Me.TxtPagesCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -353,11 +351,12 @@ Partial Class FrmMangmentExpensesReport
         Me.TxtCurrentPage.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtCurrentPage.BackColor = System.Drawing.Color.White
         Me.TxtCurrentPage.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
-        Me.TxtCurrentPage.Location = New System.Drawing.Point(716, 3)
+        Me.TxtCurrentPage.Location = New System.Drawing.Point(973, 4)
+        Me.TxtCurrentPage.Margin = New System.Windows.Forms.Padding(4)
         Me.TxtCurrentPage.Name = "TxtCurrentPage"
         Me.TxtCurrentPage.ReadOnly = True
         Me.TxtCurrentPage.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TxtCurrentPage.Size = New System.Drawing.Size(138, 35)
+        Me.TxtCurrentPage.Size = New System.Drawing.Size(174, 42)
         Me.TxtCurrentPage.TabIndex = 1205
         Me.TxtCurrentPage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -365,10 +364,11 @@ Partial Class FrmMangmentExpensesReport
         '
         Me.NUDPageSize.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.NUDPageSize.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
-        Me.NUDPageSize.Location = New System.Drawing.Point(75, 3)
+        Me.NUDPageSize.Location = New System.Drawing.Point(145, 4)
+        Me.NUDPageSize.Margin = New System.Windows.Forms.Padding(4)
         Me.NUDPageSize.Name = "NUDPageSize"
         Me.NUDPageSize.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.NUDPageSize.Size = New System.Drawing.Size(138, 35)
+        Me.NUDPageSize.Size = New System.Drawing.Size(174, 42)
         Me.NUDPageSize.TabIndex = 19
         Me.NUDPageSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -376,10 +376,10 @@ Partial Class FrmMangmentExpensesReport
         '
         Me.Panel5.Controls.Add(Me.Label10)
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel5.Location = New System.Drawing.Point(218, 2)
-        Me.Panel5.Margin = New System.Windows.Forms.Padding(2)
+        Me.Panel5.Location = New System.Drawing.Point(326, 2)
+        Me.Panel5.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(114, 36)
+        Me.Panel5.Size = New System.Drawing.Size(152, 45)
         Me.Panel5.TabIndex = 1205
         '
         'Label10
@@ -387,9 +387,10 @@ Partial Class FrmMangmentExpensesReport
         Me.Label10.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.Label10.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
         Me.Label10.ForeColor = System.Drawing.Color.White
-        Me.Label10.Location = New System.Drawing.Point(3, 4)
+        Me.Label10.Location = New System.Drawing.Point(4, 5)
+        Me.Label10.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(108, 28)
+        Me.Label10.Size = New System.Drawing.Size(144, 34)
         Me.Label10.TabIndex = 1201
         Me.Label10.Text = "حجم الصفحة"
         Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -398,10 +399,10 @@ Partial Class FrmMangmentExpensesReport
         '
         Me.Panel6.Controls.Add(Me.Label11)
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel6.Location = New System.Drawing.Point(480, 2)
-        Me.Panel6.Margin = New System.Windows.Forms.Padding(2)
+        Me.Panel6.Location = New System.Drawing.Point(666, 2)
+        Me.Panel6.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(114, 36)
+        Me.Panel6.Size = New System.Drawing.Size(152, 45)
         Me.Panel6.TabIndex = 1205
         '
         'Label11
@@ -409,9 +410,10 @@ Partial Class FrmMangmentExpensesReport
         Me.Label11.Anchor = System.Windows.Forms.AnchorStyles.Right
         Me.Label11.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
         Me.Label11.ForeColor = System.Drawing.Color.White
-        Me.Label11.Location = New System.Drawing.Point(8, 4)
+        Me.Label11.Location = New System.Drawing.Point(11, 5)
+        Me.Label11.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(99, 28)
+        Me.Label11.Size = New System.Drawing.Size(132, 34)
         Me.Label11.TabIndex = 40
         Me.Label11.Text = "عدد الصفحات"
         Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -420,10 +422,10 @@ Partial Class FrmMangmentExpensesReport
         '
         Me.Panel7.Controls.Add(Me.BtnLastPage)
         Me.Panel7.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel7.Location = New System.Drawing.Point(598, 2)
-        Me.Panel7.Margin = New System.Windows.Forms.Padding(2)
+        Me.Panel7.Location = New System.Drawing.Point(824, 2)
+        Me.Panel7.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel7.Name = "Panel7"
-        Me.Panel7.Size = New System.Drawing.Size(68, 36)
+        Me.Panel7.Size = New System.Drawing.Size(85, 45)
         Me.Panel7.TabIndex = 1205
         '
         'BtnLastPage
@@ -437,9 +439,10 @@ Partial Class FrmMangmentExpensesReport
         Me.BtnLastPage.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.BtnLastPage.Image = CType(resources.GetObject("BtnLastPage.Image"), System.Drawing.Image)
         Me.BtnLastPage.Location = New System.Drawing.Point(0, 0)
+        Me.BtnLastPage.Margin = New System.Windows.Forms.Padding(4)
         Me.BtnLastPage.Name = "BtnLastPage"
         Me.BtnLastPage.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.BtnLastPage.Size = New System.Drawing.Size(68, 36)
+        Me.BtnLastPage.Size = New System.Drawing.Size(85, 45)
         Me.BtnLastPage.TabIndex = 18
         Me.BtnLastPage.Tag = "Dark"
         Me.BtnLastPage.UseVisualStyleBackColor = False
@@ -448,10 +451,10 @@ Partial Class FrmMangmentExpensesReport
         '
         Me.Panel12.Controls.Add(Me.BtnNextPage)
         Me.Panel12.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel12.Location = New System.Drawing.Point(670, 2)
-        Me.Panel12.Margin = New System.Windows.Forms.Padding(2)
+        Me.Panel12.Location = New System.Drawing.Point(915, 2)
+        Me.Panel12.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel12.Name = "Panel12"
-        Me.Panel12.Size = New System.Drawing.Size(41, 36)
+        Me.Panel12.Size = New System.Drawing.Size(51, 45)
         Me.Panel12.TabIndex = 1205
         '
         'BtnNextPage
@@ -465,9 +468,10 @@ Partial Class FrmMangmentExpensesReport
         Me.BtnNextPage.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.BtnNextPage.Image = CType(resources.GetObject("BtnNextPage.Image"), System.Drawing.Image)
         Me.BtnNextPage.Location = New System.Drawing.Point(0, 0)
+        Me.BtnNextPage.Margin = New System.Windows.Forms.Padding(4)
         Me.BtnNextPage.Name = "BtnNextPage"
         Me.BtnNextPage.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.BtnNextPage.Size = New System.Drawing.Size(41, 36)
+        Me.BtnNextPage.Size = New System.Drawing.Size(51, 45)
         Me.BtnNextPage.TabIndex = 17
         Me.BtnNextPage.Tag = "Dark"
         Me.BtnNextPage.UseVisualStyleBackColor = False
@@ -476,10 +480,10 @@ Partial Class FrmMangmentExpensesReport
         '
         Me.Panel13.Controls.Add(Me.BtnPreviousPage)
         Me.Panel13.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel13.Location = New System.Drawing.Point(859, 2)
-        Me.Panel13.Margin = New System.Windows.Forms.Padding(2)
+        Me.Panel13.Location = New System.Drawing.Point(1154, 2)
+        Me.Panel13.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel13.Name = "Panel13"
-        Me.Panel13.Size = New System.Drawing.Size(41, 36)
+        Me.Panel13.Size = New System.Drawing.Size(51, 45)
         Me.Panel13.TabIndex = 1205
         '
         'BtnPreviousPage
@@ -493,9 +497,10 @@ Partial Class FrmMangmentExpensesReport
         Me.BtnPreviousPage.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.BtnPreviousPage.Image = CType(resources.GetObject("BtnPreviousPage.Image"), System.Drawing.Image)
         Me.BtnPreviousPage.Location = New System.Drawing.Point(0, 0)
+        Me.BtnPreviousPage.Margin = New System.Windows.Forms.Padding(4)
         Me.BtnPreviousPage.Name = "BtnPreviousPage"
         Me.BtnPreviousPage.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.BtnPreviousPage.Size = New System.Drawing.Size(41, 36)
+        Me.BtnPreviousPage.Size = New System.Drawing.Size(51, 45)
         Me.BtnPreviousPage.TabIndex = 16
         Me.BtnPreviousPage.Tag = "Dark"
         Me.BtnPreviousPage.UseVisualStyleBackColor = False
@@ -504,10 +509,10 @@ Partial Class FrmMangmentExpensesReport
         '
         Me.Panel16.Controls.Add(Me.BtnFirstPage)
         Me.Panel16.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel16.Location = New System.Drawing.Point(904, 2)
-        Me.Panel16.Margin = New System.Windows.Forms.Padding(2)
+        Me.Panel16.Location = New System.Drawing.Point(1211, 2)
+        Me.Panel16.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel16.Name = "Panel16"
-        Me.Panel16.Size = New System.Drawing.Size(68, 36)
+        Me.Panel16.Size = New System.Drawing.Size(85, 45)
         Me.Panel16.TabIndex = 1205
         '
         'BtnFirstPage
@@ -521,9 +526,10 @@ Partial Class FrmMangmentExpensesReport
         Me.BtnFirstPage.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.BtnFirstPage.Image = CType(resources.GetObject("BtnFirstPage.Image"), System.Drawing.Image)
         Me.BtnFirstPage.Location = New System.Drawing.Point(0, 0)
+        Me.BtnFirstPage.Margin = New System.Windows.Forms.Padding(4)
         Me.BtnFirstPage.Name = "BtnFirstPage"
         Me.BtnFirstPage.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.BtnFirstPage.Size = New System.Drawing.Size(68, 36)
+        Me.BtnFirstPage.Size = New System.Drawing.Size(85, 45)
         Me.BtnFirstPage.TabIndex = 15
         Me.BtnFirstPage.Tag = "Dark"
         Me.BtnFirstPage.UseVisualStyleBackColor = False
@@ -534,26 +540,26 @@ Partial Class FrmMangmentExpensesReport
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TableLayoutPanel9.ColumnCount = 7
         Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10.0!))
+        Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 13.0!))
         Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10.0!))
+        Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 13.0!))
         Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10.0!))
+        Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 13.0!))
         Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27.0!))
+        Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27.0!))
         Me.TableLayoutPanel9.Controls.Add(Me.BtnPrintReport, 4, 0)
         Me.TableLayoutPanel9.Controls.Add(Me.BtnRefreshReport, 2, 0)
         Me.TableLayoutPanel9.Controls.Add(Me.BtnSearch, 0, 0)
         Me.TableLayoutPanel9.Controls.Add(Me.BtnPrintAll, 6, 0)
         Me.TableLayoutPanel9.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TableLayoutPanel9.Location = New System.Drawing.Point(16, 185)
-        Me.TableLayoutPanel9.Margin = New System.Windows.Forms.Padding(2)
+        Me.TableLayoutPanel9.Location = New System.Drawing.Point(21, 208)
+        Me.TableLayoutPanel9.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TableLayoutPanel9.Name = "TableLayoutPanel9"
         Me.TableLayoutPanel9.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.TableLayoutPanel9.RowCount = 1
         Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel9.Size = New System.Drawing.Size(974, 40)
+        Me.TableLayoutPanel9.Size = New System.Drawing.Size(1299, 49)
         Me.TableLayoutPanel9.TabIndex = 1215
         '
         'BtnPrintReport
@@ -568,10 +574,10 @@ Partial Class FrmMangmentExpensesReport
         Me.BtnPrintReport.ForeColor = System.Drawing.Color.White
         Me.BtnPrintReport.Image = CType(resources.GetObject("BtnPrintReport.Image"), System.Drawing.Image)
         Me.BtnPrintReport.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.BtnPrintReport.Location = New System.Drawing.Point(248, 2)
-        Me.BtnPrintReport.Margin = New System.Windows.Forms.Padding(2)
+        Me.BtnPrintReport.Location = New System.Drawing.Point(331, 2)
+        Me.BtnPrintReport.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.BtnPrintReport.Name = "BtnPrintReport"
-        Me.BtnPrintReport.Size = New System.Drawing.Size(232, 36)
+        Me.BtnPrintReport.Size = New System.Drawing.Size(309, 45)
         Me.BtnPrintReport.TabIndex = 26
         Me.BtnPrintReport.Tag = "Dark"
         Me.BtnPrintReport.Text = "طباعة صفحة واحدة"
@@ -589,10 +595,10 @@ Partial Class FrmMangmentExpensesReport
         Me.BtnRefreshReport.ForeColor = System.Drawing.Color.White
         Me.BtnRefreshReport.Image = CType(resources.GetObject("BtnRefreshReport.Image"), System.Drawing.Image)
         Me.BtnRefreshReport.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.BtnRefreshReport.Location = New System.Drawing.Point(494, 2)
-        Me.BtnRefreshReport.Margin = New System.Windows.Forms.Padding(2)
+        Me.BtnRefreshReport.Location = New System.Drawing.Point(659, 2)
+        Me.BtnRefreshReport.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.BtnRefreshReport.Name = "BtnRefreshReport"
-        Me.BtnRefreshReport.Size = New System.Drawing.Size(232, 36)
+        Me.BtnRefreshReport.Size = New System.Drawing.Size(309, 45)
         Me.BtnRefreshReport.TabIndex = 1168
         Me.BtnRefreshReport.Tag = "Dark"
         Me.BtnRefreshReport.Text = "تحديث"
@@ -610,10 +616,10 @@ Partial Class FrmMangmentExpensesReport
         Me.BtnSearch.ForeColor = System.Drawing.Color.White
         Me.BtnSearch.Image = CType(resources.GetObject("BtnSearch.Image"), System.Drawing.Image)
         Me.BtnSearch.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.BtnSearch.Location = New System.Drawing.Point(740, 2)
-        Me.BtnSearch.Margin = New System.Windows.Forms.Padding(0, 2, 2, 2)
+        Me.BtnSearch.Location = New System.Drawing.Point(987, 2)
+        Me.BtnSearch.Margin = New System.Windows.Forms.Padding(0, 2, 3, 2)
         Me.BtnSearch.Name = "BtnSearch"
-        Me.BtnSearch.Size = New System.Drawing.Size(234, 36)
+        Me.BtnSearch.Size = New System.Drawing.Size(312, 45)
         Me.BtnSearch.TabIndex = 26
         Me.BtnSearch.Tag = "Dark"
         Me.BtnSearch.Text = "بحث"
@@ -635,7 +641,7 @@ Partial Class FrmMangmentExpensesReport
         Me.BtnPrintAll.Margin = New System.Windows.Forms.Padding(0, 2, 0, 2)
         Me.BtnPrintAll.Name = "BtnPrintAll"
         Me.BtnPrintAll.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.BtnPrintAll.Size = New System.Drawing.Size(236, 36)
+        Me.BtnPrintAll.Size = New System.Drawing.Size(315, 45)
         Me.BtnPrintAll.TabIndex = 1172
         Me.BtnPrintAll.Tag = "Dark"
         Me.BtnPrintAll.Text = "طباعة الكل"
@@ -647,12 +653,12 @@ Partial Class FrmMangmentExpensesReport
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GrpReport.Controls.Add(Me.TableLayoutPanel4)
         Me.GrpReport.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GrpReport.Location = New System.Drawing.Point(16, 2)
-        Me.GrpReport.Margin = New System.Windows.Forms.Padding(2)
+        Me.GrpReport.Location = New System.Drawing.Point(21, 2)
+        Me.GrpReport.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.GrpReport.Name = "GrpReport"
-        Me.GrpReport.Padding = New System.Windows.Forms.Padding(2)
+        Me.GrpReport.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.GrpReport.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.GrpReport.Size = New System.Drawing.Size(974, 171)
+        Me.GrpReport.Size = New System.Drawing.Size(1299, 190)
         Me.GrpReport.TabIndex = 1214
         Me.GrpReport.TabStop = False
         Me.GrpReport.Text = "بحث حسب"
@@ -664,47 +670,44 @@ Partial Class FrmMangmentExpensesReport
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TableLayoutPanel4.ColumnCount = 5
         Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 156.0!))
-        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 17.0!))
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 208.0!))
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 23.0!))
         Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 126.0!))
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 168.0!))
         Me.TableLayoutPanel4.Controls.Add(Me.TableLayoutPanel6, 0, 1)
         Me.TableLayoutPanel4.Controls.Add(Me.ChkMonth, 1, 0)
         Me.TableLayoutPanel4.Controls.Add(Me.TableLayoutPanel5, 0, 0)
         Me.TableLayoutPanel4.Controls.Add(Me.ChkDate, 1, 1)
         Me.TableLayoutPanel4.Controls.Add(Me.ChkUserReport, 4, 0)
         Me.TableLayoutPanel4.Controls.Add(Me.ChkReciptName, 4, 1)
-        Me.TableLayoutPanel4.Controls.Add(Me.ChkExpenses, 4, 2)
         Me.TableLayoutPanel4.Controls.Add(Me.CmbUserReport, 3, 0)
         Me.TableLayoutPanel4.Controls.Add(Me.TxtReciptNameReport, 3, 1)
-        Me.TableLayoutPanel4.Controls.Add(Me.CmbTypeExpenses, 3, 2)
-        Me.TableLayoutPanel4.Location = New System.Drawing.Point(15, 28)
-        Me.TableLayoutPanel4.Margin = New System.Windows.Forms.Padding(2)
+        Me.TableLayoutPanel4.Location = New System.Drawing.Point(20, 34)
+        Me.TableLayoutPanel4.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
         Me.TableLayoutPanel4.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.TableLayoutPanel4.RowCount = 3
+        Me.TableLayoutPanel4.RowCount = 2
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanel4.Size = New System.Drawing.Size(935, 133)
+        Me.TableLayoutPanel4.Size = New System.Drawing.Size(1247, 143)
         Me.TableLayoutPanel4.TabIndex = 1226
         '
         'TableLayoutPanel6
         '
         Me.TableLayoutPanel6.ColumnCount = 3
         Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 41.0!))
+        Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 55.0!))
         Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel6.Controls.Add(Me.DTPToDate, 0, 0)
         Me.TableLayoutPanel6.Controls.Add(Me.Label2, 1, 0)
         Me.TableLayoutPanel6.Controls.Add(Me.DTPFromDate, 2, 0)
         Me.TableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel6.Location = New System.Drawing.Point(0, 44)
+        Me.TableLayoutPanel6.Location = New System.Drawing.Point(0, 71)
         Me.TableLayoutPanel6.Margin = New System.Windows.Forms.Padding(0)
         Me.TableLayoutPanel6.Name = "TableLayoutPanel6"
         Me.TableLayoutPanel6.RowCount = 1
         Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel6.Size = New System.Drawing.Size(318, 44)
+        Me.TableLayoutPanel6.Size = New System.Drawing.Size(424, 72)
         Me.TableLayoutPanel6.TabIndex = 1211
         '
         'DTPToDate
@@ -715,22 +718,21 @@ Partial Class FrmMangmentExpensesReport
         Me.DTPToDate.Enabled = False
         Me.DTPToDate.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DTPToDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DTPToDate.Location = New System.Drawing.Point(0, 4)
+        Me.DTPToDate.Location = New System.Drawing.Point(0, 15)
         Me.DTPToDate.Margin = New System.Windows.Forms.Padding(0)
         Me.DTPToDate.Name = "DTPToDate"
         Me.DTPToDate.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.DTPToDate.RightToLeftLayout = True
-        Me.DTPToDate.Size = New System.Drawing.Size(138, 35)
+        Me.DTPToDate.Size = New System.Drawing.Size(184, 42)
         Me.DTPToDate.TabIndex = 10
         '
         'Label2
         '
         Me.Label2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label2.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(140, 0)
-        Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label2.Location = New System.Drawing.Point(187, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(37, 44)
+        Me.Label2.Size = New System.Drawing.Size(49, 72)
         Me.Label2.TabIndex = 9
         Me.Label2.Text = "إلى"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -743,12 +745,12 @@ Partial Class FrmMangmentExpensesReport
         Me.DTPFromDate.Enabled = False
         Me.DTPFromDate.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DTPFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DTPFromDate.Location = New System.Drawing.Point(179, 4)
+        Me.DTPFromDate.Location = New System.Drawing.Point(239, 15)
         Me.DTPFromDate.Margin = New System.Windows.Forms.Padding(0)
         Me.DTPFromDate.Name = "DTPFromDate"
         Me.DTPFromDate.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.DTPFromDate.RightToLeftLayout = True
-        Me.DTPFromDate.Size = New System.Drawing.Size(139, 35)
+        Me.DTPFromDate.Size = New System.Drawing.Size(185, 42)
         Me.DTPFromDate.TabIndex = 11
         '
         'ChkMonth
@@ -756,11 +758,11 @@ Partial Class FrmMangmentExpensesReport
         Me.ChkMonth.Cursor = System.Windows.Forms.Cursors.Hand
         Me.ChkMonth.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ChkMonth.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ChkMonth.Location = New System.Drawing.Point(320, 2)
-        Me.ChkMonth.Margin = New System.Windows.Forms.Padding(2)
+        Me.ChkMonth.Location = New System.Drawing.Point(427, 2)
+        Me.ChkMonth.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ChkMonth.Name = "ChkMonth"
         Me.ChkMonth.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.ChkMonth.Size = New System.Drawing.Size(152, 40)
+        Me.ChkMonth.Size = New System.Drawing.Size(202, 67)
         Me.ChkMonth.TabIndex = 1
         Me.ChkMonth.Text = "الشهر - السنة"
         Me.ChkMonth.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -770,7 +772,7 @@ Partial Class FrmMangmentExpensesReport
         '
         Me.TableLayoutPanel5.ColumnCount = 3
         Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 41.0!))
+        Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 55.0!))
         Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel5.Controls.Add(Me.CmbMonthReport, 2, 0)
         Me.TableLayoutPanel5.Controls.Add(Me.CmbYearReport, 0, 0)
@@ -780,7 +782,7 @@ Partial Class FrmMangmentExpensesReport
         Me.TableLayoutPanel5.Name = "TableLayoutPanel5"
         Me.TableLayoutPanel5.RowCount = 1
         Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel5.Size = New System.Drawing.Size(318, 44)
+        Me.TableLayoutPanel5.Size = New System.Drawing.Size(424, 71)
         Me.TableLayoutPanel5.TabIndex = 37
         '
         'CmbMonthReport
@@ -793,12 +795,12 @@ Partial Class FrmMangmentExpensesReport
         Me.CmbMonthReport.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CmbMonthReport.FormattingEnabled = True
         Me.CmbMonthReport.IntegralHeight = False
-        Me.CmbMonthReport.Location = New System.Drawing.Point(179, 4)
+        Me.CmbMonthReport.Location = New System.Drawing.Point(239, 14)
         Me.CmbMonthReport.Margin = New System.Windows.Forms.Padding(0)
         Me.CmbMonthReport.MaxLength = 4
         Me.CmbMonthReport.Name = "CmbMonthReport"
         Me.CmbMonthReport.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.CmbMonthReport.Size = New System.Drawing.Size(139, 35)
+        Me.CmbMonthReport.Size = New System.Drawing.Size(185, 42)
         Me.CmbMonthReport.TabIndex = 1160
         '
         'CmbYearReport
@@ -811,12 +813,12 @@ Partial Class FrmMangmentExpensesReport
         Me.CmbYearReport.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CmbYearReport.FormattingEnabled = True
         Me.CmbYearReport.IntegralHeight = False
-        Me.CmbYearReport.Location = New System.Drawing.Point(0, 4)
+        Me.CmbYearReport.Location = New System.Drawing.Point(0, 14)
         Me.CmbYearReport.Margin = New System.Windows.Forms.Padding(0)
         Me.CmbYearReport.MaxLength = 4
         Me.CmbYearReport.Name = "CmbYearReport"
         Me.CmbYearReport.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.CmbYearReport.Size = New System.Drawing.Size(138, 35)
+        Me.CmbYearReport.Size = New System.Drawing.Size(184, 42)
         Me.CmbYearReport.TabIndex = 1159
         '
         'ChkDate
@@ -824,11 +826,11 @@ Partial Class FrmMangmentExpensesReport
         Me.ChkDate.Cursor = System.Windows.Forms.Cursors.Hand
         Me.ChkDate.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ChkDate.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ChkDate.Location = New System.Drawing.Point(320, 46)
-        Me.ChkDate.Margin = New System.Windows.Forms.Padding(2)
+        Me.ChkDate.Location = New System.Drawing.Point(427, 73)
+        Me.ChkDate.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ChkDate.Name = "ChkDate"
         Me.ChkDate.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.ChkDate.Size = New System.Drawing.Size(152, 40)
+        Me.ChkDate.Size = New System.Drawing.Size(202, 68)
         Me.ChkDate.TabIndex = 1209
         Me.ChkDate.Text = "تاريخ الصرف :  من"
         Me.ChkDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -839,11 +841,11 @@ Partial Class FrmMangmentExpensesReport
         Me.ChkUserReport.Cursor = System.Windows.Forms.Cursors.Hand
         Me.ChkUserReport.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ChkUserReport.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ChkUserReport.Location = New System.Drawing.Point(811, 2)
-        Me.ChkUserReport.Margin = New System.Windows.Forms.Padding(2)
+        Me.ChkUserReport.Location = New System.Drawing.Point(1082, 2)
+        Me.ChkUserReport.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ChkUserReport.Name = "ChkUserReport"
         Me.ChkUserReport.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.ChkUserReport.Size = New System.Drawing.Size(122, 40)
+        Me.ChkUserReport.Size = New System.Drawing.Size(162, 67)
         Me.ChkUserReport.TabIndex = 3
         Me.ChkUserReport.Text = "المستخدم"
         Me.ChkUserReport.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -854,30 +856,15 @@ Partial Class FrmMangmentExpensesReport
         Me.ChkReciptName.Cursor = System.Windows.Forms.Cursors.Hand
         Me.ChkReciptName.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ChkReciptName.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ChkReciptName.Location = New System.Drawing.Point(811, 46)
-        Me.ChkReciptName.Margin = New System.Windows.Forms.Padding(2)
+        Me.ChkReciptName.Location = New System.Drawing.Point(1082, 73)
+        Me.ChkReciptName.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ChkReciptName.Name = "ChkReciptName"
         Me.ChkReciptName.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.ChkReciptName.Size = New System.Drawing.Size(122, 40)
+        Me.ChkReciptName.Size = New System.Drawing.Size(162, 68)
         Me.ChkReciptName.TabIndex = 5
         Me.ChkReciptName.Text = "المستلم"
         Me.ChkReciptName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.ChkReciptName.UseVisualStyleBackColor = True
-        '
-        'ChkExpenses
-        '
-        Me.ChkExpenses.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.ChkExpenses.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ChkExpenses.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ChkExpenses.Location = New System.Drawing.Point(811, 90)
-        Me.ChkExpenses.Margin = New System.Windows.Forms.Padding(2)
-        Me.ChkExpenses.Name = "ChkExpenses"
-        Me.ChkExpenses.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.ChkExpenses.Size = New System.Drawing.Size(122, 41)
-        Me.ChkExpenses.TabIndex = 33
-        Me.ChkExpenses.Text = "نوع المصروف"
-        Me.ChkExpenses.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.ChkExpenses.UseVisualStyleBackColor = True
         '
         'CmbUserReport
         '
@@ -889,11 +876,11 @@ Partial Class FrmMangmentExpensesReport
         Me.CmbUserReport.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CmbUserReport.FormattingEnabled = True
         Me.CmbUserReport.IntegralHeight = False
-        Me.CmbUserReport.Location = New System.Drawing.Point(493, 4)
-        Me.CmbUserReport.Margin = New System.Windows.Forms.Padding(2)
+        Me.CmbUserReport.Location = New System.Drawing.Point(658, 14)
+        Me.CmbUserReport.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.CmbUserReport.Name = "CmbUserReport"
         Me.CmbUserReport.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.CmbUserReport.Size = New System.Drawing.Size(314, 35)
+        Me.CmbUserReport.Size = New System.Drawing.Size(418, 42)
         Me.CmbUserReport.TabIndex = 1212
         '
         'TxtReciptNameReport
@@ -901,38 +888,21 @@ Partial Class FrmMangmentExpensesReport
         Me.TxtReciptNameReport.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtReciptNameReport.Enabled = False
         Me.TxtReciptNameReport.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtReciptNameReport.Location = New System.Drawing.Point(493, 48)
-        Me.TxtReciptNameReport.Margin = New System.Windows.Forms.Padding(2)
+        Me.TxtReciptNameReport.Location = New System.Drawing.Point(658, 86)
+        Me.TxtReciptNameReport.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TxtReciptNameReport.MaxLength = 200
         Me.TxtReciptNameReport.Name = "TxtReciptNameReport"
         Me.TxtReciptNameReport.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TxtReciptNameReport.Size = New System.Drawing.Size(314, 35)
+        Me.TxtReciptNameReport.Size = New System.Drawing.Size(418, 42)
         Me.TxtReciptNameReport.TabIndex = 31
-        '
-        'CmbTypeExpenses
-        '
-        Me.CmbTypeExpenses.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.CmbTypeExpenses.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.CmbTypeExpenses.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.CmbTypeExpenses.DropDownHeight = 160
-        Me.CmbTypeExpenses.Enabled = False
-        Me.CmbTypeExpenses.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CmbTypeExpenses.FormattingEnabled = True
-        Me.CmbTypeExpenses.IntegralHeight = False
-        Me.CmbTypeExpenses.Location = New System.Drawing.Point(493, 93)
-        Me.CmbTypeExpenses.Margin = New System.Windows.Forms.Padding(2)
-        Me.CmbTypeExpenses.Name = "CmbTypeExpenses"
-        Me.CmbTypeExpenses.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.CmbTypeExpenses.Size = New System.Drawing.Size(314, 35)
-        Me.CmbTypeExpenses.TabIndex = 1213
         '
         'ProgressBar1
         '
         Me.ProgressBar1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.ProgressBar1.Location = New System.Drawing.Point(0, 546)
-        Me.ProgressBar1.Margin = New System.Windows.Forms.Padding(2)
+        Me.ProgressBar1.Location = New System.Drawing.Point(0, 672)
+        Me.ProgressBar1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ProgressBar1.Name = "ProgressBar1"
-        Me.ProgressBar1.Size = New System.Drawing.Size(1004, 10)
+        Me.ProgressBar1.Size = New System.Drawing.Size(1339, 12)
         Me.ProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous
         Me.ProgressBar1.TabIndex = 1140
         '
@@ -942,22 +912,22 @@ Partial Class FrmMangmentExpensesReport
         Me.TxtSumReportAmont.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtSumReportAmont.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TxtSumReportAmont.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
-        Me.TxtSumReportAmont.Location = New System.Drawing.Point(16, 495)
-        Me.TxtSumReportAmont.Margin = New System.Windows.Forms.Padding(3)
+        Me.TxtSumReportAmont.Location = New System.Drawing.Point(21, 609)
+        Me.TxtSumReportAmont.Margin = New System.Windows.Forms.Padding(4)
         Me.TxtSumReportAmont.Name = "TxtSumReportAmont"
-        Me.TxtSumReportAmont.Size = New System.Drawing.Size(337, 35)
+        Me.TxtSumReportAmont.Size = New System.Drawing.Size(449, 43)
         Me.TxtSumReportAmont.TabIndex = 1237
         Me.TxtSumReportAmont.Tag = "AutoC"
         Me.TxtSumReportAmont.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'FrmMangmentExpensesReport
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1004, 556)
+        Me.ClientSize = New System.Drawing.Size(1339, 684)
         Me.Controls.Add(Me.Panel2)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Margin = New System.Windows.Forms.Padding(2)
+        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "FrmMangmentExpensesReport"
         Me.Text = "تقارير المصروفات"
         Me.Panel2.ResumeLayout(False)
@@ -992,7 +962,6 @@ Partial Class FrmMangmentExpensesReport
     Friend WithEvents Label20 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents TableLayoutPanel4 As TableLayoutPanel
-    Friend WithEvents ChkExpenses As CheckBox
     Friend WithEvents ChkUserReport As CheckBox
     Friend WithEvents ChkMonth As CheckBox
     Friend WithEvents TxtReciptNameReport As TextBox
@@ -1035,5 +1004,4 @@ Partial Class FrmMangmentExpensesReport
     Friend WithEvents Column1 As DataGridViewTextBoxColumn
     Friend WithEvents Column2 As DataGridViewTextBoxColumn
     Friend WithEvents TxtSumReportAmont As Label
-    Friend WithEvents CmbTypeExpenses As ComboBox
 End Class

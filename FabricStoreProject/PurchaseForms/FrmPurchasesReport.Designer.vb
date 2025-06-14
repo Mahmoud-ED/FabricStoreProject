@@ -72,6 +72,7 @@ Partial Class FrmPurchasesReport
         Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColShow = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.ColEdit = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.ColDel = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.TLPBottom = New System.Windows.Forms.TableLayoutPanel()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -111,7 +112,7 @@ Partial Class FrmPurchasesReport
         Me.BtnPrint.Name = "BtnPrint"
         Me.BtnPrint.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.BtnPrint.Size = New System.Drawing.Size(238, 36)
-        Me.BtnPrint.TabIndex = 33
+        Me.BtnPrint.TabIndex = 3
         Me.BtnPrint.Tag = "Dark"
         Me.BtnPrint.Text = "طباعة صفحة واحدة"
         Me.BtnPrint.UseVisualStyleBackColor = False
@@ -134,7 +135,7 @@ Partial Class FrmPurchasesReport
         Me.BtnPrintAll.Name = "BtnPrintAll"
         Me.BtnPrintAll.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.BtnPrintAll.Size = New System.Drawing.Size(242, 36)
-        Me.BtnPrintAll.TabIndex = 32
+        Me.BtnPrintAll.TabIndex = 4
         Me.BtnPrintAll.Tag = "Dark"
         Me.BtnPrintAll.Text = "طباعة الكل"
         Me.BtnPrintAll.UseVisualStyleBackColor = False
@@ -157,7 +158,7 @@ Partial Class FrmPurchasesReport
         Me.BtnNew.Name = "BtnNew"
         Me.BtnNew.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.BtnNew.Size = New System.Drawing.Size(242, 36)
-        Me.BtnNew.TabIndex = 31
+        Me.BtnNew.TabIndex = 2
         Me.BtnNew.Tag = "Dark"
         Me.BtnNew.Text = "تحديث"
         Me.BtnNew.UseVisualStyleBackColor = False
@@ -206,7 +207,7 @@ Partial Class FrmPurchasesReport
         Me.TableLayoutPanel6.RowCount = 1
         Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel6.Size = New System.Drawing.Size(320, 51)
-        Me.TableLayoutPanel6.TabIndex = 1227
+        Me.TableLayoutPanel6.TabIndex = 5
         '
         'DTPFrom
         '
@@ -259,11 +260,11 @@ Partial Class FrmPurchasesReport
         Me.TxtNum.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
         Me.TxtNum.Location = New System.Drawing.Point(519, 10)
         Me.TxtNum.Margin = New System.Windows.Forms.Padding(2)
-        Me.TxtNum.MaxLength = 6
+        Me.TxtNum.MaxLength = 20
         Me.TxtNum.Name = "TxtNum"
         Me.TxtNum.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.TxtNum.Size = New System.Drawing.Size(315, 35)
-        Me.TxtNum.TabIndex = 56
+        Me.TxtNum.TabIndex = 1
         Me.TxtNum.Tag = ""
         '
         'Panel9
@@ -309,7 +310,7 @@ Partial Class FrmPurchasesReport
         Me.ChkDate.Margin = New System.Windows.Forms.Padding(2)
         Me.ChkDate.Name = "ChkDate"
         Me.ChkDate.Size = New System.Drawing.Size(167, 51)
-        Me.ChkDate.TabIndex = 2
+        Me.ChkDate.TabIndex = 4
         Me.ChkDate.Text = "تاريخ الفاتورة  :  من"
         Me.ChkDate.UseVisualStyleBackColor = True
         '
@@ -332,7 +333,7 @@ Partial Class FrmPurchasesReport
         Me.ChkUser.Margin = New System.Windows.Forms.Padding(2)
         Me.ChkUser.Name = "ChkUser"
         Me.ChkUser.Size = New System.Drawing.Size(167, 51)
-        Me.ChkUser.TabIndex = 1
+        Me.ChkUser.TabIndex = 6
         Me.ChkUser.Text = "المستخدم"
         Me.ChkUser.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.ChkUser.UseVisualStyleBackColor = True
@@ -356,7 +357,7 @@ Partial Class FrmPurchasesReport
         Me.ChkSupplier.Margin = New System.Windows.Forms.Padding(2)
         Me.ChkSupplier.Name = "ChkSupplier"
         Me.ChkSupplier.Size = New System.Drawing.Size(132, 51)
-        Me.ChkSupplier.TabIndex = 1
+        Me.ChkSupplier.TabIndex = 2
         Me.ChkSupplier.Text = "المورد"
         Me.ChkSupplier.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.ChkSupplier.UseVisualStyleBackColor = True
@@ -371,11 +372,11 @@ Partial Class FrmPurchasesReport
         Me.CmbSupplier.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
         Me.CmbSupplier.FormattingEnabled = True
         Me.CmbSupplier.IntegralHeight = False
-        Me.CmbSupplier.Location = New System.Drawing.Point(519, 65)
+        Me.CmbSupplier.Location = New System.Drawing.Point(519, 64)
         Me.CmbSupplier.Margin = New System.Windows.Forms.Padding(2)
         Me.CmbSupplier.Name = "CmbSupplier"
         Me.CmbSupplier.Size = New System.Drawing.Size(315, 35)
-        Me.CmbSupplier.TabIndex = 1230
+        Me.CmbSupplier.TabIndex = 3
         '
         'CmbUserName
         '
@@ -387,11 +388,11 @@ Partial Class FrmPurchasesReport
         Me.CmbUserName.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
         Me.CmbUserName.FormattingEnabled = True
         Me.CmbUserName.IntegralHeight = False
-        Me.CmbUserName.Location = New System.Drawing.Point(2, 65)
+        Me.CmbUserName.Location = New System.Drawing.Point(2, 64)
         Me.CmbUserName.Margin = New System.Windows.Forms.Padding(2)
         Me.CmbUserName.Name = "CmbUserName"
         Me.CmbUserName.Size = New System.Drawing.Size(316, 35)
-        Me.CmbUserName.TabIndex = 41
+        Me.CmbUserName.TabIndex = 7
         '
         'BtnSaerch
         '
@@ -411,7 +412,7 @@ Partial Class FrmPurchasesReport
         Me.BtnSaerch.Name = "BtnSaerch"
         Me.BtnSaerch.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.BtnSaerch.Size = New System.Drawing.Size(245, 36)
-        Me.BtnSaerch.TabIndex = 29
+        Me.BtnSaerch.TabIndex = 1
         Me.BtnSaerch.Tag = "Dark"
         Me.BtnSaerch.Text = "بحث"
         Me.BtnSaerch.UseVisualStyleBackColor = False
@@ -686,7 +687,7 @@ Partial Class FrmPurchasesReport
         Me.DGVPurchases.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DGVPurchases.ColumnHeadersHeight = 32
         Me.DGVPurchases.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        Me.DGVPurchases.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.Column12, Me.Column11, Me.Column2, Me.ColShow, Me.ColDel})
+        Me.DGVPurchases.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.Column12, Me.Column11, Me.Column2, Me.ColShow, Me.ColEdit, Me.ColDel})
         DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -775,6 +776,17 @@ Partial Class FrmPurchasesReport
         Me.ColShow.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         Me.ColShow.Text = "عرض"
         Me.ColShow.UseColumnTextForButtonValue = True
+        Me.ColShow.Visible = False
+        '
+        'ColEdit
+        '
+        Me.ColEdit.HeaderText = ""
+        Me.ColEdit.Name = "ColEdit"
+        Me.ColEdit.ReadOnly = True
+        Me.ColEdit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.ColEdit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.ColEdit.Text = "تعديل"
+        Me.ColEdit.UseColumnTextForButtonValue = True
         '
         'ColDel
         '
@@ -908,5 +920,6 @@ Partial Class FrmPurchasesReport
     Friend WithEvents Column11 As DataGridViewTextBoxColumn
     Friend WithEvents Column2 As DataGridViewTextBoxColumn
     Friend WithEvents ColShow As DataGridViewButtonColumn
+    Friend WithEvents ColEdit As DataGridViewButtonColumn
     Friend WithEvents ColDel As DataGridViewButtonColumn
 End Class

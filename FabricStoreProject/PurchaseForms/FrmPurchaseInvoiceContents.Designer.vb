@@ -22,8 +22,9 @@ Partial Class FrmPurchaseInvoiceContents
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmPurchaseInvoiceContents))
         Me.Label13 = New System.Windows.Forms.Label()
         Me.TxtSumValue = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
@@ -47,20 +48,25 @@ Partial Class FrmPurchaseInvoiceContents
         Me.PnlTitel = New System.Windows.Forms.Panel()
         Me.BtnClose = New System.Windows.Forms.Button()
         Me.LblTitel = New System.Windows.Forms.Label()
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.BtnPrint = New System.Windows.Forms.Button()
+        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel11.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.GroupBox8.SuspendLayout()
         CType(Me.DGVInvoContent, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PnlTitel.SuspendLayout()
+        Me.TableLayoutPanel1.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label13
         '
-        Me.Label13.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Label13.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.Label13.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.Label13.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label13.ForeColor = System.Drawing.Color.Gray
-        Me.Label13.Location = New System.Drawing.Point(27, 551)
+        Me.Label13.Location = New System.Drawing.Point(2, 1)
         Me.Label13.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label13.Name = "Label13"
         Me.Label13.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -72,33 +78,33 @@ Partial Class FrmPurchaseInvoiceContents
         '
         'TxtSumValue
         '
-        Me.TxtSumValue.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtSumValue.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TxtSumValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TxtSumValue.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TxtSumValue.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
         Me.TxtSumValue.ForeColor = System.Drawing.Color.Black
-        Me.TxtSumValue.Location = New System.Drawing.Point(24, 550)
+        Me.TxtSumValue.Location = New System.Drawing.Point(0, 0)
         Me.TxtSumValue.Margin = New System.Windows.Forms.Padding(0)
         Me.TxtSumValue.Name = "TxtSumValue"
         Me.TxtSumValue.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TxtSumValue.Size = New System.Drawing.Size(348, 35)
+        Me.TxtSumValue.Size = New System.Drawing.Size(247, 34)
         Me.TxtSumValue.TabIndex = 1282
         Me.TxtSumValue.Tag = "AutoC"
         Me.TxtSumValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label9
         '
-        Me.Label9.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Label9.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label9.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label9.ForeColor = System.Drawing.SystemColors.WindowText
-        Me.Label9.Location = New System.Drawing.Point(376, 550)
+        Me.Label9.Location = New System.Drawing.Point(265, 2)
         Me.Label9.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label9.Name = "Label9"
         Me.Label9.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Label9.Size = New System.Drawing.Size(69, 35)
+        Me.Label9.Size = New System.Drawing.Size(249, 35)
         Me.Label9.TabIndex = 1239
         Me.Label9.Text = "الإجمالي"
-        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'TxtStore
         '
@@ -217,9 +223,7 @@ Partial Class FrmPurchaseInvoiceContents
         '
         'Panel1
         '
-        Me.Panel1.Controls.Add(Me.Label13)
-        Me.Panel1.Controls.Add(Me.TxtSumValue)
-        Me.Panel1.Controls.Add(Me.Label9)
+        Me.Panel1.Controls.Add(Me.TableLayoutPanel1)
         Me.Panel1.Controls.Add(Me.GroupBox8)
         Me.Panel1.Controls.Add(Me.DGVInvoContent)
         Me.Panel1.Controls.Add(Me.PnlTitel)
@@ -253,25 +257,25 @@ Partial Class FrmPurchaseInvoiceContents
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DGVInvoContent.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DGVInvoContent.BackgroundColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(150, Byte), Integer), CType(CType(136, Byte), Integer))
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGVInvoContent.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
+        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(150, Byte), Integer), CType(CType(136, Byte), Integer))
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGVInvoContent.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
         Me.DGVInvoContent.ColumnHeadersHeight = 32
         Me.DGVInvoContent.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.DGVInvoContent.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn4, Me.Column2, Me.PruchPrice, Me.Quantity, Me.TotalAll, Me.Column1, Me.Column3})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(150, Byte), Integer), CType(CType(136, Byte), Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.LightCyan
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGVInvoContent.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
+        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(150, Byte), Integer), CType(CType(136, Byte), Integer))
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.LightCyan
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGVInvoContent.DefaultCellStyle = DataGridViewCellStyle6
         Me.DGVInvoContent.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.DGVInvoContent.Location = New System.Drawing.Point(24, 143)
         Me.DGVInvoContent.MultiSelect = False
@@ -373,12 +377,67 @@ Partial Class FrmPurchaseInvoiceContents
         Me.LblTitel.BackColor = System.Drawing.Color.Transparent
         Me.LblTitel.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
         Me.LblTitel.ForeColor = System.Drawing.Color.White
-        Me.LblTitel.Location = New System.Drawing.Point(332, 0)
+        Me.LblTitel.Location = New System.Drawing.Point(243, 0)
         Me.LblTitel.Name = "LblTitel"
-        Me.LblTitel.Size = New System.Drawing.Size(167, 28)
+        Me.LblTitel.Size = New System.Drawing.Size(329, 28)
         Me.LblTitel.TabIndex = 1
-        Me.LblTitel.Text = "تفاصيل الفاتورة  "
+        Me.LblTitel.Text = "محتويات الفاتورة"
         Me.LblTitel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TableLayoutPanel1
+        '
+        Me.TableLayoutPanel1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TableLayoutPanel1.ColumnCount = 5
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanel1.Controls.Add(Me.BtnPrint, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label9, 2, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.Panel2, 4, 0)
+        Me.TableLayoutPanel1.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(24, 545)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 0)
+        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        Me.TableLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.TableLayoutPanel1.RowCount = 1
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(779, 40)
+        Me.TableLayoutPanel1.TabIndex = 1284
+        '
+        'BtnPrint
+        '
+        Me.BtnPrint.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(150, Byte), Integer), CType(CType(136, Byte), Integer))
+        Me.BtnPrint.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.BtnPrint.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.BtnPrint.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.BtnPrint.FlatAppearance.BorderSize = 0
+        Me.BtnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BtnPrint.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnPrint.ForeColor = System.Drawing.Color.White
+        Me.BtnPrint.Image = CType(resources.GetObject("BtnPrint.Image"), System.Drawing.Image)
+        Me.BtnPrint.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.BtnPrint.Location = New System.Drawing.Point(528, 2)
+        Me.BtnPrint.Margin = New System.Windows.Forms.Padding(2)
+        Me.BtnPrint.Name = "BtnPrint"
+        Me.BtnPrint.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.BtnPrint.Size = New System.Drawing.Size(249, 36)
+        Me.BtnPrint.TabIndex = 4
+        Me.BtnPrint.Tag = "Dark"
+        Me.BtnPrint.Text = "طباعة"
+        Me.BtnPrint.UseVisualStyleBackColor = False
+        '
+        'Panel2
+        '
+        Me.Panel2.Controls.Add(Me.Label13)
+        Me.Panel2.Controls.Add(Me.TxtSumValue)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel2.Location = New System.Drawing.Point(3, 3)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(247, 34)
+        Me.Panel2.TabIndex = 1240
         '
         'FrmPurchaseInvoiceContents
         '
@@ -398,6 +457,8 @@ Partial Class FrmPurchaseInvoiceContents
         Me.GroupBox8.ResumeLayout(False)
         CType(Me.DGVInvoContent, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PnlTitel.ResumeLayout(False)
+        Me.TableLayoutPanel1.ResumeLayout(False)
+        Me.Panel2.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -425,4 +486,7 @@ Partial Class FrmPurchaseInvoiceContents
     Friend WithEvents TotalAll As DataGridViewTextBoxColumn
     Friend WithEvents Column1 As DataGridViewTextBoxColumn
     Friend WithEvents Column3 As DataGridViewTextBoxColumn
+    Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
+    Friend WithEvents BtnPrint As Button
+    Friend WithEvents Panel2 As Panel
 End Class

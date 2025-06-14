@@ -35,9 +35,9 @@ Public Class FrmViewReceipt
             TxtNots.Text = .Item("Nots")
             TxtReciptName.Text = .Item("ReceiptName")
             TxtUserName.Text = .Item("UserName")
-            TxtValue.Text = Format(.Item("Value"), "0.000")
+            TxtValue.Text = Format(.Item("Value"), "0.00")
             LblDate.Text = Format(.Item("Date"), GetDateAndTimeFormat(DTFormat.DF))
-            TxtInsurValue.Text = Format(.Item("IncreaseValue"), "0.000")
+            TxtInsurValue.Text = Format(.Item("IncreaseValue"), "0.00")
         End With
 
     End Sub
@@ -109,67 +109,68 @@ Public Class FrmViewReceipt
         '    Exit Sub
 
         'End If
-        'If ReceiptID = 0 Then Exit Sub
+        If ReceiptID = 0 Then Exit Sub
 
-        'Dim DSPrint = New DataSet
-        'Dim SQLCon = New SQLConClass
+        Dim DSPrint = New DataSet
+        Dim SQLCon = New SQLConClass
 
-        'SQLQuery = "SELECT FORMAT(Num,'000000') AS Num,FORMAT(Date,'" & GetDateAndTimeFormat(DTFormat.DF) & "') AS [Date],Value,ReceiptName,NoteFor,CkeckNum,PaymentTypeName FROM ReceiptView WHERE ID=" & ReceiptID & " AND EndService IS NULL"
-        'SQLQuery &= " SELECT * FROM CenterMainInfoTable"
+        SQLQuery = "SELECT FORMAT(Num,'000000') AS Num,FORMAT(Date,'" & GetDateAndTimeFormat(DTFormat.DF) &
+            "') AS [Date],Value,ReceiptName,NoteFor,CkeckNum,PaymentType FROM ReceiptView WHERE ID=" & ReceiptID & " AND EndService IS NULL"
+        SQLQuery &= " SELECT * FROM CenterInfoTable"
 
-        'DSPrint = SQLCon.SelectData(SQLQuery, 0, Nothing)
+        DSPrint = SQLCon.SelectData(SQLQuery, 0, Nothing)
 
-        'Dim Check As String
-        'Dim Cash As String
-        'Dim Price As String
+        Dim Check As String
+        Dim Cash As String
+        Dim Price As String
 
-        'Dim Value = Format(DSPrint.Tables(0).Rows(0).Item(2), "0.000")
+        Dim Value = Format(DSPrint.Tables(0).Rows(0).Item(2), "0.00")
 
-        'Dim Denar As String
-        'Dim Derham As String
-        'Dim PaymentType As String
+        Dim Denar As String
+        Dim Derham As String
+        Dim PaymentType As String
 
-        'If Value.IndexOf(".") = -1 Then
-        '    Denar = Value
-        '    Derham = "00"
-        'Else
-        '    Denar = Value.Substring(0, Value.IndexOf("."))
-        '    Derham = Value.Substring(Value.IndexOf(".") + 1, 2)
-        'End If
+        If Value.IndexOf(".") = -1 Then
+            Denar = Value
+            Derham = "00"
+        Else
+            Denar = Value.Substring(0, Value.IndexOf("."))
+            Derham = Value.Substring(Value.IndexOf(".") + 1, 2)
+        End If
 
 
-        'If IsDBNull(DSPrint.Tables(0).Rows(0).Item(5)) Then
-        '    Check = ""
-        '    Cash = "✔️"
-        '    PaymentType = DSPrint.Tables(0).Rows(0).Item(6)
-        'Else
-        '    Check = "✔️"
-        '    Cash = ""
-        '    PaymentType = "نقداً"
-        'End If
+        If IsDBNull(DSPrint.Tables(0).Rows(0).Item(5)) Then
+            Check = ""
+            Cash = "✔️"
+            PaymentType = DSPrint.Tables(0).Rows(0).Item(6)
+        Else
+            Check = "✔️"
+            Cash = ""
+            PaymentType = "نقداً"
+        End If
 
-        'Price = NoToTxt(DSPrint.Tables(0).Rows(0).Item(2), "دينار", "درهم", True)
+        Price = NoToTxt(DSPrint.Tables(0).Rows(0).Item(2), "دينار", "درهم", True)
 
-        'Dim F As New FrmPrint
-        'Dim C As New CRReceipt
+        Dim F As New FrmPrint
+        Dim C As New CRReceipt
 
-        'C.SetDataSource(DSPrint.Tables(0))
-        'C.Subreports(0).SetDataSource(DSPrint.Tables(1))
-        'C.Subreports(1).SetDataSource(DSPrint.Tables(1))
-        'C.Subreports(2).SetDataSource(DSPrint.Tables(1))
-        'C.Subreports(3).SetDataSource(DSPrint.Tables(1))
-        'C.SetParameterValue("Check", Check)
-        'C.SetParameterValue("Cash", Cash)
-        'C.SetParameterValue("Price", Price)
-        'C.SetParameterValue("Denar", Denar)
-        'C.SetParameterValue("Derham", Derham)
-        'C.SetParameterValue("PaymentType", PaymentType)
-        'F.CrystalReportViewer1.ReportSource = C
-        'F.CrystalReportViewer1.Refresh()
-        'F.Text = "طباعة"
-        'F.CrystalReportViewer1.Zoom(100%)
-        'F.WindowState = FormWindowState.Maximized
-        'F.Show()
+        C.SetDataSource(DSPrint.Tables(0))
+        C.Subreports(0).SetDataSource(DSPrint.Tables(1))
+        C.Subreports(1).SetDataSource(DSPrint.Tables(1))
+        C.Subreports(2).SetDataSource(DSPrint.Tables(1))
+        C.Subreports(3).SetDataSource(DSPrint.Tables(1))
+        C.SetParameterValue("Check", Check)
+        C.SetParameterValue("Cash", Cash)
+        C.SetParameterValue("Price", Price)
+        C.SetParameterValue("Denar", Denar)
+        C.SetParameterValue("Derham", Derham)
+        C.SetParameterValue("PaymentType", PaymentType)
+        F.CrystalReportViewer1.ReportSource = C
+        F.CrystalReportViewer1.Refresh()
+        F.Text = "طباعة"
+        F.CrystalReportViewer1.Zoom(100%)
+        F.WindowState = FormWindowState.Maximized
+        F.Show()
 
     End Sub
 

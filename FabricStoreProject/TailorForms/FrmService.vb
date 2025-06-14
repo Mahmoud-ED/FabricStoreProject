@@ -18,7 +18,7 @@ Public Class FrmService
 
     Private Sub GetFillData()
         Dim SQLCon = New SQLConClass
-        SQLQuery = "Select ID ,Row_Number() Over(Order By(Select 1)) ت, Name, Price From ServicesTable Order By Name"
+        SQLQuery = "Select ID ,Row_Number() Over(Order By(Select 1)) ت, Name From ServicesTable Order By Name"
         DS = SQLCon.SelectData(SQLQuery, 0, Nothing)
 
         If DS.Tables.Count > 0 Then
@@ -35,7 +35,6 @@ Public Class FrmService
         DGV.Columns(0).Visible = False
         DGV.Columns(1).Width = 40
         DGV.Columns(2).HeaderText = "الخدمة "
-        DGV.Columns(3).HeaderText = " السعر "
     End Sub
 
     Private Sub PnlTitel_MouseDown(sender As Object, e As MouseEventArgs) Handles PnlTitel.MouseDown, LblTitel.MouseDown
@@ -68,8 +67,7 @@ Public Class FrmService
 
         Dim Param() As SqlParameter = {
             New SqlParameter("@ID", ServiceID),
-             New SqlParameter("@Name", TxtService.Text.Trim),
-             New SqlParameter("@Price", TxtPrice.Text.Trim)}
+             New SqlParameter("@Name", TxtService.Text.Trim)}
 
         Dim SQLCon = New SQLConClass
         SQLCon.CMDExecute("SaveService", 1, Param)
@@ -102,7 +100,6 @@ Public Class FrmService
     Private Sub DisplayData()
         ServiceID = DGV.Item(0, CR).Value
         TxtService.Text = DGV.Item(2, CR).Value
-        TxtPrice.Text = DGV.Item(3, CR).Value
         TxtService.Focus()
     End Sub
 
@@ -116,25 +113,7 @@ Public Class FrmService
 
     End Sub
 
-    Private Sub TxtBank_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtService.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            TxtPrice.Focus()
-        End If
-    End Sub
-
-    Private Sub TxtBank_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtService.KeyPress
-        e.Handled = Not LetterNumberSymbol(e.KeyChar)
-    End Sub
-
-    Private Sub TxtPrice_TextChanged(sender As Object, e As EventArgs) Handles TxtPrice.TextChanged
-        If sender.BackColor <> SystemColors.Window Then sender.BackColor = SystemColors.Window
-    End Sub
-
-    Private Sub TxtPrice_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtPrice.KeyPress
-        e.Handled = Not IsNumber(sender.Text, e.KeyChar, False, True)
-    End Sub
-
-    Private Sub TxtPrice_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtPrice.KeyDown
+    Private Sub TxtService_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtService.KeyDown
         If e.KeyCode = Keys.Enter Then
             If ServiceID = 0 Then
                 BtnAdd_Click(sender, e)
@@ -145,11 +124,22 @@ Public Class FrmService
         End If
     End Sub
 
+    Private Sub TxtService_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtService.KeyPress
+        e.Handled = Not LetterNumberSymbol(e.KeyChar)
+    End Sub
+
+    Private Sub TxtPrice_TextChanged(sender As Object, e As EventArgs)
+        If sender.BackColor <> SystemColors.Window Then sender.BackColor = SystemColors.Window
+    End Sub
+
+    Private Sub TxtPrice_KeyPress(sender As Object, e As KeyPressEventArgs)
+        e.Handled = Not IsNumber(sender.Text, e.KeyChar, False, True)
+    End Sub
+
     Private Sub BtnRefresh_Click(sender As Object, e As EventArgs) Handles BtnRefresh.Click
         ChangeControlColor(Pnl)
         CR = -1 : ServiceID = 0 : DGV.ClearSelection()
         TxtService.Clear()
-        TxtPrice.Clear()
 
         GetFillData()
     End Sub

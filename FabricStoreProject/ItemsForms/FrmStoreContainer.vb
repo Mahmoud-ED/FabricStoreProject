@@ -1,19 +1,24 @@
 ﻿Public Class FrmStoreContainer
-    Private LastForm As String = "FrmPurchasesInvoices"
+    Private LastForm As String = "FrmAddItem"
 
     Private Sub FrmStoreContainer_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
         If Visible Then
 
             Select Case LastForm
-                Case "FrmPurchasesReport"
+                Case "FrmItemReport"
                     LblItemReport_Click(sender, New EventArgs)
 
                 Case "FrmAddItem"
+                    LblItem_Click(sender, New EventArgs)
+
+                Case "FrmStore"
+
                     LblStore_Click(sender, New EventArgs)
 
-                Case "FrmSupplierInvoiceCashing"
-
-                    LblStore_Click(sender, New EventArgs)
+                Case "FrmPreparingClothes"
+                    LblMadeClothes_Click(sender, New EventArgs)
+                Case "FrmPreparingClothesReport"
+                    LblReport_Click(sender, New EventArgs)
             End Select
 
         Else
@@ -47,5 +52,21 @@
         OpenFormPnl(FrmStore, PnlMain, PnlStore)
 
         LastForm = "FrmStore"
+    End Sub
+
+    Private Sub LblMadeClothes_Click(sender As Object, e As EventArgs) Handles LblMadeClothes.Click
+        If FrmPreparingClothes.Visible Then Exit Sub
+        HideFormsPnl(PnlButtons, {Me.Name, Frmmain.Name, FrmPreparingClothes.Name})
+        OpenFormPnl(FrmPreparingClothes, PnlMain, PnlMadeClothes)
+
+        LastForm = "FrmPreparingClothes"
+    End Sub
+
+    Private Sub LblReport_Click(sender As Object, e As EventArgs) Handles LblReport.Click
+        If FrmPreparingClothesReport.Visible Then Exit Sub
+        HideFormsPnl(PnlButtons, {Me.Name, Frmmain.Name, FrmPreparingClothesReport.Name})
+        OpenFormPnl(FrmPreparingClothesReport, PnlMain, PnlReport)
+
+        LastForm = "FrmPreparingClothesReport"
     End Sub
 End Class

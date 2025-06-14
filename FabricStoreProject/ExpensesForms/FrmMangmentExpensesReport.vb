@@ -22,7 +22,7 @@ Public Class FrmMangmentExpensesReport
     Private Sub GetCmbData()
         Dim sqlcon As New SQLConClass()
         SQLQuery = " SELECT * FROM UserView WHERE  EndService IS NULL ORDER BY Name"
-        SQLQuery += " Select ID , Name From ExpensesTypeTable ORDER BY Name"
+        'SQLQuery += " Select ID , Name From ExpensesTypeTable ORDER BY Name"
 
         Dim DS As DataSet
         DS = sqlcon.SelectData(SQLQuery, 0, Nothing)
@@ -32,10 +32,10 @@ Public Class FrmMangmentExpensesReport
         CmbUserReport.ValueMember = "ID"
         CmbUserReport.SelectedIndex = -1
 
-        CmbTypeExpenses.DataSource = DS.Tables(1)
-        CmbTypeExpenses.DisplayMember = "Name"
-        CmbTypeExpenses.ValueMember = "ID"
-        CmbTypeExpenses.SelectedIndex = -1
+        'CmbTypeExpenses.DataSource = DS.Tables(1)
+        'CmbTypeExpenses.DisplayMember = "Name"
+        'CmbTypeExpenses.ValueMember = "ID"
+        'CmbTypeExpenses.SelectedIndex = -1
 
     End Sub
 
@@ -180,7 +180,7 @@ Public Class FrmMangmentExpensesReport
     End Sub
 
     Private Sub BtnRefreshPage_Click(sender As Object, e As EventArgs) Handles BtnRefreshPage.Click
-        If Not ChkUserReport.Checked And Not ChkReciptName.Checked And Not ChkExpenses.Checked And Not ChkMonth.Checked And Not ChkDate.Checked Then
+        If Not ChkUserReport.Checked And Not ChkReciptName.Checked And Not ChkMonth.Checked And Not ChkDate.Checked Then
             Exit Sub
         End If
 
@@ -214,7 +214,7 @@ Public Class FrmMangmentExpensesReport
                 DGVExpensesReport.Item(3, i).Value = .Item(8) 'Date
                 DGVExpensesReport.Item(4, i).Value = .Item(5) 'reiptName
                 DGVExpensesReport.Item(5, i).Value = .Item(6) 'Nots
-                DGVExpensesReport.Item(6, i).Value = Format(.Item(7), "0.000") 'Value
+                DGVExpensesReport.Item(6, i).Value = Format(.Item(7), "0.00") 'Value
                 DGVExpensesReport.Item(7, i).Value = .Item(3) + " - " + .Item(4) ' year-month
                 DGVExpensesReport.Item(8, i).Value = .Item(11)
                 DGVExpensesReport.Item(9, i).Value = .Item(10) ' UserID
@@ -247,23 +247,6 @@ Public Class FrmMangmentExpensesReport
 
     End Sub
 
-    Private Sub ChkExpenses_CheckedChanged(sender As Object, e As EventArgs) Handles ChkExpenses.CheckedChanged
-        DGVExpensesReport.Rows.Clear()
-
-        If ChkExpenses.Checked Then
-            CmbTypeExpenses.Enabled = True
-            CmbTypeExpenses.Focus()
-
-        Else
-            CmbTypeExpenses.Text = ""
-            CmbTypeExpenses.Enabled = False
-            CmbTypeExpenses.BackColor = SystemColors.Window
-            SearchActive = False
-            TxtCurrentPage.Text = 1
-            TxtPagesCount.Text = 1
-        End If
-
-    End Sub
     Private Sub ChkMonth_CheckedChanged(sender As Object, e As EventArgs) Handles ChkMonth.CheckedChanged
         DGVExpensesReport.Rows.Clear()
 
@@ -358,31 +341,31 @@ Public Class FrmMangmentExpensesReport
         '    Exit Sub
         'End If
 
-        'If DGVExpensesReport.Rows.Count = 0 Then Exit Sub
+        If DGVExpensesReport.Rows.Count = 0 Then Exit Sub
 
-        'Dim DSPrint = New DataSet
-        'Dim SQLCon = New SQLConClass
+        Dim DSPrint = New DataSet
+        Dim SQLCon = New SQLConClass
 
-        'SQLQuery = "SELECT Expr1,FORMAT([Date],'" & GetDateAndTimeFormat(DTFormat.DF) & "') AS [Date],Value,ReceiptName,Name FROM ClinicExpensesReportView WHERE 1=1"
-        'AppendReportConditions()
-        'SQLQuery &= " ORDER BY ID DESC OFFSET " & PageSize * (PageNum - 1) & " ROWS FETCH NEXT " & PageSize & " ROWS ONLY"
-        'SQLQuery &= " SELECT * FROM CenterMainInfoTable"
+        SQLQuery = "SELECT UserName,FORMAT([Date],'" & GetDateAndTimeFormat(DTFormat.DF) & "') AS [Date],Value,ReceiptName,Name FROM ExpensesReportView WHERE 1=1"
+        AppendReportConditions()
+        SQLQuery &= " ORDER BY ID DESC OFFSET " & PageSize * (PageNum - 1) & " ROWS FETCH NEXT " & PageSize & " ROWS ONLY"
+        SQLQuery &= " SELECT * FROM CenterInfoTable"
 
-        'DSPrint = SQLCon.SelectData(SQLQuery, 0, Nothing)
+        DSPrint = SQLCon.SelectData(SQLQuery, 0, Nothing)
 
-        'Dim F As New FrmPrint
-        'Dim C As New CRClinicExpensesReports
+        Dim F As New FrmPrint
+        Dim C As New CRExpensesReports
 
-        'C.SetDataSource(DSPrint.Tables(0))
-        'C.Subreports(0).SetDataSource(DSPrint.Tables(1))
-        'C.Subreports(1).SetDataSource(DSPrint.Tables(1))
-        'C.SetParameterValue("Title", "مصروفات العيادة")
-        'F.CrystalReportViewer1.ReportSource = C
-        'F.CrystalReportViewer1.Refresh()
-        'F.Text = "طباعة"
-        'F.CrystalReportViewer1.Zoom(100%)
-        'F.WindowState = FormWindowState.Maximized
-        'F.Show()
+        C.SetDataSource(DSPrint.Tables(0))
+        C.Subreports(0).SetDataSource(DSPrint.Tables(1))
+        C.Subreports(1).SetDataSource(DSPrint.Tables(1))
+        C.SetParameterValue("Title", "مصروفات المتجر")
+        F.CrystalReportViewer1.ReportSource = C
+        F.CrystalReportViewer1.Refresh()
+        F.Text = "طباعة"
+        F.CrystalReportViewer1.Zoom(100%)
+        F.WindowState = FormWindowState.Maximized
+        F.Show()
 
     End Sub
 
@@ -394,37 +377,37 @@ Public Class FrmMangmentExpensesReport
         '    Exit Sub
 
         'End If
-        'If DGVExpensesReport.Rows.Count = 0 Then Exit Sub
+        If DGVExpensesReport.Rows.Count = 0 Then Exit Sub
 
-        'Dim DSPrint = New DataSet
-        'Dim SQLCon = New SQLConClass
+        Dim DSPrint = New DataSet
+        Dim SQLCon = New SQLConClass
 
-        'SQLQuery = "SELECT Expr1,FORMAT([Date],'" & GetDateAndTimeFormat(DTFormat.DF) & "') AS [Date],Value,ReceiptName,Name FROM ClinicExpensesReportView WHERE 1=1"
-        'AppendReportConditions()
-        'SQLQuery &= " SELECT * FROM CenterMainInfoTable"
+        SQLQuery = "SELECT UserName,FORMAT([Date],'" & GetDateAndTimeFormat(DTFormat.DF) & "') AS [Date],Value,ReceiptName,Name FROM ExpensesReportView WHERE 1=1"
+        AppendReportConditions()
+        SQLQuery &= " SELECT * FROM CenterInfoTable"
 
-        'DSPrint = SQLCon.SelectData(SQLQuery, 0, Nothing)
+        DSPrint = SQLCon.SelectData(SQLQuery, 0, Nothing)
 
-        'Dim F As New FrmPrint
-        'Dim C As New CRClinicExpensesReports
+        Dim F As New FrmPrint
+        Dim C As New CRExpensesReports
 
-        'C.SetDataSource(DSPrint.Tables(0))
-        'C.Subreports(0).SetDataSource(DSPrint.Tables(1))
-        'C.Subreports(1).SetDataSource(DSPrint.Tables(1))
-        'C.SetParameterValue("Title", "مصروفات العيادة")
-        'F.CrystalReportViewer1.ReportSource = C
-        'F.CrystalReportViewer1.Refresh()
-        'F.Text = "طباعة"
-        'F.CrystalReportViewer1.Zoom(100%)
-        'F.WindowState = FormWindowState.Maximized
-        'F.Show()
+        C.SetDataSource(DSPrint.Tables(0))
+        C.Subreports(0).SetDataSource(DSPrint.Tables(1))
+        C.Subreports(1).SetDataSource(DSPrint.Tables(1))
+        C.SetParameterValue("Title", "مصروفات المتجر")
+        F.CrystalReportViewer1.ReportSource = C
+        F.CrystalReportViewer1.Refresh()
+        F.Text = "طباعة"
+        F.CrystalReportViewer1.Zoom(100%)
+        F.WindowState = FormWindowState.Maximized
+        F.Show()
     End Sub
 
     Private Sub AppendReportConditions()
         If ChkUserReport.Checked And CmbUserReport.SelectedValue <> Nothing Then AppendToQuery(" AND ", " UserID=" & (IIf(IsNothing(CmbUserReport.SelectedValue), 0, CmbUserReport.SelectedValue)))
         If ChkMonth.Checked Then AppendToQuery(" AND ", " [Month]=" & Val(CmbMonthReport.Text) & "  AND [Year]= " & Val(CmbYearReport.Text) & "")
         If ChkReciptName.Checked And TxtReciptNameReport.Text.Trim <> "" Then AppendToQuery(" AND ", " ReceiptName Like '%" & TxtReciptNameReport.Text.Trim & "%'")
-        If ChkExpenses.Checked And Not IsNothing(CmbTypeExpenses.SelectedValue) Then AppendToQuery(" AND ", " ExpensesTypeID=" & (IIf(IsNothing(CmbTypeExpenses.SelectedValue), 0, CmbTypeExpenses.SelectedValue)))
+        'If ChkExpenses.Checked And Not IsNothing(CmbTypeExpenses.SelectedValue) Then AppendToQuery(" AND ", " ExpensesTypeID=" & (IIf(IsNothing(CmbTypeExpenses.SelectedValue), 0, CmbTypeExpenses.SelectedValue)))
         If ChkDate.Checked Then
             Dim DateTimeFrom As Date = DTPFromDate.Value.Date & " " & "00:00:00".ToString
             Dim DateTimeTo As Date = DTPToDate.Value.Date & " " & "23:59:00".ToString
@@ -469,14 +452,10 @@ Public Class FrmMangmentExpensesReport
         If sender.BackColor <> SystemColors.Window Then sender.BackColor = SystemColors.Window
     End Sub
 
-    Private Sub TxtExpensesTypeReport_TextChanged(sender As Object, e As EventArgs)
-        DGVExpensesReport.Rows.Clear()
-        If sender.BackColor <> SystemColors.Window Then sender.BackColor = SystemColors.Window
-    End Sub
 
     Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
         PageNum = 1
-        If ChkUserReport.Checked = False And ChkReciptName.Checked = False And ChkMonth.Checked = False And ChkExpenses.Checked = False And ChkDate.Checked = False Then
+        If ChkUserReport.Checked = False And ChkReciptName.Checked = False And ChkMonth.Checked = False And ChkDate.Checked = False Then
             Exit Sub
         End If
         IsDataMissing = False
@@ -498,11 +477,10 @@ Public Class FrmMangmentExpensesReport
         CmbUserReport.BackColor = SystemColors.Window
         CmbMonthReport.BackColor = SystemColors.Window
         CmbYearReport.BackColor = SystemColors.Window
-        CmbTypeExpenses.BackColor = SystemColors.Window
         TxtReciptNameReport.BackColor = SystemColors.Window
     End Sub
 
-    Private Sub CmbMonthReport_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbMonthReport.SelectedIndexChanged, CmbTypeExpenses.SelectedIndexChanged
+    Private Sub CmbMonthReport_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbMonthReport.SelectedIndexChanged
         DGVExpensesReport.Rows.Clear()
         sender.backColor = SystemColors.Window
     End Sub
@@ -559,7 +537,7 @@ ExpensesContentTable.Date  , ExpensesTypeID ,ExpensesContentTable.UserID , State
             FillDGVReport(DSReport)
             TxtSumReportAmont.Text = "0"
             If Not IsDBNull(DSReport.Tables(2).Rows(0).Item(0)) Then
-                TxtSumReportAmont.Text = Format(DSReport.Tables(2).Rows(0).Item(0), "0.000")
+                TxtSumReportAmont.Text = Format(DSReport.Tables(2).Rows(0).Item(0), "0.00")
             End If
 
             If DGVExpensesReport.Rows.Count = 0 Then
@@ -591,7 +569,6 @@ ExpensesContentTable.Date  , ExpensesTypeID ,ExpensesContentTable.UserID , State
 
         If ChkReciptName.Checked And TxtReciptNameReport.Text <> "" Then AppendToQuery(" AND ", " ReceiptName Like @ReceiptName")  '%" & TxtReciptNameReport.Text & "%'
         If ChkMonth.Checked Then AppendToQuery(" AND ", "  Month = @Month  And Year= @Year") ' & Val(CmbMonthReport.Text) & & Val(CmbYearReport.Text)
-        If ChkExpenses.Checked And Not IsNothing(CmbTypeExpenses.SelectedValue) Then AppendToQuery(" AND ", " ExpensesTypeID  = " & CmbTypeExpenses.SelectedValue) '%" & TxtExpensesTypeReport.Text & "%'
         If ChkUserReport.Checked And CmbUserReport.Text <> "" And CmbUserReport.SelectedValue <> 0 Then AppendToQuery(" AND ", " UserID = " & CmbUserReport.SelectedValue & " ")
 
     End Sub
@@ -643,7 +620,7 @@ ExpensesContentTable.Date  , ExpensesTypeID ,ExpensesContentTable.UserID , State
         End If
     End Sub
 
-    Private Sub CmbTypeExpenses_TextChanged(sender As Object, e As EventArgs) Handles CmbTypeExpenses.TextChanged
+    Private Sub CmbTypeExpenses_TextChanged(sender As Object, e As EventArgs)
         sender.backColor = SystemColors.Window
         DGVExpensesReport.Rows.Clear()
 

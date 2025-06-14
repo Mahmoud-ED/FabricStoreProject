@@ -1,13 +1,16 @@
 ﻿Imports System.ComponentModel
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement.Window
 Imports System.Drawing.Drawing2D
+Imports System.Data.SqlClient
 
 Public Class Frmmain
     Private Showsetting As Boolean
     Private SwBasicData As Boolean = True
     Private SwReport As Boolean = True
     Private SwReservation As Boolean = True
-
+    Private DSSearch As New DataSet
+    Private OrderID, InvoID As Integer
+    Private Operation As String
 
     Private Btnclicked As Boolean = False
     Private Title As String = "متجر الأقمشة والملابس الجاهزة "
@@ -393,9 +396,9 @@ Public Class Frmmain
     Private Sub BtnAddItem_click(sender As Object, e As EventArgs) Handles BtnAddItem.Click
         SubMenuOpened()
         Btnclicked = False
-        If Not FrmAddItem.Visible Then
+        If Not FrmStoreContainer.Visible Then
             HideFormsBtn(PnlButton, {Me.Name})
-            OpenFormBtn(FrmAddItem, PnlMain, BtnAddItem)
+            OpenFormBtn(FrmStoreContainer, PnlMain, BtnAddItem)
             Btnclicked = True
 
         Else
@@ -535,7 +538,18 @@ Public Class Frmmain
         BtnCities.TextImageRelation = TextImageRelation.TextBeforeImage
     End Sub
 
+    Private Sub BtnCategories_Click(sender As Object, e As EventArgs) Handles BtnCategories.Click
+        HideFormsBtn(PnlButton, {Me.Name})
+        FrmCategory.ShowDialog()
+    End Sub
 
+    Private Sub BtnCategories_MouseEnter(sender As Object, e As EventArgs) Handles BtnCategories.MouseEnter
+        BtnCategories.TextImageRelation = TextImageRelation.ImageBeforeText
+    End Sub
+
+    Private Sub BtnCategories_MouseLeave(sender As Object, e As EventArgs) Handles BtnCategories.MouseLeave
+        BtnCategories.TextImageRelation = TextImageRelation.TextBeforeImage
+    End Sub
 
     Private Sub BtnServices_Click(sender As Object, e As EventArgs) Handles BtnServices.Click
         HideFormsBtn(PnlButton, {Me.Name})
@@ -608,16 +622,11 @@ Public Class Frmmain
 
     Private Sub btnsafe_click(sender As Object, e As EventArgs) Handles BtnSafe.Click
 
-        'Dim Perm() As DataRow = DTUserPermission.Select("OperationID=62")
 
-        'If Perm(0)(3) = False Then
-        '    MsgTool("ليس لديك صلاحية العرض", 0)
-        '    Exit Sub
-        'End If
 
-        If Not FrmMainSafeContainer.Visible Then
+        If Not FrmMainSafeReport.Visible Then
             HideFormsBtn(PnlButton, {Me.Name})
-            OpenFormBtn(FrmMainSafeContainer, PnlMain, BtnSafe)
+            OpenFormBtn(FrmMainSafeReport, PnlMain, BtnSafe)
             Btnclicked = True
         Else
             HideFormsBtn(PnlButton, {Me.Name})
@@ -738,6 +747,7 @@ Public Class Frmmain
         If Not FrmSupplierInvoiceCashing.Visible Then
             HideFormsBtn(PnlButton, {Me.Name})
             OpenFormBtn(FrmSupplierInvoiceCashing, PnlMain, BtnSalarySuppliers)
+            FrmSupplierInvoiceCashing.BtnRefresh_Click(sender, e)
             Btnclicked = True
         Else
             HideFormsBtn(PnlButton, {Me.Name})
@@ -751,6 +761,25 @@ Public Class Frmmain
 
     Private Sub BtnSalarySuppliers_MouseLeave(sender As Object, e As EventArgs) Handles BtnSalarySuppliers.MouseLeave
         BtnSalarySuppliers.TextImageRelation = TextImageRelation.TextBeforeImage
+    End Sub
+
+    Private Sub BtnSalaryDelivery_Click(sender As Object, e As EventArgs) Handles BtnSalaryDelivery.Click
+        If Not FrmDeliveryInvoiceCashing.Visible Then
+            HideFormsBtn(PnlButton, {Me.Name})
+            OpenFormBtn(FrmDeliveryInvoiceCashing, PnlMain, BtnSalaryDelivery)
+            Btnclicked = True
+        Else
+            HideFormsBtn(PnlButton, {Me.Name})
+            Btnclicked = False
+        End If
+    End Sub
+
+    Private Sub BtnSalaryDelivery_MouseEnter(sender As Object, e As EventArgs) Handles BtnSalaryDelivery.MouseEnter
+        BtnSalaryDelivery.TextImageRelation = TextImageRelation.ImageBeforeText
+    End Sub
+
+    Private Sub BtnSalaryDelivery_MouseLeave(sender As Object, e As EventArgs) Handles BtnSalaryDelivery.MouseLeave
+        BtnSalaryDelivery.TextImageRelation = TextImageRelation.TextBeforeImage
     End Sub
 
     Private Sub PicLogo_Click(sender As Object, e As EventArgs)
@@ -815,9 +844,9 @@ Public Class Frmmain
         '    Exit Sub
         'End If
 
-        If Not FrmTreasury.Visible Then
+        If Not FrmCashAndReceipt.Visible Then
             HideFormsBtn(PnlButton, {Me.Name})
-            OpenFormBtn(FrmTreasury, PnlMain, BtnTreasury)
+            OpenFormBtn(FrmCashAndReceipt, PnlMain, BtnTreasury)
             Btnclicked = True
         Else
             HideFormsBtn(PnlButton, {Me.Name})
@@ -870,6 +899,222 @@ Public Class Frmmain
 
     Private Sub PicClose_Click(sender As Object, e As EventArgs) Handles PicClose.Click
         Application.Restart()
+    End Sub
+
+
+    Private Sub TxtItemStoreNum_TextChanged(sender As Object, e As EventArgs) Handles TxtItemStoreNum.TextChanged
+
+    End Sub
+
+    Private Sub TxtItemStoreNum_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtItemStoreNum.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            BtnSearch_Click(sender, e)
+        End If
+    End Sub
+
+    Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
+        If TxtItemStoreNum.Text.Trim = "" Then
+            MsgTool("يرجى التأكد من البيانات", 0)
+            TxtItemStoreNum.Focus()
+            Exit Sub
+        End If
+
+        Dim SQLCon = New SQLConClass()
+
+        SQLQuery = " SELECT ID, Place, CustomerID From CustomerOrdersView 
+                     WHERE InvoiceEndService IS NULL And OrderEndService IS NULL 
+AND CustomerOrdersView.InvoceID = 	 (select InvoiceID  from InvoiceContentView  where INUM ='" & TxtItemStoreNum.Text.Trim & "' ) "
+        DSSearch = SQLCon.SelectData(SQLQuery, 0, Nothing)
+        If DSSearch.Tables(0).Rows.Count > 0 Then
+            OrderID = DSSearch.Tables(0).Rows(0).Item("ID")
+            'FrmOrderData.CustomerID = DSSearch.Tables(0).Rows(0).Item("CustomerID")
+            'FrmOrderData.OrderNum = TxtItemStoreNum.Text.Trim
+            Select Case DSSearch.Tables(0).Rows(0).Item("Place")
+                Case 1
+                    LblPlace.Text = "في المخزن"
+                Case 2
+                    LblPlace.Text = "تحت التجهيز"
+                Case 3
+                    LblPlace.Text = "جاهز"
+
+                Case 4
+                    LblPlace.Text = "تم البيع"
+
+                    FrmReceipt.CIDSearch = DSSearch.Tables(0).Rows(0).Item("CustomerID")
+                    FrmReceipt.ShowDialog()
+            End Select
+            LblPlace.Visible = True
+
+        Else
+            LblPlace.Visible = False
+            MsgTool("لا يوجد قطعة بهذا الرقم", 0)
+            Exit Sub
+            TxtItemStoreNum.Clear()
+            TxtItemStoreNum.Focus()
+        End If
+
+    End Sub
+
+    Private Sub BtnMove_Click(sender As Object, e As EventArgs) Handles BtnMove.Click
+        If OrderID <= 0 Then Exit Sub
+        Dim ItemPlace As Integer = DSSearch.Tables(0).Rows(0).Item("Place")
+        If ItemPlace = 1 Then
+            Operation = "Send"
+
+        ElseIf ItemPlace = 2 Then
+            Operation = "Receive"
+
+        ElseIf ItemPlace = 3 Then
+            Operation = "Sell"
+
+        ElseIf ItemPlace = 4 Then
+            MsgTool("تم تسليم الطلب للزبون ", 1)
+            Exit Sub
+        End If
+        FrmOrderData.OrderID = OrderID
+        FrmOrderData.CustomerID = DSSearch.Tables(0).Rows(0).Item("CustomerID")
+        FrmOrderData.OrderNum = TxtItemStoreNum.Text.Trim
+        FrmOrderData.ShowDialog()
+        BtnSearch_Click(sender, e)
+
+        'Dim SQLCon = New SQLConClass
+
+        'Dim Param() As SqlParameter = {
+        'New SqlParameter("@ID", OrderID),
+        'New SqlParameter("@Operation", Operation)}
+
+        'Dim DS As DataSet = SQLCon.CMDExecuteData("MoveOrder", Param)
+
+        'If Save = 1 Then
+        '    Select Case Operation
+
+        '        Case = "Send"
+        '            MsgTool("تم ارسال الطلب للخياط ", 1)
+
+        '        Case = "Receive"
+        '            MsgTool("تم استلام الطلب من الخياط ", 1)
+
+        '        Case = "Sell"
+        '            MsgTool("تم تسليم الطلب للزبون ", 1)
+
+        '    End Select
+        'End If
+    End Sub
+
+    Private Sub BtnNew_Click(sender As Object, e As EventArgs) Handles BtnNew.Click
+        TxtItemStoreNum.Clear()
+        LblPlace.Text = ""
+        LblPlace.Visible = False
+        OrderID = 0
+    End Sub
+
+    Private Sub TxtInvoNum_TextChanged(sender As Object, e As EventArgs) Handles TxtInvoNum.TextChanged
+
+    End Sub
+
+    Private Sub TxtInvoNum_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtInvoNum.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            BtnSearchDelivery_Click(sender, e)
+        End If
+    End Sub
+
+    Private Sub BtnSearchDelivery_Click(sender As Object, e As EventArgs) Handles BtnSearchDelivery.Click
+        If TxtInvoNum.Text.Trim = "" Then
+            MsgTool("يرجى التأكد من البيانات", 0)
+            TxtInvoNum.Focus()
+            Exit Sub
+        End If
+
+        Dim SQLCon = New SQLConClass()
+
+        SQLQuery = " SELECT ID, Num, RegDate, DeliveryDate, CustomerID From DeliveryOrderView 
+                    WHERE InvoiceEndService IS NULL And OrderEndService IS NULL AND Num='" & TxtInvoNum.Text.Trim & "'"
+
+        DSSearch = SQLCon.SelectData(SQLQuery, 0, Nothing)
+        If DSHasTables(DSSearch) Then
+            Dim DeliveryCustomerID As Integer
+
+            If DSSearch.Tables(0).Rows.Count > 0 Then
+
+                InvoID = DSSearch.Tables(0).Rows(0).Item("ID")
+                DeliveryCustomerID = DSSearch.Tables(0).Rows(0).Item("CustomerID")
+                If IsDBNull(DSSearch.Tables(0).Rows(0).Item("RegDate")) Then
+                    LblDeliveryPlace.Text = "في المخزن"
+
+                ElseIf (Not IsDBNull(DSSearch.Tables(0).Rows(0).Item("RegDate"))) And (IsDBNull(DSSearch.Tables(0).Rows(0).Item("DeliveryDate"))) Then
+                    LblDeliveryPlace.Text = "في الشحن"
+
+                ElseIf Not IsDBNull(DSSearch.Tables(0).Rows(0).Item("DeliveryDate")) Then
+                    LblDeliveryPlace.Text = "تم التسليم"
+
+                    FrmReceipt.CIDSearch = DeliveryCustomerID
+                    FrmReceipt.ShowDialog()
+                End If
+
+                LblDeliveryPlace.Visible = True
+
+            Else
+                LblDeliveryPlace.Visible = False
+                MsgTool("لا يوجد فاتورة توصيل بهذا الرقم", 0)
+                TxtInvoNum.SelectAll()
+                TxtInvoNum.Focus()
+                DeliveryCustomerID = 0
+                Exit Sub
+            End If
+
+        Else
+            LblDeliveryPlace.Visible = False
+            MsgTool("لا يوجد فاتورة توصيل بهذا الرقم", 0)
+            Exit Sub
+            TxtInvoNum.Clear()
+            TxtInvoNum.Focus()
+        End If
+
+    End Sub
+
+    Private Sub BtnDelivery_Click(sender As Object, e As EventArgs) Handles BtnDelivery.Click
+
+        If InvoID <= 0 Then Exit Sub
+        Dim DeliveryOrder As Integer
+
+        If IsDBNull(DSSearch.Tables(0).Rows(0).Item("RegDate")) Then
+            Operation = "Send"
+            DeliveryOrder = 2
+
+        ElseIf (Not IsDBNull(DSSearch.Tables(0).Rows(0).Item("RegDate"))) And (IsDBNull(DSSearch.Tables(0).Rows(0).Item("DeliveryDate"))) Then
+            Operation = "Sell"
+            DeliveryOrder = 3
+
+        ElseIf Not IsDBNull(DSSearch.Tables(0).Rows(0).Item("DeliveryDate")) Then
+            MsgTool("تم تسليم الطلب للزبون ", 1)
+            Exit Sub
+        End If
+
+        Dim SQLCon = New SQLConClass
+
+        Dim Param() As SqlParameter = {
+        New SqlParameter("@ID", InvoID),
+        New SqlParameter("@Operation", Operation)}
+
+        Dim DS As DataSet = SQLCon.CMDExecuteData("DeliveryOrder", Param)
+
+        If DeliveryOrder = 2 Then
+            MsgTool("الطلب في الشحن", 1)
+
+        ElseIf DeliveryOrder = 3 Then
+            MsgTool("تم التسليم ", 1)
+
+        End If
+
+        BtnSearchDelivery_Click(sender, e)
+    End Sub
+
+    Private Sub BtnRefreshDelivery_Click(sender As Object, e As EventArgs) Handles BtnRefreshDelivery.Click
+        TxtInvoNum.Clear()
+        LblDeliveryPlace.Text = ""
+        LblDeliveryPlace.Visible = False
+        InvoID = 0
+
     End Sub
 
 End Class

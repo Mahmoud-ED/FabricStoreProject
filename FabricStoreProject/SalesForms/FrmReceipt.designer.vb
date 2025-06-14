@@ -78,13 +78,13 @@ Partial Class FrmReceipt
         Me.PnlEmp = New System.Windows.Forms.Panel()
         Me.TLPUser = New System.Windows.Forms.TableLayoutPanel()
         Me.TxtUserName = New System.Windows.Forms.Label()
-        Me.CmbEmpName = New System.Windows.Forms.ComboBox()
         Me.PnlChkPrint = New System.Windows.Forms.Panel()
         Me.ChkPrint = New System.Windows.Forms.CheckBox()
         Me.PnlEmpName = New System.Windows.Forms.Panel()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.PnlUser = New System.Windows.Forms.Panel()
         Me.Label19 = New System.Windows.Forms.Label()
+        Me.CmbTrusry = New System.Windows.Forms.ComboBox()
         Me.DGVReceipt = New System.Windows.Forms.DataGridView()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -325,9 +325,9 @@ Partial Class FrmReceipt
         Me.TLPFinancial.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TLPFinancial.ColumnCount = 4
-        Me.TLPFinancial.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TLPFinancial.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 85.0!))
         Me.TLPFinancial.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TLPFinancial.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TLPFinancial.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 85.0!))
         Me.TLPFinancial.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TLPFinancial.Controls.Add(Me.TxtRest, 1, 1)
         Me.TLPFinancial.Controls.Add(Me.TxtIncreaseValue, 3, 1)
@@ -343,7 +343,6 @@ Partial Class FrmReceipt
         Me.TLPFinancial.RowCount = 2
         Me.TLPFinancial.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TLPFinancial.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TLPFinancial.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.TLPFinancial.Size = New System.Drawing.Size(379, 82)
         Me.TLPFinancial.TabIndex = 0
         '
@@ -358,7 +357,7 @@ Partial Class FrmReceipt
         Me.TxtRest.Margin = New System.Windows.Forms.Padding(0)
         Me.TxtRest.Name = "TxtRest"
         Me.TxtRest.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TxtRest.Size = New System.Drawing.Size(93, 35)
+        Me.TxtRest.Size = New System.Drawing.Size(104, 35)
         Me.TxtRest.TabIndex = 1281
         Me.TxtRest.Tag = "AutoC"
         Me.TxtRest.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -374,7 +373,7 @@ Partial Class FrmReceipt
         Me.TxtIncreaseValue.Margin = New System.Windows.Forms.Padding(0)
         Me.TxtIncreaseValue.Name = "TxtIncreaseValue"
         Me.TxtIncreaseValue.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TxtIncreaseValue.Size = New System.Drawing.Size(94, 35)
+        Me.TxtIncreaseValue.Size = New System.Drawing.Size(105, 35)
         Me.TxtIncreaseValue.TabIndex = 1284
         Me.TxtIncreaseValue.Tag = "AutoC"
         Me.TxtIncreaseValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -391,7 +390,7 @@ Partial Class FrmReceipt
         Me.TxtPayment.Margin = New System.Windows.Forms.Padding(0)
         Me.TxtPayment.Name = "TxtPayment"
         Me.TxtPayment.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TxtPayment.Size = New System.Drawing.Size(94, 35)
+        Me.TxtPayment.Size = New System.Drawing.Size(105, 35)
         Me.TxtPayment.TabIndex = 1283
         Me.TxtPayment.Tag = "AutoC"
         Me.TxtPayment.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -407,7 +406,7 @@ Partial Class FrmReceipt
         Me.TxtPrice.Margin = New System.Windows.Forms.Padding(0)
         Me.TxtPrice.Name = "TxtPrice"
         Me.TxtPrice.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TxtPrice.Size = New System.Drawing.Size(93, 35)
+        Me.TxtPrice.Size = New System.Drawing.Size(104, 35)
         Me.TxtPrice.TabIndex = 1282
         Me.TxtPrice.Tag = "AutoC"
         Me.TxtPrice.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -416,10 +415,10 @@ Partial Class FrmReceipt
         '
         Me.PnlIncreaseValue.Controls.Add(Me.Label22)
         Me.PnlIncreaseValue.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PnlIncreaseValue.Location = New System.Drawing.Point(96, 43)
+        Me.PnlIncreaseValue.Location = New System.Drawing.Point(107, 43)
         Me.PnlIncreaseValue.Margin = New System.Windows.Forms.Padding(2)
         Me.PnlIncreaseValue.Name = "PnlIncreaseValue"
-        Me.PnlIncreaseValue.Size = New System.Drawing.Size(92, 37)
+        Me.PnlIncreaseValue.Size = New System.Drawing.Size(81, 37)
         Me.PnlIncreaseValue.TabIndex = 61
         Me.PnlIncreaseValue.Visible = False
         '
@@ -432,7 +431,7 @@ Partial Class FrmReceipt
         Me.Label22.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label22.Name = "Label22"
         Me.Label22.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Label22.Size = New System.Drawing.Size(92, 37)
+        Me.Label22.Size = New System.Drawing.Size(81, 37)
         Me.Label22.TabIndex = 59
         Me.Label22.Text = "قيمة الزيادة"
         Me.Label22.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -441,11 +440,11 @@ Partial Class FrmReceipt
         '
         Me.Panel12.Controls.Add(Me.Label8)
         Me.Panel12.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel12.Location = New System.Drawing.Point(96, 2)
+        Me.Panel12.Location = New System.Drawing.Point(107, 2)
         Me.Panel12.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel12.Name = "Panel12"
         Me.Panel12.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Panel12.Size = New System.Drawing.Size(92, 37)
+        Me.Panel12.Size = New System.Drawing.Size(81, 37)
         Me.Panel12.TabIndex = 59
         '
         'Label8
@@ -457,7 +456,7 @@ Partial Class FrmReceipt
         Me.Label8.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label8.Name = "Label8"
         Me.Label8.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Label8.Size = New System.Drawing.Size(92, 37)
+        Me.Label8.Size = New System.Drawing.Size(81, 37)
         Me.Label8.TabIndex = 59
         Me.Label8.Text = "المدفوع"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -466,11 +465,11 @@ Partial Class FrmReceipt
         '
         Me.Panel10.Controls.Add(Me.Label9)
         Me.Panel10.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel10.Location = New System.Drawing.Point(285, 43)
+        Me.Panel10.Location = New System.Drawing.Point(296, 43)
         Me.Panel10.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel10.Name = "Panel10"
         Me.Panel10.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Panel10.Size = New System.Drawing.Size(92, 37)
+        Me.Panel10.Size = New System.Drawing.Size(81, 37)
         Me.Panel10.TabIndex = 59
         '
         'Label9
@@ -482,7 +481,7 @@ Partial Class FrmReceipt
         Me.Label9.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label9.Name = "Label9"
         Me.Label9.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Label9.Size = New System.Drawing.Size(92, 37)
+        Me.Label9.Size = New System.Drawing.Size(81, 37)
         Me.Label9.TabIndex = 59
         Me.Label9.Text = "الباقي"
         Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -491,11 +490,11 @@ Partial Class FrmReceipt
         '
         Me.Panel9.Controls.Add(Me.Label7)
         Me.Panel9.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel9.Location = New System.Drawing.Point(285, 2)
+        Me.Panel9.Location = New System.Drawing.Point(296, 2)
         Me.Panel9.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel9.Name = "Panel9"
         Me.Panel9.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Panel9.Size = New System.Drawing.Size(92, 37)
+        Me.Panel9.Size = New System.Drawing.Size(81, 37)
         Me.Panel9.TabIndex = 59
         '
         'Label7
@@ -507,7 +506,7 @@ Partial Class FrmReceipt
         Me.Label7.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label7.Name = "Label7"
         Me.Label7.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Label7.Size = New System.Drawing.Size(92, 37)
+        Me.Label7.Size = New System.Drawing.Size(81, 37)
         Me.Label7.TabIndex = 59
         Me.Label7.Text = "السعر"
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -875,7 +874,7 @@ Partial Class FrmReceipt
         Me.Panel1.Location = New System.Drawing.Point(3, 3)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Padding = New System.Windows.Forms.Padding(3)
-        Me.Panel1.Size = New System.Drawing.Size(944, 676)
+        Me.Panel1.Size = New System.Drawing.Size(944, 672)
         Me.Panel1.TabIndex = 413
         Me.Panel1.Tag = "Background"
         '
@@ -894,7 +893,7 @@ Partial Class FrmReceipt
         Me.PnlCenter.Location = New System.Drawing.Point(3, 31)
         Me.PnlCenter.Margin = New System.Windows.Forms.Padding(2)
         Me.PnlCenter.Name = "PnlCenter"
-        Me.PnlCenter.Size = New System.Drawing.Size(938, 642)
+        Me.PnlCenter.Size = New System.Drawing.Size(938, 638)
         Me.PnlCenter.TabIndex = 411
         '
         'PnlEmp
@@ -918,10 +917,10 @@ Partial Class FrmReceipt
         Me.TLPUser.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TLPUser.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TLPUser.Controls.Add(Me.TxtUserName, 3, 0)
-        Me.TLPUser.Controls.Add(Me.CmbEmpName, 1, 0)
         Me.TLPUser.Controls.Add(Me.PnlChkPrint, 4, 0)
         Me.TLPUser.Controls.Add(Me.PnlEmpName, 0, 0)
         Me.TLPUser.Controls.Add(Me.PnlUser, 2, 0)
+        Me.TLPUser.Controls.Add(Me.CmbTrusry, 1, 0)
         Me.TLPUser.Location = New System.Drawing.Point(5, 6)
         Me.TLPUser.Margin = New System.Windows.Forms.Padding(0)
         Me.TLPUser.Name = "TLPUser"
@@ -938,28 +937,14 @@ Partial Class FrmReceipt
         Me.TxtUserName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TxtUserName.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
         Me.TxtUserName.ForeColor = System.Drawing.Color.Black
-        Me.TxtUserName.Location = New System.Drawing.Point(204, 3)
+        Me.TxtUserName.Location = New System.Drawing.Point(206, 3)
         Me.TxtUserName.Margin = New System.Windows.Forms.Padding(0)
         Me.TxtUserName.Name = "TxtUserName"
         Me.TxtUserName.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TxtUserName.Size = New System.Drawing.Size(187, 35)
+        Me.TxtUserName.Size = New System.Drawing.Size(186, 35)
         Me.TxtUserName.TabIndex = 1279
         Me.TxtUserName.Tag = "Auto"
         Me.TxtUserName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'CmbEmpName
-        '
-        Me.CmbEmpName.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.CmbEmpName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.CmbEmpName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.CmbEmpName.Font = New System.Drawing.Font("Droid Arabic Kufi", 11.0!)
-        Me.CmbEmpName.FormattingEnabled = True
-        Me.CmbEmpName.Location = New System.Drawing.Point(569, 3)
-        Me.CmbEmpName.Margin = New System.Windows.Forms.Padding(2)
-        Me.CmbEmpName.Name = "CmbEmpName"
-        Me.CmbEmpName.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.CmbEmpName.Size = New System.Drawing.Size(183, 36)
-        Me.CmbEmpName.TabIndex = 66
         '
         'PnlChkPrint
         '
@@ -968,7 +953,7 @@ Partial Class FrmReceipt
         Me.PnlChkPrint.Location = New System.Drawing.Point(0, 3)
         Me.PnlChkPrint.Margin = New System.Windows.Forms.Padding(0)
         Me.PnlChkPrint.Name = "PnlChkPrint"
-        Me.PnlChkPrint.Size = New System.Drawing.Size(204, 36)
+        Me.PnlChkPrint.Size = New System.Drawing.Size(206, 36)
         Me.PnlChkPrint.TabIndex = 67
         '
         'ChkPrint
@@ -980,7 +965,7 @@ Partial Class FrmReceipt
         Me.ChkPrint.Margin = New System.Windows.Forms.Padding(0)
         Me.ChkPrint.Name = "ChkPrint"
         Me.ChkPrint.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.ChkPrint.Size = New System.Drawing.Size(176, 32)
+        Me.ChkPrint.Size = New System.Drawing.Size(178, 32)
         Me.ChkPrint.TabIndex = 66
         Me.ChkPrint.Text = "طباعة عند الحفظ"
         Me.ChkPrint.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -1007,14 +992,14 @@ Partial Class FrmReceipt
         Me.Label18.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.Label18.Size = New System.Drawing.Size(116, 30)
         Me.Label18.TabIndex = 65
-        Me.Label18.Text = "الموظف"
+        Me.Label18.Text = "الخزينة"
         Me.Label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'PnlUser
         '
         Me.PnlUser.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PnlUser.Controls.Add(Me.Label19)
-        Me.PnlUser.Location = New System.Drawing.Point(391, 3)
+        Me.PnlUser.Location = New System.Drawing.Point(392, 3)
         Me.PnlUser.Margin = New System.Windows.Forms.Padding(0)
         Me.PnlUser.Name = "PnlUser"
         Me.PnlUser.Size = New System.Drawing.Size(176, 35)
@@ -1033,6 +1018,20 @@ Partial Class FrmReceipt
         Me.Label19.TabIndex = 65
         Me.Label19.Text = "مستخدم المنظومة"
         Me.Label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'CmbTrusry
+        '
+        Me.CmbTrusry.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.CmbTrusry.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.CmbTrusry.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.CmbTrusry.Font = New System.Drawing.Font("Droid Arabic Kufi", 11.0!)
+        Me.CmbTrusry.FormattingEnabled = True
+        Me.CmbTrusry.Location = New System.Drawing.Point(570, 3)
+        Me.CmbTrusry.Margin = New System.Windows.Forms.Padding(2)
+        Me.CmbTrusry.Name = "CmbTrusry"
+        Me.CmbTrusry.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.CmbTrusry.Size = New System.Drawing.Size(182, 36)
+        Me.CmbTrusry.TabIndex = 66
         '
         'DGVReceipt
         '
@@ -1276,7 +1275,7 @@ Partial Class FrmReceipt
         Me.TxtFinalPrice.Margin = New System.Windows.Forms.Padding(0)
         Me.TxtFinalPrice.Name = "TxtFinalPrice"
         Me.TxtFinalPrice.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TxtFinalPrice.Size = New System.Drawing.Size(200, 35)
+        Me.TxtFinalPrice.Size = New System.Drawing.Size(199, 35)
         Me.TxtFinalPrice.TabIndex = 1273
         Me.TxtFinalPrice.Tag = "AutoC"
         Me.TxtFinalPrice.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -1510,7 +1509,7 @@ Partial Class FrmReceipt
         Me.StatusStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible
         Me.StatusStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SSLMessage})
-        Me.StatusStrip1.Location = New System.Drawing.Point(3, 679)
+        Me.StatusStrip1.Location = New System.Drawing.Point(3, 675)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
         Me.StatusStrip1.Size = New System.Drawing.Size(944, 22)
@@ -1530,7 +1529,7 @@ Partial Class FrmReceipt
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
         Me.BackColor = System.Drawing.SystemColors.Info
-        Me.ClientSize = New System.Drawing.Size(950, 704)
+        Me.ClientSize = New System.Drawing.Size(950, 700)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.StatusStrip1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
@@ -1636,7 +1635,7 @@ Partial Class FrmReceipt
     Friend WithEvents PnlEmp As Panel
     Friend WithEvents TLPUser As TableLayoutPanel
     Friend WithEvents TxtUserName As Label
-    Friend WithEvents CmbEmpName As ComboBox
+    Friend WithEvents CmbTrusry As ComboBox
     Friend WithEvents PnlChkPrint As Panel
     Friend WithEvents ChkPrint As CheckBox
     Friend WithEvents PnlEmpName As Panel

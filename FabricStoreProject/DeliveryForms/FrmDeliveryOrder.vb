@@ -2,12 +2,18 @@
 Imports System.Web.Services
 Imports System.Web.Services.Description
 
+Imports System.IO
+Imports System.Drawing
+Imports System.Drawing.Imaging
+Imports ZXing ' مكتبة إنشاء الباركود
+Imports ZXing.Common ' لمزيد من خيارات ZXing
+
+
 Public Class FrmDeliveryOrder
 
     Private PageSize, PagesCount, RowsCount, OrderID As Integer
     Private PageNum As Integer = 1
     Private SearchActive As Boolean
-    Private Operation As String
 
     Private FromChkNum As Boolean
     Private DSMain, DSSearch, DSEdit, DSDel As New DataSet
@@ -105,22 +111,22 @@ Public Class FrmDeliveryOrder
                 CmbDelivery.ValueMember = "ID"
                 CmbDelivery.SelectedIndex = -1
 
-                DTDelivery = DS.Tables(1).Copy
-                CmbDeliveryOrder.DataSource = DTDelivery
-                CmbDeliveryOrder.DisplayMember = "Name"
-                CmbDeliveryOrder.ValueMember = "ID"
-                CmbDeliveryOrder.SelectedIndex = -1
+                'DTDelivery = DS.Tables(1).Copy
+                'CmbDeliveryOrder.DataSource = DTDelivery
+                'CmbDeliveryOrder.DisplayMember = "Name"
+                'CmbDeliveryOrder.ValueMember = "ID"
+                'CmbDeliveryOrder.SelectedIndex = -1
 
                 CmbCity.DataSource = DS.Tables(2)
                 CmbCity.DisplayMember = "Name"
                 CmbCity.ValueMember = "ID"
                 CmbCity.SelectedIndex = -1
 
-                DTCity = DS.Tables(2).Copy
-                CmbCityOrder.DataSource = DTCity
-                CmbCityOrder.DisplayMember = "Name"
-                CmbCityOrder.ValueMember = "ID"
-                CmbCityOrder.SelectedIndex = -1
+                'DTCity = DS.Tables(2).Copy
+                'CmbCityOrder.DataSource = DTCity
+                'CmbCityOrder.DisplayMember = "Name"
+                'CmbCityOrder.ValueMember = "ID"
+                'CmbCityOrder.SelectedIndex = -1
 
             Case Data.Search
                 If DS.Tables(1).Rows.Count > 0 Then
@@ -143,9 +149,9 @@ Public Class FrmDeliveryOrder
                         DGV.Item(5, i).Value = .Item("CustomerName")
                         DGV.Item(6, i).Value = .Item("CityName")
                         DGV.Item(7, i).Value = .Item("Phone")
-                        DGV.Item(8, i).Value = Format(.Item("Total"), "0.000")
-                        DGV.Item(9, i).Value = Format(.Item("Price"), "0.000")
-                        DGV.Item(10, i).Value = Format(.Item("DeliveryTotal"), "0.000")
+                        DGV.Item(8, i).Value = Format(.Item("Total"), "0.00")
+                        DGV.Item(9, i).Value = Format(.Item("Price"), "0.00")
+                        DGV.Item(10, i).Value = Format(.Item("DeliveryTotal"), "0.00")
 
                         If IsDBNull(.Item("RegDate")) Then
                             DGV.Item(11, i).Value = "-"
@@ -362,72 +368,22 @@ Public Class FrmDeliveryOrder
         SearchActive = False
     End Sub
 
-    Private Sub BtnSend_Click(sender As Object, e As EventArgs) Handles BtnSend.Click
-        Operation = "Send"
-        EditOrder()
-    End Sub
-
-    Private Sub BtnSell_Click(sender As Object, e As EventArgs) Handles BtnSell.Click
-        Operation = "Sell"
-        EditOrder()
-    End Sub
-
-    Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles BtnSave.Click
-        Operation = "Edit"
-        EditOrder()
-    End Sub
 
     Private Sub DGV_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV.CellContentClick
         If DGV.RowCount = 0 OrElse e.RowIndex < 0 Then Exit Sub
 
-        'If DGV.Item(11, e.RowIndex).Value <> "-" Then Exit Sub
-
         OrderID = Convert.ToInt32(DGV.Item(0, e.RowIndex).Value)
-
-        If Not IsNothing(DGV.Item(13, e.RowIndex)) Then
-            CmbCityOrder.SelectedValue = DGV.Item(13, e.RowIndex).Value
-        End If
-
-        If Not IsNothing(DGV.Item(14, e.RowIndex)) Then
-            CmbDeliveryOrder.SelectedValue = DGV.Item(14, e.RowIndex).Value
-        End If
-
-        TxtAddress.Text = DGV.Item(15, e.RowIndex).Value
-        TxtDeliveryPrice.Text = DGV.Item(9, e.RowIndex).Value
-        TxtPhone.Text = DGV.Item(7, e.RowIndex).Value
+        FrmDeliveryOrderData.OrderID = OrderID
 
         Dim ColName As String = DGV.Columns(e.ColumnIndex).Name
 
         If ColName = "ColEdit" Then
-            If DGV.Item(11, e.RowIndex).Value = "-" Then
-                BtnSend.Enabled = True
-                BtnSell.Enabled = False
-
-                'ElseIf DGV.Item(10, e.RowIndex).Value <> "-" Then
-                '    BtnSend.Enabled = False
-                '    BtnSell.Enabled = True
-            End If
-
-            If DGV.Item(11, e.RowIndex).Value = "-" Then
-                'LblOrderData.Enabled = True
-                LblOrderData_Click(sender, e)
-
-            ElseIf DGV.Item(11, e.RowIndex).Value <> "-" And DGV.Item(12, e.RowIndex).Value <> "-" Then
-                MsgTool("تم تسليم الطلب للزبون", 0)
-                Exit Sub
-
-            Else
-                'LblOrderData.Enabled = False
-                LblOrderState_Click(sender, e)
-            End If
-
-            TLPOrderDetails.Visible = True
+            FrmDeliveryOrderData.ShowDialog()
 
         ElseIf ColName = "ColDel" Then
-            If vbYes = MsgBox("هل تريد إلغاء طلب توصيل فاتورة رقم ( " & DGV.Item(2, e.RowIndex).Value & " )  ", vbMsgBoxRight + vbYesNo + vbQuestion, "تأكيد الإلغاء") Then
+            If vbYes = MsgBox("هل تريد إلغاء طلب توصيل فاتورة رقم " & vbCrLf & "( " & Format(DGV.Item(2, e.RowIndex).Value, "000000") & " )  ", vbMsgBoxRight + vbYesNo + vbQuestion, "تأكيد الإلغاء") Then
                 Dim SQLCon = New SQLConClass
-                Dim Param() As SqlParameter = {
-                New SqlParameter("@ID", OrderID)}
+                Dim Param() As SqlParameter = {New SqlParameter("@ID", OrderID)}
 
                 DSDel = SQLCon.CMDExecuteData("DeleteDeliveryInvo", Param)
                 If Save = 1 Then
@@ -436,6 +392,30 @@ Public Class FrmDeliveryOrder
                 End If
             End If
 
+        ElseIf ColName = "ColPrint" Then
+            Dim DSPrint = New DataSet
+            Dim SQLCon = New SQLConClass
+
+            SQLQuery = "  SELECT   Format(Num,'000000') AS Num, InvoiceDate, DeliveryName, CustomerName, CityName, Address, Phone, Total, Price,
+                     DeliveryTotal, RegDate, DeliveryDate  From DeliveryOrderView WHERE InvoiceEndService IS NULL And OrderEndService IS NULL And ID=@ID"
+            SQLQuery &= " SELECT * FROM CenterInfoTable"
+
+            Dim Param() As SqlParameter = {New SqlParameter("@ID", OrderID)}
+
+            DSPrint = SQLCon.SelectData(SQLQuery, 0, Param)
+
+            Dim F As New FrmPrint
+            Dim C As New CRDeliveryOrderBarCode
+
+            C.SetDataSource(DSPrint.Tables(0))
+            C.Subreports(0).SetDataSource(DSPrint.Tables(1))
+            C.Subreports(1).SetDataSource(DSPrint.Tables(1))
+            F.CrystalReportViewer1.ReportSource = C
+            F.CrystalReportViewer1.Refresh()
+            F.Text = "طباعة"
+            F.CrystalReportViewer1.Zoom(100%)
+            F.WindowState = FormWindowState.Maximized
+            F.Show()
         End If
     End Sub
 
@@ -447,105 +427,24 @@ Public Class FrmDeliveryOrder
         If DGV.RowCount = 0 OrElse DGV.CurrentRow Is Nothing Then Exit Sub
 
         OrderID = Convert.ToInt32(DGV.CurrentRow.Cells(0).Value)
+        FrmDeliveryOrderData.OrderID = OrderID
+        FrmDeliveryOrderData.ShowDialog()
 
-        If DGV.CurrentRow.Cells(11).Value = "-" Then
-            BtnSend.Enabled = True
-            BtnSell.Enabled = False
-
-            'ElseIf DGV.CurrentRow.Cells(10).Value <> "-" Then
-            '    BtnSend.Enabled = False
-            '    BtnSell.Enabled = True
-        End If
-
-        If DGV.CurrentRow.Cells(11).Value = "-" Then
-            'LblOrderData.Enabled = True
-            LblOrderData_Click(sender, e)
-
-        ElseIf DGV.CurrentRow.Cells(12).Value <> "-" Then
-            MsgTool("تم تسليم الطلب للزبون", 0)
-            Exit Sub
-
-        Else
-            'LblOrderData.Enabled = False
-            LblOrderState_Click(sender, e)
-        End If
-        TLPOrderDetails.Visible = True
-
-    End Sub
-
-    Private Sub LblOrderData_Click(sender As Object, e As EventArgs) Handles LblOrderData.Click
-        PnlData.BringToFront()
-        PnlOrderState.Visible = False
-        PnlOrderData.Visible = True
-    End Sub
-
-    Private Sub LblOrderState_Click(sender As Object, e As EventArgs) Handles LblOrderState.Click
-        PnlState.BringToFront()
-        PnlOrderData.Visible = False
-        PnlOrderState.Visible = True
-    End Sub
-
-    Private Sub EditOrder()
-        Dim DeliveryID As Integer = 0
-        Dim CityID As Integer = 0
-        Dim DeliveryPrice As Double = 0
-        Dim Address As String = ""
-        Dim Phone As String = ""
-
-        If Not IsNothing(CmbDeliveryOrder.SelectedValue) Then
-            DeliveryID = CmbDeliveryOrder.SelectedValue
-        End If
-
-        If Not IsNothing(CmbCityOrder.SelectedValue) Then
-            CityID = CmbCityOrder.SelectedValue
-        End If
-
-        If TxtAddress.Text <> "" Then
-            Address = TxtAddress.Text.Trim
-        End If
-        DeliveryPrice = Val(TxtDeliveryPrice.Text)
-
-        Phone = TxtPhone.Text.Trim
-
-        If (DeliveryID = 0 Or CityID = 0 Or DeliveryPrice = 0 Or Address = "" Or Phone = "") And Operation = "Edit" Then
-            MsgTool("يرجى تكملة بيانات الطلب أولاً", 0)
-            Exit Sub
-        End If
-
-        If (DeliveryID = 0 Or CityID = 0 Or DeliveryPrice = 0 Or Address = "" Or Phone = "") And Operation = "Send" Then
-            MsgTool("يرجى تكملة بيانات الطلب أولاً", 0)
-            Exit Sub
-        End If
-
-        If OrderID <= 0 Then Exit Sub
-        Dim SQLCon = New SQLConClass
-        Dim Param() As SqlParameter = {
-        New SqlParameter("@ID", OrderID),
-        New SqlParameter("@Operation", Operation),
-        New SqlParameter("@DeliveryID", DeliveryID),
-        New SqlParameter("@CityID", CityID),
-        New SqlParameter("@DeliveryPrice", DeliveryPrice),
-        New SqlParameter("@Phone", Phone),
-        New SqlParameter("@Address", Address)}
-
-        Dim DS As DataSet = SQLCon.CMDExecuteData("EditDeliveryOrder", Param)
-        Select Case Operation
-            Case = "Edit"
-                MsgTool("تم تعديل بيانات الطلب  ", 1)
-
-            Case = "Sell"
-                MsgTool("تم تسليم الطلب للزبون ", 1)
-
-
-        End Select
-        BtnSearch.PerformClick()
-        TLPOrderDetails.Visible = False
-        Clear(TLPDeliveryData)
     End Sub
 
     Private Sub TxtNum_TextChanged(sender As Object, e As EventArgs) Handles TxtNum.TextChanged, CmbUserName.TextChanged
         DGV.Rows.Clear()
         sender.BackColor = SystemColors.Window
+    End Sub
+
+    Private Sub TxtNum_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtNum.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            BtnSearch_Click(sender, e)
+        End If
+    End Sub
+
+    Private Sub TxtNum_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtNum.KeyPress
+        e.Handled = Not IsNumber(sender.Text, e.KeyChar, False, True)
     End Sub
 
     Private Sub DTPFrom_ValueChanged(sender As Object, e As EventArgs) Handles DTPFrom.ValueChanged
@@ -559,10 +458,6 @@ Public Class FrmDeliveryOrder
     Private Sub CmbUserName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbUserName.SelectedIndexChanged
         DGV.Rows.Clear()
         sender.BackColor = SystemColors.Window
-    End Sub
-
-    Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
-        TLPOrderDetails.Visible = False
     End Sub
 
     Private Sub CmbDelivery_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbDelivery.SelectedIndexChanged
@@ -585,11 +480,11 @@ Public Class FrmDeliveryOrder
         sender.BackColor = SystemColors.Window
     End Sub
 
-    Private Sub TxtPhone_TextChanged(sender As Object, e As EventArgs) Handles TxtPhone.TextChanged
+    Private Sub TxtPhone_TextChanged(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub TxtPhone_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtPhone.KeyPress
+    Private Sub TxtPhone_KeyPress(sender As Object, e As KeyPressEventArgs)
         e.Handled = Not IsPhone(sender.Text, e)
     End Sub
 
@@ -601,41 +496,91 @@ Public Class FrmDeliveryOrder
         '    Exit Sub
         'End If
 
-        'If DGVRecipt.Rows.Count = 0 Then Exit Sub
+        If DGV.Rows.Count = 0 Then Exit Sub
 
-        'Dim DSPrint = New DataSet
-        'Dim SQLCon = New SQLConClass
+        Dim DSPrint = New DataSet
+        Dim SQLCon = New SQLConClass
 
-        'SQLQuery = "SELECT FORMAT(Num,'000000') AS Num,FORMAT([Date],'" & GetDateAndTimeFormat(DTFormat.DF) & "') AS [Date],Value,ReceiptName,NoteFor FROM ReceiptView WHERE EndService IS NULL"
-        'AppendReportConditions()
-        'SQLQuery &= " ORDER BY ID DESC OFFSET " & PageSize * (PageNum - 1) & " ROWS FETCH NEXT " & PageSize & " ROWS ONLY"
-        'SQLQuery &= " SELECT * FROM CenterMainInfoTable"
+        SQLQuery = "  SELECT   Format(Num,'000000') AS Num, InvoiceDate, DeliveryName, CustomerName, CityName, Address, Phone, Total, Price,
+                     DeliveryTotal, RegDate, DeliveryDate  From DeliveryOrderView WHERE InvoiceEndService IS NULL And OrderEndService IS NULL"
+        AppendReportConditions()
+        SQLQuery &= " ORDER BY DeliveryOrderView.InvoiceDate Desc OFFSET " & PageSize * (PageNum - 1) & " ROWS FETCH NEXT " & PageSize & " ROWS ONLY"
+        SQLQuery &= " SELECT * FROM CenterInfoTable"
 
-        'Dim Param() As SqlParameter =
-        '    {
-        '    New SqlParameter("@Num", TxtNum.Text.Trim),
-        '    New SqlParameter("@ReceiptName", "%" & TxtReciptName.Text.Trim & "%"),
-        '    New SqlParameter("@PaymentTypeID", (IIf(IsNothing(CmbPaymentType.SelectedValue), 0, CmbPaymentType.SelectedValue))),
-        '    New SqlParameter("@UserID", (IIf(IsNothing(CmbUserName.SelectedValue), 0, CmbUserName.SelectedValue))),
-        '    New SqlParameter("@BankID", (IIf(IsNothing(CmbBank.SelectedValue), 0, CmbBank.SelectedValue))),
-        '    New SqlParameter("@ReceiptFinanceTypeID", (IIf(IsNothing(CmbFinancRecipt.SelectedValue), 0, CmbFinancRecipt.SelectedValue))),
-        '    New SqlParameter("@Check", "%" & Val(TxtCkeck.Text.Trim) & "%")
-        '    }
+        Dim Param() As SqlParameter = {New SqlParameter("@InvoiceNum", Val(TxtNum.Text))}
 
-        'DSPrint = SQLCon.SelectData(SQLQuery, 0, Param)
+        DSPrint = SQLCon.SelectData(SQLQuery, 0, Param)
 
-        'Dim F As New FrmPrint
-        'Dim C As New CRRecieptList
+        Dim F As New FrmPrint
+        Dim C As New CRDeliveryOrder
 
-        'C.SetDataSource(DSPrint.Tables(0))
-        'C.Subreports(0).SetDataSource(DSPrint.Tables(1))
-        'C.Subreports(1).SetDataSource(DSPrint.Tables(1))
-        'F.CrystalReportViewer1.ReportSource = C
-        'F.CrystalReportViewer1.Refresh()
-        'F.Text = "طباعة"
-        'F.CrystalReportViewer1.Zoom(100%)
-        'F.WindowState = FormWindowState.Maximized
-        'F.Show()
+        '*******
+        '    If DSPrint IsNot Nothing AndAlso DSPrint.Tables.Count > 0 AndAlso DSPrint.Tables(0).Rows.Count > 0 Then
+        '        Dim dtForBarcode As DataTable = DSPrint.Tables(0)
+
+        '        ' 1. أضف عمودًا جديدًا للـ DataTable ليحمل صورة الباركود
+        '        If Not dtForBarcode.Columns.Contains("BarcodeImage") Then
+        '        dtForBarcode.Columns.Add("BarcodeImage", GetType(Byte()))
+        '    End If
+
+        '    ' 2. إعداد كاتب الباركود
+        '    Dim barcodeWriter As New BarcodeWriter()
+        '    barcodeWriter.Format = BarcodeFormat.CODE_128 ' اختر نوع الباركود (مثال: CODE_128, QR_CODE, EAN_13)
+        '    barcodeWriter.Options = New EncodingOptions() With {
+        '    .Height = 80,       ' ارتفاع الباركود بالبكسل
+        '    .Width = 250,      ' عرض الباركود بالبكسل
+        '    .Margin = 5,        ' الهامش حول الباركود
+        '    .PureBarcode = False, ' إذا كانت False، سيعرض النص تحت الباركود (لـ CODE_128 مثلاً)
+        '    .NoPadding = True
+        '}
+        '    ' يمكنك تعديل هذه الخيارات لتناسب احتياجاتك
+
+        '    ' 3. المرور على كل صف لإنشاء الباركود
+        '    For Each row As DataRow In dtForBarcode.Rows
+        '        Dim dataToEncode As String = ""
+        '        ' استخراج البيانات من العمود "Num" (أو أي عمود آخر تريده)
+        '        If row("Num") IsNot DBNull.Value AndAlso row("Num") IsNot Nothing Then
+        '            dataToEncode = row("Num").ToString()
+        '        End If
+
+        '        If Not String.IsNullOrEmpty(dataToEncode) Then
+        '            Try
+        '                ' إنشاء صورة الباركود
+        '                Using barcodeBitmap As Bitmap = barcodeWriter.Write(dataToEncode)
+        '                    ' تحويل الصورة إلى مصفوفة بايت
+        '                    Using ms As New MemoryStream()
+        '                        barcodeBitmap.Save(ms, ImageFormat.Png) ' يمكنك استخدام Png, Jpeg, Bmp
+        '                        row("BarcodeImage") = ms.ToArray()
+        '                    End Using
+        '                End Using ' سيتم التخلص من barcodeBitmap تلقائيًا هنا
+        '            Catch ex As Exception
+        '                ' في حالة حدوث خطأ، يمكنك تسجيله أو وضع قيمة فارغة
+        '                Console.WriteLine($"خطأ في إنشاء باركود للبيانات '{dataToEncode}': {ex.Message}")
+        '                row("BarcodeImage") = DBNull.Value
+        '            End Try
+        '        Else
+        '            ' إذا كانت البيانات فارغة، ضع قيمة فارغة للباركود
+        '            row("BarcodeImage") = DBNull.Value
+        '        End If
+        '    Next
+        '    ' الآن DataTable (dtForBarcode أو DSPrint.Tables(0)) يحتوي على عمود "BarcodeImage"
+        '    Else
+        '    ' لا توجد بيانات في الجدول لمعالجة الباركود
+        '    Console.WriteLine("لا توجد بيانات في DSPrint.Tables(0) لإنشاء باركود.")
+        '    End If
+
+
+        '*******
+
+        C.SetDataSource(DSPrint.Tables(0))
+        C.Subreports(0).SetDataSource(DSPrint.Tables(1))
+        C.Subreports(1).SetDataSource(DSPrint.Tables(1))
+        F.CrystalReportViewer1.ReportSource = C
+        F.CrystalReportViewer1.Refresh()
+        F.Text = "طباعة"
+        F.CrystalReportViewer1.Zoom(100%)
+        F.WindowState = FormWindowState.Maximized
+        F.Show()
     End Sub
 
     Private Sub BtnPrintAll_Click(sender As Object, e As EventArgs) Handles BtnPrintAll.Click
@@ -646,53 +591,52 @@ Public Class FrmDeliveryOrder
         '    Exit Sub
         'End If
 
-        'If DGVRecipt.Rows.Count = 0 Then Exit Sub
+        If DGV.Rows.Count = 0 Then Exit Sub
 
-        'Dim DSPrint = New DataSet
-        'Dim SQLCon = New SQLConClass
+        Dim DSPrint = New DataSet
+        Dim SQLCon = New SQLConClass
 
-        'SQLQuery = "SELECT FORMAT(Num,'000000') AS Num,FORMAT([Date],'" & GetDateAndTimeFormat(DTFormat.DF) & "') AS [Date],Value,ReceiptName,NoteFor FROM ReceiptView WHERE EndService IS NULL"
-        'AppendReportConditions()
-        'SQLQuery &= " ORDER BY ID DESC"
-        'SQLQuery &= " SELECT * FROM CenterMainInfoTable"
+        SQLQuery = "  SELECT   Format(Num,'000000') AS Num, InvoiceDate, DeliveryName, CustomerName, CityName, Address, Phone, Total, Price,
+                     DeliveryTotal, RegDate, DeliveryDate  From DeliveryOrderView WHERE InvoiceEndService IS NULL And OrderEndService IS NULL"
+        AppendReportConditions()
+        SQLQuery &= " SELECT * FROM CenterInfoTable"
 
-        'Dim Param() As SqlParameter =
-        '    {
-        '    New SqlParameter("@Num", TxtNum.Text.Trim),
-        '    New SqlParameter("@ReceiptName", "%" & TxtReciptName.Text.Trim & "%"),
-        '    New SqlParameter("@PaymentTypeID", (IIf(IsNothing(CmbPaymentType.SelectedValue), 0, CmbPaymentType.SelectedValue))),
-        '    New SqlParameter("@UserID", (IIf(IsNothing(CmbUserName.SelectedValue), 0, CmbUserName.SelectedValue))),
-        '    New SqlParameter("@BankID", (IIf(IsNothing(CmbBank.SelectedValue), 0, CmbBank.SelectedValue))),
-        '    New SqlParameter("@ReceiptFinanceTypeID", (IIf(IsNothing(CmbFinancRecipt.SelectedValue), 0, CmbFinancRecipt.SelectedValue))),
-        '    New SqlParameter("@Check", "%" & Val(TxtCkeck.Text.Trim) & "%")
-        '    }
+        Dim Param() As SqlParameter = {New SqlParameter("@InvoiceNum", Val(TxtNum.Text))}
 
-        'DSPrint = SQLCon.SelectData(SQLQuery, 0, Param)
+        DSPrint = SQLCon.SelectData(SQLQuery, 0, Param)
 
-        'Dim F As New FrmPrint
-        'Dim C As New CRRecieptList
+        Dim F As New FrmPrint
+        Dim C As New CRDeliveryOrder
 
-        'C.SetDataSource(DSPrint.Tables(0))
-        'C.Subreports(0).SetDataSource(DSPrint.Tables(1))
-        'C.Subreports(1).SetDataSource(DSPrint.Tables(1))
-        'F.CrystalReportViewer1.ReportSource = C
-        'F.CrystalReportViewer1.Refresh()
-        'F.Text = "طباعة"
-        'F.CrystalReportViewer1.Zoom(100%)
-        'F.WindowState = FormWindowState.Maximized
-        'F.Show()
+        C.SetDataSource(DSPrint.Tables(0))
+        C.Subreports(0).SetDataSource(DSPrint.Tables(1))
+        C.Subreports(1).SetDataSource(DSPrint.Tables(1))
+        F.CrystalReportViewer1.ReportSource = C
+        F.CrystalReportViewer1.Refresh()
+        F.Text = "طباعة"
+        F.CrystalReportViewer1.Zoom(100%)
+        F.WindowState = FormWindowState.Maximized
+        F.Show()
     End Sub
 
     Private Sub AppendReportConditions()
 
-        If ChkNum.Checked And TxtNum.Text.Trim <> "" Then AppendToQuery(" AND ", " InvoiceNum=@Num")
-        If ChkUser.Checked And CmbUserName.Text.Trim <> "" And CmbUserName.SelectedValue <> 0 Then AppendToQuery(" AND ", " UserID=@UserID")
-        If ChkDate.Checked Then AppendToQuery(" AND ", " Date BETWEEN '" & DTPFrom.Value.Date & " " & "00:00".ToString & "' AND '" & DTPTo.Value.Date & " " & "23:59".ToString & "'")
+        Dim DateTimeFrom As Date = DTPFrom.Value.Date & " " & "00:00".ToString
+        Dim DateTimeTo As Date = DTPTo.Value.Date & " " & "23:59".ToString
+        If ChkNum.Checked And TxtNum.Text.Trim <> "" Then AppendToQuery(" AND ", " DeliveryOrderView.Num=@InvoiceNum ")
+        If ChkUser.Checked And CmbUserName.SelectedValue <> Nothing Then AppendToQuery(" AND ", "  dbo.DeliveryOrderView.UserID = " & CmbUserName.SelectedValue)
+        If ChkDelivery.Checked And CmbDelivery.SelectedValue <> Nothing Then AppendToQuery(" AND ", " dbo.DeliveryOrderView.DeliveryID = " & CmbDelivery.SelectedValue)
+        If ChkCity.Checked And CmbCity.SelectedValue <> Nothing Then AppendToQuery(" AND ", " dbo.DeliveryOrderView.CityID = " & CmbCity.SelectedValue)
+        If ChkDate.Checked Then AppendToQuery(" AND ", " InvoiceDate BETWEEN '" & DateTimeFrom & "' AND '" & DateTimeTo & "' ")
+        If ChkOrder.Checked Then
+            If RadReady.Checked Then
+                AppendToQuery(" AND ", " dbo.DeliveryOrderView.DeliveryDate IS NOT NULL")
+            End If
 
-    End Sub
-
-    Private Sub TxtNum_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtNum.KeyPress
-        e.Handled = Not IsNumber(sender.Text, e.KeyChar, False, True)
+            If RadOrder.Checked Then
+                AppendToQuery(" AND ", " dbo.DeliveryOrderView.DeliveryDate IS NULL")
+            End If
+        End If
     End Sub
 
     '****************************************************************************
@@ -789,6 +733,13 @@ Public Class FrmDeliveryOrder
         End If
     End Sub
 
+    Private Sub TxtDeliveryPrice_TextChanged(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub TxtDeliveryPrice_KeyPress(sender As Object, e As KeyPressEventArgs)
+        e.Handled = Not Price(sender.Text, e.KeyChar, False, True)
+    End Sub
     Private Sub CheckPageSize()
 
         If PageSize <> My.Settings.PageSize Then
@@ -824,18 +775,6 @@ Public Class FrmDeliveryOrder
         If Not ChkNum.Checked And Not ChkUser.Checked And Not ChkDate.Checked And Not ChkDelivery.Checked And Not ChkCity.Checked And Not ChkOrder.Checked Then Exit Sub
         TxtPageNum.Text = 1
         BtnFirstPage_Click(sender, e)
-    End Sub
-
-    Private Sub PnlEditOrder_MouseDown(sender As Object, e As MouseEventArgs) Handles PnlEditOrder.MouseDown
-        MoveObject(e, MouseEvent.Down, TLPOrderDetails)
-    End Sub
-
-    Private Sub PnlEditOrder_MouseMove(sender As Object, e As MouseEventArgs) Handles PnlEditOrder.MouseMove
-        MoveObject(e, MouseEvent.Move, TLPOrderDetails)
-    End Sub
-
-    Private Sub PnlEditOrder_MouseUp(sender As Object, e As MouseEventArgs) Handles PnlEditOrder.MouseUp
-        MoveObject(e, MouseEvent.Up, TLPOrderDetails)
     End Sub
 
 End Class

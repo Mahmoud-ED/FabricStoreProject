@@ -32,16 +32,16 @@ Partial Class FrmCountry
         Me.LblTitel = New System.Windows.Forms.Label()
         Me.TxtCountry = New System.Windows.Forms.TextBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.BtnRefresh = New System.Windows.Forms.Button()
+        Me.BtnDelete = New System.Windows.Forms.Button()
+        Me.BtnAdd = New System.Windows.Forms.Button()
+        Me.BtnSave = New System.Windows.Forms.Button()
         Me.PnlCountry = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.TLPBtns = New System.Windows.Forms.TableLayoutPanel()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.BtnRefresh = New System.Windows.Forms.Button()
-        Me.BtnDelete = New System.Windows.Forms.Button()
-        Me.BtnAdd = New System.Windows.Forms.Button()
-        Me.BtnSave = New System.Windows.Forms.Button()
         CType(Me.DGVCountry, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PnlTitel.SuspendLayout()
         Me.PnlCountry.SuspendLayout()
@@ -148,102 +148,8 @@ Partial Class FrmCountry
         Me.TxtCountry.MaxLength = 200
         Me.TxtCountry.Name = "TxtCountry"
         Me.TxtCountry.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TxtCountry.Size = New System.Drawing.Size(299, 35)
+        Me.TxtCountry.Size = New System.Drawing.Size(310, 35)
         Me.TxtCountry.TabIndex = 0
-        '
-        'PnlCountry
-        '
-        Me.PnlCountry.BackColor = System.Drawing.SystemColors.Control
-        Me.PnlCountry.Controls.Add(Me.TableLayoutPanel1)
-        Me.PnlCountry.Controls.Add(Me.PnlTitel)
-        Me.PnlCountry.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PnlCountry.Location = New System.Drawing.Point(3, 3)
-        Me.PnlCountry.Name = "PnlCountry"
-        Me.PnlCountry.Padding = New System.Windows.Forms.Padding(3)
-        Me.PnlCountry.Size = New System.Drawing.Size(445, 430)
-        Me.PnlCountry.TabIndex = 8
-        Me.PnlCountry.Tag = "Background"
-        '
-        'TableLayoutPanel1
-        '
-        Me.TableLayoutPanel1.ColumnCount = 1
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Controls.Add(Me.Panel5, 0, 2)
-        Me.TableLayoutPanel1.Controls.Add(Me.TLPBtns, 0, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.TableLayoutPanel2, 0, 0)
-        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 31)
-        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-        Me.TableLayoutPanel1.RowCount = 3
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(439, 396)
-        Me.TableLayoutPanel1.TabIndex = 9
-        '
-        'Panel5
-        '
-        Me.Panel5.BackColor = System.Drawing.Color.White
-        Me.Panel5.Controls.Add(Me.DGVCountry)
-        Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel5.Location = New System.Drawing.Point(5, 97)
-        Me.Panel5.Margin = New System.Windows.Forms.Padding(5)
-        Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(429, 294)
-        Me.Panel5.TabIndex = 0
-        '
-        'TLPBtns
-        '
-        Me.TLPBtns.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TLPBtns.ColumnCount = 7
-        Me.TLPBtns.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TLPBtns.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10.0!))
-        Me.TLPBtns.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TLPBtns.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10.0!))
-        Me.TLPBtns.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TLPBtns.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10.0!))
-        Me.TLPBtns.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TLPBtns.Controls.Add(Me.BtnRefresh, 6, 0)
-        Me.TLPBtns.Controls.Add(Me.BtnDelete, 4, 0)
-        Me.TLPBtns.Controls.Add(Me.BtnAdd, 0, 0)
-        Me.TLPBtns.Controls.Add(Me.BtnSave, 2, 0)
-        Me.TLPBtns.Location = New System.Drawing.Point(2, 48)
-        Me.TLPBtns.Margin = New System.Windows.Forms.Padding(2)
-        Me.TLPBtns.Name = "TLPBtns"
-        Me.TLPBtns.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TLPBtns.RowCount = 1
-        Me.TLPBtns.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TLPBtns.Size = New System.Drawing.Size(435, 41)
-        Me.TLPBtns.TabIndex = 3
-        '
-        'TableLayoutPanel2
-        '
-        Me.TableLayoutPanel2.ColumnCount = 2
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.61855!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.38144!))
-        Me.TableLayoutPanel2.Controls.Add(Me.Label1, 1, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.TxtCountry, 0, 0)
-        Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 3)
-        Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
-        Me.TableLayoutPanel2.RowCount = 1
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(433, 40)
-        Me.TableLayoutPanel2.TabIndex = 4
-        '
-        'Label1
-        '
-        Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label1.BackColor = System.Drawing.Color.Transparent
-        Me.Label1.Font = New System.Drawing.Font("Droid Arabic Kufi", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.Black
-        Me.Label1.Location = New System.Drawing.Point(308, 6)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(122, 28)
-        Me.Label1.TabIndex = 2
-        Me.Label1.Text = "اسم البلد"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'BtnRefresh
         '
@@ -340,6 +246,100 @@ Partial Class FrmCountry
         Me.BtnSave.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.ToolTip1.SetToolTip(Me.BtnSave, "تعديل")
         Me.BtnSave.UseVisualStyleBackColor = False
+        '
+        'PnlCountry
+        '
+        Me.PnlCountry.BackColor = System.Drawing.SystemColors.Control
+        Me.PnlCountry.Controls.Add(Me.TableLayoutPanel1)
+        Me.PnlCountry.Controls.Add(Me.PnlTitel)
+        Me.PnlCountry.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PnlCountry.Location = New System.Drawing.Point(3, 3)
+        Me.PnlCountry.Name = "PnlCountry"
+        Me.PnlCountry.Padding = New System.Windows.Forms.Padding(3)
+        Me.PnlCountry.Size = New System.Drawing.Size(445, 430)
+        Me.PnlCountry.TabIndex = 8
+        Me.PnlCountry.Tag = "Background"
+        '
+        'TableLayoutPanel1
+        '
+        Me.TableLayoutPanel1.ColumnCount = 1
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.Controls.Add(Me.Panel5, 0, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.TLPBtns, 0, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.TableLayoutPanel2, 0, 0)
+        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 31)
+        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        Me.TableLayoutPanel1.RowCount = 3
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(439, 396)
+        Me.TableLayoutPanel1.TabIndex = 9
+        '
+        'Panel5
+        '
+        Me.Panel5.BackColor = System.Drawing.Color.White
+        Me.Panel5.Controls.Add(Me.DGVCountry)
+        Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel5.Location = New System.Drawing.Point(5, 97)
+        Me.Panel5.Margin = New System.Windows.Forms.Padding(5)
+        Me.Panel5.Name = "Panel5"
+        Me.Panel5.Size = New System.Drawing.Size(429, 294)
+        Me.Panel5.TabIndex = 0
+        '
+        'TLPBtns
+        '
+        Me.TLPBtns.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TLPBtns.ColumnCount = 7
+        Me.TLPBtns.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TLPBtns.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10.0!))
+        Me.TLPBtns.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TLPBtns.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10.0!))
+        Me.TLPBtns.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TLPBtns.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10.0!))
+        Me.TLPBtns.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TLPBtns.Controls.Add(Me.BtnRefresh, 6, 0)
+        Me.TLPBtns.Controls.Add(Me.BtnDelete, 4, 0)
+        Me.TLPBtns.Controls.Add(Me.BtnAdd, 0, 0)
+        Me.TLPBtns.Controls.Add(Me.BtnSave, 2, 0)
+        Me.TLPBtns.Location = New System.Drawing.Point(2, 48)
+        Me.TLPBtns.Margin = New System.Windows.Forms.Padding(2)
+        Me.TLPBtns.Name = "TLPBtns"
+        Me.TLPBtns.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.TLPBtns.RowCount = 1
+        Me.TLPBtns.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TLPBtns.Size = New System.Drawing.Size(435, 41)
+        Me.TLPBtns.TabIndex = 3
+        '
+        'TableLayoutPanel2
+        '
+        Me.TableLayoutPanel2.ColumnCount = 2
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.97922!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.02078!))
+        Me.TableLayoutPanel2.Controls.Add(Me.Label1, 1, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.TxtCountry, 0, 0)
+        Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 3)
+        Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
+        Me.TableLayoutPanel2.RowCount = 1
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(433, 40)
+        Me.TableLayoutPanel2.TabIndex = 4
+        '
+        'Label1
+        '
+        Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label1.BackColor = System.Drawing.Color.Transparent
+        Me.Label1.Font = New System.Drawing.Font("Droid Arabic Kufi", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.Black
+        Me.Label1.Location = New System.Drawing.Point(319, 6)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(111, 28)
+        Me.Label1.TabIndex = 2
+        Me.Label1.Text = "اسم البلد"
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'FrmCountry
         '

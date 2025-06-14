@@ -210,7 +210,7 @@ Public Class FrmMainSafeReport
 
     Private Sub TxtSumValue_TextChanged(sender As Object, e As EventArgs)
         If Val(TxtSumValue.Text) > 0 Then
-            TxtSumValue.Text = Format(Val(TxtSumValue.Text), "0.000")
+            TxtSumValue.Text = Format(Val(TxtSumValue.Text), "0.00")
 
         Else
             TxtSumValue.Text = 0
@@ -220,7 +220,7 @@ Public Class FrmMainSafeReport
 
     Private Sub CheckPageSize()
 
-        If PageSize <> My.Settings.SizeOfPage Then
+        If PageSize <> My.Settings.PageSize Then
             PageNum = 1
             GetData(Data.Search) 'عند تغيير حجم الصفحة يجب معرفة عدد الصفحات الجديد PagesCount
         End If
@@ -310,6 +310,7 @@ Public Class FrmMainSafeReport
         If col = "ColShow" Then
             FrmTrusry.ShowDialog()
             GetData(Data.Search)
+
         ElseIf col = "ColPrint" Then
             Dim SQLCon = New SQLConClass
 
@@ -318,17 +319,22 @@ Public Class FrmMainSafeReport
 
             DSReport = SQLCon.SelectData(SQLQuery, 0, Nothing)
 
-            Dim F As New FrmPrint
-            Dim C As New CrTrusry
+            'Dim F As New FrmPrint
+            'Dim C As New CrTrusry
 
-            C.SetDataSource(DSReport.Tables(0))
-            F.CrystalReportViewer1.ReportSource = C
-            F.CrystalReportViewer1.Refresh()
-            F.Text = "طباعة"
-            F.CrystalReportViewer1.Zoom(100%)
-            F.WindowState = FormWindowState.Maximized
-            F.Show()
+            'C.SetDataSource(DSReport.Tables(0))
+            'F.CrystalReportViewer1.ReportSource = C
+            'F.CrystalReportViewer1.Refresh()
+            'F.Text = "طباعة"
+            'F.CrystalReportViewer1.Zoom(100%)
+            'F.WindowState = FormWindowState.Maximized
+            'F.Show()
         End If
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        FrmTrusry.ShowDialog()
+        BtnSearch.PerformClick()
     End Sub
 
     Private Sub CmbDay_TextChanged(sender As Object, e As EventArgs) Handles CmbDay.TextChanged

@@ -4,6 +4,8 @@ Public Class FrmSupplierInvoiceCashing
     Private DS, DsSave As DataSet
     Private CashingID As Integer
 
+    Public SupplierID As Integer
+
     Private Sub FrmSupplierInvoiceCashing_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
         If Me.Visible Then
             DTPDate.CustomFormat = GetDateAndTimeFormat(DTFormat.DF)
@@ -28,6 +30,7 @@ Public Class FrmSupplierInvoiceCashing
             TxtRest.Text = ""
             LblValue.BackColor = Color.White
             ChangeControlColor(Me)
+            'SupplierID = 0
 
         End If
     End Sub
@@ -42,28 +45,37 @@ Public Class FrmSupplierInvoiceCashing
         ChangeSystemColors(Me)
     End Sub
 
-
     Private Sub GetData()
 
         Dim sqlcon As New SQLConClass()
 
         SQLQuery = " Select SuppliersTable.ID ID ,SuppliersTable.Name , COALESCE(SUM(PurchasesTable.Total),0) Total 
                     From SuppliersTable, PurchasesTable Where PurchasesTable.SupplierID= SuppliersTable.ID
-                    And SuppliersTable.ID In(Select SupplierID from PurchasesTable) 
-                    GROUP BY SuppliersTable.ID,SuppliersTable.Name ORDER BY SuppliersTable.Name   " 'SupplierID
+                    And SuppliersTable.ID In(Select SupplierID from PurchasesTable) "
+        If SupplierID <> 0 Then
+            SQLQuery &= " and SupplierID=" & SupplierID
+        End If
+
+        SQLQuery &= " GROUP BY SuppliersTable.ID,SuppliersTable.Name ORDER BY SuppliersTable.Name   " 'SupplierID
+
         If Not IsNothing(CmbSupplier.SelectedValue) Then
             SQLQuery &= " where SupplierID=" & CmbSupplier.SelectedValue
         End If
+
         SQLQuery &= " SELECT ID, Name FROM BankTable ORDER BY Name "
-        SQLQuery &= "Select SuppliersTable.ID, SuppliersTable.Name, COALESCE(SUM(CashingTable.Value),0) Value
+        SQLQuery &= " Select SuppliersTable.ID, SuppliersTable.Name, COALESCE(SUM(CashingTable.Value),0) Value
                     From SuppliersTable LEFT JOIN SupplierCashingTable ON SuppliersTable.ID= SupplierCashingTable.SupplierID 
                     LEFT JOIN  CashingTable ON CashingTable.ID = SupplierCashingTable.CashingID
-                    Where CashingTable.EndService IS NULL
-                    GROUP BY SuppliersTable.ID, SuppliersTable.Name "
+                    Where CashingTable.EndService IS NULL"
+        If SupplierID <> 0 Then
+            SQLQuery &= " And SupplierID=" & SupplierID
+        End If
+        SQLQuery &= "  GROUP BY SuppliersTable.ID, SuppliersTable.Name "
 
         If Not IsNothing(CmbSupplier.SelectedValue) Then
             SQLQuery &= " And SupplierID = " & CmbSupplier.SelectedValue
         End If
+
         SQLQuery &= " DECLARE @Num BigInt Select @Num=ISNULL( MAX(Num),0) +1 From CashingTable  Select @Num Num"
         SQLQuery &= " Select ID , Name From PaymentTypeTable "
         SQLQuery &= " Select ID ,Name from EmployeeTable where EndService is NULL AND ID IN (SELECT EmployeeID From UserTable )  ORDER BY Name "
@@ -113,10 +125,10 @@ Public Class FrmSupplierInvoiceCashing
         Dim ItemRow() As DataRow = DS.Tables(0).Select("ID=" & CmbSupplier.SelectedValue)
 
         If ItemRow.Length > 0 Then
-            TxtSpusedValue.Text = Format(ItemRow(0)("Total"), "0.000")
+            TxtSpusedValue.Text = Format(ItemRow(0)("Total"), "0.00")
 
         Else
-            TxtSpusedValue.Text = "0.000"
+            TxtSpusedValue.Text = "0.00"
         End If
 
         Dim SelectedRow() As DataRow = DS.Tables(2).Select("ID=" & CmbSupplier.SelectedValue)
@@ -126,17 +138,17 @@ Public Class FrmSupplierInvoiceCashing
 
             With DT.Rows(0)
                 'If Not IsDBNull(DT.Rows(0).Item("Value")) Then
-                TxtValueRecipted.Text = Format(DT.Rows(0).Item("Value"), "0.000") 'Value
+                TxtValueRecipted.Text = Format(DT.Rows(0).Item("Value"), "0.00") 'Value
                 'Else
-                '    TxtValueRecipted.Text = "0.000"
+                '    TxtValueRecipted.Text = "0.00"
                 'End If
 
                 TxtRest.Text = (Val(TxtSpusedValue.Text) - Val(TxtValueRecipted.Text)).ToString
             End With
         Else
-            'TxtSpusedValue.Text = "0.000"
-            TxtValueRecipted.Text = "0.000"
-            TxtRest.Text = Format(TxtSpusedValue.Text, "0.000")
+            'TxtSpusedValue.Text = "0.00"
+            TxtValueRecipted.Text = "0.00"
+            TxtRest.Text = Format(TxtSpusedValue.Text, "0.00")
         End If
 
     End Sub
@@ -209,15 +221,17 @@ Public Class FrmSupplierInvoiceCashing
         FillDGV()
 
         If Save = 1 Then
-            If DsSave.Tables(1).Rows.Count > 0 Then
-                CashingID = DsSave.Tables(1).Rows(0).Item(0)
+            If DsSave.Tables(0).Rows.Count > 0 Then
+                CashingID = DsSave.Tables(0).Rows(0).Item(0)
             End If
         End If
+
+        SupplierID = 0
     End Sub
 
     Private Sub TxtRest_TextChanged(sender As Object, e As EventArgs) Handles TxtRest.TextChanged
         If TxtRest.Tag = "AutoC" Then
-            TxtRest.Text = Format(Val(TxtSpusedValue.Text) - Val(TxtValueRecipted.Text), "0.000")
+            TxtRest.Text = Format(Val(TxtSpusedValue.Text) - Val(TxtValueRecipted.Text), "0.00")
         End If
     End Sub
 
@@ -231,12 +245,15 @@ Public Class FrmSupplierInvoiceCashing
         LblValue.BackColor = TxtValue.BackColor
         LblValue.BackColor = SystemColors.Window
         Clear(Me)
+        SupplierID = 0
+
         GetData()
         CashingID = 0
 
         TxtRest.Text = ""
         TxtRest.Tag = "AutoC"
         ChangeControlColor(Me)
+
 
     End Sub
 
@@ -246,8 +263,8 @@ Public Class FrmSupplierInvoiceCashing
         DGVInvoice.Item(0, 0).Value = DGVInvoice.Rows.Count + 1
         DGVInvoice.Item(1, 0).Value = CmbSupplier.Text
         DGVInvoice.Item(2, 0).Value = TxtSpusedValue.Text
-        DGVInvoice.Item(3, 0).Value = Format(Val(TxtValueRecipted.Text) + Val(TxtValue.Text), "0.000")
-        DGVInvoice.Item(4, 0).Value = Format(Val(TxtSpusedValue.Text) - (Val(TxtValueRecipted.Text) + Val(TxtValue.Text)), "0.000")
+        DGVInvoice.Item(3, 0).Value = Format(Val(TxtValueRecipted.Text) + Val(TxtValue.Text), "0.00")
+        DGVInvoice.Item(4, 0).Value = Format(Val(TxtSpusedValue.Text) - (Val(TxtValueRecipted.Text) + Val(TxtValue.Text)), "0.00")
         DGVInvoice.ClearSelection()
     End Sub
 
@@ -326,67 +343,68 @@ Public Class FrmSupplierInvoiceCashing
     End Sub
 
     Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles BtnPrint.Click
-        'If CashingID = 0 Then Exit Sub
+        If CashingID = 0 Then Exit Sub
 
-        'Dim DSPrint = New DataSet
-        'Dim SQLCon = New SQLConClass
+        Dim DSPrint = New DataSet
+        Dim SQLCon = New SQLConClass
 
-        'SQLQuery = "SELECT FORMAT(Num,'000000') AS Num,FORMAT(Date,'" & GetDateAndTimeFormat(DTFormat.DF) & "') AS [Date],Value,ReceiptName,Nots,CheckNum,PaymentTypeName FROM CashingView WHERE ID=" & CashingID
-        'SQLQuery &= " SELECT * FROM CenterMainInfoTable"
+        SQLQuery = "SELECT FORMAT(Num,'000000') AS Num,FORMAT(Date,'" & GetDateAndTimeFormat(DTFormat.DF) &
+            "') AS [Date],Value,ReceiptName,Notes,CheckNum,PaymentTypeName FROM CashingView WHERE ID=" & CashingID
+        SQLQuery &= " SELECT * FROM CenterInfoTable"
 
-        'DSPrint = SQLCon.SelectData(SQLQuery, 0, Nothing)
+        DSPrint = SQLCon.SelectData(SQLQuery, 0, Nothing)
 
-        'Dim Check As String
-        'Dim Cash As String
-        'Dim Price As String
+        Dim Check As String
+        Dim Cash As String
+        Dim Price As String
 
-        'Dim Value = Format(DSPrint.Tables(0).Rows(0).Item(2), "0.000")
+        Dim Value = Format(DSPrint.Tables(0).Rows(0).Item(2), "0.00")
 
-        'Dim Denar As String
-        'Dim Derham As String
-        'Dim PaymentType As String
+        Dim Denar As String
+        Dim Derham As String
+        Dim PaymentType As String
 
-        'If Value.IndexOf(".") = -1 Then
-        '    Denar = Value
-        '    Derham = "00"
-        'Else
-        '    Denar = Value.Substring(0, Value.IndexOf("."))
-        '    Derham = Value.Substring(Value.IndexOf(".") + 1, 2)
-        'End If
+        If Value.IndexOf(".") = -1 Then
+            Denar = Value
+            Derham = "00"
+        Else
+            Denar = Value.Substring(0, Value.IndexOf("."))
+            Derham = Value.Substring(Value.IndexOf(".") + 1, 2)
+        End If
 
 
-        'If IsDBNull(DSPrint.Tables(0).Rows(0).Item(5)) Then
-        '    Check = ""
-        '    Cash = "✔️"
-        '    PaymentType = DSPrint.Tables(0).Rows(0).Item(6)
-        'Else
-        '    Check = "✔️"
-        '    Cash = ""
-        '    PaymentType = "نقداً"
-        'End If
+        If IsDBNull(DSPrint.Tables(0).Rows(0).Item(5)) Then
+            Check = ""
+            Cash = "✔️"
+            PaymentType = DSPrint.Tables(0).Rows(0).Item(6)
+        Else
+            Check = "✔️"
+            Cash = ""
+            PaymentType = "نقداً"
+        End If
 
-        'Price = NoToTxt(DSPrint.Tables(0).Rows(0).Item(2), "دينار", "درهم", True)
+        Price = NoToTxt(DSPrint.Tables(0).Rows(0).Item(2), "دينار", "درهم", True)
 
-        'Dim F As New FrmPrint
-        'Dim C As New CRCashing
+        Dim F As New FrmPrint
+        Dim C As New CRCashing
 
-        'C.SetDataSource(DSPrint.Tables(0))
-        'C.Subreports(0).SetDataSource(DSPrint.Tables(1))
-        'C.Subreports(1).SetDataSource(DSPrint.Tables(1))
-        'C.Subreports(2).SetDataSource(DSPrint.Tables(1))
-        'C.Subreports(3).SetDataSource(DSPrint.Tables(1))
-        'C.SetParameterValue("Check", Check)
-        'C.SetParameterValue("Cash", Cash)
-        'C.SetParameterValue("Price", Price)
-        'C.SetParameterValue("Denar", Denar)
-        'C.SetParameterValue("Derham", Derham)
-        'C.SetParameterValue("PaymentType", PaymentType)
-        'F.CrystalReportViewer1.ReportSource = C
-        'F.CrystalReportViewer1.Refresh()
-        'F.Text = "طباعة"
-        'F.CrystalReportViewer1.Zoom(100%)
-        'F.WindowState = FormWindowState.Maximized
-        'F.Show()
+        C.SetDataSource(DSPrint.Tables(0))
+        C.Subreports(0).SetDataSource(DSPrint.Tables(1))
+        C.Subreports(1).SetDataSource(DSPrint.Tables(1))
+        C.Subreports(2).SetDataSource(DSPrint.Tables(1))
+        C.Subreports(3).SetDataSource(DSPrint.Tables(1))
+        C.SetParameterValue("Check", Check)
+        C.SetParameterValue("Cash", Cash)
+        C.SetParameterValue("Price", Price)
+        C.SetParameterValue("Denar", Denar)
+        C.SetParameterValue("Derham", Derham)
+        C.SetParameterValue("PaymentType", PaymentType)
+        F.CrystalReportViewer1.ReportSource = C
+        F.CrystalReportViewer1.Refresh()
+        F.Text = "طباعة"
+        F.CrystalReportViewer1.Zoom(100%)
+        F.WindowState = FormWindowState.Maximized
+        F.Show()
 
     End Sub
 

@@ -17,10 +17,10 @@ Public Class FrmTrusry
         If TrustyID = 0 Then
             SQLQuery = " select ISNULL(Max(NUM),0)+1 from TrusryTable  "
 
-            SQLQuery += " select * from ReceiptView where Type=0 order by Date Desc "
-            SQLQuery += " select * from CashingView where Type=0   order by Date Desc "
-            SQLQuery += " select ISNULL(SUM(Value),0) from ReceiptView where Type=0  and PaymentTypeID =1   "
-            SQLQuery += " select ISNULL(SUM(Value),0) from ReceiptView where Type=0  and PaymentTypeID <>1   "
+            SQLQuery += " select * from ReceiptView where TrusryTypeID=1 order by Date Desc "
+            SQLQuery += " select * from CashingView where TrusryTypeID=1   order by Date Desc "
+            SQLQuery += " select ISNULL(SUM(Value),0) from ReceiptView where TrusryTypeID=1  and PaymentTypeID =1   "
+            SQLQuery += " select ISNULL(SUM(Value),0) from ReceiptView where TrusryTypeID=1  and PaymentTypeID <>1   "
         Else
             SQLQuery = " select * from TrusryView where ID=  " & TrustyID
             SQLQuery += " select * from ReceiptView where ID in (select ReceiptID from TrusryReceiptTable where TrusryID=" & TrustyID & " ) order by Date Desc "
@@ -55,7 +55,7 @@ Public Class FrmTrusry
                 LblTotal.Text = Val(LblCash.Text) - Val(TxtCashing.Text)
                 TxtPaid.Text = Ds.Tables(0).Rows(0).Item("Paid")
                 TxtCashing.Text = Ds.Tables(0).Rows(0).Item("Expenses")
-                lblUser.Text = Ds.Tables(0).Rows(0).Item("Name")
+                lblUser.Text = Ds.Tables(0).Rows(0).Item("Name").ToString
                 TxtNots.Text = Ds.Tables(0).Rows(0).Item("Nots")
                 DTPDate.Value = Ds.Tables(0).Rows(0).Item("Date1")
             End If
@@ -76,7 +76,7 @@ Public Class FrmTrusry
                 DGVCashing.Item(5, i).Value = .Item("PaymentTypeName")
                 DGVCashing.Item(6, i).Value = Format(.Item("Date"), GetDateAndTimeFormat(DTFormat.DTF))
                 DGVCashing.Item(7, i).Value = .Item("ReceiptName")
-                DGVCashing.Item(8, i).Value = .Item("UserName")
+                DGVCashing.Item(8, i).Value = .Item("Notes")
                 TxtCashing.Text = Val(TxtCashing.Text) + .Item("Value")
             End With
         Next
@@ -94,9 +94,9 @@ Public Class FrmTrusry
                 DGVInvoice.Item(2, i).Value = i + 1
                 DGVInvoice.Item(3, i).Value = Format(.Item("NUM"), "00000")
                 DGVInvoice.Item(4, i).Value = .Item("Value")
-                DGVInvoice.Item(5, i).Value = .Item("PayName")
+                DGVInvoice.Item(5, i).Value = .Item("PaymentType")
                 DGVInvoice.Item(6, i).Value = Format(.Item("Date"), GetDateAndTimeFormat(DTFormat.DTF))
-                DGVInvoice.Item(7, i).Value = .Item("UserName")
+                'DGVInvoice.Item(7, i).Value = .Item("UserName")
                 DGVInvoice.Item(8, i).Value = .Item("NoteFor")
                 LblReceipt.Text = Val(LblReceipt.Text) + .Item("Value")
             End With
@@ -128,15 +128,39 @@ Public Class FrmTrusry
         DSReport = SQLCon1.SelectData(SQLQuery, 0, Nothing)
 
         Dim F As New FrmPrint
-        Dim C As New CrTrusry
+        'Dim C As New CrTrusry
 
-        C.SetDataSource(DSReport.Tables(0))
-        F.CrystalReportViewer1.ReportSource = C
-        F.CrystalReportViewer1.Refresh()
-        F.Text = "طباعة"
-        F.CrystalReportViewer1.Zoom(100%)
-        F.WindowState = FormWindowState.Maximized
-        F.Show()
-        Me.Close()
+        'C.SetDataSource(DSReport.Tables(0))
+        'F.CrystalReportViewer1.ReportSource = C
+        'F.CrystalReportViewer1.Refresh()
+        'F.Text = "طباعة"
+        'F.CrystalReportViewer1.Zoom(100%)
+        'F.WindowState = FormWindowState.Maximized
+        'F.Show()
+        'Me.Close()
     End Sub
+
+    Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
+        Close()
+    End Sub
+
+    Private Sub PnlTitel_MouseDown(sender As Object, e As MouseEventArgs) Handles PnlTitel.MouseDown, LblTitel.MouseDown
+        If e.Button = MouseButtons.Left Then
+            SW = True
+            Pos = e.Location
+        End If
+    End Sub
+
+    Private Sub PnlTitel_MouseMove(sender As Object, e As MouseEventArgs) Handles PnlTitel.MouseMove, LblTitel.MouseMove
+        If SW Then
+            Me.Location += e.Location - Pos
+        End If
+    End Sub
+
+    Private Sub PnlTitel_MouseUp(sender As Object, e As MouseEventArgs) Handles PnlTitel.MouseUp, LblTitel.MouseUp
+        If e.Button = MouseButtons.Left Then
+            SW = False
+        End If
+    End Sub
+
 End Class

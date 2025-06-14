@@ -45,6 +45,11 @@ Partial Class FrmTailorInvoiceCashing
         Me.Label13 = New System.Windows.Forms.Label()
         Me.TxtNoteFor = New System.Windows.Forms.TextBox()
         Me.DGVInvoice = New System.Windows.Forms.DataGridView()
+        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanel5 = New System.Windows.Forms.TableLayoutPanel()
@@ -81,12 +86,9 @@ Partial Class FrmTailorInvoiceCashing
         Me.LblValueRecipted = New System.Windows.Forms.Label()
         Me.TxtValueRecipted = New System.Windows.Forms.Label()
         Me.CmbEmployee = New System.Windows.Forms.ComboBox()
+        Me.CmbTrusryType = New System.Windows.Forms.ComboBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel5 = New System.Windows.Forms.Panel()
-        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TableLayoutPanel4.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.Panel7.SuspendLayout()
@@ -127,7 +129,7 @@ Partial Class FrmTailorInvoiceCashing
         Me.TableLayoutPanel4.Controls.Add(Me.TxtRecipient, 3, 1)
         Me.TableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel4.Location = New System.Drawing.Point(2, 2)
-        Me.TableLayoutPanel4.Margin = New System.Windows.Forms.Padding(2)
+        Me.TableLayoutPanel4.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
         Me.TableLayoutPanel4.RowCount = 2
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
@@ -143,7 +145,7 @@ Partial Class FrmTailorInvoiceCashing
         Me.Panel4.Location = New System.Drawing.Point(261, 5)
         Me.Panel4.Margin = New System.Windows.Forms.Padding(0)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Padding = New System.Windows.Forms.Padding(2)
+        Me.Panel4.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Panel4.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.Panel4.Size = New System.Drawing.Size(157, 36)
         Me.Panel4.TabIndex = 464
@@ -157,7 +159,7 @@ Partial Class FrmTailorInvoiceCashing
         Me.LblNum.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
         Me.LblNum.ForeColor = System.Drawing.Color.Black
         Me.LblNum.Location = New System.Drawing.Point(2, 2)
-        Me.LblNum.Margin = New System.Windows.Forms.Padding(5)
+        Me.LblNum.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
         Me.LblNum.Name = "LblNum"
         Me.LblNum.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.LblNum.Size = New System.Drawing.Size(153, 32)
@@ -171,7 +173,7 @@ Partial Class FrmTailorInvoiceCashing
         Me.Panel7.Controls.Add(Me.TxtValue)
         Me.Panel7.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel7.Location = New System.Drawing.Point(263, 49)
-        Me.Panel7.Margin = New System.Windows.Forms.Padding(2)
+        Me.Panel7.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Size = New System.Drawing.Size(153, 44)
         Me.Panel7.TabIndex = 465
@@ -235,7 +237,7 @@ Partial Class FrmTailorInvoiceCashing
         Me.DTPDate.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DTPDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.DTPDate.Location = New System.Drawing.Point(2, 7)
-        Me.DTPDate.Margin = New System.Windows.Forms.Padding(2)
+        Me.DTPDate.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.DTPDate.Name = "DTPDate"
         Me.DTPDate.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.DTPDate.RightToLeftLayout = True
@@ -272,7 +274,7 @@ Partial Class FrmTailorInvoiceCashing
         Me.TxtRecipient.BackColor = System.Drawing.SystemColors.Window
         Me.TxtRecipient.Font = New System.Drawing.Font("Droid Arabic Kufi", 11.0!)
         Me.TxtRecipient.Location = New System.Drawing.Point(2, 53)
-        Me.TxtRecipient.Margin = New System.Windows.Forms.Padding(2)
+        Me.TxtRecipient.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TxtRecipient.MaxLength = 200
         Me.TxtRecipient.Name = "TxtRecipient"
         Me.TxtRecipient.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -296,7 +298,7 @@ Partial Class FrmTailorInvoiceCashing
         Me.TLPButtons.Controls.Add(Me.BtnPrint, 4, 0)
         Me.TLPButtons.Controls.Add(Me.BtnRefresh, 2, 0)
         Me.TLPButtons.Location = New System.Drawing.Point(14, 408)
-        Me.TLPButtons.Margin = New System.Windows.Forms.Padding(2)
+        Me.TLPButtons.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TLPButtons.Name = "TLPButtons"
         Me.TLPButtons.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.TLPButtons.RowCount = 1
@@ -441,7 +443,7 @@ Partial Class FrmTailorInvoiceCashing
         Me.DGVInvoice.EnableHeadersVisualStyles = False
         Me.DGVInvoice.GridColor = System.Drawing.Color.Gray
         Me.DGVInvoice.Location = New System.Drawing.Point(14, 461)
-        Me.DGVInvoice.Margin = New System.Windows.Forms.Padding(2)
+        Me.DGVInvoice.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.DGVInvoice.MultiSelect = False
         Me.DGVInvoice.Name = "DGVInvoice"
         Me.DGVInvoice.ReadOnly = True
@@ -454,6 +456,44 @@ Partial Class FrmTailorInvoiceCashing
         Me.DGVInvoice.Size = New System.Drawing.Size(971, 80)
         Me.DGVInvoice.TabIndex = 43
         Me.DGVInvoice.Tag = ""
+        '
+        'Column4
+        '
+        Me.Column4.FillWeight = 60.46077!
+        Me.Column4.HeaderText = "ت"
+        Me.Column4.MinimumWidth = 6
+        Me.Column4.Name = "Column4"
+        Me.Column4.ReadOnly = True
+        Me.Column4.Visible = False
+        '
+        'Column5
+        '
+        Me.Column5.FillWeight = 128.3422!
+        Me.Column5.HeaderText = "الخياط"
+        Me.Column5.MinimumWidth = 6
+        Me.Column5.Name = "Column5"
+        Me.Column5.ReadOnly = True
+        '
+        'Column6
+        '
+        Me.Column6.HeaderText = "الاجمالي"
+        Me.Column6.MinimumWidth = 6
+        Me.Column6.Name = "Column6"
+        Me.Column6.ReadOnly = True
+        '
+        'Column7
+        '
+        Me.Column7.HeaderText = "المدفوع"
+        Me.Column7.MinimumWidth = 6
+        Me.Column7.Name = "Column7"
+        Me.Column7.ReadOnly = True
+        '
+        'Column2
+        '
+        Me.Column2.HeaderText = "القيمة المستحقة"
+        Me.Column2.MinimumWidth = 6
+        Me.Column2.Name = "Column2"
+        Me.Column2.ReadOnly = True
         '
         'TableLayoutPanel1
         '
@@ -482,7 +522,7 @@ Partial Class FrmTailorInvoiceCashing
         Me.GroupBox1.Location = New System.Drawing.Point(0, 0)
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(0)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2)
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.GroupBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.GroupBox1.Size = New System.Drawing.Size(571, 359)
         Me.GroupBox1.TabIndex = 35
@@ -564,7 +604,7 @@ Partial Class FrmTailorInvoiceCashing
         Me.TableLayoutPanel3.Controls.Add(Me.CmbPaymentType, 1, 0)
         Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel3.Location = New System.Drawing.Point(2, 196)
-        Me.TableLayoutPanel3.Margin = New System.Windows.Forms.Padding(2)
+        Me.TableLayoutPanel3.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
         Me.TableLayoutPanel3.RowCount = 1
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
@@ -606,9 +646,9 @@ Partial Class FrmTailorInvoiceCashing
         Me.GroupBox2.Controls.Add(Me.TLPCheck)
         Me.GroupBox2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox2.Location = New System.Drawing.Point(2, 238)
-        Me.GroupBox2.Margin = New System.Windows.Forms.Padding(2)
+        Me.GroupBox2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Padding = New System.Windows.Forms.Padding(2)
+        Me.GroupBox2.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.GroupBox2.Size = New System.Drawing.Size(542, 78)
         Me.GroupBox2.TabIndex = 70
         Me.GroupBox2.TabStop = False
@@ -619,7 +659,7 @@ Partial Class FrmTailorInvoiceCashing
         Me.ChkCheck.Cursor = System.Windows.Forms.Cursors.Hand
         Me.ChkCheck.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
         Me.ChkCheck.Location = New System.Drawing.Point(470, -1)
-        Me.ChkCheck.Margin = New System.Windows.Forms.Padding(2)
+        Me.ChkCheck.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.ChkCheck.Name = "ChkCheck"
         Me.ChkCheck.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.ChkCheck.Size = New System.Drawing.Size(59, 32)
@@ -640,8 +680,8 @@ Partial Class FrmTailorInvoiceCashing
         Me.TLPCheck.Controls.Add(Me.Panel17, 2, 0)
         Me.TLPCheck.Controls.Add(Me.Panel16, 0, 0)
         Me.TLPCheck.Enabled = False
-        Me.TLPCheck.Location = New System.Drawing.Point(9, 25)
-        Me.TLPCheck.Margin = New System.Windows.Forms.Padding(2)
+        Me.TLPCheck.Location = New System.Drawing.Point(9, 26)
+        Me.TLPCheck.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TLPCheck.Name = "TLPCheck"
         Me.TLPCheck.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.TLPCheck.RowCount = 1
@@ -657,7 +697,7 @@ Partial Class FrmTailorInvoiceCashing
         Me.CmbBank.Font = New System.Drawing.Font("Droid Arabic Kufi", 11.0!)
         Me.CmbBank.FormattingEnabled = True
         Me.CmbBank.Location = New System.Drawing.Point(2, 4)
-        Me.CmbBank.Margin = New System.Windows.Forms.Padding(2)
+        Me.CmbBank.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CmbBank.Name = "CmbBank"
         Me.CmbBank.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.CmbBank.Size = New System.Drawing.Size(176, 36)
@@ -669,7 +709,7 @@ Partial Class FrmTailorInvoiceCashing
         Me.TxtCheckNum.BackColor = System.Drawing.SystemColors.Window
         Me.TxtCheckNum.Font = New System.Drawing.Font("Droid Arabic Kufi", 11.0!)
         Me.TxtCheckNum.Location = New System.Drawing.Point(261, 4)
-        Me.TxtCheckNum.Margin = New System.Windows.Forms.Padding(2)
+        Me.TxtCheckNum.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TxtCheckNum.MaxLength = 20
         Me.TxtCheckNum.Name = "TxtCheckNum"
         Me.TxtCheckNum.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -682,7 +722,7 @@ Partial Class FrmTailorInvoiceCashing
         Me.Panel17.Controls.Add(Me.Label17)
         Me.Panel17.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel17.Location = New System.Drawing.Point(182, 2)
-        Me.Panel17.Margin = New System.Windows.Forms.Padding(2)
+        Me.Panel17.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Panel17.Name = "Panel17"
         Me.Panel17.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.Panel17.Size = New System.Drawing.Size(75, 40)
@@ -707,7 +747,7 @@ Partial Class FrmTailorInvoiceCashing
         Me.Panel16.Controls.Add(Me.Label16)
         Me.Panel16.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel16.Location = New System.Drawing.Point(441, 2)
-        Me.Panel16.Margin = New System.Windows.Forms.Padding(2)
+        Me.Panel16.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Panel16.Name = "Panel16"
         Me.Panel16.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.Panel16.Size = New System.Drawing.Size(87, 40)
@@ -759,9 +799,11 @@ Partial Class FrmTailorInvoiceCashing
         Me.TableLayoutPanel10.Controls.Add(Me.CmbTailor, 1, 0)
         Me.TableLayoutPanel10.Controls.Add(Me.Panel2, 1, 2)
         Me.TableLayoutPanel10.Controls.Add(Me.CmbEmployee, 1, 4)
+        Me.TableLayoutPanel10.Controls.Add(Me.CmbTrusryType, 1, 5)
+        Me.TableLayoutPanel10.Controls.Add(Me.Label1, 0, 5)
         Me.TableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel10.Location = New System.Drawing.Point(3, 31)
-        Me.TableLayoutPanel10.Margin = New System.Windows.Forms.Padding(2)
+        Me.TableLayoutPanel10.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TableLayoutPanel10.Name = "TableLayoutPanel10"
         Me.TableLayoutPanel10.RowCount = 7
         Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667!))
@@ -995,6 +1037,33 @@ Partial Class FrmTailorInvoiceCashing
         Me.CmbEmployee.TabIndex = 463
         Me.CmbEmployee.Tag = ""
         '
+        'CmbTrusryType
+        '
+        Me.CmbTrusryType.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.CmbTrusryType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.CmbTrusryType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.CmbTrusryType.Font = New System.Drawing.Font("Droid Arabic Kufi", 11.0!)
+        Me.CmbTrusryType.FormattingEnabled = True
+        Me.CmbTrusryType.Location = New System.Drawing.Point(20, 268)
+        Me.CmbTrusryType.Margin = New System.Windows.Forms.Padding(0)
+        Me.CmbTrusryType.Name = "CmbTrusryType"
+        Me.CmbTrusryType.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.CmbTrusryType.Size = New System.Drawing.Size(223, 36)
+        Me.CmbTrusryType.TabIndex = 1276
+        Me.CmbTrusryType.Tag = ""
+        '
+        'Label1
+        '
+        Me.Label1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label1.Font = New System.Drawing.Font("Droid Arabic Kufi", 11.0!)
+        Me.Label1.ForeColor = System.Drawing.Color.Black
+        Me.Label1.Location = New System.Drawing.Point(246, 260)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(125, 52)
+        Me.Label1.TabIndex = 1277
+        Me.Label1.Text = "الخزينة"
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'Panel5
         '
         Me.Panel5.Controls.Add(Me.TableLayoutPanel1)
@@ -1005,44 +1074,6 @@ Partial Class FrmTailorInvoiceCashing
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Size = New System.Drawing.Size(1002, 561)
         Me.Panel5.TabIndex = 1255
-        '
-        'Column4
-        '
-        Me.Column4.FillWeight = 60.46077!
-        Me.Column4.HeaderText = "ت"
-        Me.Column4.MinimumWidth = 6
-        Me.Column4.Name = "Column4"
-        Me.Column4.ReadOnly = True
-        Me.Column4.Visible = False
-        '
-        'Column5
-        '
-        Me.Column5.FillWeight = 128.3422!
-        Me.Column5.HeaderText = "الخياط"
-        Me.Column5.MinimumWidth = 6
-        Me.Column5.Name = "Column5"
-        Me.Column5.ReadOnly = True
-        '
-        'Column6
-        '
-        Me.Column6.HeaderText = "الاجمالي"
-        Me.Column6.MinimumWidth = 6
-        Me.Column6.Name = "Column6"
-        Me.Column6.ReadOnly = True
-        '
-        'Column7
-        '
-        Me.Column7.HeaderText = "المدفوع"
-        Me.Column7.MinimumWidth = 6
-        Me.Column7.Name = "Column7"
-        Me.Column7.ReadOnly = True
-        '
-        'Column2
-        '
-        Me.Column2.HeaderText = "القيمة المستحقة"
-        Me.Column2.MinimumWidth = 6
-        Me.Column2.Name = "Column2"
-        Me.Column2.ReadOnly = True
         '
         'FrmTailorInvoiceCashing
         '
@@ -1147,4 +1178,6 @@ Partial Class FrmTailorInvoiceCashing
     Friend WithEvents Column6 As DataGridViewTextBoxColumn
     Friend WithEvents Column7 As DataGridViewTextBoxColumn
     Friend WithEvents Column2 As DataGridViewTextBoxColumn
+    Friend WithEvents CmbTrusryType As ComboBox
+    Friend WithEvents Label1 As Label
 End Class

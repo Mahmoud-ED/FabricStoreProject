@@ -1,11 +1,13 @@
 ﻿Imports System.ComponentModel
+Imports System.Data.SqlClient
 
 Public Class FrmStore
     Private Ds As DataSet
-    Public PurchasesID As Integer
+    Public ID As Integer
 
-    Private Sub FrmStore_Load(sender As Object, e As EventArgs) Handles Me.Load
-        'ChangeSystemColors(Me)
+
+
+    Private Sub FrmStore_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
         GetData()
     End Sub
 
@@ -18,52 +20,51 @@ Public Class FrmStore
             Ds.Clear()
         End If
 
-        TxtSumValue.Text = "0"
-        TxtInvoNum.Text = ""
-        TxtStore.Text = ""
-        TxtUserName.Text = ""
         Dispose()
     End Sub
 
     Private Sub GetData()
-        If PurchasesID = 0 Then Exit Sub
-        Dim sqlcon As New SQLConClass()
-        SQLQuery = " SELECT *  FROM PurchaseContentsView where PurchasesID=" & PurchasesID
-        SQLQuery &= " Select Total, Num,SuppliersTable.Name, UserView.Name UserName From PurchasesTable ,SuppliersTable  ,
-                UserView where SuppliersTable.ID=SupplierID  And UserView.ID=  PurchasesTable.UserID  AND  PurchasesTable.ID=" & PurchasesID
-        Ds = sqlcon.SelectData(SQLQuery)
+        'If ID = 0 Then Exit Sub
+        Dim SqlCon As New SQLConClass()
+        SQLQuery = " Select ROW_NUMBER() OVER (ORDER BY (ID)Desc) As ت, ID, Name, Num, Sum(Quantity) AS Quantity 
+                    From ItemsView WHERE EndService IS NULL AND (StoreID = 1 Or StoreID = 3) GROUP BY Name, ID, Num ORDER BY Name DESC"
+        Ds = SqlCon.SelectData(SQLQuery)
         If DSHasTables(Ds) Then
             FillDGV()
-            TxtUserName.Text = Ds.Tables(1).Rows(0).Item("UserName")
-            TxtStore.Text = Ds.Tables(1).Rows(0).Item("Name")
-            If Val(Ds.Tables(1).Rows(0).Item("Total")) > 0 Then
-                TxtSumValue.Text = Format(Ds.Tables(1).Rows(0).Item("Total"), "0.000")
-
-            Else
-                TxtSumValue.Text = "0"
-            End If
-
-            TxtInvoNum.Text = Format(Ds.Tables(1).Rows(0).Item("Num"), "000000")
         End If
     End Sub
 
     Private Sub FillDGV()
-        DGVInvoContent.Rows.Clear()
+        DGVItem.Rows.Clear()
         For i = 0 To Ds.Tables(0).Rows.Count - 1
             With Ds.Tables(0).Rows(i)
 
-                DGVInvoContent.Rows.Add()
-                DGVInvoContent.Item(0, i).Value = i + 1
-                DGVInvoContent.Item(1, i).Value = .Item("Name")
-                DGVInvoContent.Item(2, i).Value = Format(.Item("Price"), "0.000")
-                DGVInvoContent.Item(3, i).Value = .Item("Quantity")
-                DGVInvoContent.Item(4, i).Value = Format(.Item("Total"), "0.000")
-                DGVInvoContent.Item(5, i).Value = .Item("Color")
-                DGVInvoContent.Item(6, i).Value = .Item("Country")
+                DGVItem.Rows.Add()
+                DGVItem.Item(0, i).Value = i + 1
+                DGVItem.Item(1, i).Value = .Item("Num")
+                DGVItem.Item(2, i).Value = .Item("Name")
+                DGVItem.Item(3, i).Value = .Item("Quantity")
+                DGVItem.Item(4, i).Value = .Item("ID")
 
             End With
         Next
-        DGVInvoContent.ClearSelection()
+        DGVItem.ClearSelection()
+    End Sub
+
+    Private Sub DGVItem_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGVItem.CellContentClick
+        If DGVItem.RowCount = 0 Then Exit Sub
+
+        ID = DGVItem.Item(4, DGVItem.CurrentRow.Index).Value
+
+        Dim Col = CType(sender, DataGridView).Columns(e.ColumnIndex).Name
+        If Col = "ColShow" Then
+            If ID = 0 Then Exit Sub
+            FrmItemDetails.ID = ID
+            FrmItemDetails.ShowDialog()
+
+        End If
+
+        GetData()
     End Sub
 
 End Class

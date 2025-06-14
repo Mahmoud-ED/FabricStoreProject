@@ -42,15 +42,15 @@ Public Class FrmReceipt
         Dim DSEmp As DataSet
         DSEmp = SQLCon.SelectData(SQLQuery)
         If DSEmp.Tables.Count > 0 Then
-            CmbEmpName.DataSource = DSEmp.Tables(0)
-            CmbEmpName.ValueMember = "ID"
-            CmbEmpName.DisplayMember = "Name"
+            CmbTrusry.DataSource = DSEmp.Tables(0)
+            CmbTrusry.ValueMember = "ID"
+            CmbTrusry.DisplayMember = "Name"
 
             If EmployeeID <> 0 Then
-                CmbEmpName.SelectedValue = EmployeeID
+                CmbTrusry.SelectedValue = EmployeeID
 
             Else
-                CmbEmpName.SelectedValue = -1
+                CmbTrusry.SelectedValue = -1
             End If
         End If
     End Sub
@@ -117,10 +117,12 @@ Public Class FrmReceipt
         SQLQuery = " SELECT * FROM PaymentTypeTable "
         SQLQuery &= " EXEC GetUnpaidInvoices  @CustomerID = " & CIDSearch
         SQLQuery &= " Select * From BankTable Order By Name"
-        SQLQuery &= " Select ID ,Name from EmployeeTable where EndService is NULL AND ID IN (SELECT EmployeeID From UserTable )  ORDER BY Name "
+        SQLQuery &= " Select ID ,Name from TrusryTypeTable  "
         SQLQuery &= " DECLARE @Num BigInt Select @Num=ISNULL(MAX(Num),0) +1 From ReceiptTable  Select @Num Num "
         SQLQuery &= "  Select ID, Name  From CustomersTable Where  ID = " & CIDSearch
-
+        If ReceiptID <> 0 Then
+            SQLQuery += "	Select * From ReceiptView Where ID =" & ReceiptID
+        End If
         Dim SQLCon = New SQLConClass()
 
         DS = SQLCon.SelectData(SQLQuery)
@@ -186,22 +188,26 @@ Public Class FrmReceipt
         End If
 
         If DS.Tables(3).Rows.Count > 0 Then
-            CmbEmpName.DataSource = DS.Tables(3)
-            CmbEmpName.ValueMember = "ID"
-            CmbEmpName.DisplayMember = "Name"
+            CmbTrusry.DataSource = DS.Tables(3)
+            CmbTrusry.ValueMember = "ID"
+            CmbTrusry.DisplayMember = "Name"
             If EmployeeID <> 0 Then
-                CmbEmpName.SelectedValue = EmployeeID
+                CmbTrusry.SelectedValue = EmployeeID
 
             Else
-                CmbEmpName.SelectedValue = -1
+                CmbTrusry.SelectedValue = -1
             End If
         Else
-            CmbEmpName.DataSource = Nothing
+            CmbTrusry.DataSource = Nothing
         End If
 
         CmbInvoice.Select()
         LblReceiptNum.Text = Format(DS.Tables(4).Rows(0).Item("Num"), "000000")
 
+
+        If ReceiptID <> 0 Then
+            FillDGV(DS.Tables(6))
+        End If
     End Sub
 
     Private Sub PnlMenu_MouseDown(sender As Object, e As MouseEventArgs) Handles PnlMenu.MouseDown, LblTitle.MouseDown
@@ -234,27 +240,28 @@ Public Class FrmReceipt
 
     Private Sub CmbInvoice_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles CmbInvoice.SelectionChangeCommitted
         InvoiceID = CmbInvoice.SelectedValue
-        Dim Row() As DataRow = DS.Tables(1).Select("ID=" & InvoiceID)
-        If Row.Length > 0 Then
+        'Dim Row() As DataRow = DS.Tables(1).Select("ID=" & InvoiceID)
+        'If Row.Length > 0 Then  ' هدا زايد بيدير خطأ 
 
 
-            SQLQuery = "Exec GetInvoiceDetails @InvoiceID = " & InvoiceID
+        SQLQuery = "Exec GetInvoiceDetails @InvoiceID = " & InvoiceID
 
             Dim SQLCon = New SQLConClass()
 
             DSPrice = SQLCon.SelectData(SQLQuery)
             If DSPrice.Tables(0).Rows.Count > 0 Then
-                TxtPrice.Text = Format(DSPrice.Tables(0).Rows(0).Item("TotalInvoice"), "0.000")
-                TxtPayment.Text = Format(DSPrice.Tables(0).Rows(0).Item("TotalReceipts"), "0.000")
-                TxtRest.Text = Format(DSPrice.Tables(0).Rows(0).Item("Remaining"), "0.000")
-
-            End If
-            TxtReceiptValue.Text = TxtRest.Text
+            TxtPrice.Text = Format(DSPrice.Tables(0).Rows(0).Item("TotalInvoice"), "0.00")
+            TxtPayment.Text = Format(DSPrice.Tables(0).Rows(0).Item("TotalReceipts"), "0.00")
+            TxtRest.Text = Format(DSPrice.Tables(0).Rows(0).Item("Remaining"), "0.00")
 
         End If
+            TxtReceiptValue.Text = TxtRest.Text
+
+        'End If
     End Sub
 
     Private Sub BtnRefresh_Click(sender As Object, e As EventArgs) Handles BtnRefresh.Click
+        ReceiptID = 0
         NewReceipt()
         DGVReceipt.Rows.Clear()
         GetData()
@@ -326,7 +333,7 @@ Public Class FrmReceipt
             New SqlParameter("@Date", DTPReceiptDate.Value),
             New SqlParameter("@Value", TxtReceiptValue.Text.Trim),
             New SqlParameter("@IncreaseValue", TxtIncreaseValue.Text.Trim),
-            New SqlParameter("@EmployeeID", CmbEmpName.SelectedValue),
+            New SqlParameter("@TrusryTypeID", CmbTrusry.SelectedValue),
             New SqlParameter("@ReceiptName", TxtName.Text.Trim),
             New SqlParameter("@PaymentTypeID", CmbPaymentType.SelectedValue),
             New SqlParameter("@BankID", CmbBank.SelectedValue),
@@ -341,7 +348,7 @@ Public Class FrmReceipt
         If Save = 1 Then
             MsgToolReceipt("تم حفظ الايصال بنجاح", 1)
             ReceiptID = DSReceipt.Tables(0).Rows(0).Item(0)
-            FillDGV(DSReceipt.Tables(0))
+            'FillDGV(DSReceipt.Tables(0))
             'If ChkPrint.Checked Then
             '    BtnPrint_Click(sender, e)
             'End If
@@ -360,7 +367,7 @@ Public Class FrmReceipt
                 ReceiptID = .Item("ID")
                 DGVReceipt.Item(0, i).Value = .Item("ID")
                 DGVReceipt.Item(1, i).Value = Format(.Item("Num"), "000000")
-                DGVReceipt.Item(2, i).Value = Format(.Item("Value"), "0.000")
+                DGVReceipt.Item(2, i).Value = Format(.Item("Value"), "0.00")
                 DGVReceipt.Item(3, i).Value = .Item("ReceiptName")
                 DGVReceipt.Item(4, i).Value = .Item("InvoiceNum")
                 DGVReceipt.Item(5, i).Value = .Item("PaymentType")
@@ -371,7 +378,7 @@ Public Class FrmReceipt
 
     Private Sub TxtPercent_TextChanged(sender As Object, e As EventArgs) Handles TxtPercent.TextChanged
         If Val(TxtPrice.Text) > 0 Then
-            TxtIncreaseValue.Text = Format(Val(TxtReceiptValue.Text) * (Val(TxtPercent.Text) / 100), "0.000")
+            TxtIncreaseValue.Text = Format(Val(TxtReceiptValue.Text) * (Val(TxtPercent.Text) / 100), "0.00")
         End If
     End Sub
 
@@ -479,79 +486,80 @@ Public Class FrmReceipt
     End Sub
 
     Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles BtnPrint.Click
-        'If ReceiptID = 0 Then Exit Sub
+        If ReceiptID = 0 Then Exit Sub
 
-        'Dim DSPrint = New DataSet
-        'Dim SQLCon = New SQLConClass
+        Dim DSPrint = New DataSet
+        Dim SQLCon = New SQLConClass
 
-        'SQLQuery = "SELECT FORMAT(Num,'000000') AS Num,FORMAT(Date,'" & GetDateAndTimeFormat(DTFormat.DF) & "') AS [Date],Value,ReceiptName,NoteFor,CkeckNum,PaymentTypeName FROM ReceiptView WHERE ID=" & ReceiptID & " AND EndService IS NULL"
-        'SQLQuery &= " SELECT * FROM CenterMainInfoTable"
+        SQLQuery = "SELECT FORMAT(Num,'000000') AS Num,FORMAT(Date,'" & GetDateAndTimeFormat(DTFormat.DF) &
+            "') AS [Date],Value,ReceiptName,NoteFor,CkeckNum,PaymentType FROM ReceiptView WHERE ID=" & ReceiptID & " AND EndService IS NULL"
+        SQLQuery &= " SELECT * FROM CenterInfoTable"
 
-        'DSPrint = SQLCon.SelectData(SQLQuery, 0, Nothing)
+        DSPrint = SQLCon.SelectData(SQLQuery, 0, Nothing)
 
-        'Dim Check As String
-        'Dim Cash As String
-        'Dim Price As String
+        Dim Check As String
+        Dim Cash As String
+        Dim Price As String
 
-        'Dim Value = Format(DSPrint.Tables(0).Rows(0).Item(2), "0.000")
+        Dim Value = Format(DSPrint.Tables(0).Rows(0).Item(2), "0.00")
 
-        'Dim Denar As String
-        'Dim Derham As String
-        'Dim PaymentType As String
+        Dim Denar As String
+        Dim Derham As String
+        Dim PaymentType As String
 
-        'If Value.IndexOf(".") = -1 Then
-        '    Denar = Value
-        '    Derham = "00"
-        'Else
-        '    Denar = Value.Substring(0, Value.IndexOf("."))
-        '    Derham = Value.Substring(Value.IndexOf(".") + 1, 2)
-        'End If
+        If Value.IndexOf(".") = -1 Then
+            Denar = Value
+            Derham = "00"
+        Else
+            Denar = Value.Substring(0, Value.IndexOf("."))
+            Derham = Value.Substring(Value.IndexOf(".") + 1, 2)
+        End If
 
 
-        'If IsDBNull(DSPrint.Tables(0).Rows(0).Item(5)) Then
-        '    Check = ""
-        '    Cash = "✔️"
-        '    PaymentType = DSPrint.Tables(0).Rows(0).Item(6)
-        'Else
-        '    Check = "✔️"
-        '    Cash = ""
-        '    PaymentType = "نقداً"
-        'End If
+        If IsDBNull(DSPrint.Tables(0).Rows(0).Item(5)) Then
+            Check = ""
+            Cash = "✔️"
+            PaymentType = DSPrint.Tables(0).Rows(0).Item(6)
+        Else
+            Check = "✔️"
+            Cash = ""
+            PaymentType = "نقداً"
+        End If
 
-        'Price = TxtValueChr.Text.Trim()
-        'Price = NoToTxt(Val(DSPrint.Tables(0).Rows(0).Item(2)), "دينار", "درهم", True)
+        Price = TxtValueChr.Text.Trim()
+        Price = NoToTxt(Val(DSPrint.Tables(0).Rows(0).Item(2)), "دينار", "درهم", True)
 
-        'Dim F As New FrmPrint
-        'Dim C As New CRReceipt
+        Dim F As New FrmPrint
+        Dim C As New CRReceipt
 
-        'C.SetDataSource(DSPrint.Tables(0))
-        'C.Subreports(0).SetDataSource(DSPrint.Tables(1))
-        'C.Subreports(1).SetDataSource(DSPrint.Tables(1))
-        'C.Subreports(2).SetDataSource(DSPrint.Tables(1))
-        'C.Subreports(3).SetDataSource(DSPrint.Tables(1))
-        'C.SetParameterValue("Check", Check)
-        'C.SetParameterValue("Cash", Cash)
-        'C.SetParameterValue("Price", Price)
-        'C.SetParameterValue("Denar", Denar)
-        'C.SetParameterValue("Derham", Derham)
-        'C.SetParameterValue("PaymentType", PaymentType)
-        'F.CrystalReportViewer1.ReportSource = C
-        'F.CrystalReportViewer1.Refresh()
-        'F.Text = "طباعة"
-        'F.CrystalReportViewer1.Zoom(100%)
-        'F.WindowState = FormWindowState.Maximized
-        'F.Show()
+        C.SetDataSource(DSPrint.Tables(0))
+        C.Subreports(0).SetDataSource(DSPrint.Tables(1))
+        C.Subreports(1).SetDataSource(DSPrint.Tables(1))
+        C.Subreports(2).SetDataSource(DSPrint.Tables(1))
+        C.Subreports(3).SetDataSource(DSPrint.Tables(1))
+        C.SetParameterValue("Check", Check)
+        C.SetParameterValue("Cash", Cash)
+        C.SetParameterValue("Price", Price)
+        C.SetParameterValue("Denar", Denar)
+        C.SetParameterValue("Derham", Derham)
+        C.SetParameterValue("PaymentType", PaymentType)
+        F.CrystalReportViewer1.ReportSource = C
+        F.CrystalReportViewer1.Refresh()
+        F.Text = "طباعة"
+        F.CrystalReportViewer1.Zoom(100%)
+        F.WindowState = FormWindowState.Maximized
+        F.Show()
     End Sub
 
     Private Sub CmbBank_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbBank.SelectedIndexChanged
         If sender.BackColor <> SystemColors.Window Then sender.BackColor = SystemColors.Window
     End Sub
 
-    Private Sub CmbEmpName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbEmpName.SelectedIndexChanged
+    Private Sub CmbEmpName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbTrusry.SelectedIndexChanged
         If sender.BackColor <> SystemColors.Window Then sender.BackColor = SystemColors.Window
     End Sub
 
-    Private Sub CmbEmpName_TextChanged(sender As Object, e As EventArgs) Handles CmbEmpName.TextChanged
+    Private Sub CmbEmpName_TextChanged(sender As Object, e As EventArgs) Handles CmbTrusry.TextChanged
         If sender.BackColor <> SystemColors.Window Then sender.BackColor = SystemColors.Window
     End Sub
 
@@ -578,8 +586,8 @@ Public Class FrmReceipt
             TxtValueChr.Text = vbNullString
         End If
 
-        TxtFinalPrice.Text = Format(Val(TxtReceiptValue.Text) + (Val(TxtReceiptValue.Text) * (Val(TxtPercent.Text) / 100)), "0.000")
-        TxtIncreaseValue.Text = Format(Val(TxtFinalPrice.Text) - Val(TxtReceiptValue.Text), "0.000")
+        TxtFinalPrice.Text = Format(Val(TxtReceiptValue.Text) + (Val(TxtReceiptValue.Text) * (Val(TxtPercent.Text) / 100)), "0.00")
+        TxtIncreaseValue.Text = Format(Val(TxtFinalPrice.Text) - Val(TxtReceiptValue.Text), "0.00")
 
         If Val(TxtIncreaseValue.Text) > 0 Then
             TxtIncreaseValue.Visible = True

@@ -76,9 +76,6 @@ Public Class FrmColor
         'Frmmain.BtnStores.BackColor = Settings.GetSettings(ClassSettings.Setting.ColorDark)
 
 
-        'BasicForms:
-        FrmBasicData.ChangeColor()
-
 
         'EmployeeForms:
         FrmEmployeeContainr.ChangeColor()
@@ -92,6 +89,8 @@ Public Class FrmColor
         FrmCustomers.ChangeColor()
         FrmCustomerReport.ChangeColor()
 
+
+        FrmPreparingClothesReport.ChangeColor()
         'TailorForms:
         FrmTailorContainr.ChangeColor()
         FrmTailors.ChangeColor()
@@ -103,6 +102,7 @@ Public Class FrmColor
         FrmDeliveryContainr.ChangeColor()
         FrmDeliveryReport.ChangeColor()
         FrmDeliveryOrder.ChangeColor()
+        FrmDeliveryInvoiceCashing.ChangeColor()
 
         'SupplierForms:
         FrmSupplierInvoiceCashing.ChangeColor()
@@ -110,6 +110,7 @@ Public Class FrmColor
         FrmSuppleir.ChangeColor()
         FrmSuppleirReport.ChangeColor()
 
+        FrmCashAndReceipt.ChangeColor()
 
         'ItemForms:
         FrmStoreContainer.ChangeColor()
@@ -139,11 +140,12 @@ Public Class FrmColor
         FrmSalesReport.ChangeColor()
         FrmCustomerInvoiceReceipt.ChangeColor()
         FrmCustomerOrders.ChangeColor()
-
+        FrmPreparingClothes.ChangeColor()
         'SystemForms:
         FrmBackupSettings.ChangeColor()
         FrmCenterInfoSettings.ChangeColor()
 
+        FrmMainSafeReport.ChangeColor()
 
         'FrmMain.ChangeColor()
         FrmSettingsContainer.ChangeColor()
@@ -160,10 +162,10 @@ Public Class FrmColor
         FrmEmployeeCashingReport.ChangeColor()
 
         'SafeForms
-        FrmSafe.ChangeColor()
-        FrmMainSafeReport.ChangeColor()
-        FrmMainSafeContainer.ChangeColor()
-        FrmShowMainSafe.ChangeColor()
+        'FrmSafe.ChangeColor()
+        'FrmMainSafeReport.ChangeColor()
+        'FrmMainSafeContainer.ChangeColor()
+        'FrmShowMainSafe.ChangeColor()
 
     End Sub
 

@@ -64,7 +64,7 @@ Public Class FrmSalesReport
             Case Data.Main
 
                 SQLQuery = " Select ID,Name From UserView where  ID <> 1  Order By Name "
-                SQLQuery &= " Select ID,Name From CustomersTable  Order By Name  "
+                SQLQuery &= " Select ID,Name From CustomersTable  where EndService IS Null  Order By Name  "
 
                 DSMain = SQLCon.SelectData(SQLQuery)
                 FillData(Type, DSMain, 2)
@@ -73,11 +73,11 @@ Public Class FrmSalesReport
 
                 Dim Param() As SqlParameter =
                     {New SqlParameter("@Num", Val(TxtNum.Text))}
-                SQLQuery = "SELECT  ROW_NUMBER() OVER (ORDER BY (Date)Desc) As ت, * From InvoiceView WHERE EndService IS NULL "
+                SQLQuery = "SELECT  ROW_NUMBER() OVER (ORDER BY (Date)Desc) As ت, * From CustomerInvoiceView  WHERE 1=1 "
 
                 AppendConditions()
-                SQLQuery &= " ORDER BY InvoiceView.Date Desc OFFSET " & PageSize * (PageNum - 1) & " ROWS FETCH NEXT " & PageSize & " ROWS ONLY"
-                SQLQuery &= " SELECT COUNT(ID) FROM InvoiceView WHERE EndService IS NULL "
+                SQLQuery &= " ORDER BY CustomerInvoiceView.Date Desc OFFSET " & PageSize * (PageNum - 1) & " ROWS FETCH NEXT " & PageSize & " ROWS ONLY"
+                SQLQuery &= " SELECT COUNT(CustomerID) FROM CustomerInvoiceView  WHERE 1=1  "
                 AppendConditions()
 
                 DSSearch = SQLCon.SelectData(SQLQuery, 0, Param)
@@ -91,9 +91,9 @@ Public Class FrmSalesReport
 
         Dim DateTimeFrom As Date = DTPFrom.Value.Date & " " & "00:00".ToString
         Dim DateTimeTo As Date = DTPTo.Value.Date & " " & "23:59".ToString
-        If ChkNum.Checked And TxtNum.Text.Trim <> "" Then AppendToQuery(" AND ", " InvoiceView.Num=@Num ")
-        If ChkUser.Checked And CmbUserName.SelectedValue <> Nothing Then AppendToQuery(" AND ", "  dbo.InvoiceView.UserID = " & CmbUserName.SelectedValue)
-        If ChkCustomer.Checked And CmbCustomer.SelectedValue <> Nothing Then AppendToQuery(" AND ", " dbo.InvoiceView.CustomerID = " & CmbCustomer.SelectedValue)
+        If ChkNum.Checked And TxtNum.Text.Trim <> "" Then AppendToQuery(" AND ", " CustomerInvoiceView.Num=@Num ")
+        If ChkUser.Checked And CmbUserName.SelectedValue <> Nothing Then AppendToQuery(" AND ", "  CustomerInvoiceView.UserID = " & CmbUserName.SelectedValue)
+        If ChkCustomer.Checked And CmbCustomer.SelectedValue <> Nothing Then AppendToQuery(" AND ", " CustomerInvoiceView.CustomerID = " & CmbCustomer.SelectedValue)
         If ChkDate.Checked Then AppendToQuery(" AND ", " Date BETWEEN '" & DateTimeFrom & "' AND '" & DateTimeTo & "' ")
     End Sub
 
@@ -223,6 +223,16 @@ Public Class FrmSalesReport
         sender.BackColor = SystemColors.Window
     End Sub
 
+    Private Sub TxtNum_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtNum.KeyPress
+        e.Handled = Not IsNumber(sender.Text, e.KeyChar, False, True)
+    End Sub
+
+    Private Sub TxtNum_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtNum.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            BtnSearch_Click(sender, e)
+        End If
+    End Sub
+
     Private Sub FillData(Type As Data, DS As DataSet, TCount As Integer)
 
         Select Case Type
@@ -250,12 +260,14 @@ Public Class FrmSalesReport
                     With DS.Tables(0).Rows(i)
 
                         DGV.Rows.Add()
-                        DGV.Item(0, i).Value = .Item("ID")
+                        DGV.Item(0, i).Value = .Item("InvoiceID")
                         DGV.Item(1, i).Value = .Item("ت") 'i + 1
                         DGV.Item(2, i).Value = Format(.Item("Num"), "000000")
                         DGV.Item(3, i).Value = Format(.Item("Date"), GetDateAndTimeFormat(DTFormat.DTF))
-                        DGV.Item(4, i).Value = Format(.Item("Total"), "0.000")
-                        DGV.Item(5, i).Value = .Item("Name")
+                        DGV.Item(4, i).Value = .Item("CustomerName")
+                        DGV.Item(5, i).Value = Format(.Item("Total"), "0.00")
+                        DGV.Item(6, i).Value = Format(.Item("TotalReceipts"), "0.00")
+                        DGV.Item(7, i).Value = Format(.Item("RemainingAmount"), "0.00")
 
                     End With
                 Next
@@ -299,41 +311,34 @@ Public Class FrmSalesReport
         '    Exit Sub
         'End If
 
-        'If DGVRecipt.Rows.Count = 0 Then Exit Sub
+        If DGV.Rows.Count = 0 Then Exit Sub
 
-        'Dim DSPrint = New DataSet
-        'Dim SQLCon = New SQLConClass
+        Dim DSPrint = New DataSet
+        Dim SQLCon = New SQLConClass
 
-        'SQLQuery = "SELECT FORMAT(Num,'000000') AS Num,FORMAT([Date],'" & GetDateAndTimeFormat(DTFormat.DF) & "') AS [Date],Value,ReceiptName,NoteFor FROM ReceiptView WHERE EndService IS NULL"
-        'AppendReportConditions()
-        'SQLQuery &= " ORDER BY ID DESC OFFSET " & PageSize * (PageNum - 1) & " ROWS FETCH NEXT " & PageSize & " ROWS ONLY"
-        'SQLQuery &= " SELECT * FROM CenterMainInfoTable"
+        SQLQuery = "SELECT FORMAT(Num,'000000') AS Num, Date, Name, [User],Total FROM InvoiceView  WHERE EndService IS NULL "
+        AppendReportConditions()
+        SQLQuery &= " ORDER BY ID DESC OFFSET " & PageSize * (PageNum - 1) & " ROWS FETCH NEXT " & PageSize & " ROWS ONLY"
+        SQLQuery &= " SELECT * FROM CenterInfoTable"
 
-        'Dim Param() As SqlParameter =
-        '    {
-        '    New SqlParameter("@Num", TxtNum.Text.Trim),
-        '    New SqlParameter("@ReceiptName", "%" & TxtReciptName.Text.Trim & "%"),
-        '    New SqlParameter("@PaymentTypeID", (IIf(IsNothing(CmbPaymentType.SelectedValue), 0, CmbPaymentType.SelectedValue))),
-        '    New SqlParameter("@UserID", (IIf(IsNothing(CmbUserName.SelectedValue), 0, CmbUserName.SelectedValue))),
-        '    New SqlParameter("@BankID", (IIf(IsNothing(CmbBank.SelectedValue), 0, CmbBank.SelectedValue))),
-        '    New SqlParameter("@ReceiptFinanceTypeID", (IIf(IsNothing(CmbFinancRecipt.SelectedValue), 0, CmbFinancRecipt.SelectedValue))),
-        '    New SqlParameter("@Check", "%" & Val(TxtCkeck.Text.Trim) & "%")
-        '    }
+        Dim Param() As SqlParameter =
+            {
+            New SqlParameter("@Num", TxtNum.Text.Trim)}
 
-        'DSPrint = SQLCon.SelectData(SQLQuery, 0, Param)
+        DSPrint = SQLCon.SelectData(SQLQuery, 0, Param)
 
-        'Dim F As New FrmPrint
-        'Dim C As New CRRecieptList
+        Dim F As New FrmPrint
+        Dim C As New CRSellInvoiceReports
 
-        'C.SetDataSource(DSPrint.Tables(0))
-        'C.Subreports(0).SetDataSource(DSPrint.Tables(1))
-        'C.Subreports(1).SetDataSource(DSPrint.Tables(1))
-        'F.CrystalReportViewer1.ReportSource = C
-        'F.CrystalReportViewer1.Refresh()
-        'F.Text = "طباعة"
-        'F.CrystalReportViewer1.Zoom(100%)
-        'F.WindowState = FormWindowState.Maximized
-        'F.Show()
+        C.SetDataSource(DSPrint.Tables(0))
+        C.Subreports(0).SetDataSource(DSPrint.Tables(1))
+        C.Subreports(1).SetDataSource(DSPrint.Tables(1))
+        F.CrystalReportViewer1.ReportSource = C
+        F.CrystalReportViewer1.Refresh()
+        F.Text = "طباعة"
+        F.CrystalReportViewer1.Zoom(100%)
+        F.WindowState = FormWindowState.Maximized
+        F.Show()
     End Sub
 
     Private Sub BtnPrintAll_Click(sender As Object, e As EventArgs) Handles BtnPrintAll.Click
@@ -344,54 +349,45 @@ Public Class FrmSalesReport
         '    Exit Sub
         'End If
 
-        'If DGVRecipt.Rows.Count = 0 Then Exit Sub
+        If DGV.Rows.Count = 0 Then Exit Sub
 
-        'Dim DSPrint = New DataSet
-        'Dim SQLCon = New SQLConClass
+        Dim DSPrint = New DataSet
+        Dim SQLCon = New SQLConClass
 
-        'SQLQuery = "SELECT FORMAT(Num,'000000') AS Num,FORMAT([Date],'" & GetDateAndTimeFormat(DTFormat.DF) & "') AS [Date],Value,ReceiptName,NoteFor FROM ReceiptView WHERE EndService IS NULL"
-        'AppendReportConditions()
-        'SQLQuery &= " ORDER BY ID DESC"
-        'SQLQuery &= " SELECT * FROM CenterMainInfoTable"
+        SQLQuery = "SELECT FORMAT(Num,'000000') AS Num, Date, Name, [User],Total FROM InvoiceView  WHERE EndService IS NULL "
+        AppendReportConditions()
+        SQLQuery &= " ORDER BY ID DESC  "
+        SQLQuery &= " SELECT * FROM CenterInfoTable"
 
-        'Dim Param() As SqlParameter =
-        '    {
-        '    New SqlParameter("@Num", TxtNum.Text.Trim),
-        '    New SqlParameter("@ReceiptName", "%" & TxtReciptName.Text.Trim & "%"),
-        '    New SqlParameter("@PaymentTypeID", (IIf(IsNothing(CmbPaymentType.SelectedValue), 0, CmbPaymentType.SelectedValue))),
-        '    New SqlParameter("@UserID", (IIf(IsNothing(CmbUserName.SelectedValue), 0, CmbUserName.SelectedValue))),
-        '    New SqlParameter("@BankID", (IIf(IsNothing(CmbBank.SelectedValue), 0, CmbBank.SelectedValue))),
-        '    New SqlParameter("@ReceiptFinanceTypeID", (IIf(IsNothing(CmbFinancRecipt.SelectedValue), 0, CmbFinancRecipt.SelectedValue))),
-        '    New SqlParameter("@Check", "%" & Val(TxtCkeck.Text.Trim) & "%")
-        '    }
+        Dim Param() As SqlParameter =
+            {
+            New SqlParameter("@Num", TxtNum.Text.Trim)}
 
-        'DSPrint = SQLCon.SelectData(SQLQuery, 0, Param)
+        DSPrint = SQLCon.SelectData(SQLQuery, 0, Param)
 
-        'Dim F As New FrmPrint
-        'Dim C As New CRRecieptList
+        Dim F As New FrmPrint
+        Dim C As New CRPurchasesInvoiceReports
 
-        'C.SetDataSource(DSPrint.Tables(0))
-        'C.Subreports(0).SetDataSource(DSPrint.Tables(1))
-        'C.Subreports(1).SetDataSource(DSPrint.Tables(1))
-        'F.CrystalReportViewer1.ReportSource = C
-        'F.CrystalReportViewer1.Refresh()
-        'F.Text = "طباعة"
-        'F.CrystalReportViewer1.Zoom(100%)
-        'F.WindowState = FormWindowState.Maximized
-        'F.Show()
+        C.SetDataSource(DSPrint.Tables(0))
+        C.Subreports(0).SetDataSource(DSPrint.Tables(1))
+        C.Subreports(1).SetDataSource(DSPrint.Tables(1))
+        F.CrystalReportViewer1.ReportSource = C
+        F.CrystalReportViewer1.Refresh()
+        F.Text = "طباعة"
+        F.CrystalReportViewer1.Zoom(100%)
+        F.WindowState = FormWindowState.Maximized
+        F.Show()
     End Sub
 
     Private Sub AppendReportConditions()
 
+        Dim DateTimeFrom As Date = DTPFrom.Value.Date & " " & "00:00".ToString
+        Dim DateTimeTo As Date = DTPTo.Value.Date & " " & "23:59".ToString
         If ChkNum.Checked And TxtNum.Text.Trim <> "" Then AppendToQuery(" AND ", " Num=@Num")
-        If ChkUser.Checked And CmbUserName.Text.Trim <> "" And CmbUserName.SelectedValue <> 0 Then AppendToQuery(" AND ", " UserID=@UserID")
-        If ChkCustomer.Checked And CmbCustomer.Text.Trim <> "" And CmbCustomer.SelectedValue <> 0 Then AppendToQuery(" AND ", " CustomerID=@CustomerID")
+        If ChkUser.Checked And CmbUserName.Text.Trim <> "" And CmbUserName.SelectedValue <> 0 Then AppendToQuery(" AND ", " UserID=" & CmbUserName.SelectedValue)
+        If ChkCustomer.Checked And CmbCustomer.Text.Trim <> "" And CmbCustomer.SelectedValue <> 0 Then AppendToQuery(" AND ", " CustomerID=" & CmbCustomer.SelectedValue)
         If ChkDate.Checked Then AppendToQuery(" AND ", " Date BETWEEN '" & DTPFrom.Value.Date & " " & "00:00".ToString & "' AND '" & DTPTo.Value.Date & " " & "23:59".ToString & "'")
 
-    End Sub
-
-    Private Sub TxtNum_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtNum.KeyPress
-        e.Handled = Not IsNumber(sender.Text, e.KeyChar, False, True)
     End Sub
 
     '****************************************************************************
@@ -514,6 +510,7 @@ Public Class FrmSalesReport
 
                 If Save = 1 Then
                     MsgTool("تم حذف الفاتورة ", 1)
+                    'FrmSales.InvoiceID = 0
 
                 ElseIf Save = 2 Then
                     MsgTool("لا يمكن حذف الفاتورة", 0)
@@ -568,4 +565,5 @@ Public Class FrmSalesReport
 
 
     End Sub
+
 End Class

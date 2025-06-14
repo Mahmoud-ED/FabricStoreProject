@@ -14,7 +14,7 @@
 
                 Case "FrmCustomerInvoiceReceipt"
 
-                    LblReceipt_Click(sender, New EventArgs)
+                    LblDebts_Click(sender, New EventArgs)
 
                 Case "FrmCustomerOrders"
                     LblCustomerOrders_Click(sender, New EventArgs)
@@ -52,10 +52,6 @@
         OpenFormPnl(FrmCustomerInvoiceReceipt, PnlMain, PnlDebts)
 
         LastForm = "FrmCustomerInvoiceReceipt"
-    End Sub
-
-    Private Sub LblReceipt_Click(sender As Object, e As EventArgs)
-
     End Sub
 
     Private Sub LblCustomerOrders_Click(sender As Object, e As EventArgs) Handles LblCustomerOrders.Click

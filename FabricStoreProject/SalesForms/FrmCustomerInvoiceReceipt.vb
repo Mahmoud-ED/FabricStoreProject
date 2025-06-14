@@ -48,11 +48,11 @@ Public Class FrmCustomerInvoiceReceipt
                 DGVCustomerInvoices.Item(0, I).Value = .Item("ID") ' ID
                 DGVCustomerInvoices.Item(1, I).Value = I + 1 ' ت
                 DGVCustomerInvoices.Item(2, I).Value = .Item("Name")
-                DGVCustomerInvoices.Item(3, I).Value = Format(.Item("Total"), "0.000")
+                DGVCustomerInvoices.Item(3, I).Value = Format(.Item("Total"), "0.00")
                 Total += .Item("Total")
-                DGVCustomerInvoices.Item(4, I).Value = Format(.Item("TotalReceipts"), "0.000")
+                DGVCustomerInvoices.Item(4, I).Value = Format(.Item("TotalReceipts"), "0.00")
                 TotalReceipts += .Item("TotalReceipts")
-                DGVCustomerInvoices.Item(5, I).Value = Format(.Item("RemainingAmount"), "0.000")
+                DGVCustomerInvoices.Item(5, I).Value = Format(.Item("RemainingAmount"), "0.00")
                 RemainingDebt += .Item("RemainingAmount")
 
             End With

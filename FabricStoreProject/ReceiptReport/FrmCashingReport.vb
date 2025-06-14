@@ -394,7 +394,7 @@ Public Class FrmCashingReport
                         DGVCashing.Item(2, i).Value = Format(.Item("Num"), "000000")
                         DGVCashing.Item(3, i).Value = .Item("Notes")
                         DGVCashing.Item(4, i).Value = .Item("Name")
-                        DGVCashing.Item(5, i).Value = Format(.Item("Value"), "0.000")
+                        DGVCashing.Item(5, i).Value = Format(.Item("Value"), "0.00")
                         DGVCashing.Item(6, i).Value = Format(.Item("Date"), GetDateAndTimeFormat(DTFormat.DTF))
                         DGVCashing.Item(7, i).Value = .Item("ReceiptName")
                         DGVCashing.Item(8, i).Value = .Item("PayName")
@@ -456,41 +456,42 @@ Public Class FrmCashingReport
         '    Exit Sub
 
         'End If
-        'If DGVCashing.Rows.Count = 0 Then Exit Sub
+        If DGVCashing.Rows.Count = 0 Then Exit Sub
 
-        'Dim DSPrint = New DataSet
-        'Dim SQLCon = New SQLConClass
+        Dim DSPrint = New DataSet
+        Dim SQLCon = New SQLConClass
 
-        'SQLQuery = "SELECT FORMAT(Num,'000000') AS Num,FORMAT([Date],'" & GetDateAndTimeFormat(DTFormat.DF) & "') AS [Date],Value,ReceiptName,Nots FROM CashingView WHERE 1=1"
-        'AppendReportConditions()
-        'SQLQuery &= " ORDER BY ID DESC OFFSET " & PageSize * (PageNum - 1) & " ROWS FETCH NEXT " & PageSize & " ROWS ONLY"
-        'SQLQuery &= " SELECT * FROM CenterMainInfoTable"
+        SQLQuery = "SELECT FORMAT(Num,'000000') AS Num,FORMAT([Date],'" & GetDateAndTimeFormat(DTFormat.DF) &
+            "') AS [Date],Value,ReceiptName,Notes FROM CashingView WHERE 1=1"
+        AppendReportConditions()
+        SQLQuery &= " ORDER BY ID DESC OFFSET " & PageSize * (PageNum - 1) & " ROWS FETCH NEXT " & PageSize & " ROWS ONLY"
+        SQLQuery &= " SELECT * FROM CenterInfoTable"
 
-        'Dim Param() As SqlParameter =
-        '    {
-        '    New SqlParameter("@Num", TxtNum.Text.Trim),
-        '    New SqlParameter("@ReceiptName", "%" & TxtReciptName.Text.Trim & "%"),
-        '    New SqlParameter("@PaymentTypeID", (IIf(IsNothing(CmbPaymentType.SelectedValue), 0, CmbPaymentType.SelectedValue))),
-        '    New SqlParameter("@UserID", (IIf(IsNothing(CmbUserName.SelectedValue), 0, CmbUserName.SelectedValue))),
-        '    New SqlParameter("@BankID", (IIf(IsNothing(CmbBank.SelectedValue), 0, CmbBank.SelectedValue))),
-        '    New SqlParameter("@ReceiptFinanceTypeID", (IIf(IsNothing(CmbFinancCashing.SelectedValue), 0, CmbFinancCashing.SelectedValue))),
-        '    New SqlParameter("@Check", "%" & Val(TxtCkeck.Text.Trim) & "%")
-        '    }
+        Dim Param() As SqlParameter =
+            {
+            New SqlParameter("@Num", TxtNum.Text.Trim),
+            New SqlParameter("@ReceiptName", "%" & TxtReciptName.Text.Trim & "%"),
+            New SqlParameter("@PaymentTypeID", (IIf(IsNothing(CmbPaymentType.SelectedValue), 0, CmbPaymentType.SelectedValue))),
+            New SqlParameter("@UserID", (IIf(IsNothing(CmbUserName.SelectedValue), 0, CmbUserName.SelectedValue))),
+            New SqlParameter("@BankID", (IIf(IsNothing(CmbBank.SelectedValue), 0, CmbBank.SelectedValue))),
+            New SqlParameter("@ReceiptFinanceTypeID", (IIf(IsNothing(CmbFinancCashing.SelectedValue), 0, CmbFinancCashing.SelectedValue))),
+            New SqlParameter("@Check", "%" & Val(TxtCkeck.Text.Trim) & "%")
+            }
 
-        'DSPrint = SQLCon.SelectData(SQLQuery, 0, Param)
+        DSPrint = SQLCon.SelectData(SQLQuery, 0, Param)
 
-        'Dim F As New FrmPrint
-        'Dim C As New CRCashingList
+        Dim F As New FrmPrint
+        Dim C As New CRCashingList
 
-        'C.SetDataSource(DSPrint.Tables(0))
-        'C.Subreports(0).SetDataSource(DSPrint.Tables(1))
-        'C.Subreports(1).SetDataSource(DSPrint.Tables(1))
-        'F.CrystalReportViewer1.ReportSource = C
-        'F.CrystalReportViewer1.Refresh()
-        'F.Text = "طباعة"
-        'F.CrystalReportViewer1.Zoom(100%)
-        'F.WindowState = FormWindowState.Maximized
-        'F.Show()
+        C.SetDataSource(DSPrint.Tables(0))
+        C.Subreports(0).SetDataSource(DSPrint.Tables(1))
+        C.Subreports(1).SetDataSource(DSPrint.Tables(1))
+        F.CrystalReportViewer1.ReportSource = C
+        F.CrystalReportViewer1.Refresh()
+        F.Text = "طباعة"
+        F.CrystalReportViewer1.Zoom(100%)
+        F.WindowState = FormWindowState.Maximized
+        F.Show()
 
     End Sub
 
@@ -502,41 +503,42 @@ Public Class FrmCashingReport
         '    Exit Sub
 
         'End If
-        'If DGVCashing.Rows.Count = 0 Then Exit Sub
+        If DGVCashing.Rows.Count = 0 Then Exit Sub
 
-        'Dim DSPrint = New DataSet
-        'Dim SQLCon = New SQLConClass
+        Dim DSPrint = New DataSet
+        Dim SQLCon = New SQLConClass
 
-        'SQLQuery = "SELECT FORMAT(Num,'000000') AS Num,FORMAT([Date],'" & GetDateAndTimeFormat(DTFormat.DF) & "') AS [Date],Value,ReceiptName,Nots FROM CashingView WHERE 1=1"
-        'AppendReportConditions()
-        'SQLQuery &= " ORDER BY ID DESC"
-        'SQLQuery &= " SELECT * FROM CenterMainInfoTable"
+        SQLQuery = "SELECT FORMAT(Num,'000000') AS Num,FORMAT([Date],'" & GetDateAndTimeFormat(DTFormat.DF) &
+            "') AS [Date],Value,ReceiptName,Notes FROM CashingView WHERE 1=1"
+        AppendReportConditions()
+        SQLQuery &= " ORDER BY ID DESC"
+        SQLQuery &= " SELECT * FROM CenterInfoTable"
 
-        'Dim Param() As SqlParameter =
-        '    {
-        '    New SqlParameter("@Num", TxtNum.Text.Trim),
-        '    New SqlParameter("@ReceiptName", "%" & TxtReciptName.Text.Trim & "%"),
-        '    New SqlParameter("@PaymentTypeID", (IIf(IsNothing(CmbPaymentType.SelectedValue), 0, CmbPaymentType.SelectedValue))),
-        '    New SqlParameter("@UserID", (IIf(IsNothing(CmbUserName.SelectedValue), 0, CmbUserName.SelectedValue))),
-        '    New SqlParameter("@BankID", (IIf(IsNothing(CmbBank.SelectedValue), 0, CmbBank.SelectedValue))),
-        '    New SqlParameter("@ReceiptFinanceTypeID", (IIf(IsNothing(CmbFinancCashing.SelectedValue), 0, CmbFinancCashing.SelectedValue))),
-        '    New SqlParameter("@Check", "%" & Val(TxtCkeck.Text.Trim) & "%")
-        '    }
+        Dim Param() As SqlParameter =
+            {
+            New SqlParameter("@Num", TxtNum.Text.Trim),
+            New SqlParameter("@ReceiptName", "%" & TxtReciptName.Text.Trim & "%"),
+            New SqlParameter("@PaymentTypeID", (IIf(IsNothing(CmbPaymentType.SelectedValue), 0, CmbPaymentType.SelectedValue))),
+            New SqlParameter("@UserID", (IIf(IsNothing(CmbUserName.SelectedValue), 0, CmbUserName.SelectedValue))),
+            New SqlParameter("@BankID", (IIf(IsNothing(CmbBank.SelectedValue), 0, CmbBank.SelectedValue))),
+            New SqlParameter("@ReceiptFinanceTypeID", (IIf(IsNothing(CmbFinancCashing.SelectedValue), 0, CmbFinancCashing.SelectedValue))),
+            New SqlParameter("@Check", "%" & Val(TxtCkeck.Text.Trim) & "%")
+            }
 
-        'DSPrint = SQLCon.SelectData(SQLQuery, 0, Param)
+        DSPrint = SQLCon.SelectData(SQLQuery, 0, Param)
 
-        'Dim F As New FrmPrint
-        'Dim C As New CRCashingList
+        Dim F As New FrmPrint
+        Dim C As New CRCashingList
 
-        'C.SetDataSource(DSPrint.Tables(0))
-        'C.Subreports(0).SetDataSource(DSPrint.Tables(1))
-        'C.Subreports(1).SetDataSource(DSPrint.Tables(1))
-        'F.CrystalReportViewer1.ReportSource = C
-        'F.CrystalReportViewer1.Refresh()
-        'F.Text = "طباعة"
-        'F.CrystalReportViewer1.Zoom(100%)
-        'F.WindowState = FormWindowState.Maximized
-        'F.Show()
+        C.SetDataSource(DSPrint.Tables(0))
+        C.Subreports(0).SetDataSource(DSPrint.Tables(1))
+        C.Subreports(1).SetDataSource(DSPrint.Tables(1))
+        F.CrystalReportViewer1.ReportSource = C
+        F.CrystalReportViewer1.Refresh()
+        F.Text = "طباعة"
+        F.CrystalReportViewer1.Zoom(100%)
+        F.WindowState = FormWindowState.Maximized
+        F.Show()
 
     End Sub
 

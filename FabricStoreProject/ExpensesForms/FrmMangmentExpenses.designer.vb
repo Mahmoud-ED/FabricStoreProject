@@ -23,11 +23,11 @@ Partial Class FrmMangmentExpenses
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmMangmentExpenses))
         Me.P1 = New System.Windows.Forms.Panel()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.LblMangment = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanel14 = New System.Windows.Forms.TableLayoutPanel()
@@ -42,38 +42,38 @@ Partial Class FrmMangmentExpenses
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanel12 = New System.Windows.Forms.TableLayoutPanel()
         Me.TxtUserName = New System.Windows.Forms.Label()
-        Me.DGVExpensesEmp = New System.Windows.Forms.DataGridView()
-        Me.DataGridViewTextBoxColumn8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Label9 = New System.Windows.Forms.Label()
+        Me.DGVExpenses = New System.Windows.Forms.DataGridView()
         Me.TableLayoutPanel5 = New System.Windows.Forms.TableLayoutPanel()
-        Me.BtnPrint = New System.Windows.Forms.Button()
-        Me.BtnRefresh = New System.Windows.Forms.Button()
         Me.BtnSave = New System.Windows.Forms.Button()
+        Me.BtnRefresh = New System.Windows.Forms.Button()
         Me.BtnDelete = New System.Windows.Forms.Button()
-        Me.Label13 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.CmbExpensesType = New System.Windows.Forms.ComboBox()
+        Me.CmbPaymentType = New System.Windows.Forms.ComboBox()
         Me.DTPDate = New System.Windows.Forms.DateTimePicker()
         Me.Panel15 = New System.Windows.Forms.Panel()
-        Me.TxtReceiver = New System.Windows.Forms.TextBox()
+        Me.TxtNots = New System.Windows.Forms.TextBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TxtAmount = New System.Windows.Forms.TextBox()
+        Me.CmbTrusry = New System.Windows.Forms.ComboBox()
         Me.LblUserName = New System.Windows.Forms.Label()
-        Me.TxtSumValue = New System.Windows.Forms.Label()
+        Me.DataGridViewTextBoxColumn8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.P1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -82,7 +82,7 @@ Partial Class FrmMangmentExpenses
         Me.Panel35.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.TableLayoutPanel12.SuspendLayout()
-        CType(Me.DGVExpensesEmp, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DGVExpenses, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel5.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
@@ -94,19 +94,47 @@ Partial Class FrmMangmentExpenses
         'P1
         '
         Me.P1.BackColor = System.Drawing.SystemColors.Control
+        Me.P1.Controls.Add(Me.Label5)
+        Me.P1.Controls.Add(Me.LblMangment)
         Me.P1.Controls.Add(Me.TableLayoutPanel1)
-        Me.P1.Controls.Add(Me.DGVExpensesEmp)
-        Me.P1.Controls.Add(Me.Label9)
+        Me.P1.Controls.Add(Me.DGVExpenses)
         Me.P1.Controls.Add(Me.TableLayoutPanel5)
-        Me.P1.Controls.Add(Me.Label13)
         Me.P1.Controls.Add(Me.GroupBox1)
-        Me.P1.Controls.Add(Me.TxtSumValue)
         Me.P1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.P1.Location = New System.Drawing.Point(0, 0)
         Me.P1.Margin = New System.Windows.Forms.Padding(2)
         Me.P1.Name = "P1"
         Me.P1.Size = New System.Drawing.Size(1004, 556)
         Me.P1.TabIndex = 1140
+        '
+        'Label5
+        '
+        Me.Label5.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.ForeColor = System.Drawing.SystemColors.WindowText
+        Me.Label5.Location = New System.Drawing.Point(806, 514)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label5.Name = "Label5"
+        Me.Label5.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.Label5.Size = New System.Drawing.Size(116, 28)
+        Me.Label5.TabIndex = 1237
+        Me.Label5.Text = "مصروفات المتجر"
+        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LblMangment
+        '
+        Me.LblMangment.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.LblMangment.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblMangment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LblMangment.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
+        Me.LblMangment.Location = New System.Drawing.Point(406, 510)
+        Me.LblMangment.Margin = New System.Windows.Forms.Padding(3)
+        Me.LblMangment.Name = "LblMangment"
+        Me.LblMangment.Size = New System.Drawing.Size(387, 35)
+        Me.LblMangment.TabIndex = 1238
+        Me.LblMangment.Tag = "AutoC"
+        Me.LblMangment.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'TableLayoutPanel1
         '
@@ -299,7 +327,7 @@ Partial Class FrmMangmentExpenses
         Me.TableLayoutPanel12.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.TableLayoutPanel12.RowCount = 1
         Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel12.Size = New System.Drawing.Size(254, 40)
+        Me.TableLayoutPanel12.Size = New System.Drawing.Size(255, 40)
         Me.TableLayoutPanel12.TabIndex = 45
         '
         'TxtUserName
@@ -310,22 +338,22 @@ Partial Class FrmMangmentExpenses
         Me.TxtUserName.ForeColor = System.Drawing.Color.Black
         Me.TxtUserName.Location = New System.Drawing.Point(3, 3)
         Me.TxtUserName.Name = "TxtUserName"
-        Me.TxtUserName.Size = New System.Drawing.Size(248, 34)
+        Me.TxtUserName.Size = New System.Drawing.Size(249, 34)
         Me.TxtUserName.TabIndex = 3
         Me.TxtUserName.Tag = "Auto"
         Me.TxtUserName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'DGVExpensesEmp
+        'DGVExpenses
         '
-        Me.DGVExpensesEmp.AllowUserToAddRows = False
-        Me.DGVExpensesEmp.AllowUserToDeleteRows = False
-        Me.DGVExpensesEmp.AllowUserToResizeRows = False
-        Me.DGVExpensesEmp.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.DGVExpenses.AllowUserToAddRows = False
+        Me.DGVExpenses.AllowUserToDeleteRows = False
+        Me.DGVExpenses.AllowUserToResizeRows = False
+        Me.DGVExpenses.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.DGVExpensesEmp.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.DGVExpensesEmp.BackgroundColor = System.Drawing.SystemColors.Control
-        Me.DGVExpensesEmp.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
+        Me.DGVExpenses.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.DGVExpenses.BackgroundColor = System.Drawing.SystemColors.Control
+        Me.DGVExpenses.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle1.Font = New System.Drawing.Font("Droid Arabic Kufi", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -333,34 +361,376 @@ Partial Class FrmMangmentExpenses
         DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGVExpensesEmp.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
-        Me.DGVExpensesEmp.ColumnHeadersHeight = 32
-        Me.DGVExpensesEmp.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        Me.DGVExpensesEmp.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn8, Me.DataGridViewTextBoxColumn9, Me.Column5, Me.Column6, Me.Column7, Me.Column8, Me.Column9, Me.Column10})
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Droid Arabic Kufi", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.AppWorkspace
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DGVExpensesEmp.DefaultCellStyle = DataGridViewCellStyle4
-        Me.DGVExpensesEmp.EnableHeadersVisualStyles = False
-        Me.DGVExpensesEmp.GridColor = System.Drawing.Color.Gray
-        Me.DGVExpensesEmp.Location = New System.Drawing.Point(17, 297)
-        Me.DGVExpensesEmp.Margin = New System.Windows.Forms.Padding(2)
-        Me.DGVExpensesEmp.MultiSelect = False
-        Me.DGVExpensesEmp.Name = "DGVExpensesEmp"
-        Me.DGVExpensesEmp.ReadOnly = True
-        Me.DGVExpensesEmp.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.DGVExpensesEmp.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        Me.DGVExpensesEmp.RowHeadersVisible = False
-        Me.DGVExpensesEmp.RowHeadersWidth = 51
-        Me.DGVExpensesEmp.RowTemplate.Height = 30
-        Me.DGVExpensesEmp.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DGVExpensesEmp.Size = New System.Drawing.Size(971, 188)
-        Me.DGVExpensesEmp.TabIndex = 1222
-        Me.DGVExpensesEmp.Tag = "Dark-SelectionVisible"
+        Me.DGVExpenses.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        Me.DGVExpenses.ColumnHeadersHeight = 32
+        Me.DGVExpenses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+        Me.DGVExpenses.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn8, Me.DataGridViewTextBoxColumn9, Me.Column1, Me.Column4, Me.Column2, Me.Column3, Me.Column6, Me.Column5, Me.Column7, Me.Column8})
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Droid Arabic Kufi", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.AppWorkspace
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DGVExpenses.DefaultCellStyle = DataGridViewCellStyle2
+        Me.DGVExpenses.EnableHeadersVisualStyles = False
+        Me.DGVExpenses.GridColor = System.Drawing.Color.Gray
+        Me.DGVExpenses.Location = New System.Drawing.Point(17, 325)
+        Me.DGVExpenses.Margin = New System.Windows.Forms.Padding(2)
+        Me.DGVExpenses.MultiSelect = False
+        Me.DGVExpenses.Name = "DGVExpenses"
+        Me.DGVExpenses.ReadOnly = True
+        Me.DGVExpenses.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.DGVExpenses.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        Me.DGVExpenses.RowHeadersVisible = False
+        Me.DGVExpenses.RowHeadersWidth = 51
+        Me.DGVExpenses.RowTemplate.Height = 30
+        Me.DGVExpenses.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DGVExpenses.Size = New System.Drawing.Size(971, 170)
+        Me.DGVExpenses.TabIndex = 1222
+        Me.DGVExpenses.Tag = "Dark-SelectionVisible"
+        '
+        'TableLayoutPanel5
+        '
+        Me.TableLayoutPanel5.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TableLayoutPanel5.ColumnCount = 5
+        Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10.0!))
+        Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10.0!))
+        Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TableLayoutPanel5.Controls.Add(Me.BtnSave, 0, 0)
+        Me.TableLayoutPanel5.Controls.Add(Me.BtnRefresh, 2, 0)
+        Me.TableLayoutPanel5.Controls.Add(Me.BtnDelete, 4, 0)
+        Me.TableLayoutPanel5.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TableLayoutPanel5.Location = New System.Drawing.Point(15, 272)
+        Me.TableLayoutPanel5.Margin = New System.Windows.Forms.Padding(2)
+        Me.TableLayoutPanel5.Name = "TableLayoutPanel5"
+        Me.TableLayoutPanel5.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.TableLayoutPanel5.RowCount = 1
+        Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
+        Me.TableLayoutPanel5.Size = New System.Drawing.Size(973, 40)
+        Me.TableLayoutPanel5.TabIndex = 1215
+        '
+        'BtnSave
+        '
+        Me.BtnSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(150, Byte), Integer), CType(CType(136, Byte), Integer))
+        Me.BtnSave.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.BtnSave.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.BtnSave.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.BtnSave.FlatAppearance.BorderSize = 0
+        Me.BtnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BtnSave.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnSave.ForeColor = System.Drawing.Color.White
+        Me.BtnSave.Image = CType(resources.GetObject("BtnSave.Image"), System.Drawing.Image)
+        Me.BtnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.BtnSave.Location = New System.Drawing.Point(656, 1)
+        Me.BtnSave.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
+        Me.BtnSave.Name = "BtnSave"
+        Me.BtnSave.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.BtnSave.Size = New System.Drawing.Size(317, 38)
+        Me.BtnSave.TabIndex = 1133
+        Me.BtnSave.Tag = "Dark"
+        Me.BtnSave.Text = "حفظ"
+        Me.BtnSave.UseVisualStyleBackColor = False
+        '
+        'BtnRefresh
+        '
+        Me.BtnRefresh.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(150, Byte), Integer), CType(CType(136, Byte), Integer))
+        Me.BtnRefresh.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.BtnRefresh.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.BtnRefresh.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.BtnRefresh.FlatAppearance.BorderSize = 0
+        Me.BtnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BtnRefresh.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnRefresh.ForeColor = System.Drawing.Color.White
+        Me.BtnRefresh.Image = CType(resources.GetObject("BtnRefresh.Image"), System.Drawing.Image)
+        Me.BtnRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.BtnRefresh.Location = New System.Drawing.Point(329, 1)
+        Me.BtnRefresh.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
+        Me.BtnRefresh.Name = "BtnRefresh"
+        Me.BtnRefresh.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.BtnRefresh.Size = New System.Drawing.Size(317, 38)
+        Me.BtnRefresh.TabIndex = 1136
+        Me.BtnRefresh.Tag = "Dark"
+        Me.BtnRefresh.Text = "تحديث"
+        Me.BtnRefresh.UseVisualStyleBackColor = False
+        '
+        'BtnDelete
+        '
+        Me.BtnDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(150, Byte), Integer), CType(CType(136, Byte), Integer))
+        Me.BtnDelete.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.BtnDelete.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.BtnDelete.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.BtnDelete.FlatAppearance.BorderSize = 0
+        Me.BtnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BtnDelete.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnDelete.ForeColor = System.Drawing.Color.White
+        Me.BtnDelete.Image = CType(resources.GetObject("BtnDelete.Image"), System.Drawing.Image)
+        Me.BtnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.BtnDelete.Location = New System.Drawing.Point(0, 1)
+        Me.BtnDelete.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
+        Me.BtnDelete.Name = "BtnDelete"
+        Me.BtnDelete.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.BtnDelete.Size = New System.Drawing.Size(319, 38)
+        Me.BtnDelete.TabIndex = 1131
+        Me.BtnDelete.Tag = "Dark"
+        Me.BtnDelete.Text = "حــذف"
+        Me.BtnDelete.UseVisualStyleBackColor = False
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox1.Controls.Add(Me.TableLayoutPanel3)
+        Me.GroupBox1.Controls.Add(Me.LblUserName)
+        Me.GroupBox1.Location = New System.Drawing.Point(17, 95)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2)
+        Me.GroupBox1.Size = New System.Drawing.Size(969, 174)
+        Me.GroupBox1.TabIndex = 1214
+        Me.GroupBox1.TabStop = False
+        '
+        'TableLayoutPanel3
+        '
+        Me.TableLayoutPanel3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TableLayoutPanel3.ColumnCount = 4
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.36886!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.63114!))
+        Me.TableLayoutPanel3.Controls.Add(Me.Label6, 0, 2)
+        Me.TableLayoutPanel3.Controls.Add(Me.Label4, 2, 1)
+        Me.TableLayoutPanel3.Controls.Add(Me.Label2, 2, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.Label8, 0, 1)
+        Me.TableLayoutPanel3.Controls.Add(Me.Label12, 0, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.Panel4, 3, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.DTPDate, 1, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.Panel15, 3, 1)
+        Me.TableLayoutPanel3.Controls.Add(Me.Panel1, 1, 1)
+        Me.TableLayoutPanel3.Controls.Add(Me.CmbTrusry, 1, 2)
+        Me.TableLayoutPanel3.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TableLayoutPanel3.Location = New System.Drawing.Point(14, 22)
+        Me.TableLayoutPanel3.Margin = New System.Windows.Forms.Padding(2)
+        Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
+        Me.TableLayoutPanel3.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.TableLayoutPanel3.RowCount = 3
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(943, 140)
+        Me.TableLayoutPanel3.TabIndex = 1214
+        '
+        'Label6
+        '
+        Me.Label6.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label6.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Label6.Location = New System.Drawing.Point(819, 92)
+        Me.Label6.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label6.Name = "Label6"
+        Me.Label6.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.Label6.Size = New System.Drawing.Size(122, 48)
+        Me.Label6.TabIndex = 1240
+        Me.Label6.Text = "الخزينة"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label4
+        '
+        Me.Label4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label4.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Label4.Location = New System.Drawing.Point(353, 46)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label4.Name = "Label4"
+        Me.Label4.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.Label4.Size = New System.Drawing.Size(121, 46)
+        Me.Label4.TabIndex = 1157
+        Me.Label4.Text = "ملاحظات"
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label2
+        '
+        Me.Label2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label2.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Label2.Location = New System.Drawing.Point(353, 0)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label2.Name = "Label2"
+        Me.Label2.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.Label2.Size = New System.Drawing.Size(121, 46)
+        Me.Label2.TabIndex = 1160
+        Me.Label2.Text = "طريقة الدفع"
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label8
+        '
+        Me.Label8.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label8.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Label8.Location = New System.Drawing.Point(819, 46)
+        Me.Label8.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label8.Name = "Label8"
+        Me.Label8.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.Label8.Size = New System.Drawing.Size(122, 46)
+        Me.Label8.TabIndex = 1155
+        Me.Label8.Text = "القيمة "
+        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label12
+        '
+        Me.Label12.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label12.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Label12.Location = New System.Drawing.Point(819, 0)
+        Me.Label12.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label12.Name = "Label12"
+        Me.Label12.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.Label12.Size = New System.Drawing.Size(122, 46)
+        Me.Label12.TabIndex = 1159
+        Me.Label12.Text = "تاريخ المصروف"
+        Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel4
+        '
+        Me.Panel4.Controls.Add(Me.CmbPaymentType)
+        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel4.Location = New System.Drawing.Point(0, 0)
+        Me.Panel4.Margin = New System.Windows.Forms.Padding(0)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.Panel4.Size = New System.Drawing.Size(351, 46)
+        Me.Panel4.TabIndex = 1215
+        '
+        'CmbPaymentType
+        '
+        Me.CmbPaymentType.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.CmbPaymentType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.CmbPaymentType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.CmbPaymentType.BackColor = System.Drawing.Color.White
+        Me.CmbPaymentType.DropDownHeight = 200
+        Me.CmbPaymentType.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CmbPaymentType.FormattingEnabled = True
+        Me.CmbPaymentType.IntegralHeight = False
+        Me.CmbPaymentType.Location = New System.Drawing.Point(0, 6)
+        Me.CmbPaymentType.Margin = New System.Windows.Forms.Padding(0)
+        Me.CmbPaymentType.Name = "CmbPaymentType"
+        Me.CmbPaymentType.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.CmbPaymentType.Size = New System.Drawing.Size(351, 35)
+        Me.CmbPaymentType.TabIndex = 6
+        Me.CmbPaymentType.Tag = "1"
+        '
+        'DTPDate
+        '
+        Me.DTPDate.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.DTPDate.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DTPDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.DTPDate.Location = New System.Drawing.Point(476, 5)
+        Me.DTPDate.Margin = New System.Windows.Forms.Padding(0)
+        Me.DTPDate.Name = "DTPDate"
+        Me.DTPDate.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.DTPDate.RightToLeftLayout = True
+        Me.DTPDate.Size = New System.Drawing.Size(341, 35)
+        Me.DTPDate.TabIndex = 4
+        Me.DTPDate.Tag = "1"
+        '
+        'Panel15
+        '
+        Me.Panel15.Controls.Add(Me.TxtNots)
+        Me.Panel15.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel15.Location = New System.Drawing.Point(0, 46)
+        Me.Panel15.Margin = New System.Windows.Forms.Padding(0)
+        Me.Panel15.Name = "Panel15"
+        Me.Panel15.Size = New System.Drawing.Size(351, 46)
+        Me.Panel15.TabIndex = 1216
+        '
+        'TxtNots
+        '
+        Me.TxtNots.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtNots.BackColor = System.Drawing.Color.White
+        Me.TxtNots.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TxtNots.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtNots.Location = New System.Drawing.Point(0, 5)
+        Me.TxtNots.Margin = New System.Windows.Forms.Padding(2)
+        Me.TxtNots.MaxLength = 200
+        Me.TxtNots.Name = "TxtNots"
+        Me.TxtNots.Size = New System.Drawing.Size(351, 35)
+        Me.TxtNots.TabIndex = 8
+        Me.TxtNots.Tag = ""
+        '
+        'Panel1
+        '
+        Me.Panel1.Controls.Add(Me.Label1)
+        Me.Panel1.Controls.Add(Me.TxtAmount)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel1.Location = New System.Drawing.Point(476, 46)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(0)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(341, 46)
+        Me.Panel1.TabIndex = 1217
+        '
+        'Label1
+        '
+        Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Label1.BackColor = System.Drawing.Color.White
+        Me.Label1.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.Gray
+        Me.Label1.Location = New System.Drawing.Point(3, 6)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label1.Name = "Label1"
+        Me.Label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.Label1.Size = New System.Drawing.Size(37, 30)
+        Me.Label1.TabIndex = 1221
+        Me.Label1.Text = "د.ل"
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TxtAmount
+        '
+        Me.TxtAmount.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TxtAmount.BackColor = System.Drawing.Color.White
+        Me.TxtAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TxtAmount.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtAmount.Location = New System.Drawing.Point(0, 5)
+        Me.TxtAmount.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.TxtAmount.MaxLength = 8
+        Me.TxtAmount.Name = "TxtAmount"
+        Me.TxtAmount.Size = New System.Drawing.Size(341, 35)
+        Me.TxtAmount.TabIndex = 5
+        Me.TxtAmount.Tag = "0"
+        '
+        'CmbTrusry
+        '
+        Me.CmbTrusry.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.CmbTrusry.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.CmbTrusry.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.CmbTrusry.BackColor = System.Drawing.Color.White
+        Me.CmbTrusry.DropDownHeight = 200
+        Me.CmbTrusry.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CmbTrusry.FormattingEnabled = True
+        Me.CmbTrusry.IntegralHeight = False
+        Me.CmbTrusry.Location = New System.Drawing.Point(476, 98)
+        Me.CmbTrusry.Margin = New System.Windows.Forms.Padding(0)
+        Me.CmbTrusry.Name = "CmbTrusry"
+        Me.CmbTrusry.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.CmbTrusry.Size = New System.Drawing.Size(341, 35)
+        Me.CmbTrusry.TabIndex = 1239
+        Me.CmbTrusry.Tag = "1"
+        '
+        'LblUserName
+        '
+        Me.LblUserName.AutoSize = True
+        Me.LblUserName.Font = New System.Drawing.Font("Sakkal Majalla", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblUserName.Location = New System.Drawing.Point(229, 99)
+        Me.LblUserName.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.LblUserName.Name = "LblUserName"
+        Me.LblUserName.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.LblUserName.Size = New System.Drawing.Size(0, 25)
+        Me.LblUserName.TabIndex = 1132
+        Me.LblUserName.Visible = False
         '
         'DataGridViewTextBoxColumn8
         '
@@ -378,429 +748,64 @@ Partial Class FrmMangmentExpenses
         Me.DataGridViewTextBoxColumn9.Name = "DataGridViewTextBoxColumn9"
         Me.DataGridViewTextBoxColumn9.ReadOnly = True
         '
-        'Column5
+        'Column1
         '
-        DataGridViewCellStyle2.Format = "d"
-        DataGridViewCellStyle2.NullValue = Nothing
-        Me.Column5.DefaultCellStyle = DataGridViewCellStyle2
-        Me.Column5.HeaderText = "تاريخ التسجيل"
-        Me.Column5.MinimumWidth = 6
-        Me.Column5.Name = "Column5"
-        Me.Column5.ReadOnly = True
+        Me.Column1.HeaderText = "القيمة"
+        Me.Column1.MinimumWidth = 6
+        Me.Column1.Name = "Column1"
+        Me.Column1.ReadOnly = True
+        '
+        'Column4
+        '
+        Me.Column4.HeaderText = "طريقة الدفع"
+        Me.Column4.MinimumWidth = 6
+        Me.Column4.Name = "Column4"
+        Me.Column4.ReadOnly = True
+        '
+        'Column2
+        '
+        Me.Column2.HeaderText = "الوقت"
+        Me.Column2.MinimumWidth = 6
+        Me.Column2.Name = "Column2"
+        Me.Column2.ReadOnly = True
+        '
+        'Column3
+        '
+        Me.Column3.HeaderText = "ملاحظات"
+        Me.Column3.MinimumWidth = 6
+        Me.Column3.Name = "Column3"
+        Me.Column3.ReadOnly = True
         '
         'Column6
         '
-        Me.Column6.HeaderText = "المستلم"
+        Me.Column6.HeaderText = "البند"
         Me.Column6.MinimumWidth = 6
         Me.Column6.Name = "Column6"
         Me.Column6.ReadOnly = True
         '
+        'Column5
+        '
+        Me.Column5.HeaderText = "PaymentID"
+        Me.Column5.MinimumWidth = 6
+        Me.Column5.Name = "Column5"
+        Me.Column5.ReadOnly = True
+        Me.Column5.Visible = False
+        '
         'Column7
         '
-        Me.Column7.HeaderText = "نوع المصروف"
+        Me.Column7.HeaderText = "ExpensesID"
         Me.Column7.MinimumWidth = 6
         Me.Column7.Name = "Column7"
         Me.Column7.ReadOnly = True
+        Me.Column7.Visible = False
         '
         'Column8
         '
-        DataGridViewCellStyle3.Format = "N3"
-        DataGridViewCellStyle3.NullValue = Nothing
-        Me.Column8.DefaultCellStyle = DataGridViewCellStyle3
-        Me.Column8.HeaderText = "القيمة"
+        Me.Column8.HeaderText = "Type"
         Me.Column8.MinimumWidth = 6
         Me.Column8.Name = "Column8"
         Me.Column8.ReadOnly = True
-        '
-        'Column9
-        '
-        Me.Column9.HeaderText = "للسنة-شهر"
-        Me.Column9.MinimumWidth = 6
-        Me.Column9.Name = "Column9"
-        Me.Column9.ReadOnly = True
-        Me.Column9.Visible = False
-        '
-        'Column10
-        '
-        Me.Column10.HeaderText = "الحالة"
-        Me.Column10.MinimumWidth = 6
-        Me.Column10.Name = "Column10"
-        Me.Column10.ReadOnly = True
-        Me.Column10.Visible = False
-        '
-        'Label9
-        '
-        Me.Label9.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label9.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.ForeColor = System.Drawing.SystemColors.WindowText
-        Me.Label9.Location = New System.Drawing.Point(357, 502)
-        Me.Label9.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label9.Name = "Label9"
-        Me.Label9.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Label9.Size = New System.Drawing.Size(69, 35)
-        Me.Label9.TabIndex = 1222
-        Me.Label9.Text = "الإجمالي"
-        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TableLayoutPanel5
-        '
-        Me.TableLayoutPanel5.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TableLayoutPanel5.ColumnCount = 7
-        Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
-        Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10.0!))
-        Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
-        Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10.0!))
-        Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
-        Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10.0!))
-        Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
-        Me.TableLayoutPanel5.Controls.Add(Me.BtnPrint, 6, 0)
-        Me.TableLayoutPanel5.Controls.Add(Me.BtnRefresh, 4, 0)
-        Me.TableLayoutPanel5.Controls.Add(Me.BtnSave, 0, 0)
-        Me.TableLayoutPanel5.Controls.Add(Me.BtnDelete, 2, 0)
-        Me.TableLayoutPanel5.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TableLayoutPanel5.Location = New System.Drawing.Point(15, 238)
-        Me.TableLayoutPanel5.Margin = New System.Windows.Forms.Padding(2)
-        Me.TableLayoutPanel5.Name = "TableLayoutPanel5"
-        Me.TableLayoutPanel5.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TableLayoutPanel5.RowCount = 1
-        Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel5.Size = New System.Drawing.Size(973, 40)
-        Me.TableLayoutPanel5.TabIndex = 1215
-        '
-        'BtnPrint
-        '
-        Me.BtnPrint.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(150, Byte), Integer), CType(CType(136, Byte), Integer))
-        Me.BtnPrint.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.BtnPrint.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.BtnPrint.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.BtnPrint.FlatAppearance.BorderSize = 0
-        Me.BtnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BtnPrint.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnPrint.ForeColor = System.Drawing.Color.White
-        Me.BtnPrint.Image = CType(resources.GetObject("BtnPrint.Image"), System.Drawing.Image)
-        Me.BtnPrint.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.BtnPrint.Location = New System.Drawing.Point(0, 1)
-        Me.BtnPrint.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
-        Me.BtnPrint.Name = "BtnPrint"
-        Me.BtnPrint.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.BtnPrint.Size = New System.Drawing.Size(238, 38)
-        Me.BtnPrint.TabIndex = 1141
-        Me.BtnPrint.Tag = "Dark"
-        Me.BtnPrint.Text = "طباعة "
-        Me.BtnPrint.UseVisualStyleBackColor = False
-        '
-        'BtnRefresh
-        '
-        Me.BtnRefresh.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(150, Byte), Integer), CType(CType(136, Byte), Integer))
-        Me.BtnRefresh.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.BtnRefresh.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.BtnRefresh.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.BtnRefresh.FlatAppearance.BorderSize = 0
-        Me.BtnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BtnRefresh.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnRefresh.ForeColor = System.Drawing.Color.White
-        Me.BtnRefresh.Image = CType(resources.GetObject("BtnRefresh.Image"), System.Drawing.Image)
-        Me.BtnRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.BtnRefresh.Location = New System.Drawing.Point(248, 1)
-        Me.BtnRefresh.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
-        Me.BtnRefresh.Name = "BtnRefresh"
-        Me.BtnRefresh.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.BtnRefresh.Size = New System.Drawing.Size(235, 38)
-        Me.BtnRefresh.TabIndex = 1136
-        Me.BtnRefresh.Tag = "Dark"
-        Me.BtnRefresh.Text = "تحديث"
-        Me.BtnRefresh.UseVisualStyleBackColor = False
-        '
-        'BtnSave
-        '
-        Me.BtnSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(150, Byte), Integer), CType(CType(136, Byte), Integer))
-        Me.BtnSave.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.BtnSave.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.BtnSave.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.BtnSave.FlatAppearance.BorderSize = 0
-        Me.BtnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BtnSave.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnSave.ForeColor = System.Drawing.Color.White
-        Me.BtnSave.Image = CType(resources.GetObject("BtnSave.Image"), System.Drawing.Image)
-        Me.BtnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.BtnSave.Location = New System.Drawing.Point(738, 1)
-        Me.BtnSave.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
-        Me.BtnSave.Name = "BtnSave"
-        Me.BtnSave.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.BtnSave.Size = New System.Drawing.Size(235, 38)
-        Me.BtnSave.TabIndex = 1133
-        Me.BtnSave.Tag = "Dark"
-        Me.BtnSave.Text = "حفظ"
-        Me.BtnSave.UseVisualStyleBackColor = False
-        '
-        'BtnDelete
-        '
-        Me.BtnDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(150, Byte), Integer), CType(CType(136, Byte), Integer))
-        Me.BtnDelete.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.BtnDelete.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.BtnDelete.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.BtnDelete.FlatAppearance.BorderSize = 0
-        Me.BtnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BtnDelete.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnDelete.ForeColor = System.Drawing.Color.White
-        Me.BtnDelete.Image = CType(resources.GetObject("BtnDelete.Image"), System.Drawing.Image)
-        Me.BtnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.BtnDelete.Location = New System.Drawing.Point(493, 1)
-        Me.BtnDelete.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
-        Me.BtnDelete.Name = "BtnDelete"
-        Me.BtnDelete.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.BtnDelete.Size = New System.Drawing.Size(235, 38)
-        Me.BtnDelete.TabIndex = 1131
-        Me.BtnDelete.Tag = "Dark"
-        Me.BtnDelete.Text = "حــذف"
-        Me.BtnDelete.UseVisualStyleBackColor = False
-        '
-        'Label13
-        '
-        Me.Label13.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label13.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Label13.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.ForeColor = System.Drawing.Color.Gray
-        Me.Label13.Location = New System.Drawing.Point(19, 505)
-        Me.Label13.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label13.Name = "Label13"
-        Me.Label13.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Label13.Size = New System.Drawing.Size(37, 30)
-        Me.Label13.TabIndex = 1220
-        Me.Label13.Tag = "AutoC"
-        Me.Label13.Text = "د.ل"
-        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'GroupBox1
-        '
-        Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox1.Controls.Add(Me.TableLayoutPanel3)
-        Me.GroupBox1.Controls.Add(Me.LblUserName)
-        Me.GroupBox1.Location = New System.Drawing.Point(17, 95)
-        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2)
-        Me.GroupBox1.Size = New System.Drawing.Size(969, 126)
-        Me.GroupBox1.TabIndex = 1214
-        Me.GroupBox1.TabStop = False
-        '
-        'TableLayoutPanel3
-        '
-        Me.TableLayoutPanel3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TableLayoutPanel3.ColumnCount = 4
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.36886!))
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.63114!))
-        Me.TableLayoutPanel3.Controls.Add(Me.Label4, 2, 1)
-        Me.TableLayoutPanel3.Controls.Add(Me.Label2, 2, 0)
-        Me.TableLayoutPanel3.Controls.Add(Me.Label8, 0, 1)
-        Me.TableLayoutPanel3.Controls.Add(Me.Label12, 0, 0)
-        Me.TableLayoutPanel3.Controls.Add(Me.Panel4, 3, 0)
-        Me.TableLayoutPanel3.Controls.Add(Me.DTPDate, 1, 0)
-        Me.TableLayoutPanel3.Controls.Add(Me.Panel15, 3, 1)
-        Me.TableLayoutPanel3.Controls.Add(Me.Panel1, 1, 1)
-        Me.TableLayoutPanel3.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TableLayoutPanel3.Location = New System.Drawing.Point(14, 22)
-        Me.TableLayoutPanel3.Margin = New System.Windows.Forms.Padding(2)
-        Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
-        Me.TableLayoutPanel3.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TableLayoutPanel3.RowCount = 2
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(943, 99)
-        Me.TableLayoutPanel3.TabIndex = 1214
-        '
-        'Label4
-        '
-        Me.Label4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label4.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label4.Location = New System.Drawing.Point(353, 49)
-        Me.Label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label4.Name = "Label4"
-        Me.Label4.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Label4.Size = New System.Drawing.Size(121, 50)
-        Me.Label4.TabIndex = 1157
-        Me.Label4.Text = "المستـــلم"
-        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label2
-        '
-        Me.Label2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label2.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label2.Location = New System.Drawing.Point(353, 0)
-        Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label2.Name = "Label2"
-        Me.Label2.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Label2.Size = New System.Drawing.Size(121, 49)
-        Me.Label2.TabIndex = 1160
-        Me.Label2.Text = "نوع المصـروف"
-        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label8
-        '
-        Me.Label8.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label8.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label8.Location = New System.Drawing.Point(819, 49)
-        Me.Label8.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label8.Name = "Label8"
-        Me.Label8.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Label8.Size = New System.Drawing.Size(122, 50)
-        Me.Label8.TabIndex = 1155
-        Me.Label8.Text = "القيمة "
-        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label12
-        '
-        Me.Label12.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label12.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label12.Location = New System.Drawing.Point(819, 0)
-        Me.Label12.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label12.Name = "Label12"
-        Me.Label12.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Label12.Size = New System.Drawing.Size(122, 49)
-        Me.Label12.TabIndex = 1159
-        Me.Label12.Text = "تاريخ المصروف"
-        Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Panel4
-        '
-        Me.Panel4.Controls.Add(Me.CmbExpensesType)
-        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel4.Location = New System.Drawing.Point(0, 0)
-        Me.Panel4.Margin = New System.Windows.Forms.Padding(0)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Panel4.Size = New System.Drawing.Size(351, 49)
-        Me.Panel4.TabIndex = 1215
-        '
-        'CmbExpensesType
-        '
-        Me.CmbExpensesType.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.CmbExpensesType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.CmbExpensesType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.CmbExpensesType.BackColor = System.Drawing.Color.White
-        Me.CmbExpensesType.DropDownHeight = 160
-        Me.CmbExpensesType.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CmbExpensesType.FormattingEnabled = True
-        Me.CmbExpensesType.IntegralHeight = False
-        Me.CmbExpensesType.Location = New System.Drawing.Point(0, 8)
-        Me.CmbExpensesType.Margin = New System.Windows.Forms.Padding(0)
-        Me.CmbExpensesType.Name = "CmbExpensesType"
-        Me.CmbExpensesType.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.CmbExpensesType.Size = New System.Drawing.Size(351, 35)
-        Me.CmbExpensesType.TabIndex = 6
-        Me.CmbExpensesType.Tag = "1"
-        '
-        'DTPDate
-        '
-        Me.DTPDate.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.DTPDate.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DTPDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DTPDate.Location = New System.Drawing.Point(476, 7)
-        Me.DTPDate.Margin = New System.Windows.Forms.Padding(0)
-        Me.DTPDate.Name = "DTPDate"
-        Me.DTPDate.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.DTPDate.RightToLeftLayout = True
-        Me.DTPDate.Size = New System.Drawing.Size(341, 35)
-        Me.DTPDate.TabIndex = 4
-        Me.DTPDate.Tag = "1"
-        '
-        'Panel15
-        '
-        Me.Panel15.Controls.Add(Me.TxtReceiver)
-        Me.Panel15.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel15.Location = New System.Drawing.Point(0, 49)
-        Me.Panel15.Margin = New System.Windows.Forms.Padding(0)
-        Me.Panel15.Name = "Panel15"
-        Me.Panel15.Size = New System.Drawing.Size(351, 50)
-        Me.Panel15.TabIndex = 1216
-        '
-        'TxtReceiver
-        '
-        Me.TxtReceiver.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtReceiver.BackColor = System.Drawing.Color.White
-        Me.TxtReceiver.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtReceiver.Location = New System.Drawing.Point(0, 7)
-        Me.TxtReceiver.Margin = New System.Windows.Forms.Padding(2)
-        Me.TxtReceiver.MaxLength = 200
-        Me.TxtReceiver.Name = "TxtReceiver"
-        Me.TxtReceiver.Size = New System.Drawing.Size(351, 35)
-        Me.TxtReceiver.TabIndex = 8
-        Me.TxtReceiver.Tag = ""
-        '
-        'Panel1
-        '
-        Me.Panel1.Controls.Add(Me.Label1)
-        Me.Panel1.Controls.Add(Me.TxtAmount)
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Location = New System.Drawing.Point(476, 49)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(0)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(341, 50)
-        Me.Panel1.TabIndex = 1217
-        '
-        'Label1
-        '
-        Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label1.BackColor = System.Drawing.Color.White
-        Me.Label1.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.Gray
-        Me.Label1.Location = New System.Drawing.Point(3, 10)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label1.Name = "Label1"
-        Me.Label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Label1.Size = New System.Drawing.Size(37, 30)
-        Me.Label1.TabIndex = 1221
-        Me.Label1.Text = "د.ل"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TxtAmount
-        '
-        Me.TxtAmount.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtAmount.BackColor = System.Drawing.Color.White
-        Me.TxtAmount.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtAmount.Location = New System.Drawing.Point(0, 7)
-        Me.TxtAmount.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.TxtAmount.MaxLength = 8
-        Me.TxtAmount.Name = "TxtAmount"
-        Me.TxtAmount.Size = New System.Drawing.Size(341, 35)
-        Me.TxtAmount.TabIndex = 5
-        Me.TxtAmount.Tag = "0"
-        '
-        'LblUserName
-        '
-        Me.LblUserName.AutoSize = True
-        Me.LblUserName.Font = New System.Drawing.Font("Sakkal Majalla", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblUserName.Location = New System.Drawing.Point(229, 99)
-        Me.LblUserName.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.LblUserName.Name = "LblUserName"
-        Me.LblUserName.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.LblUserName.Size = New System.Drawing.Size(0, 25)
-        Me.LblUserName.TabIndex = 1132
-        Me.LblUserName.Visible = False
-        '
-        'TxtSumValue
-        '
-        Me.TxtSumValue.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.TxtSumValue.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.TxtSumValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TxtSumValue.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
-        Me.TxtSumValue.Location = New System.Drawing.Point(17, 502)
-        Me.TxtSumValue.Margin = New System.Windows.Forms.Padding(3)
-        Me.TxtSumValue.Name = "TxtSumValue"
-        Me.TxtSumValue.Size = New System.Drawing.Size(337, 35)
-        Me.TxtSumValue.TabIndex = 1236
-        Me.TxtSumValue.Tag = "AutoC"
-        Me.TxtSumValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Column8.Visible = False
         '
         'FrmMangmentExpenses
         '
@@ -809,10 +814,12 @@ Partial Class FrmMangmentExpenses
         Me.ClientSize = New System.Drawing.Size(1004, 556)
         Me.Controls.Add(Me.P1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "FrmMangmentExpenses"
         Me.Text = "المصروفات"
         Me.P1.ResumeLayout(False)
+        Me.P1.PerformLayout()
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.GroupBox5.ResumeLayout(False)
         Me.TableLayoutPanel14.ResumeLayout(False)
@@ -820,7 +827,7 @@ Partial Class FrmMangmentExpenses
         Me.Panel35.ResumeLayout(False)
         Me.GroupBox4.ResumeLayout(False)
         Me.TableLayoutPanel12.ResumeLayout(False)
-        CType(Me.DGVExpensesEmp, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DGVExpenses, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TableLayoutPanel5.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
@@ -848,37 +855,39 @@ Partial Class FrmMangmentExpenses
     Friend WithEvents Panel35 As Panel
     Friend WithEvents TxtDay As Label
     Friend WithEvents Label32 As Label
-    Friend WithEvents DGVExpensesEmp As DataGridView
-    Friend WithEvents Label9 As Label
+    Friend WithEvents DGVExpenses As DataGridView
     Friend WithEvents TableLayoutPanel5 As TableLayoutPanel
     Friend WithEvents BtnRefresh As Button
-    Friend WithEvents BtnPrint As Button
     Friend WithEvents BtnDelete As Button
     Friend WithEvents BtnSave As Button
-    Friend WithEvents Label13 As Label
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents TableLayoutPanel3 As TableLayoutPanel
     Friend WithEvents Label4 As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents Panel4 As Panel
-    Friend WithEvents CmbExpensesType As ComboBox
+    Friend WithEvents CmbPaymentType As ComboBox
     Friend WithEvents TxtAmount As TextBox
     Friend WithEvents Label2 As Label
     Friend WithEvents Label12 As Label
     Friend WithEvents DTPDate As DateTimePicker
     Friend WithEvents Panel15 As Panel
-    Friend WithEvents TxtReceiver As TextBox
+    Friend WithEvents TxtNots As TextBox
     Friend WithEvents LblUserName As Label
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Label1 As Label
-    Friend WithEvents TxtSumValue As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents LblMangment As Label
+    Friend WithEvents CmbTrusry As ComboBox
+    Friend WithEvents Label6 As Label
     Friend WithEvents DataGridViewTextBoxColumn8 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn9 As DataGridViewTextBoxColumn
-    Friend WithEvents Column5 As DataGridViewTextBoxColumn
+    Friend WithEvents Column1 As DataGridViewTextBoxColumn
+    Friend WithEvents Column4 As DataGridViewTextBoxColumn
+    Friend WithEvents Column2 As DataGridViewTextBoxColumn
+    Friend WithEvents Column3 As DataGridViewTextBoxColumn
     Friend WithEvents Column6 As DataGridViewTextBoxColumn
+    Friend WithEvents Column5 As DataGridViewTextBoxColumn
     Friend WithEvents Column7 As DataGridViewTextBoxColumn
     Friend WithEvents Column8 As DataGridViewTextBoxColumn
-    Friend WithEvents Column9 As DataGridViewTextBoxColumn
-    Friend WithEvents Column10 As DataGridViewTextBoxColumn
 End Class

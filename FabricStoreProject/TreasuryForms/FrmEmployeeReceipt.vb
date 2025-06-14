@@ -65,8 +65,8 @@ Public Class FrmEmployeeReceipt
             If DS.Tables(5).Rows.Count > 0 Then
 
                 If Not IsDBNull(DS.Tables(5).Rows(0).Item(0)) Then
-                    LblTreasuryValue.Text = Format(DS.Tables(5).Rows(0).Item(0), "0.000")
-                    LblValueCard.Text = Format(DS.Tables(5).Rows(0).Item(1), "0.000")
+                    LblTreasuryValue.Text = Format(DS.Tables(5).Rows(0).Item(0), "0.00")
+                    LblValueCard.Text = Format(DS.Tables(5).Rows(0).Item(1), "0.00")
                     TreasuryValue = DS.Tables(5).Rows(0).Item(0)
                     BasicValue = DS.Tables(5).Rows(0).Item(0)
                 Else
@@ -144,20 +144,20 @@ Public Class FrmEmployeeReceipt
 
         If Val(TxtValue.Text) <> 0 Then
             If CmbPaymentType.SelectedValue = 1 Then
-                LblTreasuryValue.Text = Format(TreasuryValue + Val(TxtValue.Text), "0.000")
+                LblTreasuryValue.Text = Format(TreasuryValue + Val(TxtValue.Text), "0.00")
 
             ElseIf CmbPaymentType.SelectedValue > 1 Then
-                LblValueCard.Text = Format(TreasuryValue + Val(TxtValue.Text), "0.000")
+                LblValueCard.Text = Format(TreasuryValue + Val(TxtValue.Text), "0.00")
             End If
 
 
         Else
 
             If CmbPaymentType.SelectedValue = 1 Then
-                LblTreasuryValue.Text = Format(TreasuryValue, "0.000")
+                LblTreasuryValue.Text = Format(TreasuryValue, "0.00")
 
             ElseIf CmbPaymentType.SelectedValue > 1 Then
-                LblValueCard.Text = Format(TreasuryValue, "0.000")
+                LblValueCard.Text = Format(TreasuryValue, "0.00")
             End If
 
         End If
@@ -215,11 +215,11 @@ Public Class FrmEmployeeReceipt
 
         Dim Sqlcon As New SQLConClass()
         Dim param() As SqlParameter = {
-            New SqlParameter("ReceiptID", ReceiptID),
-            New SqlParameter("EmployeeID", CmbEmployee.SelectedValue),
+            New SqlParameter("ReceiptID", ReceiptID),            'New SqlParameter("EmployeeID", CmbEmployee.SelectedValue),
             New SqlParameter("Value", Val(TxtValue.Text)),
             New SqlParameter("NoteFor", TxtNoteFor.Text.Trim),
             New SqlParameter("UserID", UserID),
+            New SqlParameter("@FID", 1),
             New SqlParameter("PaymentTypeID", CmbPaymentType.SelectedValue),
             New SqlParameter("CheckNUM", TxtCheckNum.Text),
             New SqlParameter("@BankID", IIf(CmbBank.SelectedValue = Nothing, DBNull.Value, CmbBank.SelectedValue))}
@@ -231,8 +231,8 @@ Public Class FrmEmployeeReceipt
         End If
 
         If DsSave.Tables(2).Rows.Count > 0 Then
-            LblTreasuryValue.Text = Format(DsSave.Tables(2).Rows(0).Item(0), "0.000")
-            LblValueCard.Text = Format(DsSave.Tables(2).Rows(0).Item(1), "0.000")
+            LblTreasuryValue.Text = Format(DsSave.Tables(2).Rows(0).Item(0), "0.00")
+            LblValueCard.Text = Format(DsSave.Tables(2).Rows(0).Item(1), "0.00")
             TreasuryValue = DsSave.Tables(2).Rows(0).Item(0)
         End If
 
@@ -250,7 +250,7 @@ Public Class FrmEmployeeReceipt
             With DT.Rows(0)
                 DGV.Item(0, 0).Value = .Item("ID")
                 DGV.Item(1, 0).Value = Format(.Item("NUM"), "000000")
-                DGV.Item(2, 0).Value = Format(.Item("Value"), "0.000")
+                DGV.Item(2, 0).Value = Format(.Item("Value"), "0.00")
                 DGV.Item(3, 0).Value = .Item("EmployeeName")
                 DGV.Item(4, 0).Value = .Item("EmployeeReceiptFinanceName")
                 DGV.Item(5, 0).Value = .Item("PaymentTypeName")
@@ -378,7 +378,7 @@ Public Class FrmEmployeeReceipt
         'Dim Cash As String
         'Dim Price As String
 
-        'Dim Value = Format(DSPrint.Tables(0).Rows(0).Item(2), "0.000")
+        'Dim Value = Format(DSPrint.Tables(0).Rows(0).Item(2), "0.00")
 
         'Dim Denar As String
         'Dim Derham As String
@@ -476,7 +476,7 @@ Public Class FrmEmployeeReceipt
             Show = True
             If DsSearch.Tables(4).Rows.Count > 0 Then
                 If Not IsDBNull(DsSearch.Tables(4).Rows(0).Item(0)) Then
-                    LblTreasuryValue.Text = Format(DsSearch.Tables(4).Rows(0).Item(0), "0.000")
+                    LblTreasuryValue.Text = Format(DsSearch.Tables(4).Rows(0).Item(0), "0.00")
                     TreasuryValue = DsSearch.Tables(4).Rows(0).Item(0)
                     BasicValue = DsSearch.Tables(4).Rows(0).Item(0)
 
@@ -499,8 +499,8 @@ Public Class FrmEmployeeReceipt
                     LblNum.Text = Format(.Item("NUM"), "000000")
                     LblDate.Text = Format(.Item("Date"), GetDateAndTimeFormat(DTFormat.DF))
                     CmbEmployee.SelectedValue = .Item("EmployeeID")
-                    TxtValue.Text = Format(.Item("Value"), "0.000")
-                    ReceiptValue = Format(.Item("Value"), "0.000")
+                    TxtValue.Text = Format(.Item("Value"), "0.00")
+                    ReceiptValue = Format(.Item("Value"), "0.00")
                     LblCashingFinance.Text = .Item("EmployeeReceiptFinanceName")
                     CmbPaymentType.SelectedValue = .Item("PaymentTypeID")
                     If .Item("CheckNum") <> 0 Then

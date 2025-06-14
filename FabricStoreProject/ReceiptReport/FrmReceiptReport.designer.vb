@@ -150,8 +150,8 @@ Partial Class FrmReceiptReport
         Me.DGVRecipt.DefaultCellStyle = DataGridViewCellStyle4
         Me.DGVRecipt.EnableHeadersVisualStyles = False
         Me.DGVRecipt.GridColor = System.Drawing.Color.Gray
-        Me.DGVRecipt.Location = New System.Drawing.Point(19, 345)
-        Me.DGVRecipt.Margin = New System.Windows.Forms.Padding(2)
+        Me.DGVRecipt.Location = New System.Drawing.Point(25, 425)
+        Me.DGVRecipt.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.DGVRecipt.MultiSelect = False
         Me.DGVRecipt.Name = "DGVRecipt"
         Me.DGVRecipt.ReadOnly = True
@@ -161,7 +161,7 @@ Partial Class FrmReceiptReport
         Me.DGVRecipt.RowHeadersWidth = 51
         Me.DGVRecipt.RowTemplate.Height = 30
         Me.DGVRecipt.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DGVRecipt.Size = New System.Drawing.Size(1002, 141)
+        Me.DGVRecipt.Size = New System.Drawing.Size(1336, 174)
         Me.DGVRecipt.TabIndex = 1234
         Me.DGVRecipt.Tag = "Dark-SelectionVisible"
         '
@@ -172,6 +172,7 @@ Partial Class FrmReceiptReport
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
         Me.DataGridViewTextBoxColumn1.ReadOnly = True
         Me.DataGridViewTextBoxColumn1.Visible = False
+        Me.DataGridViewTextBoxColumn1.Width = 125
         '
         'DataGridViewTextBoxColumn2
         '
@@ -283,12 +284,12 @@ Partial Class FrmReceiptReport
         Me.TxtReciptName.BackColor = System.Drawing.SystemColors.Window
         Me.TxtReciptName.Enabled = False
         Me.TxtReciptName.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
-        Me.TxtReciptName.Location = New System.Drawing.Point(519, 48)
-        Me.TxtReciptName.Margin = New System.Windows.Forms.Padding(2)
+        Me.TxtReciptName.Location = New System.Drawing.Point(692, 60)
+        Me.TxtReciptName.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TxtReciptName.MaxLength = 200
         Me.TxtReciptName.Name = "TxtReciptName"
         Me.TxtReciptName.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TxtReciptName.Size = New System.Drawing.Size(315, 35)
+        Me.TxtReciptName.Size = New System.Drawing.Size(420, 42)
         Me.TxtReciptName.TabIndex = 47
         Me.TxtReciptName.Tag = ""
         '
@@ -300,10 +301,10 @@ Partial Class FrmReceiptReport
         Me.CmbPaymentType.Enabled = False
         Me.CmbPaymentType.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
         Me.CmbPaymentType.FormattingEnabled = True
-        Me.CmbPaymentType.Location = New System.Drawing.Point(2, 48)
-        Me.CmbPaymentType.Margin = New System.Windows.Forms.Padding(2)
+        Me.CmbPaymentType.Location = New System.Drawing.Point(3, 60)
+        Me.CmbPaymentType.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.CmbPaymentType.Name = "CmbPaymentType"
-        Me.CmbPaymentType.Size = New System.Drawing.Size(316, 35)
+        Me.CmbPaymentType.Size = New System.Drawing.Size(420, 42)
         Me.CmbPaymentType.TabIndex = 49
         '
         'CmbBank
@@ -314,10 +315,10 @@ Partial Class FrmReceiptReport
         Me.CmbBank.Enabled = False
         Me.CmbBank.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
         Me.CmbBank.FormattingEnabled = True
-        Me.CmbBank.Location = New System.Drawing.Point(2, 92)
-        Me.CmbBank.Margin = New System.Windows.Forms.Padding(2)
+        Me.CmbBank.Location = New System.Drawing.Point(3, 114)
+        Me.CmbBank.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.CmbBank.Name = "CmbBank"
-        Me.CmbBank.Size = New System.Drawing.Size(316, 35)
+        Me.CmbBank.Size = New System.Drawing.Size(420, 42)
         Me.CmbBank.TabIndex = 50
         '
         'CmbUserName
@@ -328,20 +329,20 @@ Partial Class FrmReceiptReport
         Me.CmbUserName.Enabled = False
         Me.CmbUserName.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
         Me.CmbUserName.FormattingEnabled = True
-        Me.CmbUserName.Location = New System.Drawing.Point(519, 92)
-        Me.CmbUserName.Margin = New System.Windows.Forms.Padding(2)
+        Me.CmbUserName.Location = New System.Drawing.Point(692, 114)
+        Me.CmbUserName.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.CmbUserName.Name = "CmbUserName"
-        Me.CmbUserName.Size = New System.Drawing.Size(315, 35)
+        Me.CmbUserName.Size = New System.Drawing.Size(420, 42)
         Me.CmbUserName.TabIndex = 41
         '
         'Panel22
         '
         Me.Panel22.Controls.Add(Me.ChkReceipt)
         Me.Panel22.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel22.Location = New System.Drawing.Point(838, 46)
-        Me.Panel22.Margin = New System.Windows.Forms.Padding(2)
+        Me.Panel22.Location = New System.Drawing.Point(1118, 56)
+        Me.Panel22.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel22.Name = "Panel22"
-        Me.Panel22.Size = New System.Drawing.Size(132, 40)
+        Me.Panel22.Size = New System.Drawing.Size(175, 50)
         Me.Panel22.TabIndex = 45
         '
         'ChkReceipt
@@ -350,9 +351,9 @@ Partial Class FrmReceiptReport
         Me.ChkReceipt.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ChkReceipt.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
         Me.ChkReceipt.Location = New System.Drawing.Point(0, 0)
-        Me.ChkReceipt.Margin = New System.Windows.Forms.Padding(2)
+        Me.ChkReceipt.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ChkReceipt.Name = "ChkReceipt"
-        Me.ChkReceipt.Size = New System.Drawing.Size(132, 40)
+        Me.ChkReceipt.Size = New System.Drawing.Size(175, 50)
         Me.ChkReceipt.TabIndex = 1
         Me.ChkReceipt.Text = "المُسلم"
         Me.ChkReceipt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -362,10 +363,10 @@ Partial Class FrmReceiptReport
         '
         Me.Panel21.Controls.Add(Me.ChkUser)
         Me.Panel21.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel21.Location = New System.Drawing.Point(838, 90)
-        Me.Panel21.Margin = New System.Windows.Forms.Padding(2)
+        Me.Panel21.Location = New System.Drawing.Point(1118, 110)
+        Me.Panel21.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel21.Name = "Panel21"
-        Me.Panel21.Size = New System.Drawing.Size(132, 40)
+        Me.Panel21.Size = New System.Drawing.Size(175, 50)
         Me.Panel21.TabIndex = 45
         '
         'ChkUser
@@ -374,9 +375,9 @@ Partial Class FrmReceiptReport
         Me.ChkUser.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ChkUser.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
         Me.ChkUser.Location = New System.Drawing.Point(0, 0)
-        Me.ChkUser.Margin = New System.Windows.Forms.Padding(2)
+        Me.ChkUser.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ChkUser.Name = "ChkUser"
-        Me.ChkUser.Size = New System.Drawing.Size(132, 40)
+        Me.ChkUser.Size = New System.Drawing.Size(175, 50)
         Me.ChkUser.TabIndex = 1
         Me.ChkUser.Text = "المستخدم"
         Me.ChkUser.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -386,10 +387,10 @@ Partial Class FrmReceiptReport
         '
         Me.Panel17.Controls.Add(Me.ChkNots)
         Me.Panel17.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel17.Location = New System.Drawing.Point(838, 178)
-        Me.Panel17.Margin = New System.Windows.Forms.Padding(2)
+        Me.Panel17.Location = New System.Drawing.Point(1118, 218)
+        Me.Panel17.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel17.Name = "Panel17"
-        Me.Panel17.Size = New System.Drawing.Size(132, 41)
+        Me.Panel17.Size = New System.Drawing.Size(175, 52)
         Me.Panel17.TabIndex = 45
         '
         'ChkNots
@@ -398,9 +399,9 @@ Partial Class FrmReceiptReport
         Me.ChkNots.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ChkNots.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
         Me.ChkNots.Location = New System.Drawing.Point(0, 0)
-        Me.ChkNots.Margin = New System.Windows.Forms.Padding(2)
+        Me.ChkNots.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ChkNots.Name = "ChkNots"
-        Me.ChkNots.Size = New System.Drawing.Size(132, 41)
+        Me.ChkNots.Size = New System.Drawing.Size(175, 52)
         Me.ChkNots.TabIndex = 1
         Me.ChkNots.Text = "البند المالي"
         Me.ChkNots.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -410,10 +411,10 @@ Partial Class FrmReceiptReport
         '
         Me.Panel7.Controls.Add(Me.ChkDate)
         Me.Panel7.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel7.Location = New System.Drawing.Point(322, 2)
-        Me.Panel7.Margin = New System.Windows.Forms.Padding(2)
+        Me.Panel7.Location = New System.Drawing.Point(429, 2)
+        Me.Panel7.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel7.Name = "Panel7"
-        Me.Panel7.Size = New System.Drawing.Size(167, 40)
+        Me.Panel7.Size = New System.Drawing.Size(222, 50)
         Me.Panel7.TabIndex = 51
         '
         'ChkDate
@@ -422,9 +423,9 @@ Partial Class FrmReceiptReport
         Me.ChkDate.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ChkDate.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
         Me.ChkDate.Location = New System.Drawing.Point(0, 0)
-        Me.ChkDate.Margin = New System.Windows.Forms.Padding(2)
+        Me.ChkDate.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ChkDate.Name = "ChkDate"
-        Me.ChkDate.Size = New System.Drawing.Size(167, 40)
+        Me.ChkDate.Size = New System.Drawing.Size(222, 50)
         Me.ChkDate.TabIndex = 2
         Me.ChkDate.Text = "تاريخ الإيصال  :  من"
         Me.ChkDate.UseVisualStyleBackColor = True
@@ -435,12 +436,12 @@ Partial Class FrmReceiptReport
         Me.TxtNum.BackColor = System.Drawing.SystemColors.Window
         Me.TxtNum.Enabled = False
         Me.TxtNum.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
-        Me.TxtNum.Location = New System.Drawing.Point(519, 4)
-        Me.TxtNum.Margin = New System.Windows.Forms.Padding(2)
+        Me.TxtNum.Location = New System.Drawing.Point(692, 6)
+        Me.TxtNum.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TxtNum.MaxLength = 6
         Me.TxtNum.Name = "TxtNum"
         Me.TxtNum.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TxtNum.Size = New System.Drawing.Size(315, 35)
+        Me.TxtNum.Size = New System.Drawing.Size(420, 42)
         Me.TxtNum.TabIndex = 56
         Me.TxtNum.Tag = ""
         '
@@ -448,10 +449,10 @@ Partial Class FrmReceiptReport
         '
         Me.Panel9.Controls.Add(Me.ChkNum)
         Me.Panel9.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel9.Location = New System.Drawing.Point(838, 2)
-        Me.Panel9.Margin = New System.Windows.Forms.Padding(2)
+        Me.Panel9.Location = New System.Drawing.Point(1118, 2)
+        Me.Panel9.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel9.Name = "Panel9"
-        Me.Panel9.Size = New System.Drawing.Size(132, 40)
+        Me.Panel9.Size = New System.Drawing.Size(175, 50)
         Me.Panel9.TabIndex = 0
         '
         'ChkNum
@@ -460,9 +461,9 @@ Partial Class FrmReceiptReport
         Me.ChkNum.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ChkNum.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
         Me.ChkNum.Location = New System.Drawing.Point(0, 0)
-        Me.ChkNum.Margin = New System.Windows.Forms.Padding(2)
+        Me.ChkNum.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ChkNum.Name = "ChkNum"
-        Me.ChkNum.Size = New System.Drawing.Size(132, 40)
+        Me.ChkNum.Size = New System.Drawing.Size(175, 50)
         Me.ChkNum.TabIndex = 0
         Me.ChkNum.Text = "رقم الإيصال"
         Me.ChkNum.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -472,7 +473,7 @@ Partial Class FrmReceiptReport
         '
         Me.TableLayoutPanel6.ColumnCount = 3
         Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 43.0!))
+        Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 57.0!))
         Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel6.Controls.Add(Me.DTPFrom, 0, 0)
         Me.TableLayoutPanel6.Controls.Add(Me.DTPTo, 2, 0)
@@ -483,7 +484,7 @@ Partial Class FrmReceiptReport
         Me.TableLayoutPanel6.Name = "TableLayoutPanel6"
         Me.TableLayoutPanel6.RowCount = 1
         Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel6.Size = New System.Drawing.Size(320, 40)
+        Me.TableLayoutPanel6.Size = New System.Drawing.Size(426, 50)
         Me.TableLayoutPanel6.TabIndex = 1227
         '
         'DTPFrom
@@ -493,12 +494,12 @@ Partial Class FrmReceiptReport
         Me.DTPFrom.Enabled = False
         Me.DTPFrom.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
         Me.DTPFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DTPFrom.Location = New System.Drawing.Point(184, 2)
-        Me.DTPFrom.Margin = New System.Windows.Forms.Padding(2)
+        Me.DTPFrom.Location = New System.Drawing.Point(245, 4)
+        Me.DTPFrom.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.DTPFrom.Name = "DTPFrom"
         Me.DTPFrom.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.DTPFrom.RightToLeftLayout = True
-        Me.DTPFrom.Size = New System.Drawing.Size(134, 35)
+        Me.DTPFrom.Size = New System.Drawing.Size(178, 42)
         Me.DTPFrom.TabIndex = 42
         Me.DTPFrom.Value = New Date(2021, 1, 1, 0, 0, 0, 0)
         '
@@ -509,22 +510,21 @@ Partial Class FrmReceiptReport
         Me.DTPTo.Enabled = False
         Me.DTPTo.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
         Me.DTPTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DTPTo.Location = New System.Drawing.Point(2, 2)
-        Me.DTPTo.Margin = New System.Windows.Forms.Padding(2)
+        Me.DTPTo.Location = New System.Drawing.Point(3, 4)
+        Me.DTPTo.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.DTPTo.Name = "DTPTo"
         Me.DTPTo.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.DTPTo.RightToLeftLayout = True
-        Me.DTPTo.Size = New System.Drawing.Size(135, 35)
+        Me.DTPTo.Size = New System.Drawing.Size(179, 42)
         Me.DTPTo.TabIndex = 43
         '
         'Label2
         '
         Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label2.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(141, 7)
-        Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label2.Location = New System.Drawing.Point(188, 9)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(39, 25)
+        Me.Label2.Size = New System.Drawing.Size(51, 31)
         Me.Label2.TabIndex = 9
         Me.Label2.Text = "إلى"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -535,22 +535,22 @@ Partial Class FrmReceiptReport
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TLPBottom.ColumnCount = 7
         Me.TLPBottom.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TLPBottom.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10.0!))
+        Me.TLPBottom.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 13.0!))
         Me.TLPBottom.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TLPBottom.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10.0!))
+        Me.TLPBottom.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 13.0!))
         Me.TLPBottom.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TLPBottom.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10.0!))
+        Me.TLPBottom.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 13.0!))
         Me.TLPBottom.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
         Me.TLPBottom.Controls.Add(Me.BtnPrint, 2, 0)
         Me.TLPBottom.Controls.Add(Me.BtnSaerch, 6, 0)
         Me.TLPBottom.Controls.Add(Me.BtnPrintAll, 0, 0)
         Me.TLPBottom.Controls.Add(Me.BtnNew, 4, 0)
-        Me.TLPBottom.Location = New System.Drawing.Point(19, 287)
-        Me.TLPBottom.Margin = New System.Windows.Forms.Padding(2)
+        Me.TLPBottom.Location = New System.Drawing.Point(25, 353)
+        Me.TLPBottom.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TLPBottom.Name = "TLPBottom"
         Me.TLPBottom.RowCount = 1
         Me.TLPBottom.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TLPBottom.Size = New System.Drawing.Size(1001, 40)
+        Me.TLPBottom.Size = New System.Drawing.Size(1335, 49)
         Me.TLPBottom.TabIndex = 1233
         '
         'BtnPrint
@@ -565,11 +565,11 @@ Partial Class FrmReceiptReport
         Me.BtnPrint.ForeColor = System.Drawing.Color.White
         Me.BtnPrint.Image = CType(resources.GetObject("BtnPrint.Image"), System.Drawing.Image)
         Me.BtnPrint.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.BtnPrint.Location = New System.Drawing.Point(254, 2)
-        Me.BtnPrint.Margin = New System.Windows.Forms.Padding(2)
+        Me.BtnPrint.Location = New System.Drawing.Point(340, 2)
+        Me.BtnPrint.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.BtnPrint.Name = "BtnPrint"
         Me.BtnPrint.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.BtnPrint.Size = New System.Drawing.Size(238, 36)
+        Me.BtnPrint.Size = New System.Drawing.Size(318, 45)
         Me.BtnPrint.TabIndex = 33
         Me.BtnPrint.Tag = "Dark"
         Me.BtnPrint.Text = "طباعة صفحة واحدة"
@@ -588,11 +588,11 @@ Partial Class FrmReceiptReport
         Me.BtnSaerch.ForeColor = System.Drawing.Color.White
         Me.BtnSaerch.Image = CType(resources.GetObject("BtnSaerch.Image"), System.Drawing.Image)
         Me.BtnSaerch.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.BtnSaerch.Location = New System.Drawing.Point(756, 2)
+        Me.BtnSaerch.Location = New System.Drawing.Point(1011, 2)
         Me.BtnSaerch.Margin = New System.Windows.Forms.Padding(0, 2, 0, 2)
         Me.BtnSaerch.Name = "BtnSaerch"
         Me.BtnSaerch.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.BtnSaerch.Size = New System.Drawing.Size(245, 36)
+        Me.BtnSaerch.Size = New System.Drawing.Size(324, 45)
         Me.BtnSaerch.TabIndex = 29
         Me.BtnSaerch.Tag = "Dark"
         Me.BtnSaerch.Text = "بحث"
@@ -615,7 +615,7 @@ Partial Class FrmReceiptReport
         Me.BtnPrintAll.Margin = New System.Windows.Forms.Padding(0, 2, 0, 2)
         Me.BtnPrintAll.Name = "BtnPrintAll"
         Me.BtnPrintAll.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.BtnPrintAll.Size = New System.Drawing.Size(242, 36)
+        Me.BtnPrintAll.Size = New System.Drawing.Size(324, 45)
         Me.BtnPrintAll.TabIndex = 32
         Me.BtnPrintAll.Tag = "Dark"
         Me.BtnPrintAll.Text = "طباعة الكل"
@@ -634,11 +634,11 @@ Partial Class FrmReceiptReport
         Me.BtnNew.ForeColor = System.Drawing.Color.White
         Me.BtnNew.Image = CType(resources.GetObject("BtnNew.Image"), System.Drawing.Image)
         Me.BtnNew.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.BtnNew.Location = New System.Drawing.Point(504, 2)
+        Me.BtnNew.Location = New System.Drawing.Point(674, 2)
         Me.BtnNew.Margin = New System.Windows.Forms.Padding(0, 2, 0, 2)
         Me.BtnNew.Name = "BtnNew"
         Me.BtnNew.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.BtnNew.Size = New System.Drawing.Size(242, 36)
+        Me.BtnNew.Size = New System.Drawing.Size(324, 45)
         Me.BtnNew.TabIndex = 31
         Me.BtnNew.Tag = "Dark"
         Me.BtnNew.Text = "تحديث"
@@ -650,12 +650,12 @@ Partial Class FrmReceiptReport
         Me.TxtCkeck.BackColor = System.Drawing.SystemColors.Window
         Me.TxtCkeck.Enabled = False
         Me.TxtCkeck.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
-        Me.TxtCkeck.Location = New System.Drawing.Point(2, 136)
-        Me.TxtCkeck.Margin = New System.Windows.Forms.Padding(2)
+        Me.TxtCkeck.Location = New System.Drawing.Point(3, 168)
+        Me.TxtCkeck.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TxtCkeck.MaxLength = 20
         Me.TxtCkeck.Name = "TxtCkeck"
         Me.TxtCkeck.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TxtCkeck.Size = New System.Drawing.Size(316, 35)
+        Me.TxtCkeck.Size = New System.Drawing.Size(420, 42)
         Me.TxtCkeck.TabIndex = 45
         Me.TxtCkeck.Tag = ""
         '
@@ -665,12 +665,12 @@ Partial Class FrmReceiptReport
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox2.Controls.Add(Me.TableLayoutPanel4)
         Me.GroupBox2.Font = New System.Drawing.Font("Droid Arabic Kufi", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox2.Location = New System.Drawing.Point(19, 5)
-        Me.GroupBox2.Margin = New System.Windows.Forms.Padding(2)
+        Me.GroupBox2.Location = New System.Drawing.Point(25, 6)
+        Me.GroupBox2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Padding = New System.Windows.Forms.Padding(2)
+        Me.GroupBox2.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.GroupBox2.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.GroupBox2.Size = New System.Drawing.Size(1002, 266)
+        Me.GroupBox2.Size = New System.Drawing.Size(1336, 327)
         Me.GroupBox2.TabIndex = 1232
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "بحث حسب"
@@ -680,10 +680,10 @@ Partial Class FrmReceiptReport
         Me.TableLayoutPanel4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TableLayoutPanel4.ColumnCount = 5
-        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 136.0!))
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 181.0!))
         Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 26.0!))
-        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 171.0!))
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35.0!))
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 228.0!))
         Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel4.Controls.Add(Me.TableLayoutPanel6, 4, 0)
         Me.TableLayoutPanel4.Controls.Add(Me.TxtNum, 1, 0)
@@ -703,8 +703,8 @@ Partial Class FrmReceiptReport
         Me.TableLayoutPanel4.Controls.Add(Me.CmbFinancRecipt, 1, 4)
         Me.TableLayoutPanel4.Controls.Add(Me.Panel1, 0, 3)
         Me.TableLayoutPanel4.Controls.Add(Me.CmbEmp, 1, 3)
-        Me.TableLayoutPanel4.Location = New System.Drawing.Point(19, 30)
-        Me.TableLayoutPanel4.Margin = New System.Windows.Forms.Padding(2)
+        Me.TableLayoutPanel4.Location = New System.Drawing.Point(25, 37)
+        Me.TableLayoutPanel4.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
         Me.TableLayoutPanel4.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.TableLayoutPanel4.RowCount = 5
@@ -713,17 +713,17 @@ Partial Class FrmReceiptReport
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
-        Me.TableLayoutPanel4.Size = New System.Drawing.Size(972, 221)
+        Me.TableLayoutPanel4.Size = New System.Drawing.Size(1296, 272)
         Me.TableLayoutPanel4.TabIndex = 1230
         '
         'Panel23
         '
         Me.Panel23.Controls.Add(Me.ChkPayment)
         Me.Panel23.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel23.Location = New System.Drawing.Point(322, 46)
-        Me.Panel23.Margin = New System.Windows.Forms.Padding(2)
+        Me.Panel23.Location = New System.Drawing.Point(429, 56)
+        Me.Panel23.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel23.Name = "Panel23"
-        Me.Panel23.Size = New System.Drawing.Size(167, 40)
+        Me.Panel23.Size = New System.Drawing.Size(222, 50)
         Me.Panel23.TabIndex = 45
         '
         'ChkPayment
@@ -732,9 +732,9 @@ Partial Class FrmReceiptReport
         Me.ChkPayment.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ChkPayment.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
         Me.ChkPayment.Location = New System.Drawing.Point(0, 0)
-        Me.ChkPayment.Margin = New System.Windows.Forms.Padding(2)
+        Me.ChkPayment.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ChkPayment.Name = "ChkPayment"
-        Me.ChkPayment.Size = New System.Drawing.Size(167, 40)
+        Me.ChkPayment.Size = New System.Drawing.Size(222, 50)
         Me.ChkPayment.TabIndex = 1
         Me.ChkPayment.Text = "طريقة الدفع"
         Me.ChkPayment.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -744,10 +744,10 @@ Partial Class FrmReceiptReport
         '
         Me.Panel24.Controls.Add(Me.ChkBank)
         Me.Panel24.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel24.Location = New System.Drawing.Point(322, 90)
-        Me.Panel24.Margin = New System.Windows.Forms.Padding(2)
+        Me.Panel24.Location = New System.Drawing.Point(429, 110)
+        Me.Panel24.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel24.Name = "Panel24"
-        Me.Panel24.Size = New System.Drawing.Size(167, 40)
+        Me.Panel24.Size = New System.Drawing.Size(222, 50)
         Me.Panel24.TabIndex = 45
         '
         'ChkBank
@@ -756,9 +756,9 @@ Partial Class FrmReceiptReport
         Me.ChkBank.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ChkBank.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
         Me.ChkBank.Location = New System.Drawing.Point(0, 0)
-        Me.ChkBank.Margin = New System.Windows.Forms.Padding(2)
+        Me.ChkBank.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ChkBank.Name = "ChkBank"
-        Me.ChkBank.Size = New System.Drawing.Size(167, 40)
+        Me.ChkBank.Size = New System.Drawing.Size(222, 50)
         Me.ChkBank.TabIndex = 1
         Me.ChkBank.Text = "المصرف"
         Me.ChkBank.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -768,10 +768,10 @@ Partial Class FrmReceiptReport
         '
         Me.Panel11.Controls.Add(Me.ChkCkeck)
         Me.Panel11.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel11.Location = New System.Drawing.Point(322, 134)
-        Me.Panel11.Margin = New System.Windows.Forms.Padding(2)
+        Me.Panel11.Location = New System.Drawing.Point(429, 164)
+        Me.Panel11.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel11.Name = "Panel11"
-        Me.Panel11.Size = New System.Drawing.Size(167, 40)
+        Me.Panel11.Size = New System.Drawing.Size(222, 50)
         Me.Panel11.TabIndex = 49
         '
         'ChkCkeck
@@ -780,9 +780,9 @@ Partial Class FrmReceiptReport
         Me.ChkCkeck.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ChkCkeck.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
         Me.ChkCkeck.Location = New System.Drawing.Point(0, 0)
-        Me.ChkCkeck.Margin = New System.Windows.Forms.Padding(2)
+        Me.ChkCkeck.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ChkCkeck.Name = "ChkCkeck"
-        Me.ChkCkeck.Size = New System.Drawing.Size(167, 40)
+        Me.ChkCkeck.Size = New System.Drawing.Size(222, 50)
         Me.ChkCkeck.TabIndex = 1
         Me.ChkCkeck.Text = "الصك"
         Me.ChkCkeck.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -796,20 +796,20 @@ Partial Class FrmReceiptReport
         Me.CmbFinancRecipt.Enabled = False
         Me.CmbFinancRecipt.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
         Me.CmbFinancRecipt.FormattingEnabled = True
-        Me.CmbFinancRecipt.Location = New System.Drawing.Point(519, 180)
-        Me.CmbFinancRecipt.Margin = New System.Windows.Forms.Padding(2)
+        Me.CmbFinancRecipt.Location = New System.Drawing.Point(692, 223)
+        Me.CmbFinancRecipt.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.CmbFinancRecipt.Name = "CmbFinancRecipt"
-        Me.CmbFinancRecipt.Size = New System.Drawing.Size(315, 35)
+        Me.CmbFinancRecipt.Size = New System.Drawing.Size(420, 42)
         Me.CmbFinancRecipt.TabIndex = 1228
         '
         'Panel1
         '
         Me.Panel1.Controls.Add(Me.ChkEmp)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Location = New System.Drawing.Point(838, 134)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(2)
+        Me.Panel1.Location = New System.Drawing.Point(1118, 164)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(132, 40)
+        Me.Panel1.Size = New System.Drawing.Size(175, 50)
         Me.Panel1.TabIndex = 1229
         '
         'ChkEmp
@@ -818,9 +818,9 @@ Partial Class FrmReceiptReport
         Me.ChkEmp.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ChkEmp.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
         Me.ChkEmp.Location = New System.Drawing.Point(0, 0)
-        Me.ChkEmp.Margin = New System.Windows.Forms.Padding(2)
+        Me.ChkEmp.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ChkEmp.Name = "ChkEmp"
-        Me.ChkEmp.Size = New System.Drawing.Size(132, 40)
+        Me.ChkEmp.Size = New System.Drawing.Size(175, 50)
         Me.ChkEmp.TabIndex = 1
         Me.ChkEmp.Text = "الموظف"
         Me.ChkEmp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -834,10 +834,10 @@ Partial Class FrmReceiptReport
         Me.CmbEmp.Enabled = False
         Me.CmbEmp.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
         Me.CmbEmp.FormattingEnabled = True
-        Me.CmbEmp.Location = New System.Drawing.Point(519, 136)
-        Me.CmbEmp.Margin = New System.Windows.Forms.Padding(2)
+        Me.CmbEmp.Location = New System.Drawing.Point(692, 168)
+        Me.CmbEmp.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.CmbEmp.Name = "CmbEmp"
-        Me.CmbEmp.Size = New System.Drawing.Size(315, 35)
+        Me.CmbEmp.Size = New System.Drawing.Size(420, 42)
         Me.CmbEmp.TabIndex = 1230
         '
         'TLPPages
@@ -855,7 +855,7 @@ Partial Class FrmReceiptReport
         Me.TLPPages.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.62162!))
         Me.TLPPages.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TLPPages.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.62162!))
-        Me.TLPPages.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 97.0!))
+        Me.TLPPages.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 133.0!))
         Me.TLPPages.Controls.Add(Me.BtnRefreshPage, 9, 0)
         Me.TLPPages.Controls.Add(Me.TxtPagesCount, 6, 0)
         Me.TLPPages.Controls.Add(Me.TxtPageNum, 2, 0)
@@ -867,13 +867,13 @@ Partial Class FrmReceiptReport
         Me.TLPPages.Controls.Add(Me.Panel14, 1, 0)
         Me.TLPPages.Controls.Add(Me.Panel16, 0, 0)
         Me.TLPPages.Font = New System.Drawing.Font("Droid Arabic Kufi", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TLPPages.Location = New System.Drawing.Point(19, 488)
-        Me.TLPPages.Margin = New System.Windows.Forms.Padding(2)
+        Me.TLPPages.Location = New System.Drawing.Point(25, 601)
+        Me.TLPPages.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TLPPages.Name = "TLPPages"
         Me.TLPPages.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.TLPPages.RowCount = 1
         Me.TLPPages.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TLPPages.Size = New System.Drawing.Size(1002, 40)
+        Me.TLPPages.Size = New System.Drawing.Size(1336, 49)
         Me.TLPPages.TabIndex = 1235
         Me.TLPPages.Tag = "Dark"
         '
@@ -887,10 +887,11 @@ Partial Class FrmReceiptReport
         Me.BtnRefreshPage.Font = New System.Drawing.Font("Droid Arabic Kufi", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnRefreshPage.ForeColor = System.Drawing.Color.White
         Me.BtnRefreshPage.Image = CType(resources.GetObject("BtnRefreshPage.Image"), System.Drawing.Image)
-        Me.BtnRefreshPage.Location = New System.Drawing.Point(3, 3)
+        Me.BtnRefreshPage.Location = New System.Drawing.Point(4, 4)
+        Me.BtnRefreshPage.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.BtnRefreshPage.Name = "BtnRefreshPage"
         Me.BtnRefreshPage.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.BtnRefreshPage.Size = New System.Drawing.Size(94, 34)
+        Me.BtnRefreshPage.Size = New System.Drawing.Size(131, 41)
         Me.BtnRefreshPage.TabIndex = 1207
         Me.BtnRefreshPage.Tag = "Dark"
         Me.BtnRefreshPage.UseVisualStyleBackColor = False
@@ -900,11 +901,12 @@ Partial Class FrmReceiptReport
         Me.TxtPagesCount.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtPagesCount.BackColor = System.Drawing.SystemColors.Window
         Me.TxtPagesCount.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
-        Me.TxtPagesCount.Location = New System.Drawing.Point(365, 3)
+        Me.TxtPagesCount.Location = New System.Drawing.Point(492, 4)
+        Me.TxtPagesCount.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TxtPagesCount.Name = "TxtPagesCount"
         Me.TxtPagesCount.ReadOnly = True
         Me.TxtPagesCount.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TxtPagesCount.Size = New System.Drawing.Size(138, 35)
+        Me.TxtPagesCount.Size = New System.Drawing.Size(183, 42)
         Me.TxtPagesCount.TabIndex = 1205
         Me.TxtPagesCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -913,11 +915,12 @@ Partial Class FrmReceiptReport
         Me.TxtPageNum.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtPageNum.BackColor = System.Drawing.Color.White
         Me.TxtPageNum.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
-        Me.TxtPageNum.Location = New System.Drawing.Point(744, 3)
+        Me.TxtPageNum.Location = New System.Drawing.Point(995, 4)
+        Me.TxtPageNum.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TxtPageNum.Name = "TxtPageNum"
         Me.TxtPageNum.ReadOnly = True
         Me.TxtPageNum.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TxtPageNum.Size = New System.Drawing.Size(138, 35)
+        Me.TxtPageNum.Size = New System.Drawing.Size(183, 42)
         Me.TxtPageNum.TabIndex = 1205
         Me.TxtPageNum.TabStop = False
         Me.TxtPageNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -926,10 +929,11 @@ Partial Class FrmReceiptReport
         '
         Me.NUDPageSize.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.NUDPageSize.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
-        Me.NUDPageSize.Location = New System.Drawing.Point(103, 3)
+        Me.NUDPageSize.Location = New System.Drawing.Point(143, 4)
+        Me.NUDPageSize.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.NUDPageSize.Name = "NUDPageSize"
         Me.NUDPageSize.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.NUDPageSize.Size = New System.Drawing.Size(138, 35)
+        Me.NUDPageSize.Size = New System.Drawing.Size(183, 42)
         Me.NUDPageSize.TabIndex = 20
         Me.NUDPageSize.TabStop = False
         Me.NUDPageSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -938,10 +942,10 @@ Partial Class FrmReceiptReport
         '
         Me.Panel3.Controls.Add(Me.Label10)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(246, 2)
-        Me.Panel3.Margin = New System.Windows.Forms.Padding(2)
+        Me.Panel3.Location = New System.Drawing.Point(333, 2)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(114, 36)
+        Me.Panel3.Size = New System.Drawing.Size(152, 45)
         Me.Panel3.TabIndex = 1205
         '
         'Label10
@@ -949,9 +953,10 @@ Partial Class FrmReceiptReport
         Me.Label10.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.Label10.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
         Me.Label10.ForeColor = System.Drawing.Color.White
-        Me.Label10.Location = New System.Drawing.Point(3, 4)
+        Me.Label10.Location = New System.Drawing.Point(4, 5)
+        Me.Label10.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(108, 28)
+        Me.Label10.Size = New System.Drawing.Size(144, 34)
         Me.Label10.TabIndex = 1201
         Me.Label10.Text = "حجم الصفحة"
         Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -960,10 +965,10 @@ Partial Class FrmReceiptReport
         '
         Me.Panel4.Controls.Add(Me.Label11)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel4.Location = New System.Drawing.Point(508, 2)
-        Me.Panel4.Margin = New System.Windows.Forms.Padding(2)
+        Me.Panel4.Location = New System.Drawing.Point(682, 2)
+        Me.Panel4.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(114, 36)
+        Me.Panel4.Size = New System.Drawing.Size(152, 45)
         Me.Panel4.TabIndex = 1205
         '
         'Label11
@@ -971,9 +976,10 @@ Partial Class FrmReceiptReport
         Me.Label11.Anchor = System.Windows.Forms.AnchorStyles.Right
         Me.Label11.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
         Me.Label11.ForeColor = System.Drawing.Color.White
-        Me.Label11.Location = New System.Drawing.Point(8, 4)
+        Me.Label11.Location = New System.Drawing.Point(11, 5)
+        Me.Label11.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(99, 28)
+        Me.Label11.Size = New System.Drawing.Size(132, 34)
         Me.Label11.TabIndex = 40
         Me.Label11.Text = "عدد الصفحات"
         Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -982,10 +988,10 @@ Partial Class FrmReceiptReport
         '
         Me.Panel12.Controls.Add(Me.BtnLastPage)
         Me.Panel12.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel12.Location = New System.Drawing.Point(626, 2)
-        Me.Panel12.Margin = New System.Windows.Forms.Padding(2)
+        Me.Panel12.Location = New System.Drawing.Point(840, 2)
+        Me.Panel12.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel12.Name = "Panel12"
-        Me.Panel12.Size = New System.Drawing.Size(68, 36)
+        Me.Panel12.Size = New System.Drawing.Size(89, 45)
         Me.Panel12.TabIndex = 1205
         '
         'BtnLastPage
@@ -999,9 +1005,10 @@ Partial Class FrmReceiptReport
         Me.BtnLastPage.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.BtnLastPage.Image = CType(resources.GetObject("BtnLastPage.Image"), System.Drawing.Image)
         Me.BtnLastPage.Location = New System.Drawing.Point(0, 0)
+        Me.BtnLastPage.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.BtnLastPage.Name = "BtnLastPage"
         Me.BtnLastPage.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.BtnLastPage.Size = New System.Drawing.Size(68, 36)
+        Me.BtnLastPage.Size = New System.Drawing.Size(89, 45)
         Me.BtnLastPage.TabIndex = 19
         Me.BtnLastPage.Tag = "Dark"
         Me.BtnLastPage.UseVisualStyleBackColor = False
@@ -1010,10 +1017,10 @@ Partial Class FrmReceiptReport
         '
         Me.Panel13.Controls.Add(Me.BtnNextPage)
         Me.Panel13.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel13.Location = New System.Drawing.Point(698, 2)
-        Me.Panel13.Margin = New System.Windows.Forms.Padding(2)
+        Me.Panel13.Location = New System.Drawing.Point(935, 2)
+        Me.Panel13.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel13.Name = "Panel13"
-        Me.Panel13.Size = New System.Drawing.Size(41, 36)
+        Me.Panel13.Size = New System.Drawing.Size(53, 45)
         Me.Panel13.TabIndex = 1205
         '
         'BtnNextPage
@@ -1027,9 +1034,10 @@ Partial Class FrmReceiptReport
         Me.BtnNextPage.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.BtnNextPage.Image = CType(resources.GetObject("BtnNextPage.Image"), System.Drawing.Image)
         Me.BtnNextPage.Location = New System.Drawing.Point(0, 0)
+        Me.BtnNextPage.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.BtnNextPage.Name = "BtnNextPage"
         Me.BtnNextPage.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.BtnNextPage.Size = New System.Drawing.Size(41, 36)
+        Me.BtnNextPage.Size = New System.Drawing.Size(53, 45)
         Me.BtnNextPage.TabIndex = 18
         Me.BtnNextPage.Tag = "Dark"
         Me.BtnNextPage.UseVisualStyleBackColor = False
@@ -1038,10 +1046,10 @@ Partial Class FrmReceiptReport
         '
         Me.Panel14.Controls.Add(Me.BtnPreviousPage)
         Me.Panel14.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel14.Location = New System.Drawing.Point(887, 2)
-        Me.Panel14.Margin = New System.Windows.Forms.Padding(2)
+        Me.Panel14.Location = New System.Drawing.Point(1185, 2)
+        Me.Panel14.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel14.Name = "Panel14"
-        Me.Panel14.Size = New System.Drawing.Size(41, 36)
+        Me.Panel14.Size = New System.Drawing.Size(53, 45)
         Me.Panel14.TabIndex = 1205
         '
         'BtnPreviousPage
@@ -1055,9 +1063,10 @@ Partial Class FrmReceiptReport
         Me.BtnPreviousPage.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.BtnPreviousPage.Image = CType(resources.GetObject("BtnPreviousPage.Image"), System.Drawing.Image)
         Me.BtnPreviousPage.Location = New System.Drawing.Point(0, 0)
+        Me.BtnPreviousPage.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.BtnPreviousPage.Name = "BtnPreviousPage"
         Me.BtnPreviousPage.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.BtnPreviousPage.Size = New System.Drawing.Size(41, 36)
+        Me.BtnPreviousPage.Size = New System.Drawing.Size(53, 45)
         Me.BtnPreviousPage.TabIndex = 17
         Me.BtnPreviousPage.Tag = "Dark"
         Me.BtnPreviousPage.UseVisualStyleBackColor = False
@@ -1066,10 +1075,10 @@ Partial Class FrmReceiptReport
         '
         Me.Panel16.Controls.Add(Me.BtnFirstPage)
         Me.Panel16.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel16.Location = New System.Drawing.Point(932, 2)
-        Me.Panel16.Margin = New System.Windows.Forms.Padding(2)
+        Me.Panel16.Location = New System.Drawing.Point(1244, 2)
+        Me.Panel16.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel16.Name = "Panel16"
-        Me.Panel16.Size = New System.Drawing.Size(68, 36)
+        Me.Panel16.Size = New System.Drawing.Size(89, 45)
         Me.Panel16.TabIndex = 1205
         '
         'BtnFirstPage
@@ -1083,23 +1092,25 @@ Partial Class FrmReceiptReport
         Me.BtnFirstPage.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.BtnFirstPage.Image = CType(resources.GetObject("BtnFirstPage.Image"), System.Drawing.Image)
         Me.BtnFirstPage.Location = New System.Drawing.Point(0, 0)
+        Me.BtnFirstPage.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.BtnFirstPage.Name = "BtnFirstPage"
         Me.BtnFirstPage.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.BtnFirstPage.Size = New System.Drawing.Size(68, 36)
+        Me.BtnFirstPage.Size = New System.Drawing.Size(89, 45)
         Me.BtnFirstPage.TabIndex = 16
         Me.BtnFirstPage.Tag = "Dark"
         Me.BtnFirstPage.UseVisualStyleBackColor = False
         '
         'FrmReceiptReport
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1040, 545)
+        Me.ClientSize = New System.Drawing.Size(1387, 671)
         Me.Controls.Add(Me.TLPPages)
         Me.Controls.Add(Me.DGVRecipt)
         Me.Controls.Add(Me.TLPBottom)
         Me.Controls.Add(Me.GroupBox2)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "FrmReceiptReport"
         Me.Text = "ايصالات القبض"
         CType(Me.DGVRecipt, System.ComponentModel.ISupportInitialize).EndInit()

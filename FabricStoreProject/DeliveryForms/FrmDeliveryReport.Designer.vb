@@ -99,7 +99,7 @@ Partial Class FrmDeliveryReport
         Me.BtnUpdate.Name = "BtnUpdate"
         Me.BtnUpdate.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.BtnUpdate.Size = New System.Drawing.Size(314, 37)
-        Me.BtnUpdate.TabIndex = 1123
+        Me.BtnUpdate.TabIndex = 2
         Me.BtnUpdate.Tag = "Dark"
         Me.BtnUpdate.Text = "تحديث"
         Me.BtnUpdate.UseVisualStyleBackColor = False
@@ -146,7 +146,7 @@ Partial Class FrmDeliveryReport
         Me.BtnPrintAll.Name = "BtnPrintAll"
         Me.BtnPrintAll.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.BtnPrintAll.Size = New System.Drawing.Size(315, 37)
-        Me.BtnPrintAll.TabIndex = 1171
+        Me.BtnPrintAll.TabIndex = 3
         Me.BtnPrintAll.Tag = "Dark"
         Me.BtnPrintAll.Text = "طباعة"
         Me.BtnPrintAll.UseVisualStyleBackColor = False
@@ -167,7 +167,7 @@ Partial Class FrmDeliveryReport
         Me.BtnSearch.Margin = New System.Windows.Forms.Padding(0, 2, 0, 2)
         Me.BtnSearch.Name = "BtnSearch"
         Me.BtnSearch.Size = New System.Drawing.Size(314, 37)
-        Me.BtnSearch.TabIndex = 1141
+        Me.BtnSearch.TabIndex = 1
         Me.BtnSearch.Tag = "Dark"
         Me.BtnSearch.Text = "بحث"
         Me.BtnSearch.UseVisualStyleBackColor = False
@@ -226,7 +226,7 @@ Partial Class FrmDeliveryReport
         Me.TxtAddress.Name = "TxtAddress"
         Me.TxtAddress.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.TxtAddress.Size = New System.Drawing.Size(772, 35)
-        Me.TxtAddress.TabIndex = 1238
+        Me.TxtAddress.TabIndex = 3
         Me.TxtAddress.Tag = ""
         '
         'ChkAddress
@@ -240,7 +240,7 @@ Partial Class FrmDeliveryReport
         Me.ChkAddress.Name = "ChkAddress"
         Me.ChkAddress.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.ChkAddress.Size = New System.Drawing.Size(162, 38)
-        Me.ChkAddress.TabIndex = 1225
+        Me.ChkAddress.TabIndex = 2
         Me.ChkAddress.Text = "العنوان"
         Me.ChkAddress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.ChkAddress.UseVisualStyleBackColor = True
@@ -256,7 +256,7 @@ Partial Class FrmDeliveryReport
         Me.TxtPhoneReport.Name = "TxtPhoneReport"
         Me.TxtPhoneReport.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.TxtPhoneReport.Size = New System.Drawing.Size(772, 35)
-        Me.TxtPhoneReport.TabIndex = 1224
+        Me.TxtPhoneReport.TabIndex = 5
         '
         'ChkNameReport
         '
@@ -269,7 +269,7 @@ Partial Class FrmDeliveryReport
         Me.ChkNameReport.Name = "ChkNameReport"
         Me.ChkNameReport.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.ChkNameReport.Size = New System.Drawing.Size(162, 38)
-        Me.ChkNameReport.TabIndex = 1041
+        Me.ChkNameReport.TabIndex = 0
         Me.ChkNameReport.Text = "اسـم الشركة"
         Me.ChkNameReport.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.ChkNameReport.UseVisualStyleBackColor = True
@@ -285,7 +285,7 @@ Partial Class FrmDeliveryReport
         Me.ChkPhone.Name = "ChkPhone"
         Me.ChkPhone.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.ChkPhone.Size = New System.Drawing.Size(162, 38)
-        Me.ChkPhone.TabIndex = 1051
+        Me.ChkPhone.TabIndex = 4
         Me.ChkPhone.Text = "رقـم الهـاتف"
         Me.ChkPhone.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.ChkPhone.UseVisualStyleBackColor = True
@@ -301,7 +301,7 @@ Partial Class FrmDeliveryReport
         Me.TxtNameReport.Name = "TxtNameReport"
         Me.TxtNameReport.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.TxtNameReport.Size = New System.Drawing.Size(772, 35)
-        Me.TxtNameReport.TabIndex = 1055
+        Me.TxtNameReport.TabIndex = 1
         '
         'BtnRefreshPage
         '

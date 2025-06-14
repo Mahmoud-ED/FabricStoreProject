@@ -22,16 +22,17 @@ Partial Class FrmTailorReport
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmTailorReport))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmTailorReport))
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.ChkAll = New System.Windows.Forms.CheckBox()
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
         Me.TLPPages = New System.Windows.Forms.TableLayoutPanel()
+        Me.BtnRefreshPage = New System.Windows.Forms.Button()
         Me.TxtPagesCount = New System.Windows.Forms.TextBox()
         Me.TxtCurrentPage = New System.Windows.Forms.TextBox()
         Me.NUDPageSize = New System.Windows.Forms.NumericUpDown()
@@ -40,9 +41,13 @@ Partial Class FrmTailorReport
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Panel12 = New System.Windows.Forms.Panel()
+        Me.BtnLastPage = New System.Windows.Forms.Button()
         Me.Panel13 = New System.Windows.Forms.Panel()
+        Me.BtnNextPage = New System.Windows.Forms.Button()
         Me.Panel14 = New System.Windows.Forms.Panel()
+        Me.BtnPreviousPage = New System.Windows.Forms.Button()
         Me.Panel16 = New System.Windows.Forms.Panel()
+        Me.BtnFirstPage = New System.Windows.Forms.Button()
         Me.DGVReport = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -50,6 +55,9 @@ Partial Class FrmTailorReport
         Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TableLayoutPanel12 = New System.Windows.Forms.TableLayoutPanel()
+        Me.BtnPrintAll = New System.Windows.Forms.Button()
+        Me.BtnUpdate = New System.Windows.Forms.Button()
+        Me.BtnSearch = New System.Windows.Forms.Button()
         Me.GrpReport = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.TxtAddress = New System.Windows.Forms.TextBox()
@@ -58,14 +66,6 @@ Partial Class FrmTailorReport
         Me.ChkNameReport = New System.Windows.Forms.CheckBox()
         Me.ChkPhone = New System.Windows.Forms.CheckBox()
         Me.TxtNameReport = New System.Windows.Forms.TextBox()
-        Me.BtnRefreshPage = New System.Windows.Forms.Button()
-        Me.BtnLastPage = New System.Windows.Forms.Button()
-        Me.BtnNextPage = New System.Windows.Forms.Button()
-        Me.BtnPreviousPage = New System.Windows.Forms.Button()
-        Me.BtnFirstPage = New System.Windows.Forms.Button()
-        Me.BtnPrintAll = New System.Windows.Forms.Button()
-        Me.BtnUpdate = New System.Windows.Forms.Button()
-        Me.BtnSearch = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.GroupBox7.SuspendLayout()
         Me.TLPPages.SuspendLayout()
@@ -150,7 +150,7 @@ Partial Class FrmTailorReport
         Me.TLPPages.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.62162!))
         Me.TLPPages.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TLPPages.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.62162!))
-        Me.TLPPages.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 114.0!))
+        Me.TLPPages.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 124.0!))
         Me.TLPPages.Controls.Add(Me.BtnRefreshPage, 9, 0)
         Me.TLPPages.Controls.Add(Me.TxtPagesCount, 6, 0)
         Me.TLPPages.Controls.Add(Me.TxtCurrentPage, 2, 0)
@@ -172,16 +172,34 @@ Partial Class FrmTailorReport
         Me.TLPPages.TabIndex = 1222
         Me.TLPPages.Tag = "Dark"
         '
+        'BtnRefreshPage
+        '
+        Me.BtnRefreshPage.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(92, Byte), Integer))
+        Me.BtnRefreshPage.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.BtnRefreshPage.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.BtnRefreshPage.FlatAppearance.BorderSize = 0
+        Me.BtnRefreshPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BtnRefreshPage.Font = New System.Drawing.Font("Droid Arabic Kufi", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnRefreshPage.ForeColor = System.Drawing.Color.White
+        Me.BtnRefreshPage.Image = CType(resources.GetObject("BtnRefreshPage.Image"), System.Drawing.Image)
+        Me.BtnRefreshPage.Location = New System.Drawing.Point(3, 3)
+        Me.BtnRefreshPage.Name = "BtnRefreshPage"
+        Me.BtnRefreshPage.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.BtnRefreshPage.Size = New System.Drawing.Size(123, 34)
+        Me.BtnRefreshPage.TabIndex = 1207
+        Me.BtnRefreshPage.Tag = "Dark"
+        Me.BtnRefreshPage.UseVisualStyleBackColor = False
+        '
         'TxtPagesCount
         '
         Me.TxtPagesCount.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtPagesCount.BackColor = System.Drawing.SystemColors.Window
         Me.TxtPagesCount.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
-        Me.TxtPagesCount.Location = New System.Drawing.Point(363, 3)
+        Me.TxtPagesCount.Location = New System.Drawing.Point(375, 3)
         Me.TxtPagesCount.Name = "TxtPagesCount"
         Me.TxtPagesCount.ReadOnly = True
         Me.TxtPagesCount.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TxtPagesCount.Size = New System.Drawing.Size(122, 35)
+        Me.TxtPagesCount.Size = New System.Drawing.Size(119, 35)
         Me.TxtPagesCount.TabIndex = 1205
         Me.TxtPagesCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -190,11 +208,11 @@ Partial Class FrmTailorReport
         Me.TxtCurrentPage.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtCurrentPage.BackColor = System.Drawing.Color.White
         Me.TxtCurrentPage.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
-        Me.TxtCurrentPage.Location = New System.Drawing.Point(713, 3)
+        Me.TxtCurrentPage.Location = New System.Drawing.Point(719, 3)
         Me.TxtCurrentPage.Name = "TxtCurrentPage"
         Me.TxtCurrentPage.ReadOnly = True
         Me.TxtCurrentPage.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TxtCurrentPage.Size = New System.Drawing.Size(122, 35)
+        Me.TxtCurrentPage.Size = New System.Drawing.Size(119, 35)
         Me.TxtCurrentPage.TabIndex = 1205
         Me.TxtCurrentPage.TabStop = False
         Me.TxtCurrentPage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -203,10 +221,10 @@ Partial Class FrmTailorReport
         '
         Me.NUDPageSize.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.NUDPageSize.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
-        Me.NUDPageSize.Location = New System.Drawing.Point(117, 3)
+        Me.NUDPageSize.Location = New System.Drawing.Point(132, 3)
         Me.NUDPageSize.Name = "NUDPageSize"
         Me.NUDPageSize.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.NUDPageSize.Size = New System.Drawing.Size(122, 35)
+        Me.NUDPageSize.Size = New System.Drawing.Size(119, 35)
         Me.NUDPageSize.TabIndex = 20
         Me.NUDPageSize.TabStop = False
         Me.NUDPageSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -215,7 +233,7 @@ Partial Class FrmTailorReport
         '
         Me.Panel3.Controls.Add(Me.Label10)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(244, 2)
+        Me.Panel3.Location = New System.Drawing.Point(256, 2)
         Me.Panel3.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(114, 36)
@@ -237,7 +255,7 @@ Partial Class FrmTailorReport
         '
         Me.Panel4.Controls.Add(Me.Label11)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel4.Location = New System.Drawing.Point(490, 2)
+        Me.Panel4.Location = New System.Drawing.Point(499, 2)
         Me.Panel4.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(114, 36)
@@ -259,41 +277,113 @@ Partial Class FrmTailorReport
         '
         Me.Panel12.Controls.Add(Me.BtnLastPage)
         Me.Panel12.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel12.Location = New System.Drawing.Point(608, 2)
+        Me.Panel12.Location = New System.Drawing.Point(617, 2)
         Me.Panel12.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel12.Name = "Panel12"
-        Me.Panel12.Size = New System.Drawing.Size(60, 36)
+        Me.Panel12.Size = New System.Drawing.Size(58, 36)
         Me.Panel12.TabIndex = 1205
+        '
+        'BtnLastPage
+        '
+        Me.BtnLastPage.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(92, Byte), Integer))
+        Me.BtnLastPage.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.BtnLastPage.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.BtnLastPage.FlatAppearance.BorderSize = 0
+        Me.BtnLastPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BtnLastPage.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnLastPage.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.BtnLastPage.Image = CType(resources.GetObject("BtnLastPage.Image"), System.Drawing.Image)
+        Me.BtnLastPage.Location = New System.Drawing.Point(0, 0)
+        Me.BtnLastPage.Name = "BtnLastPage"
+        Me.BtnLastPage.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.BtnLastPage.Size = New System.Drawing.Size(58, 36)
+        Me.BtnLastPage.TabIndex = 19
+        Me.BtnLastPage.Tag = "Dark"
+        Me.BtnLastPage.UseVisualStyleBackColor = False
         '
         'Panel13
         '
         Me.Panel13.Controls.Add(Me.BtnNextPage)
         Me.Panel13.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel13.Location = New System.Drawing.Point(672, 2)
+        Me.Panel13.Location = New System.Drawing.Point(679, 2)
         Me.Panel13.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel13.Name = "Panel13"
-        Me.Panel13.Size = New System.Drawing.Size(36, 36)
+        Me.Panel13.Size = New System.Drawing.Size(35, 36)
         Me.Panel13.TabIndex = 1205
+        '
+        'BtnNextPage
+        '
+        Me.BtnNextPage.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(92, Byte), Integer))
+        Me.BtnNextPage.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.BtnNextPage.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.BtnNextPage.FlatAppearance.BorderSize = 0
+        Me.BtnNextPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BtnNextPage.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnNextPage.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.BtnNextPage.Image = CType(resources.GetObject("BtnNextPage.Image"), System.Drawing.Image)
+        Me.BtnNextPage.Location = New System.Drawing.Point(0, 0)
+        Me.BtnNextPage.Name = "BtnNextPage"
+        Me.BtnNextPage.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.BtnNextPage.Size = New System.Drawing.Size(35, 36)
+        Me.BtnNextPage.TabIndex = 18
+        Me.BtnNextPage.Tag = "Dark"
+        Me.BtnNextPage.UseVisualStyleBackColor = False
         '
         'Panel14
         '
         Me.Panel14.Controls.Add(Me.BtnPreviousPage)
         Me.Panel14.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel14.Location = New System.Drawing.Point(840, 2)
+        Me.Panel14.Location = New System.Drawing.Point(843, 2)
         Me.Panel14.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel14.Name = "Panel14"
-        Me.Panel14.Size = New System.Drawing.Size(36, 36)
+        Me.Panel14.Size = New System.Drawing.Size(35, 36)
         Me.Panel14.TabIndex = 1205
+        '
+        'BtnPreviousPage
+        '
+        Me.BtnPreviousPage.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(92, Byte), Integer))
+        Me.BtnPreviousPage.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.BtnPreviousPage.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.BtnPreviousPage.FlatAppearance.BorderSize = 0
+        Me.BtnPreviousPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BtnPreviousPage.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnPreviousPage.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.BtnPreviousPage.Image = CType(resources.GetObject("BtnPreviousPage.Image"), System.Drawing.Image)
+        Me.BtnPreviousPage.Location = New System.Drawing.Point(0, 0)
+        Me.BtnPreviousPage.Name = "BtnPreviousPage"
+        Me.BtnPreviousPage.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.BtnPreviousPage.Size = New System.Drawing.Size(35, 36)
+        Me.BtnPreviousPage.TabIndex = 17
+        Me.BtnPreviousPage.Tag = "Dark"
+        Me.BtnPreviousPage.UseVisualStyleBackColor = False
         '
         'Panel16
         '
         Me.Panel16.Controls.Add(Me.BtnFirstPage)
         Me.Panel16.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel16.Location = New System.Drawing.Point(880, 2)
+        Me.Panel16.Location = New System.Drawing.Point(882, 2)
         Me.Panel16.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel16.Name = "Panel16"
-        Me.Panel16.Size = New System.Drawing.Size(60, 36)
+        Me.Panel16.Size = New System.Drawing.Size(58, 36)
         Me.Panel16.TabIndex = 1205
+        '
+        'BtnFirstPage
+        '
+        Me.BtnFirstPage.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(92, Byte), Integer))
+        Me.BtnFirstPage.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.BtnFirstPage.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.BtnFirstPage.FlatAppearance.BorderSize = 0
+        Me.BtnFirstPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BtnFirstPage.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnFirstPage.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.BtnFirstPage.Image = CType(resources.GetObject("BtnFirstPage.Image"), System.Drawing.Image)
+        Me.BtnFirstPage.Location = New System.Drawing.Point(0, 0)
+        Me.BtnFirstPage.Name = "BtnFirstPage"
+        Me.BtnFirstPage.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.BtnFirstPage.Size = New System.Drawing.Size(58, 36)
+        Me.BtnFirstPage.TabIndex = 16
+        Me.BtnFirstPage.Tag = "Dark"
+        Me.BtnFirstPage.UseVisualStyleBackColor = False
         '
         'DGVReport
         '
@@ -406,6 +496,71 @@ Partial Class FrmTailorReport
         Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel12.Size = New System.Drawing.Size(963, 41)
         Me.TableLayoutPanel12.TabIndex = 1224
+        '
+        'BtnPrintAll
+        '
+        Me.BtnPrintAll.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(150, Byte), Integer), CType(CType(136, Byte), Integer))
+        Me.BtnPrintAll.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.BtnPrintAll.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.BtnPrintAll.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.BtnPrintAll.FlatAppearance.BorderSize = 0
+        Me.BtnPrintAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BtnPrintAll.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnPrintAll.ForeColor = System.Drawing.Color.White
+        Me.BtnPrintAll.Image = CType(resources.GetObject("BtnPrintAll.Image"), System.Drawing.Image)
+        Me.BtnPrintAll.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.BtnPrintAll.Location = New System.Drawing.Point(0, 2)
+        Me.BtnPrintAll.Margin = New System.Windows.Forms.Padding(0, 2, 0, 2)
+        Me.BtnPrintAll.Name = "BtnPrintAll"
+        Me.BtnPrintAll.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.BtnPrintAll.Size = New System.Drawing.Size(315, 37)
+        Me.BtnPrintAll.TabIndex = 1171
+        Me.BtnPrintAll.Tag = "Dark"
+        Me.BtnPrintAll.Text = "طباعة"
+        Me.BtnPrintAll.UseVisualStyleBackColor = False
+        '
+        'BtnUpdate
+        '
+        Me.BtnUpdate.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(150, Byte), Integer), CType(CType(136, Byte), Integer))
+        Me.BtnUpdate.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.BtnUpdate.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.BtnUpdate.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.BtnUpdate.FlatAppearance.BorderSize = 0
+        Me.BtnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BtnUpdate.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnUpdate.ForeColor = System.Drawing.Color.White
+        Me.BtnUpdate.Image = CType(resources.GetObject("BtnUpdate.Image"), System.Drawing.Image)
+        Me.BtnUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.BtnUpdate.Location = New System.Drawing.Point(325, 2)
+        Me.BtnUpdate.Margin = New System.Windows.Forms.Padding(0, 2, 0, 2)
+        Me.BtnUpdate.Name = "BtnUpdate"
+        Me.BtnUpdate.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.BtnUpdate.Size = New System.Drawing.Size(314, 37)
+        Me.BtnUpdate.TabIndex = 1123
+        Me.BtnUpdate.Tag = "Dark"
+        Me.BtnUpdate.Text = "تحديث"
+        Me.BtnUpdate.UseVisualStyleBackColor = False
+        '
+        'BtnSearch
+        '
+        Me.BtnSearch.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(150, Byte), Integer), CType(CType(136, Byte), Integer))
+        Me.BtnSearch.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.BtnSearch.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.BtnSearch.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(197, Byte), Integer), CType(CType(189, Byte), Integer), CType(CType(153, Byte), Integer))
+        Me.BtnSearch.FlatAppearance.BorderSize = 0
+        Me.BtnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BtnSearch.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnSearch.ForeColor = System.Drawing.Color.White
+        Me.BtnSearch.Image = CType(resources.GetObject("BtnSearch.Image"), System.Drawing.Image)
+        Me.BtnSearch.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.BtnSearch.Location = New System.Drawing.Point(649, 2)
+        Me.BtnSearch.Margin = New System.Windows.Forms.Padding(0, 2, 0, 2)
+        Me.BtnSearch.Name = "BtnSearch"
+        Me.BtnSearch.Size = New System.Drawing.Size(314, 37)
+        Me.BtnSearch.TabIndex = 1141
+        Me.BtnSearch.Tag = "Dark"
+        Me.BtnSearch.Text = "بحث"
+        Me.BtnSearch.UseVisualStyleBackColor = False
         '
         'GrpReport
         '
@@ -537,161 +692,6 @@ Partial Class FrmTailorReport
         Me.TxtNameReport.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.TxtNameReport.Size = New System.Drawing.Size(772, 35)
         Me.TxtNameReport.TabIndex = 1055
-        '
-        'BtnRefreshPage
-        '
-        Me.BtnRefreshPage.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(92, Byte), Integer))
-        Me.BtnRefreshPage.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.BtnRefreshPage.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.BtnRefreshPage.FlatAppearance.BorderSize = 0
-        Me.BtnRefreshPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BtnRefreshPage.Font = New System.Drawing.Font("Droid Arabic Kufi", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnRefreshPage.ForeColor = System.Drawing.Color.White
-        Me.BtnRefreshPage.Image = CType(resources.GetObject("BtnRefreshPage.Image"), System.Drawing.Image)
-        Me.BtnRefreshPage.Location = New System.Drawing.Point(3, 3)
-        Me.BtnRefreshPage.Name = "BtnRefreshPage"
-        Me.BtnRefreshPage.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.BtnRefreshPage.Size = New System.Drawing.Size(108, 34)
-        Me.BtnRefreshPage.TabIndex = 1207
-        Me.BtnRefreshPage.Tag = "Dark"
-        Me.BtnRefreshPage.UseVisualStyleBackColor = False
-        '
-        'BtnLastPage
-        '
-        Me.BtnLastPage.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(92, Byte), Integer))
-        Me.BtnLastPage.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.BtnLastPage.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.BtnLastPage.FlatAppearance.BorderSize = 0
-        Me.BtnLastPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BtnLastPage.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnLastPage.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.BtnLastPage.Image = CType(resources.GetObject("BtnLastPage.Image"), System.Drawing.Image)
-        Me.BtnLastPage.Location = New System.Drawing.Point(0, 0)
-        Me.BtnLastPage.Name = "BtnLastPage"
-        Me.BtnLastPage.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.BtnLastPage.Size = New System.Drawing.Size(60, 36)
-        Me.BtnLastPage.TabIndex = 19
-        Me.BtnLastPage.Tag = "Dark"
-        Me.BtnLastPage.UseVisualStyleBackColor = False
-        '
-        'BtnNextPage
-        '
-        Me.BtnNextPage.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(92, Byte), Integer))
-        Me.BtnNextPage.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.BtnNextPage.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.BtnNextPage.FlatAppearance.BorderSize = 0
-        Me.BtnNextPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BtnNextPage.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnNextPage.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.BtnNextPage.Image = CType(resources.GetObject("BtnNextPage.Image"), System.Drawing.Image)
-        Me.BtnNextPage.Location = New System.Drawing.Point(0, 0)
-        Me.BtnNextPage.Name = "BtnNextPage"
-        Me.BtnNextPage.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.BtnNextPage.Size = New System.Drawing.Size(36, 36)
-        Me.BtnNextPage.TabIndex = 18
-        Me.BtnNextPage.Tag = "Dark"
-        Me.BtnNextPage.UseVisualStyleBackColor = False
-        '
-        'BtnPreviousPage
-        '
-        Me.BtnPreviousPage.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(92, Byte), Integer))
-        Me.BtnPreviousPage.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.BtnPreviousPage.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.BtnPreviousPage.FlatAppearance.BorderSize = 0
-        Me.BtnPreviousPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BtnPreviousPage.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnPreviousPage.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.BtnPreviousPage.Image = CType(resources.GetObject("BtnPreviousPage.Image"), System.Drawing.Image)
-        Me.BtnPreviousPage.Location = New System.Drawing.Point(0, 0)
-        Me.BtnPreviousPage.Name = "BtnPreviousPage"
-        Me.BtnPreviousPage.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.BtnPreviousPage.Size = New System.Drawing.Size(36, 36)
-        Me.BtnPreviousPage.TabIndex = 17
-        Me.BtnPreviousPage.Tag = "Dark"
-        Me.BtnPreviousPage.UseVisualStyleBackColor = False
-        '
-        'BtnFirstPage
-        '
-        Me.BtnFirstPage.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(92, Byte), Integer))
-        Me.BtnFirstPage.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.BtnFirstPage.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.BtnFirstPage.FlatAppearance.BorderSize = 0
-        Me.BtnFirstPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BtnFirstPage.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnFirstPage.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.BtnFirstPage.Image = CType(resources.GetObject("BtnFirstPage.Image"), System.Drawing.Image)
-        Me.BtnFirstPage.Location = New System.Drawing.Point(0, 0)
-        Me.BtnFirstPage.Name = "BtnFirstPage"
-        Me.BtnFirstPage.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.BtnFirstPage.Size = New System.Drawing.Size(60, 36)
-        Me.BtnFirstPage.TabIndex = 16
-        Me.BtnFirstPage.Tag = "Dark"
-        Me.BtnFirstPage.UseVisualStyleBackColor = False
-        '
-        'BtnPrintAll
-        '
-        Me.BtnPrintAll.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(150, Byte), Integer), CType(CType(136, Byte), Integer))
-        Me.BtnPrintAll.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.BtnPrintAll.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.BtnPrintAll.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.BtnPrintAll.FlatAppearance.BorderSize = 0
-        Me.BtnPrintAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BtnPrintAll.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnPrintAll.ForeColor = System.Drawing.Color.White
-        Me.BtnPrintAll.Image = CType(resources.GetObject("BtnPrintAll.Image"), System.Drawing.Image)
-        Me.BtnPrintAll.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.BtnPrintAll.Location = New System.Drawing.Point(0, 2)
-        Me.BtnPrintAll.Margin = New System.Windows.Forms.Padding(0, 2, 0, 2)
-        Me.BtnPrintAll.Name = "BtnPrintAll"
-        Me.BtnPrintAll.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.BtnPrintAll.Size = New System.Drawing.Size(315, 37)
-        Me.BtnPrintAll.TabIndex = 1171
-        Me.BtnPrintAll.Tag = "Dark"
-        Me.BtnPrintAll.Text = "طباعة"
-        Me.BtnPrintAll.UseVisualStyleBackColor = False
-        '
-        'BtnUpdate
-        '
-        Me.BtnUpdate.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(150, Byte), Integer), CType(CType(136, Byte), Integer))
-        Me.BtnUpdate.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.BtnUpdate.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.BtnUpdate.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.BtnUpdate.FlatAppearance.BorderSize = 0
-        Me.BtnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BtnUpdate.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnUpdate.ForeColor = System.Drawing.Color.White
-        Me.BtnUpdate.Image = CType(resources.GetObject("BtnUpdate.Image"), System.Drawing.Image)
-        Me.BtnUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.BtnUpdate.Location = New System.Drawing.Point(325, 2)
-        Me.BtnUpdate.Margin = New System.Windows.Forms.Padding(0, 2, 0, 2)
-        Me.BtnUpdate.Name = "BtnUpdate"
-        Me.BtnUpdate.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.BtnUpdate.Size = New System.Drawing.Size(314, 37)
-        Me.BtnUpdate.TabIndex = 1123
-        Me.BtnUpdate.Tag = "Dark"
-        Me.BtnUpdate.Text = "تحديث"
-        Me.BtnUpdate.UseVisualStyleBackColor = False
-        '
-        'BtnSearch
-        '
-        Me.BtnSearch.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(150, Byte), Integer), CType(CType(136, Byte), Integer))
-        Me.BtnSearch.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.BtnSearch.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.BtnSearch.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(197, Byte), Integer), CType(CType(189, Byte), Integer), CType(CType(153, Byte), Integer))
-        Me.BtnSearch.FlatAppearance.BorderSize = 0
-        Me.BtnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BtnSearch.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnSearch.ForeColor = System.Drawing.Color.White
-        Me.BtnSearch.Image = CType(resources.GetObject("BtnSearch.Image"), System.Drawing.Image)
-        Me.BtnSearch.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.BtnSearch.Location = New System.Drawing.Point(649, 2)
-        Me.BtnSearch.Margin = New System.Windows.Forms.Padding(0, 2, 0, 2)
-        Me.BtnSearch.Name = "BtnSearch"
-        Me.BtnSearch.Size = New System.Drawing.Size(314, 37)
-        Me.BtnSearch.TabIndex = 1141
-        Me.BtnSearch.Tag = "Dark"
-        Me.BtnSearch.Text = "بحث"
-        Me.BtnSearch.UseVisualStyleBackColor = False
         '
         'FrmTailorReport
         '

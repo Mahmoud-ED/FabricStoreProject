@@ -104,7 +104,7 @@ Public Class FrmBank
     End Sub
 
     Private Sub TxtBank_TextChanged(sender As Object, e As EventArgs) Handles TxtBank.TextChanged
-        If sender.BackColor <> SystemColors.Window Then sender.BackColor = SystemColors.Window
+        sender.BackColor = SystemColors.Window
 
         If BankID = 0 Then
             DTDefaultView(TxtBank.Text, DSBank.Tables(0), "Name")
@@ -124,7 +124,7 @@ Public Class FrmBank
     End Sub
 
     Private Sub TxtAccountNumber_TextChanged(sender As Object, e As EventArgs) Handles TxtAccountNumber.TextChanged
-        If sender.BackColor <> SystemColors.Window Then sender.BackColor = SystemColors.Window
+        sender.BackColor = SystemColors.Window
     End Sub
 
     Private Sub TxtAccountNumber_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtAccountNumber.KeyPress

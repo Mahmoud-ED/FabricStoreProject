@@ -349,7 +349,7 @@ Partial Class FrmTreasury
         Me.TLPPages.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.62162!))
         Me.TLPPages.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TLPPages.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.62162!))
-        Me.TLPPages.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 143.0!))
+        Me.TLPPages.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 186.0!))
         Me.TLPPages.Controls.Add(Me.BtnRefreshPage, 9, 0)
         Me.TLPPages.Controls.Add(Me.TxtPagesCount, 6, 0)
         Me.TLPPages.Controls.Add(Me.NUDPageSize, 8, 0)
@@ -386,7 +386,7 @@ Partial Class FrmTreasury
         Me.BtnRefreshPage.Margin = New System.Windows.Forms.Padding(4)
         Me.BtnRefreshPage.Name = "BtnRefreshPage"
         Me.BtnRefreshPage.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.BtnRefreshPage.Size = New System.Drawing.Size(140, 41)
+        Me.BtnRefreshPage.Size = New System.Drawing.Size(181, 41)
         Me.BtnRefreshPage.TabIndex = 1207
         Me.BtnRefreshPage.Tag = "Dark"
         Me.BtnRefreshPage.UseVisualStyleBackColor = False
@@ -396,12 +396,12 @@ Partial Class FrmTreasury
         Me.TxtPagesCount.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtPagesCount.BackColor = System.Drawing.SystemColors.Window
         Me.TxtPagesCount.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
-        Me.TxtPagesCount.Location = New System.Drawing.Point(483, 4)
+        Me.TxtPagesCount.Location = New System.Drawing.Point(515, 4)
         Me.TxtPagesCount.Margin = New System.Windows.Forms.Padding(4)
         Me.TxtPagesCount.Name = "TxtPagesCount"
         Me.TxtPagesCount.ReadOnly = True
         Me.TxtPagesCount.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TxtPagesCount.Size = New System.Drawing.Size(165, 42)
+        Me.TxtPagesCount.Size = New System.Drawing.Size(156, 42)
         Me.TxtPagesCount.TabIndex = 1205
         Me.TxtPagesCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -409,11 +409,11 @@ Partial Class FrmTreasury
         '
         Me.NUDPageSize.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.NUDPageSize.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
-        Me.NUDPageSize.Location = New System.Drawing.Point(152, 4)
+        Me.NUDPageSize.Location = New System.Drawing.Point(193, 4)
         Me.NUDPageSize.Margin = New System.Windows.Forms.Padding(4)
         Me.NUDPageSize.Name = "NUDPageSize"
         Me.NUDPageSize.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.NUDPageSize.Size = New System.Drawing.Size(165, 42)
+        Me.NUDPageSize.Size = New System.Drawing.Size(156, 42)
         Me.NUDPageSize.TabIndex = 20
         Me.NUDPageSize.TabStop = False
         Me.NUDPageSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -422,7 +422,7 @@ Partial Class FrmTreasury
         '
         Me.Panel3.Controls.Add(Me.Label10)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(324, 2)
+        Me.Panel3.Location = New System.Drawing.Point(356, 2)
         Me.Panel3.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(152, 45)
@@ -445,7 +445,7 @@ Partial Class FrmTreasury
         '
         Me.Panel4.Controls.Add(Me.Label11)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel4.Location = New System.Drawing.Point(655, 2)
+        Me.Panel4.Location = New System.Drawing.Point(678, 2)
         Me.Panel4.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(152, 45)
@@ -468,10 +468,10 @@ Partial Class FrmTreasury
         '
         Me.Panel12.Controls.Add(Me.BtnLastPage)
         Me.Panel12.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel12.Location = New System.Drawing.Point(813, 2)
+        Me.Panel12.Location = New System.Drawing.Point(836, 2)
         Me.Panel12.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel12.Name = "Panel12"
-        Me.Panel12.Size = New System.Drawing.Size(80, 45)
+        Me.Panel12.Size = New System.Drawing.Size(76, 45)
         Me.Panel12.TabIndex = 1205
         '
         'BtnLastPage
@@ -488,7 +488,7 @@ Partial Class FrmTreasury
         Me.BtnLastPage.Margin = New System.Windows.Forms.Padding(4)
         Me.BtnLastPage.Name = "BtnLastPage"
         Me.BtnLastPage.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.BtnLastPage.Size = New System.Drawing.Size(80, 45)
+        Me.BtnLastPage.Size = New System.Drawing.Size(76, 45)
         Me.BtnLastPage.TabIndex = 19
         Me.BtnLastPage.Tag = "Dark"
         Me.BtnLastPage.UseVisualStyleBackColor = False
@@ -497,10 +497,10 @@ Partial Class FrmTreasury
         '
         Me.Panel13.Controls.Add(Me.BtnNextPage)
         Me.Panel13.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel13.Location = New System.Drawing.Point(899, 2)
+        Me.Panel13.Location = New System.Drawing.Point(918, 2)
         Me.Panel13.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel13.Name = "Panel13"
-        Me.Panel13.Size = New System.Drawing.Size(48, 45)
+        Me.Panel13.Size = New System.Drawing.Size(45, 45)
         Me.Panel13.TabIndex = 1205
         '
         'BtnNextPage
@@ -517,7 +517,7 @@ Partial Class FrmTreasury
         Me.BtnNextPage.Margin = New System.Windows.Forms.Padding(4)
         Me.BtnNextPage.Name = "BtnNextPage"
         Me.BtnNextPage.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.BtnNextPage.Size = New System.Drawing.Size(48, 45)
+        Me.BtnNextPage.Size = New System.Drawing.Size(45, 45)
         Me.BtnNextPage.TabIndex = 18
         Me.BtnNextPage.Tag = "Dark"
         Me.BtnNextPage.UseVisualStyleBackColor = False
@@ -526,10 +526,10 @@ Partial Class FrmTreasury
         '
         Me.Panel14.Controls.Add(Me.BtnPreviousPage)
         Me.Panel14.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel14.Location = New System.Drawing.Point(1126, 2)
+        Me.Panel14.Location = New System.Drawing.Point(1133, 2)
         Me.Panel14.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel14.Name = "Panel14"
-        Me.Panel14.Size = New System.Drawing.Size(48, 45)
+        Me.Panel14.Size = New System.Drawing.Size(45, 45)
         Me.Panel14.TabIndex = 1205
         '
         'BtnPreviousPage
@@ -546,7 +546,7 @@ Partial Class FrmTreasury
         Me.BtnPreviousPage.Margin = New System.Windows.Forms.Padding(4)
         Me.BtnPreviousPage.Name = "BtnPreviousPage"
         Me.BtnPreviousPage.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.BtnPreviousPage.Size = New System.Drawing.Size(48, 45)
+        Me.BtnPreviousPage.Size = New System.Drawing.Size(45, 45)
         Me.BtnPreviousPage.TabIndex = 17
         Me.BtnPreviousPage.Tag = "Dark"
         Me.BtnPreviousPage.UseVisualStyleBackColor = False
@@ -555,10 +555,10 @@ Partial Class FrmTreasury
         '
         Me.Panel16.Controls.Add(Me.BtnFirstPage)
         Me.Panel16.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel16.Location = New System.Drawing.Point(1180, 2)
+        Me.Panel16.Location = New System.Drawing.Point(1184, 2)
         Me.Panel16.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel16.Name = "Panel16"
-        Me.Panel16.Size = New System.Drawing.Size(80, 45)
+        Me.Panel16.Size = New System.Drawing.Size(76, 45)
         Me.Panel16.TabIndex = 1205
         '
         'BtnFirstPage
@@ -575,7 +575,7 @@ Partial Class FrmTreasury
         Me.BtnFirstPage.Margin = New System.Windows.Forms.Padding(4)
         Me.BtnFirstPage.Name = "BtnFirstPage"
         Me.BtnFirstPage.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.BtnFirstPage.Size = New System.Drawing.Size(80, 45)
+        Me.BtnFirstPage.Size = New System.Drawing.Size(76, 45)
         Me.BtnFirstPage.TabIndex = 16
         Me.BtnFirstPage.Tag = "Dark"
         Me.BtnFirstPage.UseVisualStyleBackColor = False
@@ -585,12 +585,12 @@ Partial Class FrmTreasury
         Me.TxtPageNum.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtPageNum.BackColor = System.Drawing.Color.White
         Me.TxtPageNum.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
-        Me.TxtPageNum.Location = New System.Drawing.Point(954, 4)
+        Me.TxtPageNum.Location = New System.Drawing.Point(970, 4)
         Me.TxtPageNum.Margin = New System.Windows.Forms.Padding(4)
         Me.TxtPageNum.Name = "TxtPageNum"
         Me.TxtPageNum.ReadOnly = True
         Me.TxtPageNum.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TxtPageNum.Size = New System.Drawing.Size(165, 42)
+        Me.TxtPageNum.Size = New System.Drawing.Size(156, 42)
         Me.TxtPageNum.TabIndex = 1205
         Me.TxtPageNum.TabStop = False
         Me.TxtPageNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -866,7 +866,7 @@ Partial Class FrmTreasury
         Me.LblValue.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.LblValue.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblValue.ForeColor = System.Drawing.Color.DimGray
-        Me.LblValue.Location = New System.Drawing.Point(5, 7)
+        Me.LblValue.Location = New System.Drawing.Point(5, 8)
         Me.LblValue.Name = "LblValue"
         Me.LblValue.Size = New System.Drawing.Size(47, 34)
         Me.LblValue.TabIndex = 1255
@@ -1050,7 +1050,7 @@ Partial Class FrmTreasury
         Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.62162!))
         Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.62162!))
-        Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 143.0!))
+        Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 186.0!))
         Me.TableLayoutPanel5.Controls.Add(Me.BtnRefreshPage1, 9, 0)
         Me.TableLayoutPanel5.Controls.Add(Me.TxtPageCount1, 6, 0)
         Me.TableLayoutPanel5.Controls.Add(Me.TxtPageNum1, 2, 0)
@@ -1087,7 +1087,7 @@ Partial Class FrmTreasury
         Me.BtnRefreshPage1.Margin = New System.Windows.Forms.Padding(4)
         Me.BtnRefreshPage1.Name = "BtnRefreshPage1"
         Me.BtnRefreshPage1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.BtnRefreshPage1.Size = New System.Drawing.Size(140, 41)
+        Me.BtnRefreshPage1.Size = New System.Drawing.Size(181, 41)
         Me.BtnRefreshPage1.TabIndex = 1207
         Me.BtnRefreshPage1.Tag = "Dark"
         Me.BtnRefreshPage1.UseVisualStyleBackColor = False
@@ -1097,12 +1097,12 @@ Partial Class FrmTreasury
         Me.TxtPageCount1.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtPageCount1.BackColor = System.Drawing.SystemColors.Window
         Me.TxtPageCount1.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
-        Me.TxtPageCount1.Location = New System.Drawing.Point(483, 4)
+        Me.TxtPageCount1.Location = New System.Drawing.Point(515, 4)
         Me.TxtPageCount1.Margin = New System.Windows.Forms.Padding(4)
         Me.TxtPageCount1.Name = "TxtPageCount1"
         Me.TxtPageCount1.ReadOnly = True
         Me.TxtPageCount1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TxtPageCount1.Size = New System.Drawing.Size(165, 42)
+        Me.TxtPageCount1.Size = New System.Drawing.Size(156, 42)
         Me.TxtPageCount1.TabIndex = 1205
         Me.TxtPageCount1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -1111,12 +1111,12 @@ Partial Class FrmTreasury
         Me.TxtPageNum1.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtPageNum1.BackColor = System.Drawing.Color.White
         Me.TxtPageNum1.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
-        Me.TxtPageNum1.Location = New System.Drawing.Point(954, 4)
+        Me.TxtPageNum1.Location = New System.Drawing.Point(970, 4)
         Me.TxtPageNum1.Margin = New System.Windows.Forms.Padding(4)
         Me.TxtPageNum1.Name = "TxtPageNum1"
         Me.TxtPageNum1.ReadOnly = True
         Me.TxtPageNum1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TxtPageNum1.Size = New System.Drawing.Size(165, 42)
+        Me.TxtPageNum1.Size = New System.Drawing.Size(156, 42)
         Me.TxtPageNum1.TabIndex = 1205
         Me.TxtPageNum1.TabStop = False
         Me.TxtPageNum1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -1125,11 +1125,11 @@ Partial Class FrmTreasury
         '
         Me.NUDPageSize1.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.NUDPageSize1.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
-        Me.NUDPageSize1.Location = New System.Drawing.Point(152, 4)
+        Me.NUDPageSize1.Location = New System.Drawing.Point(193, 4)
         Me.NUDPageSize1.Margin = New System.Windows.Forms.Padding(4)
         Me.NUDPageSize1.Name = "NUDPageSize1"
         Me.NUDPageSize1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.NUDPageSize1.Size = New System.Drawing.Size(165, 42)
+        Me.NUDPageSize1.Size = New System.Drawing.Size(156, 42)
         Me.NUDPageSize1.TabIndex = 20
         Me.NUDPageSize1.TabStop = False
         Me.NUDPageSize1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -1138,7 +1138,7 @@ Partial Class FrmTreasury
         '
         Me.Panel7.Controls.Add(Me.Label6)
         Me.Panel7.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel7.Location = New System.Drawing.Point(324, 2)
+        Me.Panel7.Location = New System.Drawing.Point(356, 2)
         Me.Panel7.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Size = New System.Drawing.Size(152, 45)
@@ -1161,7 +1161,7 @@ Partial Class FrmTreasury
         '
         Me.Panel8.Controls.Add(Me.Label7)
         Me.Panel8.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel8.Location = New System.Drawing.Point(655, 2)
+        Me.Panel8.Location = New System.Drawing.Point(678, 2)
         Me.Panel8.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel8.Name = "Panel8"
         Me.Panel8.Size = New System.Drawing.Size(152, 45)
@@ -1184,10 +1184,10 @@ Partial Class FrmTreasury
         '
         Me.Panel9.Controls.Add(Me.BtnLastPage1)
         Me.Panel9.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel9.Location = New System.Drawing.Point(813, 2)
+        Me.Panel9.Location = New System.Drawing.Point(836, 2)
         Me.Panel9.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel9.Name = "Panel9"
-        Me.Panel9.Size = New System.Drawing.Size(80, 45)
+        Me.Panel9.Size = New System.Drawing.Size(76, 45)
         Me.Panel9.TabIndex = 1205
         '
         'BtnLastPage1
@@ -1204,7 +1204,7 @@ Partial Class FrmTreasury
         Me.BtnLastPage1.Margin = New System.Windows.Forms.Padding(4)
         Me.BtnLastPage1.Name = "BtnLastPage1"
         Me.BtnLastPage1.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.BtnLastPage1.Size = New System.Drawing.Size(80, 45)
+        Me.BtnLastPage1.Size = New System.Drawing.Size(76, 45)
         Me.BtnLastPage1.TabIndex = 19
         Me.BtnLastPage1.Tag = "Dark"
         Me.BtnLastPage1.UseVisualStyleBackColor = False
@@ -1213,10 +1213,10 @@ Partial Class FrmTreasury
         '
         Me.Panel10.Controls.Add(Me.BtnNextPage1)
         Me.Panel10.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel10.Location = New System.Drawing.Point(899, 2)
+        Me.Panel10.Location = New System.Drawing.Point(918, 2)
         Me.Panel10.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel10.Name = "Panel10"
-        Me.Panel10.Size = New System.Drawing.Size(48, 45)
+        Me.Panel10.Size = New System.Drawing.Size(45, 45)
         Me.Panel10.TabIndex = 1205
         '
         'BtnNextPage1
@@ -1233,7 +1233,7 @@ Partial Class FrmTreasury
         Me.BtnNextPage1.Margin = New System.Windows.Forms.Padding(4)
         Me.BtnNextPage1.Name = "BtnNextPage1"
         Me.BtnNextPage1.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.BtnNextPage1.Size = New System.Drawing.Size(48, 45)
+        Me.BtnNextPage1.Size = New System.Drawing.Size(45, 45)
         Me.BtnNextPage1.TabIndex = 18
         Me.BtnNextPage1.Tag = "Dark"
         Me.BtnNextPage1.UseVisualStyleBackColor = False
@@ -1242,10 +1242,10 @@ Partial Class FrmTreasury
         '
         Me.Panel11.Controls.Add(Me.BtnPreviousPage1)
         Me.Panel11.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel11.Location = New System.Drawing.Point(1126, 2)
+        Me.Panel11.Location = New System.Drawing.Point(1133, 2)
         Me.Panel11.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel11.Name = "Panel11"
-        Me.Panel11.Size = New System.Drawing.Size(48, 45)
+        Me.Panel11.Size = New System.Drawing.Size(45, 45)
         Me.Panel11.TabIndex = 1205
         '
         'BtnPreviousPage1
@@ -1262,7 +1262,7 @@ Partial Class FrmTreasury
         Me.BtnPreviousPage1.Margin = New System.Windows.Forms.Padding(4)
         Me.BtnPreviousPage1.Name = "BtnPreviousPage1"
         Me.BtnPreviousPage1.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.BtnPreviousPage1.Size = New System.Drawing.Size(48, 45)
+        Me.BtnPreviousPage1.Size = New System.Drawing.Size(45, 45)
         Me.BtnPreviousPage1.TabIndex = 17
         Me.BtnPreviousPage1.Tag = "Dark"
         Me.BtnPreviousPage1.UseVisualStyleBackColor = False
@@ -1271,10 +1271,10 @@ Partial Class FrmTreasury
         '
         Me.Panel15.Controls.Add(Me.BtnFirstPage1)
         Me.Panel15.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel15.Location = New System.Drawing.Point(1180, 2)
+        Me.Panel15.Location = New System.Drawing.Point(1184, 2)
         Me.Panel15.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel15.Name = "Panel15"
-        Me.Panel15.Size = New System.Drawing.Size(80, 45)
+        Me.Panel15.Size = New System.Drawing.Size(76, 45)
         Me.Panel15.TabIndex = 1205
         '
         'BtnFirstPage1
@@ -1291,7 +1291,7 @@ Partial Class FrmTreasury
         Me.BtnFirstPage1.Margin = New System.Windows.Forms.Padding(4)
         Me.BtnFirstPage1.Name = "BtnFirstPage1"
         Me.BtnFirstPage1.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.BtnFirstPage1.Size = New System.Drawing.Size(80, 45)
+        Me.BtnFirstPage1.Size = New System.Drawing.Size(76, 45)
         Me.BtnFirstPage1.TabIndex = 16
         Me.BtnFirstPage1.Tag = "Dark"
         Me.BtnFirstPage1.UseVisualStyleBackColor = False
@@ -1519,7 +1519,7 @@ Partial Class FrmTreasury
         Me.Label17.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.Label17.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label17.ForeColor = System.Drawing.Color.DimGray
-        Me.Label17.Location = New System.Drawing.Point(5, 7)
+        Me.Label17.Location = New System.Drawing.Point(5, 8)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(47, 34)
         Me.Label17.TabIndex = 1255
@@ -1554,7 +1554,7 @@ Partial Class FrmTreasury
         Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.62162!))
         Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.62162!))
-        Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 143.0!))
+        Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 186.0!))
         Me.TableLayoutPanel6.Controls.Add(Me.BtnRefreshPage2, 9, 0)
         Me.TableLayoutPanel6.Controls.Add(Me.TxtPageCount2, 6, 0)
         Me.TableLayoutPanel6.Controls.Add(Me.TxtPageNum2, 2, 0)
@@ -1591,7 +1591,7 @@ Partial Class FrmTreasury
         Me.BtnRefreshPage2.Margin = New System.Windows.Forms.Padding(4)
         Me.BtnRefreshPage2.Name = "BtnRefreshPage2"
         Me.BtnRefreshPage2.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.BtnRefreshPage2.Size = New System.Drawing.Size(140, 41)
+        Me.BtnRefreshPage2.Size = New System.Drawing.Size(181, 41)
         Me.BtnRefreshPage2.TabIndex = 1207
         Me.BtnRefreshPage2.Tag = "Dark"
         Me.BtnRefreshPage2.UseVisualStyleBackColor = False
@@ -1601,12 +1601,12 @@ Partial Class FrmTreasury
         Me.TxtPageCount2.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtPageCount2.BackColor = System.Drawing.SystemColors.Window
         Me.TxtPageCount2.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
-        Me.TxtPageCount2.Location = New System.Drawing.Point(483, 4)
+        Me.TxtPageCount2.Location = New System.Drawing.Point(515, 4)
         Me.TxtPageCount2.Margin = New System.Windows.Forms.Padding(4)
         Me.TxtPageCount2.Name = "TxtPageCount2"
         Me.TxtPageCount2.ReadOnly = True
         Me.TxtPageCount2.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TxtPageCount2.Size = New System.Drawing.Size(165, 42)
+        Me.TxtPageCount2.Size = New System.Drawing.Size(156, 42)
         Me.TxtPageCount2.TabIndex = 1205
         Me.TxtPageCount2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -1615,12 +1615,12 @@ Partial Class FrmTreasury
         Me.TxtPageNum2.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtPageNum2.BackColor = System.Drawing.Color.White
         Me.TxtPageNum2.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
-        Me.TxtPageNum2.Location = New System.Drawing.Point(954, 4)
+        Me.TxtPageNum2.Location = New System.Drawing.Point(970, 4)
         Me.TxtPageNum2.Margin = New System.Windows.Forms.Padding(4)
         Me.TxtPageNum2.Name = "TxtPageNum2"
         Me.TxtPageNum2.ReadOnly = True
         Me.TxtPageNum2.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.TxtPageNum2.Size = New System.Drawing.Size(165, 42)
+        Me.TxtPageNum2.Size = New System.Drawing.Size(156, 42)
         Me.TxtPageNum2.TabIndex = 1205
         Me.TxtPageNum2.TabStop = False
         Me.TxtPageNum2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -1629,11 +1629,11 @@ Partial Class FrmTreasury
         '
         Me.NUDPageSize2.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.NUDPageSize2.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!)
-        Me.NUDPageSize2.Location = New System.Drawing.Point(152, 4)
+        Me.NUDPageSize2.Location = New System.Drawing.Point(193, 4)
         Me.NUDPageSize2.Margin = New System.Windows.Forms.Padding(4)
         Me.NUDPageSize2.Name = "NUDPageSize2"
         Me.NUDPageSize2.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.NUDPageSize2.Size = New System.Drawing.Size(165, 42)
+        Me.NUDPageSize2.Size = New System.Drawing.Size(156, 42)
         Me.NUDPageSize2.TabIndex = 20
         Me.NUDPageSize2.TabStop = False
         Me.NUDPageSize2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -1642,7 +1642,7 @@ Partial Class FrmTreasury
         '
         Me.Panel18.Controls.Add(Me.Label8)
         Me.Panel18.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel18.Location = New System.Drawing.Point(324, 2)
+        Me.Panel18.Location = New System.Drawing.Point(356, 2)
         Me.Panel18.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel18.Name = "Panel18"
         Me.Panel18.Size = New System.Drawing.Size(152, 45)
@@ -1665,7 +1665,7 @@ Partial Class FrmTreasury
         '
         Me.Panel19.Controls.Add(Me.Label9)
         Me.Panel19.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel19.Location = New System.Drawing.Point(655, 2)
+        Me.Panel19.Location = New System.Drawing.Point(678, 2)
         Me.Panel19.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel19.Name = "Panel19"
         Me.Panel19.Size = New System.Drawing.Size(152, 45)
@@ -1688,10 +1688,10 @@ Partial Class FrmTreasury
         '
         Me.Panel20.Controls.Add(Me.BtnLastPage2)
         Me.Panel20.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel20.Location = New System.Drawing.Point(813, 2)
+        Me.Panel20.Location = New System.Drawing.Point(836, 2)
         Me.Panel20.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel20.Name = "Panel20"
-        Me.Panel20.Size = New System.Drawing.Size(80, 45)
+        Me.Panel20.Size = New System.Drawing.Size(76, 45)
         Me.Panel20.TabIndex = 1205
         '
         'BtnLastPage2
@@ -1708,7 +1708,7 @@ Partial Class FrmTreasury
         Me.BtnLastPage2.Margin = New System.Windows.Forms.Padding(4)
         Me.BtnLastPage2.Name = "BtnLastPage2"
         Me.BtnLastPage2.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.BtnLastPage2.Size = New System.Drawing.Size(80, 45)
+        Me.BtnLastPage2.Size = New System.Drawing.Size(76, 45)
         Me.BtnLastPage2.TabIndex = 19
         Me.BtnLastPage2.Tag = "Dark"
         Me.BtnLastPage2.UseVisualStyleBackColor = False
@@ -1717,10 +1717,10 @@ Partial Class FrmTreasury
         '
         Me.Panel21.Controls.Add(Me.BtnNextPage2)
         Me.Panel21.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel21.Location = New System.Drawing.Point(899, 2)
+        Me.Panel21.Location = New System.Drawing.Point(918, 2)
         Me.Panel21.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel21.Name = "Panel21"
-        Me.Panel21.Size = New System.Drawing.Size(48, 45)
+        Me.Panel21.Size = New System.Drawing.Size(45, 45)
         Me.Panel21.TabIndex = 1205
         '
         'BtnNextPage2
@@ -1737,7 +1737,7 @@ Partial Class FrmTreasury
         Me.BtnNextPage2.Margin = New System.Windows.Forms.Padding(4)
         Me.BtnNextPage2.Name = "BtnNextPage2"
         Me.BtnNextPage2.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.BtnNextPage2.Size = New System.Drawing.Size(48, 45)
+        Me.BtnNextPage2.Size = New System.Drawing.Size(45, 45)
         Me.BtnNextPage2.TabIndex = 18
         Me.BtnNextPage2.Tag = "Dark"
         Me.BtnNextPage2.UseVisualStyleBackColor = False
@@ -1746,10 +1746,10 @@ Partial Class FrmTreasury
         '
         Me.Panel22.Controls.Add(Me.BtnPreviousPage2)
         Me.Panel22.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel22.Location = New System.Drawing.Point(1126, 2)
+        Me.Panel22.Location = New System.Drawing.Point(1133, 2)
         Me.Panel22.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel22.Name = "Panel22"
-        Me.Panel22.Size = New System.Drawing.Size(48, 45)
+        Me.Panel22.Size = New System.Drawing.Size(45, 45)
         Me.Panel22.TabIndex = 1205
         '
         'BtnPreviousPage2
@@ -1766,7 +1766,7 @@ Partial Class FrmTreasury
         Me.BtnPreviousPage2.Margin = New System.Windows.Forms.Padding(4)
         Me.BtnPreviousPage2.Name = "BtnPreviousPage2"
         Me.BtnPreviousPage2.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.BtnPreviousPage2.Size = New System.Drawing.Size(48, 45)
+        Me.BtnPreviousPage2.Size = New System.Drawing.Size(45, 45)
         Me.BtnPreviousPage2.TabIndex = 17
         Me.BtnPreviousPage2.Tag = "Dark"
         Me.BtnPreviousPage2.UseVisualStyleBackColor = False
@@ -1775,10 +1775,10 @@ Partial Class FrmTreasury
         '
         Me.Panel23.Controls.Add(Me.BtnFirstPage2)
         Me.Panel23.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel23.Location = New System.Drawing.Point(1180, 2)
+        Me.Panel23.Location = New System.Drawing.Point(1184, 2)
         Me.Panel23.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel23.Name = "Panel23"
-        Me.Panel23.Size = New System.Drawing.Size(80, 45)
+        Me.Panel23.Size = New System.Drawing.Size(76, 45)
         Me.Panel23.TabIndex = 1205
         '
         'BtnFirstPage2
@@ -1795,7 +1795,7 @@ Partial Class FrmTreasury
         Me.BtnFirstPage2.Margin = New System.Windows.Forms.Padding(4)
         Me.BtnFirstPage2.Name = "BtnFirstPage2"
         Me.BtnFirstPage2.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.BtnFirstPage2.Size = New System.Drawing.Size(80, 45)
+        Me.BtnFirstPage2.Size = New System.Drawing.Size(76, 45)
         Me.BtnFirstPage2.TabIndex = 16
         Me.BtnFirstPage2.Tag = "Dark"
         Me.BtnFirstPage2.UseVisualStyleBackColor = False
@@ -2005,7 +2005,7 @@ Partial Class FrmTreasury
         Me.Label14.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.Label14.Font = New System.Drawing.Font("Droid Arabic Kufi", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label14.ForeColor = System.Drawing.Color.DimGray
-        Me.Label14.Location = New System.Drawing.Point(5, 7)
+        Me.Label14.Location = New System.Drawing.Point(5, 8)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(47, 34)
         Me.Label14.TabIndex = 1255

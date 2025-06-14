@@ -25,9 +25,9 @@ Public Class FrmTreasury
         If Me.Visible Then
             CmbYear.Text = Now.Year
             CmbMonth.Text = Now.Month
-            NUDPageSize.Value = My.Settings.SizeOfPage
-            NUDPageSize1.Value = My.Settings.SizeOfPage
-            NUDPageSize2.Value = My.Settings.SizeOfPage
+            NUDPageSize.Value = My.Settings.PageSize
+            NUDPageSize1.Value = My.Settings.PageSize
+            NUDPageSize2.Value = My.Settings.PageSize
             ChkDay.Checked = True
             CmbDay.Enabled = True
             CmbDay.Text = Now.Day
@@ -50,14 +50,14 @@ Public Class FrmTreasury
         'PageNum = 1
         'PageNum1 = 1
         TxtPageNum.Text = PageNum
-        PageSize = My.Settings.SizeOfPage
+        PageSize = My.Settings.PageSize
 
         TxtPageNum1.Text = PageNum1
-        PageSize1 = My.Settings.SizeOfPage
+        PageSize1 = My.Settings.PageSize
 
 
         TxtPageNum2.Text = PageNum2
-        PageSize2 = My.Settings.SizeOfPage
+        PageSize2 = My.Settings.PageSize
 
         Select Case Type
             Case Data.Main
@@ -187,21 +187,21 @@ Public Class FrmTreasury
                 DGV.Item(0, i).Value = .Item("ID")
                 DGV.Item(1, i).Value = .Item("ت") 'i + 1
                 DGV.Item(2, i).Value = Format(.Item("Date"), GetDateAndTimeFormat(DTFormat.DTF))
-                DGV.Item(3, i).Value = Format(.Item("TotalValue"), "0.000")
-                DGV.Item(4, i).Value = Format(.Item("Amont"), "0.000")
-                If .Item("Type") = 0 Then
-                    DGV.Item(5, i).Value = "سحب"
-                ElseIf .Item("Type") = 1 Then
-                    DGV.Item(5, i).Value = "ايداع"
-                End If
+                DGV.Item(3, i).Value = Format(.Item("TotalValue"), "0.00")
+                DGV.Item(4, i).Value = Format(.Item("Amont"), "0.00")
+                'If .Item("Type") = 0 Then
+                '    DGV.Item(5, i).Value = "سحب"
+                'ElseIf .Item("Type") = 1 Then
+                '    DGV.Item(5, i).Value = "ايداع"
+                'End If
 
-                If .Item("Type") = 0 Then
-                    DGV.Item(4, i).Style.BackColor = Color.LightSalmon
-                    DGV.Item(4, i).Style.ForeColor = Color.White
-                ElseIf .Item("Type") = 1 Then
-                    DGV.Item(4, i).Style.BackColor = Color.LightGreen
-                    DGV.Item(4, i).Style.ForeColor = Color.White
-                End If
+                'If .Item("Type") = 0 Then
+                '    DGV.Item(4, i).Style.BackColor = Color.LightSalmon
+                '    DGV.Item(4, i).Style.ForeColor = Color.White
+                'ElseIf .Item("Type") = 1 Then
+                '    DGV.Item(4, i).Style.BackColor = Color.LightGreen
+                '    DGV.Item(4, i).Style.ForeColor = Color.White
+                'End If
                 DGV.Item(6, i).Value = .Item("FinaceName")
                 If Not IsDBNull(.Item("T")) Then
                     DGV.Item(7, i).Value = .Item("T") + "-" + Format(.Item("NUM"), "0000").ToString
@@ -222,12 +222,12 @@ Public Class FrmTreasury
 
 
         If DS.Tables(1).Rows.Count > 0 Then
-            TxtValue.Text = Format(DS.Tables(1).Rows(0).Item(0), "0.000")
-            TxtValueCard.Text = Format(DS.Tables(1).Rows(0).Item(1), "0.000")
+            TxtValue.Text = Format(DS.Tables(1).Rows(0).Item(0), "0.00")
+            TxtValueCard.Text = Format(DS.Tables(1).Rows(0).Item(1), "0.00")
 
         Else
-            TxtValue.Text = "0.000"
-            TxtValueCard.Text = "0.000"
+            TxtValue.Text = "0.00"
+            TxtValueCard.Text = "0.00"
         End If
 
     End Sub
@@ -248,8 +248,8 @@ Public Class FrmTreasury
                 DGVOther.Item(0, i).Value = .Item("ID")
                 DGVOther.Item(1, i).Value = .Item("ت") 'i + 1
                 DGVOther.Item(2, i).Value = Format(.Item("Date"), GetDateAndTimeFormat(DTFormat.DTF))
-                DGVOther.Item(3, i).Value = Format(.Item("TotalValueCard"), "0.000")
-                DGVOther.Item(4, i).Value = Format(.Item("Amont"), "0.000")
+                DGVOther.Item(3, i).Value = Format(.Item("TotalValueCard"), "0.00")
+                DGVOther.Item(4, i).Value = Format(.Item("Amont"), "0.00")
                 If .Item("Type") = 0 Then
                     DGVOther.Item(5, i).Value = "سحب"
                 ElseIf .Item("Type") = 1 Then
@@ -301,7 +301,7 @@ Public Class FrmTreasury
         '        DGVImaging.Item(0, i).Value = .Item("ID")
         '        DGVImaging.Item(1, i).Value = .Item("ت") 'i + 1
         '        DGVImaging.Item(2, i).Value = Format(.Item("Date"), GetDateAndTimeFormat(DTFormat.DTF))
-        '        DGVImaging.Item(3, i).Value = Format(.Item("Value"), "0.000")
+        '        DGVImaging.Item(3, i).Value = Format(.Item("Value"), "0.00")
         '        TxtTotalImaging.Text = Val(TxtTotalImaging.Text) + .Item("Value")
         '        DGVImaging.Item(3, i).Style.BackColor = Color.LightGreen
         '        DGVImaging.Item(3, i).Style.ForeColor = Color.White
@@ -409,7 +409,7 @@ Public Class FrmTreasury
 
     Private Sub CheckPageSize()
 
-        If PageSize <> My.Settings.SizeOfPage Then
+        If PageSize <> My.Settings.PageSize Then
             PageNum = 1
             GetData(Data.Search) 'عند تغيير حجم الصفحة يجب معرفة عدد الصفحات الجديد PagesCount
         End If
@@ -428,10 +428,10 @@ Public Class FrmTreasury
 
     Private Sub NUDPageSize_ValueChanged(sender As Object, e As EventArgs) Handles NUDPageSize.ValueChanged
 
-        Dim SPageSize As Integer = My.Settings.SizeOfPage
+        Dim SPageSize As Integer = My.Settings.PageSize
 
         If NUDPageSize.Value <> 0 And SPageSize <> NUDPageSize.Value Then
-            My.Settings.SizeOfPage = NUDPageSize.Value
+            My.Settings.PageSize = NUDPageSize.Value
             My.Settings.Save()
         End If
 
@@ -538,7 +538,7 @@ Public Class FrmTreasury
 
     Private Sub CheckPageSize1()
 
-        If PageSize1 <> My.Settings.SizeOfPage Then
+        If PageSize1 <> My.Settings.PageSize Then
             PageNum1 = 1
             GetData(Data.Search) 'عند تغيير حجم الصفحة يجب معرفة عدد الصفحات الجديد PagesCount
         End If
@@ -557,10 +557,10 @@ Public Class FrmTreasury
 
     Private Sub NUDPageSize1_ValueChanged(sender As Object, e As EventArgs) Handles NUDPageSize1.ValueChanged
 
-        Dim SPageSize1 As Integer = My.Settings.SizeOfPage
+        Dim SPageSize1 As Integer = My.Settings.PageSize
 
         If NUDPageSize1.Value <> 0 And SPageSize1 <> NUDPageSize1.Value Then
-            My.Settings.SizeOfPage = NUDPageSize1.Value
+            My.Settings.PageSize = NUDPageSize1.Value
             My.Settings.Save()
         End If
 
@@ -673,7 +673,7 @@ Public Class FrmTreasury
 
     Private Sub CheckPageSize2()
 
-        If PageSize2 <> My.Settings.SizeOfPage Then
+        If PageSize2 <> My.Settings.PageSize Then
             PageNum2 = 1
             GetData(Data.Search) 'عند تغيير حجم الصفحة يجب معرفة عدد الصفحات الجديد PagesCount
         End If
@@ -692,10 +692,10 @@ Public Class FrmTreasury
 
     Private Sub NUDPageSize2_ValueChanged(sender As Object, e As EventArgs) Handles NUDPageSize2.ValueChanged
 
-        Dim SPageSize As Integer = My.Settings.SizeOfPage
+        Dim SPageSize As Integer = My.Settings.PageSize
 
         If NUDPageSize2.Value <> 0 And SPageSize <> NUDPageSize2.Value Then
-            My.Settings.SizeOfPage = NUDPageSize2.Value
+            My.Settings.PageSize = NUDPageSize2.Value
             My.Settings.Save()
         End If
 
@@ -769,38 +769,36 @@ Public Class FrmTreasury
         Dim DSPrint = New DataSet
         Dim SQLCon = New SQLConClass
 
-        SQLQuery = "SELECT FORMAT([Date],'" & GetDateAndTimeFormat(DTFormat.DTF) & "') AS [Date],TotalValue,Amont,FinaceName,[Type],FORMAT(NUM,'000000') AS NUM,ProcNUM,UserName,PaymentName,T,TreasuryType FROM TreasuryView WHERE YEAR([Date])=" & CmbYear.Text.Trim & " AND MONTH([Date])=" & CmbMonth.Text.Trim
+        SQLQuery = "SELECT FORMAT([Date],'" & GetDateAndTimeFormat(DTFormat.DTF) & "') AS [Date],TotalValue,Amont,FinaceName,[Type],
+                    FORMAT(NUM,'000000') AS NUM,ProcNUM,UserName,PaymentName,T,TreasuryType FROM TreasuryView WHERE YEAR([Date])=" &
+                    CmbYear.Text.Trim & " AND MONTH([Date])=" & CmbMonth.Text.Trim
         AppendReportConditions()
         SQLQuery &= " ORDER BY [Date] DESC"
-        SQLQuery &= " SELECT FORMAT([Date],'" & GetDateAndTimeFormat(DTFormat.DTF) & "') AS [Date],Value,FinancName,FORMAT(Num,'000000') AS Num,UserName,PaymentName FROM TreasuryImagingView WHERE YEAR([Date])=" & CmbYear.Text.Trim & " AND MONTH([Date])=" & CmbMonth.Text.Trim
-        AppendReportConditions()
-        SQLQuery &= " ORDER BY ID DESC"
-        SQLQuery &= " SELECT * FROM CenterMainInfoTable"
+        SQLQuery &= " SELECT * FROM CenterInfoTable"
 
         DSPrint = SQLCon.SelectData(SQLQuery, 0, Nothing)
 
-        'Dim F As New FrmPrint
-        'Dim C As New CRTreasury
+        Dim F As New FrmPrint
+        Dim C As New CRTreasury
 
-        'C.SetDataSource(DSPrint.Tables(0))
-        'C.Subreports(0).SetDataSource(DSPrint.Tables(1))
-        'C.Subreports(1).SetDataSource(DSPrint.Tables(2))
-        'C.Subreports(2).SetDataSource(DSPrint.Tables(2))
-        'If ChkDay.Checked = True Then
-        '    C.SetParameterValue("Day", Format(Val(CmbDay.Text.Trim), "00").ToString)
-        'Else
-        '    C.SetParameterValue("Day", "")
-        'End If
-        'C.SetParameterValue("Month", Format(Val(CmbMonth.Text.Trim), "00").ToString)
-        'C.SetParameterValue("Year", CmbYear.Text.Trim)
-        'C.SetParameterValue("Total", TxtValue.Text.Trim)
-        'C.SetParameterValue("TotalChar", TxtMonyCharCash.Text.Trim)
-        'F.CrystalReportViewer1.ReportSource = C
-        'F.CrystalReportViewer1.Refresh()
-        'F.Text = "طباعة"
-        'F.CrystalReportViewer1.Zoom(100%)
-        'F.WindowState = FormWindowState.Maximized
-        'F.Show()
+        C.SetDataSource(DSPrint.Tables(0))
+        C.Subreports(0).SetDataSource(DSPrint.Tables(1))
+        C.Subreports(1).SetDataSource(DSPrint.Tables(1))
+        If ChkDay.Checked = True Then
+            C.SetParameterValue("Day", Format(Val(CmbDay.Text.Trim), "00").ToString)
+        Else
+            C.SetParameterValue("Day", "")
+        End If
+        C.SetParameterValue("Month", Format(Val(CmbMonth.Text.Trim), "00").ToString)
+        C.SetParameterValue("Year", CmbYear.Text.Trim)
+        C.SetParameterValue("Total", TxtValue.Text.Trim)
+        C.SetParameterValue("TotalChar", TxtMonyCharCash.Text.Trim)
+        F.CrystalReportViewer1.ReportSource = C
+        F.CrystalReportViewer1.Refresh()
+        F.Text = "طباعة"
+        F.CrystalReportViewer1.Zoom(100%)
+        F.WindowState = FormWindowState.Maximized
+        F.Show()
 
     End Sub
 

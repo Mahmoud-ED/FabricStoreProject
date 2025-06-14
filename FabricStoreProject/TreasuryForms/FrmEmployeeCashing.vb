@@ -60,8 +60,8 @@ Public Class FrmEmployeeCashing
             LblNum.Text = Format(DS.Tables(0).Rows(0).Item(0), "000000")
             LblCashingFinance.Text = DS.Tables(1).Rows(0).Item(0)
             If DS.Tables(5).Rows.Count > 0 Then
-                LblTreasuryValue.Text = Format(DS.Tables(5).Rows(0).Item(0), "0.000")
-                LblValueCard.Text = Format(DS.Tables(5).Rows(0).Item(1), "0.000")
+                LblTreasuryValue.Text = Format(DS.Tables(5).Rows(0).Item(0), "0.00")
+                LblValueCard.Text = Format(DS.Tables(5).Rows(0).Item(1), "0.00")
                 TreasuryValue = DS.Tables(5).Rows(0).Item(0)
 
             Else
@@ -134,14 +134,14 @@ Public Class FrmEmployeeCashing
             LblTreasuryValue.Text = TreasuryValue - Val(TxtValue.Text)
             If Val(LblTreasuryValue.Text) < 0 Then
                 TxtValue.Clear()
-                LblTreasuryValue.Text = Format(TreasuryValue, "0.000")
+                LblTreasuryValue.Text = Format(TreasuryValue, "0.00")
                 MsgTool("القيمة المطلوبة غير متوفرة", 0)
 
                 Exit Sub
             End If
 
         Else
-            LblTreasuryValue.Text = Format(TreasuryValue, "0.000")
+            LblTreasuryValue.Text = Format(TreasuryValue, "0.00")
         End If
 
     End Sub
@@ -238,9 +238,9 @@ Public Class FrmEmployeeCashing
         If DsSave.Tables(2).Rows.Count > 0 Then
 
             If Not IsDBNull(DsSave.Tables(2).Rows(0).Item(0)) Then
-                    LblTreasuryValue.Text = Format(DsSave.Tables(2).Rows(0).Item(0), "0.000")
-                    LblValueCard.Text = Format(DsSave.Tables(2).Rows(0).Item(1), "0.000")
-                    TreasuryValue = DsSave.Tables(2).Rows(0).Item(0)
+                LblTreasuryValue.Text = Format(DsSave.Tables(2).Rows(0).Item(0), "0.00")
+                LblValueCard.Text = Format(DsSave.Tables(2).Rows(0).Item(1), "0.00")
+                TreasuryValue = DsSave.Tables(2).Rows(0).Item(0)
                 Else
                     LblTreasuryValue.Text = 0
                     TreasuryValue = 0
@@ -263,7 +263,7 @@ Public Class FrmEmployeeCashing
             With DT.Rows(0)
                 DGVCashing.Item(0, 0).Value = .Item("ID")
                 DGVCashing.Item(1, 0).Value = Format(.Item("NUM"), "000000")
-                DGVCashing.Item(2, 0).Value = Format(.Item("Value"), "0.000")
+                DGVCashing.Item(2, 0).Value = Format(.Item("Value"), "0.00")
                 DGVCashing.Item(3, 0).Value = .Item("EmployeeName")
                 DGVCashing.Item(4, 0).Value = .Item("EmployeeCashingFinanceName")
                 DGVCashing.Item(5, 0).Value = .Item("PaymentTypeName")
@@ -381,7 +381,7 @@ Public Class FrmEmployeeCashing
     '    Dim Cash As String
     '    Dim Price As String
 
-    '    Dim Value = Format(DSPrint.Tables(0).Rows(0).Item(2), "0.000")
+    '    Dim Value = Format(DSPrint.Tables(0).Rows(0).Item(2), "0.00")
 
     '    Dim Denar As String
     '    Dim Derham As String
@@ -476,7 +476,7 @@ Public Class FrmEmployeeCashing
 
             If DsSearch.Tables(4).Rows.Count > 0 Then
                 If Not IsDBNull(DsSearch.Tables(4).Rows(0).Item(0)) Then
-                    LblTreasuryValue.Text = Format(DsSearch.Tables(4).Rows(0).Item(0), "0.000")
+                    LblTreasuryValue.Text = Format(DsSearch.Tables(4).Rows(0).Item(0), "0.00")
                     TreasuryValue = DsSearch.Tables(4).Rows(0).Item(0)
                 Else
                     LblTreasuryValue.Text = 0
@@ -496,7 +496,7 @@ Public Class FrmEmployeeCashing
                     LblNum.Text = Format(.Item("NUM"), "000000")
                     LblDate.Text = Format(.Item("Date"), GetDateAndTimeFormat(DTFormat.DF))
                     CmbEmployee.SelectedValue = .Item("EmployeeID")
-                    TxtValue.Text = Format(.Item("Value"), "0.000")
+                    TxtValue.Text = Format(.Item("Value"), "0.00")
                     LblCashingFinance.Text = .Item("EmployeeCashingFinanceName")
                     CmbPaymentType.SelectedValue = .Item("PaymentTypeID")
                     If .Item("CheckNum") <> 0 Then

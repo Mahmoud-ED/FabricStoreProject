@@ -1,9 +1,11 @@
 ﻿Imports System.Data.SqlClient
+Imports System.Security.Cryptography
 
 Public Class FrmTailors
 
-    Private DSSave, DSLoadBasic, DSDisplay As DataSet
-    Private CR, TailorID As Integer
+    Private DSSave, DSLoadBasic, DSDisplay, DSDel As DataSet
+    Private CR, TailorID, ServiceID As Integer
+    Private SID As Integer   'ServiceID
 
 
     Private Name As String
@@ -67,7 +69,8 @@ Public Class FrmTailors
     Private Sub GetData()
 
         Dim Sqlcon As New SQLConClass()
-        SQLQuery = " Select ID,Name from TailorsTable  where EndService IS NULL  "
+        SQLQuery = " Select ID,Name from TailorsTable  where EndService IS NULL  Order By Name"
+        SQLQuery += " Select * from ServicesTable  "
         DSLoadBasic = Sqlcon.SelectData(SQLQuery, 0, Nothing)
         If DSHasTables(DSLoadBasic) Then
             FillCmb()
@@ -81,10 +84,27 @@ Public Class FrmTailors
     End Sub
 
     Private Sub FillCmb()
-        CmbName.DataSource = DSLoadBasic.Tables(0)
-        CmbName.ValueMember = "ID"
-        CmbName.DisplayMember = "Name"
-        CmbName.SelectedIndex = -1
+        If DSLoadBasic.Tables(0).Rows.Count > 0 Then
+            CmbName.DataSource = DSLoadBasic.Tables(0)
+            CmbName.ValueMember = "ID"
+            CmbName.DisplayMember = "Name"
+            CmbName.SelectedIndex = -1
+
+        Else
+            CmbName.DataSource = Nothing
+
+        End If
+
+        If DSLoadBasic.Tables(1).Rows.Count > 0 Then
+            CmbService.DataSource = DSLoadBasic.Tables(1)
+            CmbService.ValueMember = "ID"
+            CmbService.DisplayMember = "Name"
+            CmbService.SelectedIndex = -1
+
+        Else
+            CmbService.DataSource = Nothing
+
+        End If
 
     End Sub
 
@@ -94,6 +114,8 @@ Public Class FrmTailors
         Dim Sqlcon As New SQLConClass()
 
         SQLQuery = " Select * From TailorsTable Where EndService IS NULL and ID = " & TailorID
+        SQLQuery += " Select * from TailorServicesView  where TailorID = " & TailorID
+        SQLQuery += " Select * from ServicesTable  "
         DSDisplay = Sqlcon.SelectData(SQLQuery, 0, Nothing)
 
         FillDGV()
@@ -104,6 +126,36 @@ Public Class FrmTailors
             TxtAddress.Text = ItemRows(0)("Address")
             TxtPhone1.Text = ItemRows(0)("Phone1")
             TxtPhone2.Text = ItemRows(0)("Phone2")
+        End If
+
+        DGVService.Rows.Clear()
+        If DSDisplay.Tables(1).Rows.Count > 0 Then
+            For i = 0 To DSDisplay.Tables(1).Rows.Count - 1
+                With DSDisplay.Tables(1).Rows(i)
+
+                    DGVService.Rows.Add()
+                    DGVService.Item(0, i).Value = .Item("ID")
+                    DGVService.Item(1, i).Value = i + 1
+                    DGVService.Item(2, i).Value = .Item("ServiceName")
+                    DGVService.Item(3, i).Value = .Item("Price")
+                    DGVService.Item(5, i).Value = .Item("ServiceID")
+
+                End With
+            Next
+            DGVService.ClearSelection()
+        Else
+            DGVService.Rows.Clear()
+        End If
+
+
+        If DSDisplay.Tables(2).Rows.Count > 0 Then
+            CmbService.DataSource = DSDisplay.Tables(2)
+            CmbService.ValueMember = "ID"
+            CmbService.DisplayMember = "Name"
+            CmbService.SelectedIndex = -1
+
+        Else
+            CmbService.DataSource = Nothing
         End If
 
     End Sub
@@ -144,6 +196,9 @@ Public Class FrmTailors
 
         DGVTailor.Rows.Clear()
         ChangeControlColor(TableLayoutPanel12)
+
+        DGVService.Rows.Clear()
+        Clear(TableLayoutPanel3)
     End Sub
 
     Private Sub BtnRefreshBasic_Click(sender As Object, e As EventArgs) Handles BtnRefreshBasic.Click
@@ -321,4 +376,140 @@ Public Class FrmTailors
         DisplayData()
     End Sub
 
+    Private Sub BtnSaveS_Click(sender As Object, e As EventArgs) Handles BtnSaveS.Click
+        Dim IsMissingData As Boolean
+        If IsNothing(CmbName.SelectedValue) Then
+            CmbName.BackColor = RedColor
+            MsgTool("يرجى إختيار الخياط", 0)
+            'ClearData()
+            Exit Sub
+        End If
+
+        If Val(TxtPrice.Text) = 0 Then
+            TxtPrice.BackColor = RedColor
+            IsMissingData = True
+        End If
+        If IsNothing(CmbService.SelectedValue) And Not IsDGVSelected(DGVService) Then ' Add new
+            CmbService.BackColor = RedColor
+            MsgTool("يرجى إختيار الخدمة", 0)
+            IsMissingData = True
+        End If
+        If IsMissingData Then Exit Sub
+
+        ' التحقق إذا كان يريد الإضافة او التعديل
+        Dim IsNewService As Boolean
+        Dim ServiceID As Integer
+
+        If SID = 0 Then
+
+            IsNewService = True
+            ServiceID = CmbService.SelectedValue
+
+        Else
+            IsNewService = False
+            ServiceID = SID
+
+        End If
+
+        Dim SQLCon = New SQLConClass()
+        Dim Param() As SqlParameter =
+            {
+        New SqlParameter("@New", IsNewService),
+        New SqlParameter("@TailorID", CmbName.SelectedValue),
+        New SqlParameter("@ServiceID", ServiceID),
+        New SqlParameter("@Price", Val(TxtPrice.Text.Trim))}
+
+        Save = SQLCon.CMDExecute("SaveTailorService", 1, Param)
+
+        If Save = 1 Then
+            MsgTool("تم الحفظ بنجاح", 1)
+            BtnNewS.PerformClick()
+
+        ElseIf Save = 0 Then
+            MsgTool("خطأ أثناء تنفيذ العملية", 0)
+
+        ElseIf Save = 2 Then
+            MsgTool("تم إضافة الخدمة مسبقاً إلى هذا الخياط", 0)
+        End If
+
+        BtnShow_Click(sender, e)
+    End Sub
+
+    Private Function IsDGVSelected(DGV As DataGridView) As Boolean
+
+        For Each Row As DataGridViewRow In DGV.Rows
+            If Row.Selected = True Then Return True
+        Next
+
+        Return False
+
+    End Function
+
+    Private Sub TxtPrice_TextChanged(sender As Object, e As EventArgs) Handles TxtPrice.TextChanged
+        sender.BackColor = SystemColors.Window
+    End Sub
+
+    Private Sub BtnDelS_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub BtnNewS_Click(sender As Object, e As EventArgs) Handles BtnNewS.Click
+        Clear(TableLayoutPanel1)
+        DGVService.ClearSelection()
+    End Sub
+
+    Private Sub DGVService_Click(sender As Object, e As EventArgs) Handles DGVService.Click
+
+        If CheckDGVError(DGVService) Then Exit Sub
+
+        'CmbService.SelectedValue = DGVService.Item(5, DGVService.CurrentRow.Index).Value
+
+        'With DGVService
+
+        Dim CR = DGVService.CurrentRow.Index
+            CmbService.SelectedValue = DGVService.Item(5, CR).Value
+
+            SID = DGVService.Item(0, CR).Value
+            TxtPrice.Text = Val(DGVService.Item(3, CR).Value)
+
+        'End With
+
+    End Sub
+
+    Private Sub DGVService_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGVService.CellContentClick
+        If CheckDGVError(DGVService) Then Exit Sub
+        If DGVService.Rows.Count = 0 Then Exit Sub
+        Dim Col = CType(sender, DataGridView).Columns(e.ColumnIndex).Name
+
+        CR = DGVService.CurrentRow.Index
+
+        If Col = "ColDel" Then
+            ServiceID = DGVService.Item(0, CR).Value
+            If vbYes = MsgBox("هل تريد حذف الخدمة " & vbCrLf & "( " & DGVService.Item(2, CR).Value & " ) من الخياط " + vbCrLf + "( " + CmbName.Text + " )", vbMsgBoxRight + vbYesNo + vbQuestion, "تأكيد الحذف") Then
+                Dim SQLCon = New SQLConClass
+                Dim Param() As SqlParameter = {
+                New SqlParameter("@ID", ServiceID)}
+
+                DSDel = SQLCon.CMDExecuteData("DeleteTailorService", Param)
+                If Save = 1 Then
+                    MsgTool("تمت حذف الخدمة", 1)
+                End If
+            End If
+        End If
+        BtnShow_Click(sender, e)
+    End Sub
+
+    Private Sub TxtPrice_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtPrice.KeyPress
+        e.Handled = Not IsNumber(sender.Text, e.KeyChar, False, True)
+    End Sub
+
+    Private Sub CmbService_TextChanged(sender As Object, e As EventArgs) Handles CmbService.TextChanged
+        sender.BackColor = SystemColors.Window
+        SID = 0
+    End Sub
+
+    Private Sub CmbService_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbService.SelectedIndexChanged
+        sender.BackColor = SystemColors.Window
+        SID = 0
+    End Sub
 End Class

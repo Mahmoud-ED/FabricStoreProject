@@ -256,7 +256,7 @@ Public Class FrmPurchasesReport
                         DGVPurchases.Item(1, i).Value = .Item("ت") 'i + 1
                         DGVPurchases.Item(2, i).Value = Format(.Item("Num"), "000000")
                         DGVPurchases.Item(3, i).Value = Format(.Item("Date"), GetDateAndTimeFormat(DTFormat.DTF))
-                        DGVPurchases.Item(4, i).Value = Format(.Item("Total"), "0.000")
+                        DGVPurchases.Item(4, i).Value = Format(.Item("Total"), "0.00")
                         DGVPurchases.Item(5, i).Value = .Item("Name")
 
                     End With
@@ -265,10 +265,6 @@ Public Class FrmPurchasesReport
 
         End Select
 
-    End Sub
-
-    Private Sub DGVPurchases_Click(sender As Object, e As EventArgs) Handles DGVPurchases.Click
-        If CheckDGVError(DGVPurchases) Then Exit Sub
     End Sub
 
     Private Sub DTPFrom_ValueChanged(sender As Object, e As EventArgs) Handles DTPFrom.ValueChanged
@@ -293,6 +289,59 @@ Public Class FrmPurchasesReport
         sender.BackColor = SystemColors.Window
     End Sub
 
+    Private Sub DGVPurchases_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGVPurchases.CellContentClick
+        If DGVPurchases.RowCount = 0 Then Exit Sub
+
+        PurchaseID = DGVPurchases.Item(0, DGVPurchases.CurrentRow.Index).Value
+
+        Dim Col = CType(sender, DataGridView).Columns(e.ColumnIndex).Name
+        If Col = "ColDel" Then
+
+            If vbYes = MsgBox("هل تريد حذف الفاتورة رقم  " & vbCrLf & "( " & DGVPurchases.Item(2, DGVPurchases.CurrentRow.Index).Value & " ) ؟", vbMsgBoxRight + vbYesNo + vbQuestion, "تأكيد الحذف") Then
+                Dim SQLCon = New SQLConClass
+                Dim Param() As SqlParameter = {
+                    New SqlParameter("@ID", PurchaseID)}
+
+                DSDel = SQLCon.CMDExecuteData("DeletePurchase", Param)
+
+                If Save = 1 Then
+                    MsgTool("تم حذف الفاتورة ", 1)
+
+                ElseIf Save = 2 Then
+                    MsgTool("لا يمكن حذف الفاتورة", 0)
+                End If
+            End If
+
+        ElseIf Col = "ColShow" Then
+            If PurchaseID = 0 Then Exit Sub
+            FrmPurchaseInvoiceContents.PurchasesID = PurchaseID
+            FrmPurchaseInvoiceContents.ShowDialog()
+
+
+        ElseIf Col = "ColEdit" Then
+            If PurchaseID = 0 Then Exit Sub
+            FrmPurchasesEditInvo.PurchasesID = PurchaseID
+            FrmPurchasesEditInvo.ShowDialog()
+        End If
+
+        BtnSearch_Click(sender, e)
+
+    End Sub
+
+    Private Sub DGVPurchases_Click(sender As Object, e As EventArgs) Handles DGVPurchases.Click
+        If CheckDGVError(DGVPurchases) Then Exit Sub
+    End Sub
+
+    Private Sub DGVPurchases_DoubleClick(sender As Object, e As EventArgs) Handles DGVPurchases.DoubleClick
+        If CheckDGVError(DGVPurchases) Then Exit Sub
+
+        Dim CR As Integer
+        CR = DGVPurchases.CurrentRow.Index
+        PurchaseID = DGVPurchases.Item(0, CR).Value
+        FrmPurchasesEditInvo.PurchasesID = PurchaseID
+        FrmPurchasesEditInvo.ShowDialog()
+    End Sub
+
     Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles BtnPrint.Click
         'Dim Perm() As DataRow = DTUserPermission.Select("OperationID=31")
 
@@ -301,41 +350,34 @@ Public Class FrmPurchasesReport
         '    Exit Sub
         'End If
 
-        'If DGVRecipt.Rows.Count = 0 Then Exit Sub
+        If DGVPurchases.Rows.Count = 0 Then Exit Sub
 
-        'Dim DSPrint = New DataSet
-        'Dim SQLCon = New SQLConClass
+        Dim DSPrint = New DataSet
+        Dim SQLCon = New SQLConClass
 
-        'SQLQuery = "SELECT FORMAT(Num,'000000') AS Num,FORMAT([Date],'" & GetDateAndTimeFormat(DTFormat.DF) & "') AS [Date],Value,ReceiptName,NoteFor FROM ReceiptView WHERE EndService IS NULL"
-        'AppendReportConditions()
-        'SQLQuery &= " ORDER BY ID DESC OFFSET " & PageSize * (PageNum - 1) & " ROWS FETCH NEXT " & PageSize & " ROWS ONLY"
-        'SQLQuery &= " SELECT * FROM CenterMainInfoTable"
+        SQLQuery = " SELECT FORMAT(Num,'000000') AS Num,Date, Name, [User],Total FROM PurchasesView  WHERE EndService IS NULL"
+        AppendReportConditions()
+        SQLQuery &= " ORDER BY ID DESC OFFSET " & PageSize * (PageNum - 1) & " ROWS FETCH NEXT " & PageSize & " ROWS ONLY"
+        SQLQuery &= " SELECT * FROM CenterInfoTable"
 
-        'Dim Param() As SqlParameter =
-        '    {
-        '    New SqlParameter("@Num", TxtNum.Text.Trim),
-        '    New SqlParameter("@ReceiptName", "%" & TxtReciptName.Text.Trim & "%"),
-        '    New SqlParameter("@PaymentTypeID", (IIf(IsNothing(CmbPaymentType.SelectedValue), 0, CmbPaymentType.SelectedValue))),
-        '    New SqlParameter("@UserID", (IIf(IsNothing(CmbUserName.SelectedValue), 0, CmbUserName.SelectedValue))),
-        '    New SqlParameter("@BankID", (IIf(IsNothing(CmbBank.SelectedValue), 0, CmbBank.SelectedValue))),
-        '    New SqlParameter("@ReceiptFinanceTypeID", (IIf(IsNothing(CmbFinancRecipt.SelectedValue), 0, CmbFinancRecipt.SelectedValue))),
-        '    New SqlParameter("@Check", "%" & Val(TxtCkeck.Text.Trim) & "%")
-        '    }
+        Dim Param() As SqlParameter =
+            {
+            New SqlParameter("@Num", TxtNum.Text.Trim)}
 
-        'DSPrint = SQLCon.SelectData(SQLQuery, 0, Param)
+        DSPrint = SQLCon.SelectData(SQLQuery, 0, Param)
 
-        'Dim F As New FrmPrint
-        'Dim C As New CRRecieptList
+        Dim F As New FrmPrint
+        Dim C As New CRPurchasesInvoiceReports
 
-        'C.SetDataSource(DSPrint.Tables(0))
-        'C.Subreports(0).SetDataSource(DSPrint.Tables(1))
-        'C.Subreports(1).SetDataSource(DSPrint.Tables(1))
-        'F.CrystalReportViewer1.ReportSource = C
-        'F.CrystalReportViewer1.Refresh()
-        'F.Text = "طباعة"
-        'F.CrystalReportViewer1.Zoom(100%)
-        'F.WindowState = FormWindowState.Maximized
-        'F.Show()
+        C.SetDataSource(DSPrint.Tables(0))
+        C.Subreports(0).SetDataSource(DSPrint.Tables(1))
+        C.Subreports(1).SetDataSource(DSPrint.Tables(1))
+        F.CrystalReportViewer1.ReportSource = C
+        F.CrystalReportViewer1.Refresh()
+        F.Text = "طباعة"
+        F.CrystalReportViewer1.Zoom(100%)
+        F.WindowState = FormWindowState.Maximized
+        F.Show()
     End Sub
 
     Private Sub BtnPrintAll_Click(sender As Object, e As EventArgs) Handles BtnPrintAll.Click
@@ -346,49 +388,49 @@ Public Class FrmPurchasesReport
         '    Exit Sub
         'End If
 
-        'If DGVRecipt.Rows.Count = 0 Then Exit Sub
+        If DGVPurchases.Rows.Count = 0 Then Exit Sub
 
-        'Dim DSPrint = New DataSet
-        'Dim SQLCon = New SQLConClass
+        Dim DSPrint = New DataSet
+        Dim SQLCon = New SQLConClass
 
-        'SQLQuery = "SELECT FORMAT(Num,'000000') AS Num,FORMAT([Date],'" & GetDateAndTimeFormat(DTFormat.DF) & "') AS [Date],Value,ReceiptName,NoteFor FROM ReceiptView WHERE EndService IS NULL"
-        'AppendReportConditions()
-        'SQLQuery &= " ORDER BY ID DESC"
-        'SQLQuery &= " SELECT * FROM CenterMainInfoTable"
+        SQLQuery = " SELECT FORMAT(Num,'000000') AS Num,Date, Name, [User],Total FROM PurchasesView  WHERE EndService IS NULL "
+        AppendReportConditions()
+        SQLQuery &= " ORDER BY ID DESC"
+        SQLQuery &= " SELECT * FROM CenterInfoTable"
 
-        'Dim Param() As SqlParameter =
-        '    {
-        '    New SqlParameter("@Num", TxtNum.Text.Trim),
-        '    New SqlParameter("@ReceiptName", "%" & TxtReciptName.Text.Trim & "%"),
-        '    New SqlParameter("@PaymentTypeID", (IIf(IsNothing(CmbPaymentType.SelectedValue), 0, CmbPaymentType.SelectedValue))),
-        '    New SqlParameter("@UserID", (IIf(IsNothing(CmbUserName.SelectedValue), 0, CmbUserName.SelectedValue))),
-        '    New SqlParameter("@BankID", (IIf(IsNothing(CmbBank.SelectedValue), 0, CmbBank.SelectedValue))),
-        '    New SqlParameter("@ReceiptFinanceTypeID", (IIf(IsNothing(CmbFinancRecipt.SelectedValue), 0, CmbFinancRecipt.SelectedValue))),
-        '    New SqlParameter("@Check", "%" & Val(TxtCkeck.Text.Trim) & "%")
-        '    }
+        Dim Param() As SqlParameter =
+            {
+            New SqlParameter("@Num", TxtNum.Text.Trim)}
 
-        'DSPrint = SQLCon.SelectData(SQLQuery, 0, Param)
+        DSPrint = SQLCon.SelectData(SQLQuery, 0, Param)
 
-        'Dim F As New FrmPrint
-        'Dim C As New CRRecieptList
+        Dim F As New FrmPrint
+        Dim C As New CRPurchasesInvoiceReports
 
-        'C.SetDataSource(DSPrint.Tables(0))
-        'C.Subreports(0).SetDataSource(DSPrint.Tables(1))
-        'C.Subreports(1).SetDataSource(DSPrint.Tables(1))
-        'F.CrystalReportViewer1.ReportSource = C
-        'F.CrystalReportViewer1.Refresh()
-        'F.Text = "طباعة"
-        'F.CrystalReportViewer1.Zoom(100%)
-        'F.WindowState = FormWindowState.Maximized
-        'F.Show()
+        C.SetDataSource(DSPrint.Tables(0))
+        C.Subreports(0).SetDataSource(DSPrint.Tables(1))
+        C.Subreports(1).SetDataSource(DSPrint.Tables(1))
+        F.CrystalReportViewer1.ReportSource = C
+        F.CrystalReportViewer1.Refresh()
+        F.Text = "طباعة"
+        F.CrystalReportViewer1.Zoom(100%)
+        F.WindowState = FormWindowState.Maximized
+        F.Show()
     End Sub
 
     Private Sub AppendReportConditions()
+        Dim DateTimeFrom As Date = DTPFrom.Value.Date & " " & "00:00".ToString
+        Dim DateTimeTo As Date = DTPTo.Value.Date & " " & "23:59".ToString
+        If ChkNum.Checked And TxtNum.Text.Trim <> "" Then AppendToQuery(" AND ", " Num=@Num ")
+        If ChkUser.Checked And CmbUserName.SelectedValue <> Nothing Then AppendToQuery(" AND ", "  UserID = " & CmbUserName.SelectedValue)
+        If ChkSupplier.Checked And CmbSupplier.SelectedValue <> Nothing Then AppendToQuery(" AND ", " SupplierID = " & CmbSupplier.SelectedValue)
+        If ChkDate.Checked Then AppendToQuery(" AND ", " Date BETWEEN '" & DateTimeFrom & "' AND '" & DateTimeTo & "' ")
 
-        If ChkNum.Checked And TxtNum.Text.Trim <> "" Then AppendToQuery(" AND ", " Num=@Num")
-        If ChkUser.Checked And CmbUserName.Text.Trim <> "" And CmbUserName.SelectedValue <> 0 Then AppendToQuery(" AND ", " UserID=@UserID")
-        If ChkSupplier.Checked And CmbSupplier.Text.Trim <> "" And CmbSupplier.SelectedValue <> 0 Then AppendToQuery(" AND ", " SupplierID=@SupplierID")
-        If ChkDate.Checked Then AppendToQuery(" AND ", " Date BETWEEN '" & DTPFrom.Value.Date & " " & "00:00".ToString & "' AND '" & DTPTo.Value.Date & " " & "23:59".ToString & "'")
+
+        'If ChkNum.Checked And TxtNum.Text.Trim <> "" Then AppendToQuery(" AND ", " Num=@Num")
+        'If ChkUser.Checked And CmbUserName.Text.Trim <> "" And CmbUserName.SelectedValue <> 0 Then AppendToQuery(" AND ", " UserID=@UserID")
+        'If ChkSupplier.Checked And CmbSupplier.Text.Trim <> "" And CmbSupplier.SelectedValue <> 0 Then AppendToQuery(" AND ", " SupplierID=@SupplierID")
+        'If ChkDate.Checked Then AppendToQuery(" AND ", " Date BETWEEN '" & DTPFrom.Value.Date & " " & "00:00".ToString & "' AND '" & DTPTo.Value.Date & " " & "23:59".ToString & "'")
 
     End Sub
 
@@ -396,6 +438,11 @@ Public Class FrmPurchasesReport
         e.Handled = Not IsNumber(sender.Text, e.KeyChar, False, True)
     End Sub
 
+    Private Sub TxtNum_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtNum.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            BtnSearch_Click(sender, e)
+        End If
+    End Sub
     '****************************************************************************
     '------------------Pagination-------------------------------------------
     Private Sub GetPagesCount()
@@ -499,40 +546,6 @@ Public Class FrmPurchasesReport
 
     End Sub
 
-    Private Sub DGVPurchases_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGVPurchases.CellContentClick
-        If DGVPurchases.RowCount = 0 Then Exit Sub
-
-        PurchaseID = DGVPurchases.Item(0, DGVPurchases.CurrentRow.Index).Value
-
-        Dim Col = CType(sender, DataGridView).Columns(e.ColumnIndex).Name
-        If Col = "ColDel" Then
-
-            If vbYes = MsgBox("هل تريد حذف الفاتورة رقم  " & vbCrLf & "( " & DGVPurchases.Item(2, DGVPurchases.CurrentRow.Index).Value & " ) ؟", vbMsgBoxRight + vbYesNo + vbQuestion, "تأكيد الحذف") Then
-                Dim SQLCon = New SQLConClass
-                Dim Param() As SqlParameter = {
-                    New SqlParameter("@ID", PurchaseID)}
-
-                DSDel = SQLCon.CMDExecuteData("DeletePurchase", Param)
-
-                If Save = 1 Then
-                    MsgTool("تم حذف الفاتورة ", 1)
-
-                ElseIf Save = 2 Then
-                    MsgTool("لا يمكن حذف الفاتورة", 0)
-                End If
-            End If
-
-        ElseIf Col = "ColShow" Then
-            If PurchaseID = 0 Then Exit Sub
-            FrmPurchaseInvoiceContents.PurchasesID = PurchaseID
-            FrmPurchaseInvoiceContents.ShowDialog()
-
-        End If
-
-        BtnNew_Click(sender, e)
-
-    End Sub
-
     Private Sub NUDPageSize_TextChanged(sender As Object, e As EventArgs) Handles NUDPageSize.TextChanged
 
         If NUDPageSize.Value = 0 Then
@@ -561,5 +574,6 @@ Public Class FrmPurchasesReport
         TxtPageNum.Text = 1
         BtnFirstPage_Click(sender, e)
     End Sub
+
 
 End Class
